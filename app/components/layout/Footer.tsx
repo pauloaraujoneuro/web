@@ -5,9 +5,10 @@ import {
   CLINIC_NAME,
   CONTACT_EMAIL,
   CONTACT_PHONE,
-  DOCTOR_CREDENTIALS,
+  DOCTOR_CRM,
   DOCTOR_NAME,
   DOCTOR_REGISTRATION_BADGES,
+  DOCTOR_RQE,
   INSTAGRAM_URL,
   NAV_ITEMS,
 } from "@/constants";
@@ -39,26 +40,13 @@ export default function Footer() {
               recuperação funcional.
             </p>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              {DOCTOR_REGISTRATION_BADGES.map((badge) => (
-                <span
-                  key={badge}
-                  className="license-badge border-bg/42 bg-bg/14 text-bg"
-                >
-                  {badge}
-                </span>
-              ))}
-            </div>
-
             <div className="mt-4 flex flex-wrap gap-2">
-              {DOCTOR_CREDENTIALS.slice(0, 3).map((credential) => (
-                <span
-                  key={credential}
-                  className="rounded-full border border-bg/35 bg-bg/10 px-3 py-1 text-xs font-semibold text-bg"
-                >
-                  {credential}
-                </span>
-              ))}
+              <span className="inline-flex items-center whitespace-nowrap rounded-full border border-secondary/65 bg-secondary/25 px-3 py-1.5 text-sm font-bold tracking-[0.02em] text-bg shadow-sm">
+                {DOCTOR_CRM}
+              </span>
+              <span className="inline-flex items-center whitespace-nowrap rounded-full border border-secondary/65 bg-secondary/25 px-3 py-1.5 text-sm font-bold tracking-[0.02em] text-bg shadow-sm">
+                {DOCTOR_RQE}
+              </span>
             </div>
           </section>
 

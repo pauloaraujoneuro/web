@@ -62,7 +62,7 @@ export const DOCTOR_PROFILE_IMAGE =
 // Doctor Information
 export const DOCTOR_NAME = "Paulo Araújo";
 export const DOCTOR_FULL_NAME = "Paulo Victor de Souza Araújo";
-export const DOCTOR_CRM = "CRM/PR 37567";
+export const DOCTOR_CRM = "CRM-PR 37567";
 export const DOCTOR_RQE = "RQE 29967";
 export const DOCTOR_TITLE = "Neurocirurgião";
 export const DOCTOR_SUBTITLE = "Cirurgia de Coluna, Nervo e Reabilitação";
