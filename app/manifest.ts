@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: DOCTOR_NAME,
     short_name: "Dr. Paulo",
     description:
-      "Atendimento especializado em neurocirurgia com foco em coluna, nervo periférico e reabilitação.",
+      "Atendimento especializado em neurocirurgia com foco em nervo periférico, coluna e reabilitação neurocirúrgica.",
     start_url: "/",
     display: "standalone",
     background_color: "#efefef",

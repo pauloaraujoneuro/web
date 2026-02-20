@@ -15,7 +15,7 @@ export default function WhatsAppFloatButton() {
       aria-label="Falar no WhatsApp"
     >
       <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-bg text-primary sm:h-10 sm:w-10">
-        <WhatsAppIcon className="h-[18px] w-[18px] sm:h-5 sm:w-5" />
+        <WhatsAppIcon className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
       </span>
       <span className="pointer-events-none absolute right-[calc(100%+0.7rem)] top-1/2 hidden -translate-y-1/2 whitespace-nowrap rounded-full border border-primary/18 bg-bg/95 px-3 py-1 text-xs font-semibold text-primary opacity-0 shadow-md transition group-hover:opacity-100 md:block">
         WhatsApp

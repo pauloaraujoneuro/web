@@ -12,14 +12,15 @@ const poppins = Poppins({
 });
 
 const SITE_DESCRIPTION =
-  "Paulo Araújo | Neurocirurgião com foco em cirurgia de coluna, nervo periférico e reabilitação em Curitiba.";
+  "Paulo Araújo | Neurocirurgião com foco em cirurgia de nervo periférico, coluna e reabilitação neurocirúrgica em Curitiba e União da Vitória.";
 
 const SITE_KEYWORDS = [
   "Paulo Araújo",
   "Neurocirurgião",
   "Neurocirurgia em Curitiba",
+  "Neurocirurgia em União da Vitória",
+  "Cirurgia de nervo periférico",
   "Cirurgia de coluna",
-  "Nervo periférico",
   "Reabilitação neurocirúrgica",
 ];
 

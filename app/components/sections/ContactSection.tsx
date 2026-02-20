@@ -1,29 +1,13 @@
 import Link from "next/link";
 import {
-  CLINIC_ADDRESS_FULL,
-  CLINIC_HOURS,
+  CITY_SCHEDULES,
   CLINIC_MAP_EMBED_URL,
+  CONSULTATION_APPROACH_POINTS,
   CONTACT_EMAIL,
   CONTACT_PHONE,
-  CONTACT_WHATSAPP_LABEL,
   CONTACT_WHATSAPP_URL,
-  SERVICE_LOCATIONS,
 } from "@/constants";
-
-function MarkerIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      className="h-5 w-5"
-    >
-      <path d="M12 22s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12Z" />
-      <circle cx="12" cy="10" r="2.5" />
-    </svg>
-  );
-}
+import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
 
 function PhoneIcon() {
   return (
@@ -79,109 +63,113 @@ export default function ContactSection() {
     >
       <div className="container-shell">
         <div className="max-w-3xl">
-          <span className="badge">Contato e Local</span>
+          <span className="badge">Contato</span>
           <h2 className="mt-4 text-balance text-3xl font-semibold text-primary sm:text-4xl">
-            Atendimento em Curitiba
+            Atendimento presencial em Curitiba e União da Vitória
           </h2>
           <p className="mt-4 text-base leading-relaxed text-primary/85">
-            Informações de contato e unidades de atuação para facilitar
-            orientação, encaminhamento e agendamento de consulta.
+            Canais de contato e agenda por cidade para orientar seu agendamento
+            com clareza e previsibilidade.
           </p>
         </div>
 
         <div className="mt-8 grid gap-6 xl:grid-cols-[0.88fr_1.12fr]">
-          <article className="relative overflow-hidden border border-primary/24 bg-primary px-6 py-7 text-bg sm:px-7">
+          <article className="relative h-full overflow-hidden rounded-xl border border-primary/24 bg-primary px-6 py-7 text-bg sm:px-7 xl:px-8 xl:py-8">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-bg/85 to-transparent" />
-            <h3 className="text-xl font-semibold text-bg">Canais de contato</h3>
+            <div className="space-y-7 xl:space-y-8">
+              <h3 className="text-xl font-semibold text-bg xl:text-2xl">
+                Entre em contato
+              </h3>
 
-            <ul className="mt-5 space-y-4">
-              <li className="flex gap-3">
-                <span className="mt-0.5 text-bg/90">
-                  <MarkerIcon />
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-bg">
-                    Endereço principal
-                  </p>
-                  <p className="text-sm leading-relaxed text-bg/82">
-                    {CLINIC_ADDRESS_FULL}
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-0.5 text-bg/90">
-                  <PhoneIcon />
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-bg">Telefone</p>
-                  <p className="text-sm leading-relaxed text-bg/82">
-                    {CONTACT_PHONE}
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-0.5 text-bg/90">
-                  <MailIcon />
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-bg">Email</p>
-                  <Link
-                    href={`mailto:${CONTACT_EMAIL}`}
-                    className="interactive-link whitespace-nowrap text-sm leading-relaxed text-bg/82"
-                  >
-                    {CONTACT_EMAIL}
-                  </Link>
-                </div>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-0.5 text-bg/90">
-                  <ClockIcon />
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-bg">Horário</p>
-                  <p className="text-sm leading-relaxed text-bg/82">
-                    {CLINIC_HOURS.weekdays}
-                  </p>
-                  <p className="text-sm leading-relaxed text-bg/82">
-                    {CLINIC_HOURS.saturday}
-                  </p>
-                  <p className="text-sm leading-relaxed text-bg/82">
-                    {CLINIC_HOURS.sunday}
-                  </p>
-                </div>
-              </li>
-            </ul>
+              <ul className="space-y-4 xl:space-y-5">
+                <li className="flex gap-3">
+                  <span className="mt-0.5 text-bg/90">
+                    <WhatsAppIcon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold text-bg xl:text-base">
+                      Mensagem direta
+                    </p>
+                    <Link
+                      href={CONTACT_WHATSAPP_URL}
+                      target={hasExternalWhatsApp ? "_blank" : undefined}
+                      rel={
+                        hasExternalWhatsApp ? "noopener noreferrer" : undefined
+                      }
+                      className="interactive-link whitespace-nowrap text-sm leading-relaxed text-bg/82 xl:text-lg"
+                    >
+                      Abrir conversa
+                    </Link>
+                  </div>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-0.5 text-bg/90">
+                    <PhoneIcon />
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold text-bg xl:text-base">
+                      Telefone fixo
+                    </p>
+                    <p className="text-sm leading-relaxed text-bg/82 xl:text-lg">
+                      {CONTACT_PHONE}
+                    </p>
+                  </div>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-0.5 text-bg/90">
+                    <MailIcon />
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold text-bg xl:text-base">
+                      Email
+                    </p>
+                    <Link
+                      href={`mailto:${CONTACT_EMAIL}`}
+                      className="interactive-link whitespace-nowrap text-sm leading-relaxed text-bg/82 xl:text-[1.07rem]"
+                    >
+                      {CONTACT_EMAIL}
+                    </Link>
+                  </div>
+                </li>
+              </ul>
 
-            <Link
-              href={CONTACT_WHATSAPP_URL}
-              target={hasExternalWhatsApp ? "_blank" : undefined}
-              rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
-              className="mt-7 inline-flex items-center justify-center whitespace-nowrap rounded-full border border-bg/35 bg-bg px-5 py-2.5 text-sm font-semibold text-primary! transition hover:bg-bg/92 hover:text-primary!"
-              style={{ color: "var(--primary)" }}
-            >
-              WhatsApp: {CONTACT_WHATSAPP_LABEL}
-            </Link>
+              <div className="rounded-lg border border-bg/22 bg-bg/10 p-4 xl:p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-bg/72">
+                  Como funciona a consulta
+                </p>
+                <ul className="mt-3 space-y-2 text-sm leading-relaxed text-bg/82 xl:space-y-2.5 xl:text-base">
+                  {CONSULTATION_APPROACH_POINTS.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </article>
 
           <div className="grid gap-6">
             <article className="card-surface p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary/72">
-                Unidades de atuação
+                Locais
               </p>
               <ul className="mt-4 space-y-4">
-                {SERVICE_LOCATIONS.map((location) => (
-                  <li key={location.id} className="panel-line p-4">
+                {CITY_SCHEDULES.map((schedule) => (
+                  <li key={schedule.id} className="panel-line p-4">
                     <p className="text-sm font-semibold text-primary">
-                      {location.name}
+                      {schedule.city} - {schedule.state}
                     </p>
                     <p className="mt-1 text-sm leading-relaxed text-primary/82">
-                      {location.address}, {location.city} - {location.state}
+                      {schedule.location}
                     </p>
-                    {location.phone ? (
-                      <p className="mt-1 text-sm leading-relaxed text-primary/82">
-                        Telefone: {location.phone}
-                      </p>
-                    ) : null}
+                    <p className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-primary/85">
+                      <ClockIcon />
+                      {schedule.cadence}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-primary/82">
+                      {schedule.availability}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-primary/78">
+                      {schedule.note}
+                    </p>
                   </li>
                 ))}
               </ul>

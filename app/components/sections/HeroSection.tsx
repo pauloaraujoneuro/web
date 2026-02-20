@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {
+  DOCTOR_CREDENTIALS,
   DOCTOR_CRM,
   DOCTOR_NAME,
   DOCTOR_PROFILE_IMAGE,
@@ -7,101 +8,66 @@ import {
   DOCTOR_SHORT_BIO,
   DOCTOR_SUBTITLE,
   DOCTOR_TITLE,
-  SERVICE_LOCATIONS,
 } from "@/constants";
 
-const HERO_DIFFERENTIALS = [
-  "Especialista em nervo periférico e reabilitação pela Rede SARAH",
-  "Preceptor de nervo periférico e coluna no Hospital Universitário Cajuru - PR",
-  "Mestrando em Medicina (Clínica Cirúrgica) na UFPR",
-];
-
 interface HeroImageCardProps {
-  serviceLocationSummary: string;
-  imageClassName: string;
+  className?: string;
 }
 
-function HeroImageCard({
-  serviceLocationSummary,
-  imageClassName,
-}: HeroImageCardProps) {
+function HeroImageCard({ className = "" }: HeroImageCardProps) {
   return (
-    <div className="card-surface relative overflow-hidden p-2.5 sm:p-4">
+    <div
+      className={`card-surface relative overflow-hidden p-2.5 sm:p-4 xl:shadow-[0_34px_56px_-30px_rgba(13,29,36,0.74)] ${className}`}
+    >
       <Image
         src={DOCTOR_PROFILE_IMAGE}
         alt="Retrato profissional do Dr. Paulo Araújo"
-        width={1600}
-        height={1066}
-        sizes="(max-width: 640px) 100vw, (max-width: 1279px) 88vw, 46vw"
-        className={imageClassName}
+        width={1066}
+        height={1600}
+        sizes="(max-width: 640px) 92vw, (max-width: 1023px) 78vw, (max-width: 1279px) 44vw, 40vw"
+        className="h-auto w-full rounded-[0.45rem] object-cover object-top"
         priority
       />
       <div className="pointer-events-none absolute inset-0 hidden bg-linear-to-t from-primary/28 via-transparent to-secondary/20 sm:block" />
-
-      <div className="mt-3 sm:absolute sm:bottom-5 sm:left-5 sm:mt-0">
-        <div className="relative max-w-108 overflow-hidden rounded-xl border border-bg/55 bg-bg/88 px-3.5 py-3 shadow-[0_24px_45px_-28px_rgba(35,62,76,0.85)] ring-1 ring-primary/10 backdrop-blur-md sm:max-w-88 sm:px-4 sm:py-3.5">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-secondary/85 to-transparent" />
-
-          <p className="text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-primary/62 sm:text-[0.66rem]">
-            Atendimento principal
-          </p>
-
-          <p className="mt-1.5 flex items-center gap-2 text-sm font-semibold text-primary">
-            <span className="inline-flex h-2 w-2 rounded-full bg-secondary" />
-            Curitiba - PR
-          </p>
-
-          <p className="mt-1.5 text-xs leading-relaxed text-primary/78">
-            {serviceLocationSummary}
-          </p>
-        </div>
-      </div>
+      <div className="pointer-events-none absolute inset-0 hidden bg-linear-to-br from-primary/22 via-transparent to-primary/14 xl:block" />
+      <div className="pointer-events-none absolute inset-4 hidden rounded-[0.4rem] border border-bg/30 shadow-[inset_0_0_0_1px_rgba(35,62,76,0.22)] xl:block" />
     </div>
   );
 }
 
 export default function HeroSection() {
-  const serviceLocationSummary = SERVICE_LOCATIONS.map(
-    (location) => location.name,
-  )
-    .slice(0, 2)
-    .join(" e ");
-
   return (
     <section
       id="about"
-      className="section-shell section-anchor section-tone-neutral"
+      className="section-shell section-hero section-anchor section-tone-neutral"
     >
-      <div className="container-shell grid gap-10 xl:grid-cols-[1.05fr_0.95fr] xl:items-center">
+      <div className="container-shell grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start xl:items-center">
         <div>
-          <span className="badge hero-badge">
-            Atendimento especializado em neurocirurgia
-          </span>
+          <span className="badge hero-badge">{DOCTOR_TITLE}</span>
 
-          <h1 className="mt-5 max-w-3xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-primary sm:text-5xl">
+          <h1 className="mt-4 max-w-3xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-primary sm:text-5xl">
             {DOCTOR_NAME}
           </h1>
 
-          <p className="mt-3 text-base font-semibold text-primary/84 sm:text-lg">
-            {DOCTOR_TITLE}
-          </p>
-          <p className="text-balance text-base font-medium text-primary/78 sm:text-lg">
+          <p className="mt-3 text-balance text-base font-medium text-primary/78 sm:text-lg uppercase">
             {DOCTOR_SUBTITLE}
           </p>
 
-          <div className="mt-6 xl:hidden">
-            <HeroImageCard
-              serviceLocationSummary={serviceLocationSummary}
-              imageClassName="h-auto w-full object-cover object-center sm:h-[31rem]"
-            />
+          <div className="mt-6 lg:hidden">
+            <HeroImageCard className="mx-auto max-w-[31rem]" />
           </div>
 
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-primary/87 sm:text-lg">
             {DOCTOR_SHORT_BIO}
           </p>
 
+          <div className="mt-4 flex flex-wrap gap-2">
+            <span className="license-badge">{DOCTOR_CRM}</span>
+            <span className="license-badge">{DOCTOR_RQE}</span>
+          </div>
+
           <div className="stagger-grid mt-8 grid gap-3">
-            {HERO_DIFFERENTIALS.map((item) => (
+            {DOCTOR_CREDENTIALS.map((item) => (
               <article key={item} className="panel-line p-4">
                 <p className="text-sm font-medium leading-relaxed text-primary/88">
                   {item}
@@ -109,18 +75,10 @@ export default function HeroSection() {
               </article>
             ))}
           </div>
-
-          <div className="mt-4 flex flex-wrap gap-2">
-            <span className="license-badge">{DOCTOR_CRM}</span>
-            <span className="license-badge">{DOCTOR_RQE}</span>
-          </div>
         </div>
 
-        <div className="relative hidden xl:block">
-          <HeroImageCard
-            serviceLocationSummary={serviceLocationSummary}
-            imageClassName="h-[39rem] w-full object-cover object-center"
-          />
+        <div className="relative hidden lg:block">
+          <HeroImageCard className="mx-auto w-full max-w-[33rem] lg:ml-auto" />
         </div>
       </div>
     </section>

@@ -13,6 +13,7 @@ export interface ExpertiseArea {
   id: string;
   title: string;
   description: string;
+  highlights: string[];
 }
 
 export interface PublicationItem {
@@ -31,6 +32,7 @@ export interface AcademicMilestone {
   title: string;
   institution: string;
   summary: string;
+  details?: string[];
 }
 
 export interface ProfessionalRole {
@@ -50,13 +52,25 @@ export interface ServiceLocation {
   phone?: string;
 }
 
+export interface CitySchedule {
+  id: string;
+  city: string;
+  state: string;
+  location: string;
+  cadence: string;
+  availability: string;
+  note: string;
+}
+
 // Domain
 export const SITE_URL = "https://www.drpauloaraujo.com.br";
 
 // Brand Assets
 export const BRAND_LOGO_WORDMARK_INVERTED = "/logo-gray.png";
 export const BRAND_LOGO_HEADER = "/logo-lettering-cropped.png";
-export const DOCTOR_PROFILE_IMAGE =
+export const DOCTOR_PROFILE_IMAGE = "/pics/doutor-paulo-araujo-terno.jpeg";
+export const DOCTOR_PROFILE_IMAGE_FRONT = "/pics/doutor-paulo-araujo-frente.jpeg";
+export const DOCTOR_PROFILE_IMAGE_FRONT_WIDE =
   "/pics/doutor-paulo-araujo-frente-wide.jpeg";
 
 // Doctor Information
@@ -68,12 +82,12 @@ export const DOCTOR_TITLE = "Neurocirurgião";
 export const DOCTOR_SUBTITLE = "Cirurgia de Coluna, Nervo e Reabilitação";
 export const DOCTOR_HEADLINE = `${DOCTOR_NAME} | ${DOCTOR_TITLE} | ${DOCTOR_SUBTITLE}`;
 export const DOCTOR_SHORT_BIO =
-  "Médico graduado pela Universidade Federal de Campina Grande (2015). Neurocirurgião com residência pelo Hospital Universitário Cajuru - PR (2022), fellowship em nervo periférico pela Rede SARAH (2022) e mestrando em Medicina (Clínica Cirúrgica) pela UFPR. Atua com foco em cirurgia de coluna, nervo periférico e reabilitação, especialmente em pacientes com lesão medular e plexo braquial.";
+  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru - PR, com fellowship em nervo periférico pela Rede SARAH e Mestrado em Medicina Cirúrgica pela UFPR. Seu trabalho é direcionado à cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial, sempre com foco em ganho funcional e qualidade de vida.";
 
 export const DOCTOR_CREDENTIALS = [
-  "Especialista em nervo periférico e reabilitação (Rede SARAH)",
-  "Preceptor de nervo periférico e coluna no Hospital Universitário Cajuru - PR",
-  "Chefe do grupo de nervos periféricos e membro do grupo de coluna",
+  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru - PR",
+  "Mestrado em Medicina Cirúrgica pela UFPR",
+  "Fellowship em nervo periférico pela Rede SARAH",
 ];
 
 export const DOCTOR_REGISTRATION_BADGES = [DOCTOR_CRM, DOCTOR_RQE];
@@ -86,29 +100,42 @@ export const NAV_ITEMS: NavigationItem[] = [
   { href: "#about", label: "Sobre" },
   { href: "#expertise", label: "Especialidades" },
   { href: "#background", label: "Formação" },
-  { href: "#publications", label: "Produções" },
+  { href: "#publications", label: "Publicações" },
   { href: "#contact", label: "Contato" },
 ];
 
 // Expertise
 export const EXPERTISE_AREAS: ExpertiseArea[] = [
   {
-    id: "spine",
-    title: "Cirurgia de Coluna",
-    description:
-      "Avaliação e tratamento de doenças degenerativas, traumáticas e compressivas da coluna, com tomada de decisão baseada em critérios clínicos e funcionais.",
-  },
-  {
     id: "peripheral-nerves",
     title: "Nervo Periférico",
     description:
-      "Diagnóstico e abordagem microcirúrgica de neuropatias periféricas, síndromes compressivas e lesões traumáticas, incluindo casos de plexo braquial.",
+      "Foco em cirurgia de reconstrução nervosa para ganho funcional em lesões periféricas complexas.",
+    highlights: [
+      "Reconstrução e enxerto nervoso para ganho de movimentos em pacientes com lesão de plexo braquial e lesões de nervos nos braços e pernas.",
+      "Cirurgia de transferência nervosa para ganho de movimentos em pacientes com tetraplegia e tetraparesia.",
+      "Tratamento de casos complexos de síndromes compressivas, como túnel do carpo, síndrome cubital e túnel do tarso.",
+    ],
+  },
+  {
+    id: "spine",
+    title: "Cirurgia de Coluna",
+    description:
+      "Tratamento cirúrgico de patologias traumáticas e compressivas com foco em estabilidade e descompressão neural.",
+    highlights: [
+      "Tratamento de fraturas complexas para estabilização com uso de parafusos.",
+      "Descompressão de nervos na coluna com uso de microscópio cirúrgico.",
+      "Tratamento de hérnia de disco, estenose de canal e mielopatia cervical.",
+    ],
   },
   {
     id: "rehabilitation",
     title: "Reabilitação Neurocirúrgica",
     description:
-      "Atuação focada em recuperação funcional e planejamento terapêutico para pacientes com lesão medular e déficits neurológicos complexos.",
+      "Reabilitação orientada para ganho de movimentos e retorno funcional no pós-operatório e em lesões neurológicas crônicas.",
+    highlights: [
+      "Treinamento com foco em ganho de movimentos e funcionalidade, com orientações e uso de órteses.",
+    ],
   },
 ];
 
@@ -116,35 +143,34 @@ export const EXPERTISE_AREAS: ExpertiseArea[] = [
 export const ACADEMIC_MILESTONES: AcademicMilestone[] = [
   {
     id: "master-ufpr",
-    period: "2022 - Atual",
-    title: "Mestrado em Medicina (Clínica Cirúrgica)",
-    institution: "Universidade Federal do Paraná (UFPR)",
-    summary:
-      "Pesquisa sobre efeitos do eletrodo cerebral profundo em sintomas urinários nos pacientes com doença de Parkinson.",
+    period: "2022",
+    title: "Mestrado em Clínica Cirúrgica",
+    institution: "Universidade Federal do Paraná (UFPR), Brasil",
+    summary: "Foco em formação cirúrgica e aprofundamento em neurocirurgia.",
   },
   {
-    id: "residency-cajuru",
+    id: "residency-huc",
     period: "2017 - 2022",
-    title: "Residência Médica em Neurocirurgia",
-    institution: "Hospital Universitário Cajuru - PR",
+    title: "Especialização - Residência médica em Neurocirurgia",
+    institution: "Hospital Universitário Cajuru (HUC), Brasil",
     summary:
-      "Formação em neurocirurgia com atuação em procedimentos de urgência, trauma e cirurgias eletivas.",
+      "Formação prática e técnica em neurocirurgia durante o programa de residência médica.",
   },
   {
     id: "fellowship-sarah",
-    period: "2022",
-    title: "Fellowship em Nervo Periférico",
-    institution: "Rede SARAH",
+    period: "2022 - 2023",
+    title: "Especialização (Fellowship) em Nervo Periférico",
+    institution: "Rede SARAH, Brasil",
     summary:
-      "Aprofundamento técnico em tratamento cirúrgico e reabilitação de lesões nervosas periféricas.",
+      "Aprimoramento dedicado à cirurgia de nervo periférico e estratégias de reconstrução funcional.",
   },
   {
     id: "graduation-ufcg",
     period: "2009 - 2015",
     title: "Graduação em Medicina",
-    institution: "Universidade Federal de Campina Grande (UFCG)",
+    institution: "Universidade Federal de Campina Grande (UFCG), Brasil",
     summary:
-      "Trabalho de conclusão: Amitriptilina como droga preemptiva na dor do membro fantasma após amputação.",
+      "Formação médica de base com preparação para atuação clínica e cirúrgica.",
   },
 ];
 
@@ -156,23 +182,15 @@ export const PROFESSIONAL_ROLES: ProfessionalRole[] = [
     title: "Neurocirurgião",
     institution: "Hospital São Marcelino Champagnat",
     summary:
-      "Atendimento com foco em cirurgia de coluna, nervo periférico e planejamento de reabilitação.",
+      "Atendimento com foco em cirurgia de nervo periférico, coluna e reabilitação neurocirúrgica.",
   },
   {
-    id: "role-cajuru",
+    id: "role-sao-camilo",
     period: "Atual",
-    title: "Preceptor e Neurocirurgião",
-    institution: "Hospital Universitário Cajuru / PUCPR",
+    title: "Neurocirurgião",
+    institution: "Centro de Saúde São Camilo",
     summary:
-      "Preceptoria em nervo periférico e coluna, com assistência em casos de alta complexidade.",
-  },
-  {
-    id: "role-cnpq",
-    period: "2013 - 2014",
-    title: "Pesquisador Bolsista",
-    institution: "CNPq",
-    summary:
-      "Participação em ensaio clínico randomizado sobre dor do membro fantasma após amputação.",
+      "Atendimento em União da Vitória com foco em avaliação e conduta especializada.",
   },
 ];
 
@@ -205,13 +223,45 @@ export const SERVICE_LOCATIONS: ServiceLocation[] = [
     state: "PR",
   },
   {
-    id: "cajuru",
-    name: "Hospital Universitário Cajuru",
-    address: "Av. São José, 300 - Cristo Rei",
+    id: "sao-camilo",
+    name: "Centro de Saúde São Camilo",
+    address: "Unidade de atendimento ambulatorial",
+    city: "União da Vitória",
+    state: "PR",
+  },
+];
+
+export const CITY_SCHEDULES: CitySchedule[] = [
+  {
+    id: "schedule-curitiba",
     city: "Curitiba",
     state: "PR",
-    phone: "(41) 3271-1212",
+    location: "Hospital São Marcelino Champagnat",
+    cadence: "Agenda semanal",
+    availability: "Segunda a sexta, com horários agendados.",
+    note: "Principal base de atendimento.",
   },
+  {
+    id: "schedule-uniao-da-vitoria",
+    city: "União da Vitória",
+    state: "PR",
+    location: "Centro de Saúde São Camilo",
+    cadence: "Agenda periódica",
+    availability: "Datas específicas ao longo do mês.",
+    note: "Consulte no WhatsApp as próximas datas disponíveis.",
+  },
+];
+
+export const FIRST_APPOINTMENT_STEPS = [
+  "Envie no WhatsApp sua cidade de preferência (Curitiba ou União da Vitória).",
+  "Informe seu principal sintoma e há quanto tempo ele começou.",
+  "Se tiver exames, leve ou envie antes para orientar a consulta.",
+];
+
+export const CONSULTATION_APPROACH_POINTS = [
+  "Avaliação individual do quadro com foco em função e qualidade de vida.",
+  "Definição clara de conduta: tratamento conservador, reabilitação ou cirurgia.",
+  "Orientações objetivas para próximo passo, exames e expectativa de recuperação.",
 ];
 
 // Clinic Information
@@ -238,74 +288,39 @@ export const CTA_SECONDARY = "Ver local de atendimento";
 // Publications / Works
 export const PUBLICATIONS: PublicationItem[] = [
   {
-    id: "congress-2019-abn",
+    id: "congress-2025-peripheral",
     category: "congress",
-    title: "XVIII Congresso da Academia Brasileira de Neurocirurgia",
-    year: 2019,
-    location: "Brasil",
-    event: "Participação em congresso",
-  },
-  {
-    id: "congress-2012-perinatologia",
-    category: "congress",
-    title: "21º Congresso Brasileiro de Perinatologia",
-    year: 2012,
-    location: "Brasil",
-    event: "Participação em congresso",
-  },
-  {
-    id: "congress-2012-infectologia",
-    category: "congress",
-    title: "4º Congresso Norte/Nordeste de Infectologia",
-    year: 2012,
-    location: "Brasil",
-    event: "Participação em congresso",
-  },
-  {
-    id: "congress-2011-genetica",
-    category: "congress",
-    title: "Paciente com deleção (6)(p23): relato de caso",
-    year: 2011,
-    location: "Brasil",
-    event: "II Congresso Norte Nordeste de Genética Médica",
-  },
-  {
-    id: "academic-2014-antibioticoterapia",
-    category: "academic",
-    title: "I Módulo do Curso de Antibioticoterapia",
-    year: 2014,
-    location: "Brasil",
-    event: "Organização de evento",
-  },
-  {
-    id: "academic-2013-dermatologia",
-    category: "academic",
-    title: "I Curso de Afecções Dermatológicas na Infância",
-    year: 2013,
-    location: "Brasil",
-    event: "Organização de evento",
-  },
-  {
-    id: "scientific-2014-amitriptilina",
-    category: "scientific",
     title:
-      "Amitriptilina como droga preemptiva na dor do membro fantasma após amputação",
-    year: 2014,
-    location: "UFCG",
-    event: "Apresentação de trabalho / congresso",
+      "VIII Congresso Brasileiro de Cirurgia do Sistema Nervoso Periférico",
+    year: 2025,
+    location: "Brasil",
+    event:
+      "12/06/2025 | Palestrante convidado | Tema: Outras síndromes compartimentais em membros superiores",
   },
   {
-    id: "scientific-2011-revista",
-    category: "scientific",
-    title: "Paciente com deleção (6)(p23): relato de caso",
-    year: 2011,
-    location: "Revista Saúde & Ciência",
-    event: "Produção bibliográfica",
+    id: "congress-2024-neuro",
+    category: "congress",
+    title: "XXXV Congresso Brasileiro de Neurocirurgia",
+    year: 2024,
+    location: "Brasil",
+    event:
+      "03/08/2024 | Palestrante convidado | Tema: Paralisia Neonatal do Plexo Braquial",
+  },
+  {
+    id: "congress-2023-peripheral",
+    category: "congress",
+    title: "VII Congresso Brasileiro de Cirurgia do Sistema Nervoso Periférico",
+    year: 2023,
+    location: "Brasil",
+    event:
+      "16/11/2023 | Palestrante convidado | Tema: Transferência do nervo acessório para nervo supraescapular (via anterior x posterior)",
   },
 ];
 
 export const LATTES_DATA_NOTE =
-  "Informações coletadas do Lattes em 28/07/2024.";
+  "Produções anteriores a 2023 foram removidas desta página conforme atualização curricular.";
+export const LATTES_URL = "http://lattes.cnpq.br/5178813548582212";
+export const LATTES_URL_LABEL = "Currículo Lattes";
 
 // Structured Data Helper
 export const CLINIC_INFO = {

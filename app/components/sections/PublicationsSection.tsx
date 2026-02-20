@@ -1,154 +1,115 @@
-"use client";
-
-import { useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import {
   LATTES_DATA_NOTE,
+  LATTES_URL,
+  LATTES_URL_LABEL,
   PUBLICATIONS,
-  type PublicationCategory,
 } from "@/constants";
-
-type PublicationFilter = "all" | PublicationCategory;
-
-const FILTERS: { key: PublicationFilter; label: string }[] = [
-  { key: "all", label: "Todos" },
-  { key: "congress", label: "Congressos" },
-  { key: "academic", label: "Produções Acadêmicas" },
-  { key: "scientific", label: "Produções Científicas" },
-];
-
-const CATEGORY_LABEL: Record<PublicationCategory, string> = {
-  congress: "Congresso",
-  academic: "Acadêmica",
-  scientific: "Científica",
-};
+import LattesIcon from "@/app/components/icons/LattesIcon";
 
 export default function PublicationsSection() {
-  const [activeFilter, setActiveFilter] = useState<PublicationFilter>("all");
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const filteredItems = useMemo(() => {
-    if (activeFilter === "all") {
-      return PUBLICATIONS;
-    }
-    return PUBLICATIONS.filter((item) => item.category === activeFilter);
-  }, [activeFilter]);
-
-  const handleFilterChange = (filter: PublicationFilter) => {
-    if (filter === activeFilter) return;
-
-    setActiveFilter(filter);
-
-    requestAnimationFrame(() => {
-      const sectionNode = sectionRef.current;
-      if (!sectionNode) return;
-
-      const anchorOffset = Number.parseInt(
-        getComputedStyle(document.documentElement).getPropertyValue(
-          "--anchor-offset",
-        ),
-        10,
-      );
-      const offset = Number.isFinite(anchorOffset) ? anchorOffset : 86;
-      const top = Math.max(
-        0,
-        sectionNode.getBoundingClientRect().top + window.scrollY - offset,
-      );
-
-      window.scrollTo({ top, behavior: "smooth" });
-    });
-  };
+  const hasLattesLink = LATTES_URL.startsWith("http");
 
   return (
     <section
       id="publications"
-      ref={sectionRef}
-      className="section-shell section-anchor section-tone-neutral"
+      className="section-shell section-anchor section-tone-spotlight"
     >
-      <div className="container-shell">
+      <div className="container-shell relative z-10">
         <div className="max-w-3xl">
-          <span className="badge">Produções e Congressos</span>
+          <span className="badge">Publicações</span>
           <h2 className="mt-4 text-balance text-3xl font-semibold text-primary sm:text-4xl">
-            Participações, organização e produção científica
+            Participações recentes em congressos científicos
           </h2>
           <p className="mt-4 text-base leading-relaxed text-primary/84">
-            Conteúdo categorizado por ano, evento e local para consulta objetiva
-            e rastreável.
+            Registro das apresentações como palestrante convidado a partir de
+            2023.
           </p>
           <p className="mt-2 text-sm text-primary/72">{LATTES_DATA_NOTE}</p>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[270px_minmax(0,1fr)]">
-          <aside className="card-surface h-fit p-4 lg:sticky lg:top-[calc(var(--anchor-offset)+1rem)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary/72">
-              Filtrar por categoria
-            </p>
-            <div className="mt-3 grid gap-2">
-              {FILTERS.map((filter) => (
-                <button
-                  key={filter.key}
-                  type="button"
-                  onClick={() => handleFilterChange(filter.key)}
-                  className={`cursor-pointer rounded-full border px-4 py-2 text-left text-sm font-semibold transition ${
-                    filter.key === activeFilter
-                      ? "border-primary bg-primary text-bg"
-                      : "border-primary/22 bg-bg text-primary/88 hover:border-secondary/78 hover:bg-primary/8"
-                  }`}
+        <div className="stagger-grid mt-8 space-y-4">
+          {PUBLICATIONS.map((item) =>
+            (() => {
+              const [, rawRole = "", rawTheme = ""] = item.event
+                .split("|")
+                .map((value) => value.trim());
+              const themeText = rawTheme.replace(/^Tema:\s*/i, "").trim();
+              const roleText = rawRole.trim();
+
+              return (
+                <article
+                  key={item.id}
+                  className="card-surface relative overflow-hidden p-5 sm:p-6"
                 >
-                  {filter.label}
-                </button>
-              ))}
-            </div>
-          </aside>
+                  <span className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-linear-to-r from-primary/40 via-primary/12 to-transparent" />
 
-          <div className="stagger-grid space-y-4">
-            {filteredItems.map((item) => (
-              <article
-                key={item.id}
-                className="relative overflow-hidden border border-primary/18 bg-bg/96 p-5 transition hover:border-primary/36 hover:shadow-lg hover:shadow-primary/10 sm:p-6"
-              >
-                <span className="absolute inset-y-0 left-0 w-0.75 bg-primary/45" />
-
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-primary">
-                    {CATEGORY_LABEL[item.category]}
-                  </span>
-                  <span className="text-sm font-semibold text-primary/74">
-                    {item.year}
-                  </span>
-                </div>
-
-                <h3 className="mt-3 text-lg font-semibold text-primary">
-                  {item.title}
-                </h3>
-
-                <dl className="mt-3 grid gap-1 text-sm text-primary/82 sm:grid-cols-2">
-                  <div>
-                    <dt className="inline font-semibold text-primary">
-                      Evento:{" "}
-                    </dt>
-                    <dd className="inline">{item.event}</dd>
+                  <div className="flex flex-wrap items-center justify-between gap-2.5">
+                    <span className="text-2xl font-semibold tracking-[0.01em] text-primary/78">
+                      {item.year}
+                    </span>
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-primary">
+                      Congresso
+                    </span>
                   </div>
-                  <div>
-                    <dt className="inline font-semibold text-primary">
-                      Local:{" "}
-                    </dt>
-                    <dd className="inline">{item.location}</dd>
-                  </div>
-                </dl>
 
-                {item.link ? (
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="interactive-link mt-4 whitespace-nowrap text-sm font-semibold text-primary"
-                  >
-                    Acessar material
-                  </a>
-                ) : null}
-              </article>
-            ))}
-          </div>
+                  <h3 className="mt-3 text-lg font-semibold text-primary">
+                    {item.title}
+                  </h3>
+
+                  <div className="panel-line mt-4 p-4 sm:p-4.5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary/70">
+                      Tema
+                    </p>
+                    <p className="mt-1.5 text-lg font-semibold leading-relaxed text-primary sm:text-[1.34rem]">
+                      {themeText}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-sm font-medium leading-relaxed text-primary/82">
+                      Local: {item.location}
+                    </p>
+                    {roleText ? (
+                      <span className="rounded-full border border-primary/20 bg-bg px-3 py-1 text-xs font-semibold tracking-[0.01em] text-primary/78">
+                        {roleText}
+                      </span>
+                    ) : null}
+                  </div>
+
+                  {item.link ? (
+                    <Link
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="interactive-link mt-4 whitespace-nowrap text-sm font-semibold text-primary"
+                    >
+                      Acessar material
+                    </Link>
+                  ) : null}
+                </article>
+              );
+            })(),
+          )}
+        </div>
+
+        <div className="mt-8 text-sm text-primary/86">
+          {hasLattesLink ? (
+            <Link
+              href={LATTES_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="interactive-link inline-flex items-center gap-2 font-semibold text-primary"
+            >
+              <LattesIcon className="h-4 w-4" />
+              {LATTES_URL_LABEL}
+            </Link>
+          ) : (
+            <span className="inline-flex items-center gap-2">
+              <LattesIcon className="h-4 w-4 text-primary/88" />
+              Currículo Lattes: link será adicionado em breve.
+            </span>
+          )}
         </div>
       </div>
     </section>
