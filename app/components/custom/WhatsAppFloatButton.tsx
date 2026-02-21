@@ -4,14 +4,18 @@ import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
 
 export default function WhatsAppFloatButton() {
   const hasExternalWhatsApp = CONTACT_WHATSAPP_URL.startsWith("https://");
+  const floatOffsetStyle = {
+    bottom: "max(0.9rem, env(safe-area-inset-bottom))",
+    right: "max(0.75rem, env(safe-area-inset-right))",
+  };
 
   return (
     <Link
       href={CONTACT_WHATSAPP_URL}
       target={hasExternalWhatsApp ? "_blank" : undefined}
       rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
-      className="group fixed right-3 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full border border-secondary/60 bg-primary text-bg shadow-xl shadow-primary/28 transition hover:border-bg/75 hover:bg-primary/95 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-secondary sm:bottom-5 sm:right-5 sm:h-14 sm:w-14"
-      style={{ bottom: "max(0.9rem, env(safe-area-inset-bottom))" }}
+      className="group fixed bottom-3 right-3 z-[60] inline-flex h-12 w-12 items-center justify-center rounded-full border border-secondary/60 bg-primary text-bg shadow-xl shadow-primary/28 transition hover:border-bg/75 hover:bg-primary/95 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-secondary sm:bottom-5 sm:right-5 sm:h-14 sm:w-14"
+      style={floatOffsetStyle}
       aria-label="Falar no WhatsApp"
     >
       <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-bg text-primary sm:h-10 sm:w-10">

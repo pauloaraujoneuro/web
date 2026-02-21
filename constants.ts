@@ -82,12 +82,12 @@ export const DOCTOR_TITLE = "Neurocirurgião";
 export const DOCTOR_SUBTITLE = "Cirurgia de Coluna, Nervo e Reabilitação";
 export const DOCTOR_HEADLINE = `${DOCTOR_NAME} | ${DOCTOR_TITLE} | ${DOCTOR_SUBTITLE}`;
 export const DOCTOR_SHORT_BIO =
-  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru - PR, com fellowship em nervo periférico pela Rede SARAH e Mestrado em Medicina Cirúrgica pela UFPR. Seu trabalho é direcionado à cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial, sempre com foco em ganho funcional e qualidade de vida.";
+  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru, Curitiba, PR, com Fellowship em nervo periférico pela Rede SARAH, Brasília, DF, e Mestrado em Medicina Cirúrgica pela UFPR, Curitiba, PR. Atua com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial.";
 
 export const DOCTOR_CREDENTIALS = [
-  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru - PR",
-  "Mestrado em Medicina Cirúrgica pela UFPR",
-  "Fellowship em nervo periférico pela Rede SARAH",
+  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru, Curitiba, PR",
+  "Mestrado em Medicina Cirúrgica pela UFPR, Curitiba, PR",
+  "Fellowship em nervo periférico pela Rede SARAH, Brasília, DF",
 ];
 
 export const DOCTOR_REGISTRATION_BADGES = [DOCTOR_CRM, DOCTOR_RQE];
@@ -145,14 +145,14 @@ export const ACADEMIC_MILESTONES: AcademicMilestone[] = [
     id: "master-ufpr",
     period: "2022",
     title: "Mestrado em Clínica Cirúrgica",
-    institution: "Universidade Federal do Paraná (UFPR), Brasil",
+    institution: "Universidade Federal do Paraná (UFPR), Curitiba, PR",
     summary: "Foco em formação cirúrgica e aprofundamento em neurocirurgia.",
   },
   {
     id: "residency-huc",
     period: "2017 - 2022",
     title: "Especialização - Residência médica em Neurocirurgia",
-    institution: "Hospital Universitário Cajuru (HUC), Brasil",
+    institution: "Hospital Universitário Cajuru (HUC), Curitiba, PR",
     summary:
       "Formação prática e técnica em neurocirurgia durante o programa de residência médica.",
   },
@@ -160,7 +160,7 @@ export const ACADEMIC_MILESTONES: AcademicMilestone[] = [
     id: "fellowship-sarah",
     period: "2022 - 2023",
     title: "Especialização (Fellowship) em Nervo Periférico",
-    institution: "Rede SARAH, Brasil",
+    institution: "Rede SARAH de Hospitais de Reabilitação, Brasília, DF",
     summary:
       "Aprimoramento dedicado à cirurgia de nervo periférico e estratégias de reconstrução funcional.",
   },
@@ -168,7 +168,7 @@ export const ACADEMIC_MILESTONES: AcademicMilestone[] = [
     id: "graduation-ufcg",
     period: "2009 - 2015",
     title: "Graduação em Medicina",
-    institution: "Universidade Federal de Campina Grande (UFCG), Brasil",
+    institution: "Universidade Federal de Campina Grande (UFCG), Campina Grande, PB",
     summary:
       "Formação médica de base com preparação para atuação clínica e cirúrgica.",
   },
@@ -293,7 +293,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     title:
       "VIII Congresso Brasileiro de Cirurgia do Sistema Nervoso Periférico",
     year: 2025,
-    location: "Brasil",
+    location: "Gramado, RS",
     event:
       "12/06/2025 | Palestrante convidado | Tema: Outras síndromes compartimentais em membros superiores",
   },
@@ -302,7 +302,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     category: "congress",
     title: "XXXV Congresso Brasileiro de Neurocirurgia",
     year: 2024,
-    location: "Brasil",
+    location: "Belo Horizonte, MG",
     event:
       "03/08/2024 | Palestrante convidado | Tema: Paralisia Neonatal do Plexo Braquial",
   },
@@ -311,14 +311,12 @@ export const PUBLICATIONS: PublicationItem[] = [
     category: "congress",
     title: "VII Congresso Brasileiro de Cirurgia do Sistema Nervoso Periférico",
     year: 2023,
-    location: "Brasil",
+    location: "Belo Horizonte, MG",
     event:
       "16/11/2023 | Palestrante convidado | Tema: Transferência do nervo acessório para nervo supraescapular (via anterior x posterior)",
   },
 ];
 
-export const LATTES_DATA_NOTE =
-  "Produções anteriores a 2023 foram removidas desta página conforme atualização curricular.";
 export const LATTES_URL = "http://lattes.cnpq.br/5178813548582212";
 export const LATTES_URL_LABEL = "Currículo Lattes";
 

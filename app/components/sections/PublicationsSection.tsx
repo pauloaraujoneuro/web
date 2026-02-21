@@ -1,6 +1,5 @@
 import Link from "next/link";
 import {
-  LATTES_DATA_NOTE,
   LATTES_URL,
   LATTES_URL_LABEL,
   PUBLICATIONS,
@@ -25,7 +24,6 @@ export default function PublicationsSection() {
             Registro das apresentações como palestrante convidado a partir de
             2023.
           </p>
-          <p className="mt-2 text-sm text-primary/72">{LATTES_DATA_NOTE}</p>
         </div>
 
         <div className="stagger-grid mt-8 space-y-4">
