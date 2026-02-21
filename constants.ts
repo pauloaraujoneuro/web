@@ -69,7 +69,8 @@ export const SITE_URL = "https://www.drpauloaraujo.com.br";
 export const BRAND_LOGO_WORDMARK_INVERTED = "/logo-gray.png";
 export const BRAND_LOGO_HEADER = "/logo-lettering-cropped.png";
 export const DOCTOR_PROFILE_IMAGE = "/pics/doutor-paulo-araujo-terno.jpeg";
-export const DOCTOR_PROFILE_IMAGE_FRONT = "/pics/doutor-paulo-araujo-frente.jpeg";
+export const DOCTOR_PROFILE_IMAGE_FRONT =
+  "/pics/doutor-paulo-araujo-frente.jpeg";
 export const DOCTOR_PROFILE_IMAGE_FRONT_WIDE =
   "/pics/doutor-paulo-araujo-frente-wide.jpeg";
 
@@ -82,7 +83,7 @@ export const DOCTOR_TITLE = "Neurocirurgião";
 export const DOCTOR_SUBTITLE = "Cirurgia de Coluna, Nervo e Reabilitação";
 export const DOCTOR_HEADLINE = `${DOCTOR_NAME} | ${DOCTOR_TITLE} | ${DOCTOR_SUBTITLE}`;
 export const DOCTOR_SHORT_BIO =
-  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru, Curitiba, PR, com Fellowship em nervo periférico pela Rede SARAH, Brasília, DF, e Mestrado em Medicina Cirúrgica pela UFPR, Curitiba, PR. Atua com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial.";
+  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna do Hospital Universitário Cajuru, com fellowship em nervo periférico pela Rede SARAH e mestrado em medicina cirúrgica pela UFPR. Atua com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial.";
 
 export const DOCTOR_CREDENTIALS = [
   "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru, Curitiba, PR",
@@ -168,7 +169,8 @@ export const ACADEMIC_MILESTONES: AcademicMilestone[] = [
     id: "graduation-ufcg",
     period: "2009 - 2015",
     title: "Graduação em Medicina",
-    institution: "Universidade Federal de Campina Grande (UFCG), Campina Grande, PB",
+    institution:
+      "Universidade Federal de Campina Grande (UFCG), Campina Grande, PB",
     summary:
       "Formação médica de base com preparação para atuação clínica e cirúrgica.",
   },
