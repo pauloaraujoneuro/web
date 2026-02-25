@@ -1,7 +1,25 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Poppins } from "next/font/google";
-import { DOCTOR_HEADLINE, DOCTOR_NAME, SITE_URL } from "@/constants";
+import {
+  CLINIC_ADDRESS_CITY,
+  CLINIC_ADDRESS_COUNTRY,
+  CLINIC_ADDRESS_LINE,
+  CLINIC_ADDRESS_STATE,
+  CLINIC_MAP_EMBED_URL,
+  CLINIC_NAME,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  DOCTOR_CRM,
+  DOCTOR_NAME,
+  DOCTOR_PROFILE_IMAGE,
+  DOCTOR_PROFILE_URL,
+  DOCTOR_RQE,
+  INSTAGRAM_URL,
+  LATTES_URL,
+  SERVICE_LOCATIONS,
+  SITE_URL,
+} from "@/constants";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -11,24 +29,111 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const SITE_TITLE = `Neurocirurgião em Curitiba | ${DOCTOR_NAME}`;
+
 const SITE_DESCRIPTION =
-  "Paulo Araújo | Neurocirurgião com foco em cirurgia de nervo periférico, coluna e reabilitação neurocirúrgica em Curitiba e União da Vitória.";
+  "Neurocirurgião em Curitiba (PR), com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica.";
 
 const SITE_KEYWORDS = [
-  "Paulo Araújo",
-  "Neurocirurgião",
+  "Neurocirurgião em Curitiba",
   "Neurocirurgia em Curitiba",
-  "Neurocirurgia em União da Vitória",
+  "Neurocirurgião Curitiba PR",
+  "Consulta com neurocirurgião em Curitiba",
   "Cirurgia de nervo periférico",
-  "Cirurgia de coluna",
+  "Cirurgia de nervo periférico em Curitiba",
+  "Cirurgia de coluna em Curitiba",
   "Reabilitação neurocirúrgica",
+  "Tratamento de hérnia de disco em Curitiba",
+  "Tratamento de estenose de canal em Curitiba",
+  "Lesão de plexo braquial",
 ];
+
+const PHYSICIAN_AND_CLINIC_JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Physician",
+      "@id": `${SITE_URL}#physician`,
+      name: DOCTOR_NAME,
+      url: SITE_URL,
+      image: `${SITE_URL}${DOCTOR_PROFILE_IMAGE}`,
+      description: SITE_DESCRIPTION,
+      medicalSpecialty: ["Neurosurgery"],
+      telephone: CONTACT_PHONE,
+      email: CONTACT_EMAIL,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: CLINIC_ADDRESS_LINE,
+        addressLocality: CLINIC_ADDRESS_CITY,
+        addressRegion: CLINIC_ADDRESS_STATE,
+        addressCountry: CLINIC_ADDRESS_COUNTRY,
+      },
+      areaServed: SERVICE_LOCATIONS.map((location) => ({
+        "@type": "City",
+        name: location.city,
+      })),
+      availableService: [
+        {
+          "@type": "MedicalProcedure",
+          name: "Cirurgia de nervo periférico",
+        },
+        {
+          "@type": "MedicalProcedure",
+          name: "Cirurgia de coluna",
+        },
+        {
+          "@type": "MedicalTherapy",
+          name: "Reabilitação neurocirúrgica",
+        },
+      ],
+      sameAs: [INSTAGRAM_URL, DOCTOR_PROFILE_URL, LATTES_URL],
+      identifier: [
+        {
+          "@type": "PropertyValue",
+          propertyID: "CRM",
+          value: DOCTOR_CRM,
+        },
+        {
+          "@type": "PropertyValue",
+          propertyID: "RQE",
+          value: DOCTOR_RQE,
+        },
+      ],
+    },
+    {
+      "@type": "MedicalClinic",
+      "@id": `${SITE_URL}#clinic`,
+      name: CLINIC_NAME,
+      url: SITE_URL,
+      telephone: CONTACT_PHONE,
+      email: CONTACT_EMAIL,
+      medicalSpecialty: ["Neurosurgery"],
+      hasMap: CLINIC_MAP_EMBED_URL,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: CLINIC_ADDRESS_LINE,
+        addressLocality: CLINIC_ADDRESS_CITY,
+        addressRegion: CLINIC_ADDRESS_STATE,
+        addressCountry: CLINIC_ADDRESS_COUNTRY,
+      },
+      areaServed: SERVICE_LOCATIONS.map((location) => ({
+        "@type": "AdministrativeArea",
+        name: `${location.city} - ${location.state}`,
+      })),
+    },
+  ],
+};
+
+const safeJsonLd = JSON.stringify(PHYSICIAN_AND_CLINIC_JSON_LD).replace(
+  /</g,
+  "\\u003c",
+);
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: DOCTOR_NAME,
   title: {
-    default: DOCTOR_HEADLINE,
+    default: SITE_TITLE,
     template: `%s | ${DOCTOR_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -45,7 +150,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/logo-transparent.png", type: "image/png" }],
   },
   openGraph: {
-    title: DOCTOR_HEADLINE,
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     siteName: DOCTOR_NAME,
     url: SITE_URL,
@@ -56,13 +161,13 @@ export const metadata: Metadata = {
         url: "/logo-transparent.png",
         width: 1200,
         height: 1200,
-        alt: `Logo ${DOCTOR_NAME}`,
+        alt: `${DOCTOR_NAME} - Neurocirurgião em Curitiba`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: DOCTOR_HEADLINE,
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: ["/logo-transparent.png"],
   },
@@ -87,6 +192,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${poppins.className} ${poppins.variable}`}>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: safeJsonLd,
+          }}
+        />
         {process.env.NODE_ENV === "development" && (
           <Script
             src="//unpkg.com/react-grab/dist/index.global.js"
