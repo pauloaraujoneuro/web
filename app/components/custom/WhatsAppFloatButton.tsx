@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { CONTACT_WHATSAPP_URL } from "@/constants";
 import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
 
@@ -6,7 +5,7 @@ export default function WhatsAppFloatButton() {
   const hasExternalWhatsApp = CONTACT_WHATSAPP_URL.startsWith("https://");
 
   return (
-    <Link
+    <a
       href={CONTACT_WHATSAPP_URL}
       target={hasExternalWhatsApp ? "_blank" : undefined}
       rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
@@ -19,6 +18,6 @@ export default function WhatsAppFloatButton() {
       <span className="pointer-events-none absolute right-[calc(100%+0.7rem)] top-1/2 hidden -translate-y-1/2 whitespace-nowrap rounded-full border border-primary/18 bg-bg/95 px-3 py-1 text-xs font-semibold text-primary opacity-0 shadow-md transition group-hover:opacity-100 md:block">
         WhatsApp
       </span>
-    </Link>
+    </a>
   );
 }
