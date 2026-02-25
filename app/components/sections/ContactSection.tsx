@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   CITY_SCHEDULES,
   CLINIC_MAP_EMBED_URL,
@@ -90,7 +89,7 @@ export default function ContactSection() {
                     <p className="text-sm font-semibold text-bg xl:text-base">
                       Mensagem direta
                     </p>
-                    <Link
+                    <a
                       href={CONTACT_WHATSAPP_URL}
                       target={hasExternalWhatsApp ? "_blank" : undefined}
                       rel={
@@ -99,7 +98,7 @@ export default function ContactSection() {
                       className="interactive-link whitespace-nowrap text-sm leading-relaxed text-bg/82 xl:text-lg"
                     >
                       Abrir conversa
-                    </Link>
+                    </a>
                   </div>
                 </li>
                 <li className="flex gap-3">
@@ -123,12 +122,12 @@ export default function ContactSection() {
                     <p className="text-sm font-semibold text-bg xl:text-base">
                       Email
                     </p>
-                    <Link
+                    <a
                       href={`mailto:${CONTACT_EMAIL}`}
                       className="interactive-link whitespace-nowrap text-sm leading-relaxed text-bg/82 xl:text-[1.07rem]"
                     >
                       {CONTACT_EMAIL}
-                    </Link>
+                    </a>
                   </div>
                 </li>
               </ul>
@@ -175,14 +174,27 @@ export default function ContactSection() {
               </ul>
             </article>
 
-            <article className="card-surface overflow-hidden p-2">
-              <iframe
-                title="Mapa de atendimento"
-                src={CLINIC_MAP_EMBED_URL}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-80 w-full border-0 sm:h-97.5"
-              />
+            <article className="card-surface overflow-hidden p-2.5">
+              <details className="rounded-[0.55rem] border border-primary/16 bg-bg/64 p-3">
+                <summary className="cursor-pointer list-none rounded-md border border-primary/20 bg-bg px-3 py-2.5 [&::-webkit-details-marker]:hidden">
+                  <span className="block text-sm font-semibold text-primary">
+                    Carregar mapa interativo
+                  </span>
+                  <span className="mt-1 block text-xs leading-relaxed text-primary/72">
+                    O mapa é carregado sob demanda para reduzir o peso inicial
+                    da página.
+                  </span>
+                </summary>
+                <div className="mt-3 overflow-hidden rounded-[0.5rem] border border-primary/18">
+                  <iframe
+                    title="Mapa de atendimento"
+                    src={CLINIC_MAP_EMBED_URL}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="h-80 w-full border-0 sm:h-97.5"
+                  />
+                </div>
+              </details>
             </article>
           </div>
         </div>

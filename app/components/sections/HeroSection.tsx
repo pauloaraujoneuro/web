@@ -22,11 +22,13 @@ function HeroImageCard({ className = "" }: HeroImageCardProps) {
       <Image
         src={DOCTOR_PROFILE_IMAGE}
         alt="Retrato profissional do Dr. Paulo Araújo"
-        width={1066}
-        height={1600}
+        width={900}
+        height={1351}
         sizes="(max-width: 640px) 92vw, (max-width: 1023px) 78vw, (max-width: 1279px) 44vw, 40vw"
+        quality={72}
         className="h-auto w-full rounded-[0.45rem] object-cover object-top"
         priority
+        fetchPriority="high"
       />
       <div className="pointer-events-none absolute inset-0 hidden bg-linear-to-t from-primary/28 via-transparent to-secondary/20 sm:block" />
       <div className="pointer-events-none absolute inset-0 hidden bg-linear-to-br from-primary/22 via-transparent to-primary/14 xl:block" />

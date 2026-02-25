@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   BRAND_LOGO_WORDMARK_INVERTED,
   CLINIC_NAME,
@@ -35,9 +34,10 @@ export default function Footer() {
               <Image
                 src={BRAND_LOGO_WORDMARK_INVERTED}
                 alt="Marca Paulo Araújo"
-                width={4501}
-                height={4501}
+                width={560}
+                height={560}
                 className="h-auto w-full max-w-87.5 md:mx-auto md:max-w-75 xl:mx-0 xl:max-w-87.5"
+                unoptimized
               />
 
               <div className="mt-4 md:mt-0 xl:mt-4">
@@ -66,12 +66,12 @@ export default function Footer() {
             <ul className="mt-4 space-y-2">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
-                  <Link
+                  <a
                     href={item.href}
                     className="interactive-link whitespace-nowrap text-sm text-bg/84"
                   >
                     {item.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -84,15 +84,15 @@ export default function Footer() {
             <ul className="mt-4 space-y-2 text-sm text-bg/84">
               <li className="whitespace-nowrap">{CONTACT_PHONE}</li>
               <li>
-                <Link
+                <a
                   href={`mailto:${CONTACT_EMAIL}`}
                   className="interactive-link whitespace-nowrap"
                 >
                   {CONTACT_EMAIL}
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -100,11 +100,11 @@ export default function Footer() {
                 >
                   <InstagramIcon className="h-4.5 w-4.5" />
                   Instagram
-                </Link>
+                </a>
               </li>
               {hasLattesLink ? (
                 <li>
-                  <Link
+                  <a
                     href={LATTES_URL}
                     target="_blank"
                     rel="noreferrer"
@@ -112,7 +112,7 @@ export default function Footer() {
                   >
                     <LattesIcon className="h-4.5 w-4.5" />
                     {LATTES_URL_LABEL}
-                  </Link>
+                  </a>
                 </li>
               ) : null}
             </ul>

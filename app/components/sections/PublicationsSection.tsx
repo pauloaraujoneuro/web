@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   LATTES_URL,
   LATTES_URL_LABEL,
@@ -76,14 +75,14 @@ export default function PublicationsSection() {
                   </div>
 
                   {item.link ? (
-                    <Link
+                    <a
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="interactive-link mt-4 whitespace-nowrap text-sm font-semibold text-primary"
                     >
                       Acessar material
-                    </Link>
+                    </a>
                   ) : null}
                 </article>
               );
@@ -93,7 +92,7 @@ export default function PublicationsSection() {
 
         <div className="mt-8 text-sm text-primary/86">
           {hasLattesLink ? (
-            <Link
+            <a
               href={LATTES_URL}
               target="_blank"
               rel="noreferrer"
@@ -101,7 +100,7 @@ export default function PublicationsSection() {
             >
               <LattesIcon className="h-4 w-4" />
               {LATTES_URL_LABEL}
-            </Link>
+            </a>
           ) : (
             <span className="inline-flex items-center gap-2">
               <LattesIcon className="h-4 w-4 text-primary/88" />

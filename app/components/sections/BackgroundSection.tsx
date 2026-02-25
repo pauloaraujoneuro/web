@@ -95,6 +95,7 @@ export default function BackgroundSection() {
               width={1200}
               height={1600}
               sizes="(max-width: 767px) 100vw, 0px"
+              quality={70}
               className="h-auto w-full rounded-[0.5rem] object-contain object-top md:hidden"
             />
             <Image
@@ -103,6 +104,7 @@ export default function BackgroundSection() {
               width={1920}
               height={1080}
               sizes="(min-width: 768px) 66vw, 0px"
+              quality={70}
               className="hidden h-auto w-full rounded-[0.5rem] object-contain object-top md:block"
             />
           </article>

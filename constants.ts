@@ -67,8 +67,8 @@ export const SITE_URL = "https://www.drpauloaraujo.com.br";
 
 // Brand Assets
 export const BRAND_LOGO_WORDMARK_INVERTED = "/logo-gray.png";
-export const BRAND_LOGO_HEADER = "/logo-lettering-cropped.png";
-export const DOCTOR_PROFILE_IMAGE = "/pics/doutor-paulo-araujo-terno.jpeg";
+export const BRAND_LOGO_HEADER = "/logo-lettering-cropped.webp";
+export const DOCTOR_PROFILE_IMAGE = "/pics/doutor-paulo-araujo-terno.webp";
 export const DOCTOR_PROFILE_IMAGE_FRONT =
   "/pics/doutor-paulo-araujo-frente.jpeg";
 export const DOCTOR_PROFILE_IMAGE_FRONT_WIDE =
