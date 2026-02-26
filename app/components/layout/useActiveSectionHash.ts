@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { NavigationItem } from "@/constants";
 
+const ACTIVE_SECTION_OFFSET_PX = 132;
+
 function sanitizeHash(href: string) {
   return href.startsWith("#") ? href : "";
 }
@@ -13,8 +15,10 @@ export default function useActiveSectionHash(navItems: NavigationItem[]) {
     [navItems],
   );
 
-  const [activeHash, setActiveHash] = useState(sectionHashes[0] ?? "");
-  const visibleRatiosRef = useRef<Record<string, number>>({});
+  const [activeHash, setActiveHashState] = useState(sectionHashes[0] ?? "");
+  const sectionElementsRef = useRef<Array<{ hash: string; element: HTMLElement }>>(
+    [],
+  );
 
   useEffect(() => {
     if (sectionHashes.length === 0) return;
@@ -24,48 +28,82 @@ export default function useActiveSectionHash(navItems: NavigationItem[]) {
       sectionHashes.includes(hash) ? hash : fallbackHash;
 
     const updateFromLocation = () => {
-      setActiveHash(normalizeHash(window.location.hash));
+      setActiveHashState(normalizeHash(window.location.hash));
+    };
+
+    sectionElementsRef.current = sectionHashes
+      .map((hash) => {
+        const element = document.getElementById(hash.slice(1));
+        return element ? { hash, element } : null;
+      })
+      .filter((entry): entry is { hash: string; element: HTMLElement } => Boolean(entry));
+
+    const updateFromScroll = () => {
+      const sections = sectionElementsRef.current;
+      if (sections.length === 0) return;
+
+      const activeInViewport = sections.find(({ element }) => {
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.top <= ACTIVE_SECTION_OFFSET_PX &&
+          rect.bottom > ACTIVE_SECTION_OFFSET_PX
+        );
+      });
+
+      if (activeInViewport) {
+        setActiveHashState(activeInViewport.hash);
+        return;
+      }
+
+      const lastReached = [...sections].reverse().find(({ element }) => {
+        const rect = element.getBoundingClientRect();
+        return rect.top <= ACTIVE_SECTION_OFFSET_PX;
+      });
+
+      if (lastReached) {
+        setActiveHashState(lastReached.hash);
+        return;
+      }
+
+      setActiveHashState(fallbackHash);
+    };
+
+    let rafId = 0;
+    const onScrollOrResize = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        updateFromScroll();
+      });
+    };
+
+    const onHashChange = () => {
+      updateFromLocation();
+      window.requestAnimationFrame(updateFromScroll);
     };
 
     updateFromLocation();
+    updateFromScroll();
 
-    const sections = sectionHashes
-      .map((hash) => document.getElementById(hash.slice(1)))
-      .filter((element): element is HTMLElement => Boolean(element));
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const hash = `#${(entry.target as HTMLElement).id}`;
-          if (entry.isIntersecting) {
-            visibleRatiosRef.current[hash] = entry.intersectionRatio;
-          } else {
-            delete visibleRatiosRef.current[hash];
-          }
-        });
-
-        const mostVisibleHash = Object.entries(visibleRatiosRef.current).sort(
-          (a, b) => b[1] - a[1],
-        )[0]?.[0];
-
-        if (mostVisibleHash) {
-          setActiveHash(mostVisibleHash);
-        }
-      },
-      {
-        rootMargin: "-42% 0px -50% 0px",
-        threshold: [0, 0.2, 0.45, 0.7, 1],
-      },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    window.addEventListener("hashchange", updateFromLocation);
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize);
+    window.addEventListener("hashchange", onHashChange);
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener("hashchange", updateFromLocation);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
+      window.removeEventListener("hashchange", onHashChange);
     };
   }, [sectionHashes]);
+
+  const setActiveHash = (hash: string) => {
+    if (sectionHashes.includes(hash)) {
+      setActiveHashState(hash);
+    }
+  };
 
   return { activeHash, setActiveHash };
 }
