@@ -49,7 +49,7 @@ export default function ExpertiseSection() {
                       {area.title}
                     </h3>
                   </div>
-                  <p className="text-base leading-relaxed font-semibold text-bg/84 md:min-w-0 mt-2">
+                  <p className="text-base leading-relaxed font-semibold text-bg/84 md:min-w-0 mt-2 md:mt-0">
                     {area.description}
                   </p>
                   <ul className="mt-4 list-disc space-y-2 pl-4 text-sm leading-relaxed text-bg/82 md:col-span-2">

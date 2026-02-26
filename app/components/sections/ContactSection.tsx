@@ -62,7 +62,7 @@ export default function ContactSection() {
       className="section-shell section-anchor section-tone-secondary"
     >
       <div className="container-shell">
-        <div className="max-w-3xl">
+        <div>
           <span className="badge">Contato</span>
           <h2 className="mt-4 text-balance text-3xl font-semibold text-primary sm:text-4xl">
             Atendimento presencial em Curitiba e União da Vitória

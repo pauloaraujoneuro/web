@@ -64,10 +64,7 @@ export default function BackgroundSection() {
             <ul className="mt-6 space-y-4 border-l border-bg/24 pl-4">
               {academicMilestonesSorted.map((item) => (
                 <li key={item.id}>
-                  <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-bg/72">
-                    {item.period}
-                  </p>
-                  <p className="mt-1 text-base font-semibold text-bg">
+                  <p className="text-base font-semibold text-bg">
                     {item.title}
                   </p>
                   <p className="mt-1 text-sm font-medium text-bg/88">

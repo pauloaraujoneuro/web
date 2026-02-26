@@ -21,8 +21,8 @@ interface CongressGalleryProps {
 
 const SWIPE_THRESHOLD_PX = 42;
 
-function getSlideLabel(item: CongressGalleryItem, index: number, total: number) {
-  return `Foto ${index + 1} de ${total} (${item.year})`;
+function getSlideLabel(index: number, total: number) {
+  return `Foto ${index + 1} de ${total}`;
 }
 
 export default function CongressGallery({ items }: CongressGalleryProps) {
@@ -114,7 +114,7 @@ export default function CongressGallery({ items }: CongressGalleryProps) {
                   />
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-primary/70 via-primary/25 to-transparent px-4 py-3 text-bg sm:px-5">
                     <p className="text-xs text-bg/84">
-                      {getSlideLabel(item, index, totalSlides)}
+                      {getSlideLabel(index, totalSlides)}
                     </p>
                   </div>
                 </div>

@@ -5,7 +5,7 @@ import {
   DOCTOR_NAME,
   DOCTOR_PROFILE_IMAGE,
   DOCTOR_RQE,
-  DOCTOR_SHORT_BIO,
+  DOCTOR_SHORTER_BIO,
   DOCTOR_SUBTITLE,
   DOCTOR_TITLE,
 } from "@/constants";
@@ -60,7 +60,7 @@ export default function HeroSection() {
           </div>
 
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-primary/87 sm:text-lg">
-            {DOCTOR_SHORT_BIO}
+            {DOCTOR_SHORTER_BIO}
           </p>
 
           <div className="mt-4 flex flex-wrap gap-2">

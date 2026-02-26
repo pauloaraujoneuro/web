@@ -84,10 +84,12 @@ export const DOCTOR_SUBTITLE = "Cirurgia de Coluna, Nervo e Reabilitação";
 export const DOCTOR_HEADLINE = `${DOCTOR_NAME} | ${DOCTOR_TITLE} | ${DOCTOR_SUBTITLE}`;
 export const DOCTOR_SHORT_BIO =
   "Chefe do serviço de nervo periférico e preceptor do serviço de coluna do Hospital Universitário Cajuru, com fellowship em nervo periférico pela Rede SARAH e mestrado em medicina cirúrgica pela UFPR. Atua com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial.";
+export const DOCTOR_SHORTER_BIO =
+  "Atua com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial.";
 
 export const DOCTOR_CREDENTIALS = [
   "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru, Curitiba, PR",
-  "Mestrado em Medicina Cirúrgica pela UFPR, Curitiba, PR",
+  "Mestre em Medicina Cirúrgica pela UFPR, Curitiba, PR",
   "Fellowship em nervo periférico pela Rede SARAH, Brasília, DF",
 ];
 
@@ -198,7 +200,7 @@ export const PROFESSIONAL_ROLES: ProfessionalRole[] = [
 
 // Contact Information
 export const CONTACT_EMAIL = "paraujomed@gmail.com";
-export const CONTACT_PHONE = "(41) 3271-1212";
+export const CONTACT_PHONE = "41 2018-0330";
 
 // WhatsApp Information
 export const CONTACT_WHATSAPP_NUMBER = "5541999467571";

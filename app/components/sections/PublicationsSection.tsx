@@ -15,16 +15,11 @@ const SUPPORTED_IMAGE_EXTENSIONS = /\.(avif|heic|jpe?g|png|webp)$/i;
 const CURATED_CONGRESS_PHOTO_FILES = [
   "PHOTO-2023-11-16-22-41-321.jpg",
   "PHOTO-2023-11-17-12-12-28.jpg",
-  "PHOTO-2026-02-11-16-34-00.jpg",
   "PHOTO-2023-11-17-12-12-281.jpg",
   "PHOTO-2024-09-06-18-29-50.jpg",
-  "PHOTO-2024-09-06-18-29-502.jpg",
   "PHOTO-2024-09-06-18-29-503.jpg",
   "PHOTO-2025-03-18-10-54-5411.jpg",
-  "PHOTO-2025-03-18-10-54-5413.jpg",
-  "PHOTO-2025-03-18-10-54-5414.jpg",
   "PHOTO-2026-02-11-16-35-48.jpg",
-  "PHOTO-2026-02-11-16-35-482.jpg",
 ];
 
 function normalizeId(fileName: string) {
@@ -68,7 +63,6 @@ async function getCongressGalleryItems(): Promise<CongressGalleryItem[]> {
 }
 
 export default async function PublicationsSection() {
-  const hasLattesLink = LATTES_URL.startsWith("http");
   const congressGalleryItems = await getCongressGalleryItems();
 
   return (
@@ -77,7 +71,7 @@ export default async function PublicationsSection() {
       className="section-shell section-anchor section-tone-spotlight"
     >
       <div className="container-shell relative z-10">
-        <div className="max-w-3xl">
+        <div>
           <span className="badge">Publicações</span>
           <h2 className="mt-4 text-balance text-3xl font-semibold text-primary sm:text-4xl">
             Participações recentes em congressos científicos
@@ -86,6 +80,18 @@ export default async function PublicationsSection() {
             Registro das apresentações como palestrante convidado a partir de
             2023.
           </p>
+
+          <div className="mt-5 text-primary/86">
+            <a
+              href={LATTES_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="interactive-link inline-flex items-center gap-2.5 text-base font-semibold text-primary sm:text-lg"
+            >
+              <LattesIcon className="h-5 w-5" />
+              {LATTES_URL_LABEL}
+            </a>
+          </div>
         </div>
 
         <div className="stagger-grid mt-8 space-y-4">
@@ -154,25 +160,6 @@ export default async function PublicationsSection() {
         </div>
 
         <CongressGallery items={congressGalleryItems} />
-
-        <div className="mt-8 text-sm text-primary/86">
-          {hasLattesLink ? (
-            <a
-              href={LATTES_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="interactive-link inline-flex items-center gap-2 font-semibold text-primary"
-            >
-              <LattesIcon className="h-4 w-4" />
-              {LATTES_URL_LABEL}
-            </a>
-          ) : (
-            <span className="inline-flex items-center gap-2">
-              <LattesIcon className="h-4 w-4 text-primary/88" />
-              Currículo Lattes: link será adicionado em breve.
-            </span>
-          )}
-        </div>
       </div>
     </section>
   );
