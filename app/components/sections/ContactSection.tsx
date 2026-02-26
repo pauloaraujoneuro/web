@@ -7,6 +7,7 @@ import {
   CONTACT_WHATSAPP_URL,
 } from "@/constants";
 import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
+import ContactMapEmbed from "@/app/components/sections/ContactMapEmbed";
 
 function PhoneIcon() {
   return (
@@ -175,26 +176,7 @@ export default function ContactSection() {
             </article>
 
             <article className="card-surface overflow-hidden p-2.5">
-              <details className="rounded-[0.55rem] border border-primary/16 bg-bg/64 p-3">
-                <summary className="cursor-pointer list-none rounded-md border border-primary/20 bg-bg px-3 py-2.5 [&::-webkit-details-marker]:hidden">
-                  <span className="block text-sm font-semibold text-primary">
-                    Carregar mapa interativo
-                  </span>
-                  <span className="mt-1 block text-xs leading-relaxed text-primary/72">
-                    O mapa é carregado sob demanda para reduzir o peso inicial
-                    da página.
-                  </span>
-                </summary>
-                <div className="mt-3 overflow-hidden rounded-[0.5rem] border border-primary/18">
-                  <iframe
-                    title="Mapa de atendimento"
-                    src={CLINIC_MAP_EMBED_URL}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="h-80 w-full border-0 sm:h-97.5"
-                  />
-                </div>
-              </details>
+              <ContactMapEmbed mapUrl={CLINIC_MAP_EMBED_URL} />
             </article>
           </div>
         </div>
