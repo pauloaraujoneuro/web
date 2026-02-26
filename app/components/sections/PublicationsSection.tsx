@@ -1,12 +1,75 @@
+import { readdir } from "node:fs/promises";
+import path from "node:path";
 import {
   LATTES_URL,
   LATTES_URL_LABEL,
   PUBLICATIONS,
 } from "@/constants";
 import LattesIcon from "@/app/components/icons/LattesIcon";
+import CongressGallery, {
+  type CongressGalleryItem,
+} from "@/app/components/sections/CongressGallery";
 
-export default function PublicationsSection() {
+const CONGRESS_GALLERY_DIR = path.join(process.cwd(), "public/other/congressos");
+const SUPPORTED_IMAGE_EXTENSIONS = /\.(avif|heic|jpe?g|png|webp)$/i;
+const CURATED_CONGRESS_PHOTO_FILES = [
+  "PHOTO-2023-11-16-22-41-321.jpg",
+  "PHOTO-2023-11-17-12-12-28.jpg",
+  "PHOTO-2026-02-11-16-34-00.jpg",
+  "PHOTO-2023-11-17-12-12-281.jpg",
+  "PHOTO-2024-09-06-18-29-50.jpg",
+  "PHOTO-2024-09-06-18-29-502.jpg",
+  "PHOTO-2024-09-06-18-29-503.jpg",
+  "PHOTO-2025-03-18-10-54-5411.jpg",
+  "PHOTO-2025-03-18-10-54-5413.jpg",
+  "PHOTO-2025-03-18-10-54-5414.jpg",
+  "PHOTO-2026-02-11-16-35-48.jpg",
+  "PHOTO-2026-02-11-16-35-482.jpg",
+];
+
+function normalizeId(fileName: string) {
+  return fileName
+    .toLowerCase()
+    .replace(/\.[a-z0-9]+$/i, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function parseYear(fileName: string) {
+  const match = fileName.match(/PHOTO-(\d{4})/i);
+  return match?.[1] ?? "Evento";
+}
+
+async function getCongressGalleryItems(): Promise<CongressGalleryItem[]> {
+  try {
+    const files = await readdir(CONGRESS_GALLERY_DIR);
+    const imageFiles = files.filter((fileName) =>
+      SUPPORTED_IMAGE_EXTENSIONS.test(fileName),
+    );
+    const imageSet = new Set(imageFiles);
+    const curatedFiles = CURATED_CONGRESS_PHOTO_FILES.filter((fileName) =>
+      imageSet.has(fileName),
+    );
+    const finalFiles =
+      curatedFiles.length > 0 ? curatedFiles : imageFiles.sort((a, b) => a.localeCompare(b));
+
+    return finalFiles.map((fileName) => {
+      const year = parseYear(fileName);
+      return {
+        id: normalizeId(fileName),
+        src: `/other/congressos/${fileName}`,
+        alt: `Dr. Paulo Araujo em congresso cientifico (${year})`,
+        year,
+      };
+    });
+  } catch {
+    return [];
+  }
+}
+
+export default async function PublicationsSection() {
   const hasLattesLink = LATTES_URL.startsWith("http");
+  const congressGalleryItems = await getCongressGalleryItems();
 
   return (
     <section
@@ -89,6 +152,8 @@ export default function PublicationsSection() {
             })(),
           )}
         </div>
+
+        <CongressGallery items={congressGalleryItems} />
 
         <div className="mt-8 text-sm text-primary/86">
           {hasLattesLink ? (

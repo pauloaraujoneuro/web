@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import type { NavigationItem } from "@/constants";
 import InstagramIcon from "@/app/components/icons/InstagramIcon";
+import useActiveSectionHash from "@/app/components/layout/useActiveSectionHash";
 
 interface HeaderMobileMenuProps {
   navItems: NavigationItem[];
@@ -20,6 +21,7 @@ export default function HeaderMobileMenu({
   ctaPrimary,
 }: HeaderMobileMenuProps) {
   const detailsRef = useRef<HTMLDetailsElement>(null);
+  const { activeHash, setActiveHash } = useActiveSectionHash(navItems);
 
   const closeMenu = () => {
     if (detailsRef.current) {
@@ -57,8 +59,12 @@ export default function HeaderMobileMenu({
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="block whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold text-primary/92 transition hover:bg-primary/8"
-                  onClick={closeMenu}
+                  className="mobile-nav-link block whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold text-primary/92 transition hover:bg-primary/8"
+                  aria-current={item.href === activeHash ? "location" : undefined}
+                  onClick={() => {
+                    setActiveHash(item.href);
+                    closeMenu();
+                  }}
                 >
                   {item.label}
                 </a>
