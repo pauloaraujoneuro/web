@@ -274,7 +274,7 @@ export const CLINIC_ADDRESS_STATE = SERVICE_LOCATIONS[0].state;
 export const CLINIC_ADDRESS_COUNTRY = "Brasil";
 export const CLINIC_ADDRESS_FULL = `${SERVICE_LOCATIONS[0].name}, ${CLINIC_ADDRESS_LINE}, ${CLINIC_ADDRESS_CITY} - ${CLINIC_ADDRESS_STATE}, ${CLINIC_ADDRESS_COUNTRY}`;
 export const CLINIC_MAP_EMBED_URL =
-  "https://www.google.com/maps?q=Hospital+Sao+Marcelino+Champagnat+Curitiba&output=embed";
+  "https://www.google.com/maps?q=-25.43389,-49.24895&z=16&output=embed";
 
 // Business Hours
 export const CLINIC_HOURS = {

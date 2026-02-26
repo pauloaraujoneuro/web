@@ -41,15 +41,15 @@ export default function HeaderMobileMenu({
         <InstagramIcon className="h-4.5 w-4.5" />
       </a>
 
-      <details ref={detailsRef} className="relative">
+      <details ref={detailsRef} className="mobile-menu relative">
         <summary
-          className="icon-button flex h-10 w-10 list-none items-center justify-center [&::-webkit-details-marker]:hidden"
+          className="mobile-menu-toggle icon-button flex h-10 w-10 list-none items-center justify-center [&::-webkit-details-marker]:hidden"
           aria-label="Abrir menu"
         >
-          <span className="relative block h-5 w-6" aria-hidden="true">
-            <span className="absolute left-0 top-0.5 block h-0.5 w-6 rounded-full bg-primary" />
-            <span className="absolute left-0 top-2.5 block h-0.5 w-6 rounded-full bg-primary" />
-            <span className="absolute left-0 top-4.5 block h-0.5 w-6 rounded-full bg-primary" />
+          <span className="mobile-menu-icon relative block h-5 w-6" aria-hidden="true">
+            <span className="mobile-menu-line mobile-menu-line-top absolute left-0 top-0.5 block h-0.5 w-6 rounded-full bg-primary" />
+            <span className="mobile-menu-line mobile-menu-line-middle absolute left-0 top-2.5 block h-0.5 w-6 rounded-full bg-primary" />
+            <span className="mobile-menu-line mobile-menu-line-bottom absolute left-0 top-4.5 block h-0.5 w-6 rounded-full bg-primary" />
           </span>
         </summary>
 
@@ -59,7 +59,9 @@ export default function HeaderMobileMenu({
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="mobile-nav-link block whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold text-primary/92 transition hover:bg-primary/8"
+                  className={`mobile-nav-link block whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold text-primary/92 transition hover:bg-primary/8 ${
+                    item.href === activeHash ? "mobile-nav-link-active" : ""
+                  }`}
                   aria-current={item.href === activeHash ? "location" : undefined}
                   onClick={() => {
                     setActiveHash(item.href);

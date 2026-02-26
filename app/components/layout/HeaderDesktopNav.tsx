@@ -18,7 +18,7 @@ export default function HeaderDesktopNav({ navItems }: HeaderDesktopNavProps) {
           <li key={item.href}>
             <a
               href={item.href}
-              className="nav-link"
+              className={`nav-link ${isActive ? "nav-link-active" : ""}`}
               aria-current={isActive ? "location" : undefined}
               onClick={() => setActiveHash(item.href)}
             >
