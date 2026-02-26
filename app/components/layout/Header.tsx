@@ -7,6 +7,7 @@ import {
   NAV_ITEMS,
 } from "@/constants";
 import InstagramIcon from "@/app/components/icons/InstagramIcon";
+import HeaderDesktopNav from "@/app/components/layout/HeaderDesktopNav";
 import HeaderMobileMenu from "@/app/components/layout/HeaderMobileMenu";
 
 export default function Header() {
@@ -35,15 +36,7 @@ export default function Header() {
             />
           </a>
 
-          <ul className="hidden items-center gap-1 lg:flex">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.href}>
-                <a href={item.href} className="nav-link">
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <HeaderDesktopNav navItems={NAV_ITEMS} />
 
           <div className="hidden items-center gap-2 lg:flex">
             <a
