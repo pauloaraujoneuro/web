@@ -3,7 +3,7 @@ import { DOCTOR_SUBTITLE, EXPERTISE_AREAS } from "@/constants";
 export default function ExpertiseSection() {
   return (
     <section
-      id="expertise"
+      id="especialidades"
       className="section-shell section-anchor section-tone-ink"
     >
       <div className="container-shell relative z-10 grid gap-8 xl:grid-cols-[0.38fr_0.62fr]">

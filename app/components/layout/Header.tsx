@@ -9,6 +9,7 @@ import {
 import InstagramIcon from "@/app/components/icons/InstagramIcon";
 import HeaderDesktopNav from "@/app/components/layout/HeaderDesktopNav";
 import HeaderMobileMenu from "@/app/components/layout/HeaderMobileMenu";
+import Link from "next/link";
 
 export default function Header() {
   const hasExternalWhatsApp = CONTACT_WHATSAPP_URL.startsWith("https://");
@@ -19,8 +20,8 @@ export default function Header() {
 
       <nav className="container-shell py-3">
         <div className="flex items-center justify-between gap-4">
-          <a
-            href="#about"
+          <Link
+            href="/"
             className="group flex shrink-0 items-center leading-tight"
             aria-label="Ir para o início da página"
           >
@@ -34,7 +35,7 @@ export default function Header() {
               unoptimized
               fetchPriority="high"
             />
-          </a>
+          </Link>
 
           <HeaderDesktopNav navItems={NAV_ITEMS} />
 

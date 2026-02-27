@@ -58,7 +58,7 @@ export default function ContactSection() {
 
   return (
     <section
-      id="contact"
+      id="contato"
       className="section-shell section-anchor section-tone-secondary"
     >
       <div className="container-shell">

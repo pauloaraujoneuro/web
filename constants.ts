@@ -100,11 +100,11 @@ export const DOCTOR_PROFILE_URL =
 
 // Website Navigation
 export const NAV_ITEMS: NavigationItem[] = [
-  { href: "#about", label: "Sobre" },
-  { href: "#expertise", label: "Especialidades" },
-  { href: "#background", label: "Formação" },
-  { href: "#publications", label: "Publicações" },
-  { href: "#contact", label: "Contato" },
+  { href: "#sobre", label: "Sobre" },
+  { href: "#especialidades", label: "Especialidades" },
+  { href: "#formacao", label: "Formação" },
+  { href: "#publicacoes", label: "Publicações" },
+  { href: "#contato", label: "Contato" },
 ];
 
 // Expertise

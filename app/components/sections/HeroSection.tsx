@@ -40,7 +40,7 @@ function HeroImageCard({ className = "" }: HeroImageCardProps) {
 export default function HeroSection() {
   return (
     <section
-      id="about"
+      id="sobre"
       className="section-shell section-hero section-anchor section-tone-neutral"
     >
       <div className="container-shell grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start xl:items-center">
@@ -56,7 +56,7 @@ export default function HeroSection() {
           </p>
 
           <div className="mt-6 lg:hidden">
-            <HeroImageCard className="mx-auto max-w-[31rem]" />
+            <HeroImageCard className="mx-auto max-w-124" />
           </div>
 
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-primary/87 sm:text-lg">
@@ -80,7 +80,7 @@ export default function HeroSection() {
         </div>
 
         <div className="relative hidden lg:block">
-          <HeroImageCard className="mx-auto w-full max-w-[33rem] lg:ml-auto" />
+          <HeroImageCard className="mx-auto w-full max-w-132 lg:ml-auto" />
         </div>
       </div>
     </section>

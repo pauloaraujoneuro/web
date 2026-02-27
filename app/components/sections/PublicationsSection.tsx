@@ -1,16 +1,15 @@
 import { readdir } from "node:fs/promises";
 import path from "node:path";
-import {
-  LATTES_URL,
-  LATTES_URL_LABEL,
-  PUBLICATIONS,
-} from "@/constants";
+import { LATTES_URL, LATTES_URL_LABEL, PUBLICATIONS } from "@/constants";
 import LattesIcon from "@/app/components/icons/LattesIcon";
 import CongressGallery, {
   type CongressGalleryItem,
 } from "@/app/components/sections/CongressGallery";
 
-const CONGRESS_GALLERY_DIR = path.join(process.cwd(), "public/other/congressos");
+const CONGRESS_GALLERY_DIR = path.join(
+  process.cwd(),
+  "public/other/congressos",
+);
 const SUPPORTED_IMAGE_EXTENSIONS = /\.(avif|heic|jpe?g|png|webp)$/i;
 const CURATED_CONGRESS_PHOTO_FILES = [
   "PHOTO-2023-11-16-22-41-321.jpg",
@@ -46,7 +45,9 @@ async function getCongressGalleryItems(): Promise<CongressGalleryItem[]> {
       imageSet.has(fileName),
     );
     const finalFiles =
-      curatedFiles.length > 0 ? curatedFiles : imageFiles.sort((a, b) => a.localeCompare(b));
+      curatedFiles.length > 0
+        ? curatedFiles
+        : imageFiles.sort((a, b) => a.localeCompare(b));
 
     return finalFiles.map((fileName) => {
       const year = parseYear(fileName);
@@ -67,7 +68,7 @@ export default async function PublicationsSection() {
 
   return (
     <section
-      id="publications"
+      id="publicacoes"
       className="section-shell section-anchor section-tone-spotlight"
     >
       <div className="container-shell relative z-10">

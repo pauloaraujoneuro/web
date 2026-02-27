@@ -43,7 +43,7 @@ export default function BackgroundSection() {
 
   return (
     <section
-      id="background"
+      id="formacao"
       className="section-shell section-anchor section-tone-primary"
     >
       <div className="container-shell grid gap-10 xl:grid-cols-[0.34fr_0.66fr]">

@@ -43,7 +43,7 @@ export default function HeaderMobileMenu({
 
       <details ref={detailsRef} className="mobile-menu relative">
         <summary
-          className="mobile-menu-toggle icon-button flex h-10 w-10 list-none items-center justify-center [&::-webkit-details-marker]:hidden"
+          className="mobile-menu-toggle icon-button flex h-10 w-10 list-none items-center justify-center cursor-pointer [&::-webkit-details-marker]:hidden"
           aria-label="Abrir menu"
         >
           <span className="mobile-menu-icon relative block h-5 w-6" aria-hidden="true">
