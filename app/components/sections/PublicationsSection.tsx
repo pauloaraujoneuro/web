@@ -2,9 +2,8 @@ import { readdir } from "node:fs/promises";
 import path from "node:path";
 import { LATTES_URL, LATTES_URL_LABEL, PUBLICATIONS } from "@/constants";
 import LattesIcon from "@/app/components/icons/LattesIcon";
-import CongressGallery, {
-  type CongressGalleryItem,
-} from "@/app/components/sections/CongressGallery";
+import type { CongressGalleryItem } from "@/app/components/sections/CongressGallery";
+import DeferredCongressGallery from "@/app/components/sections/DeferredCongressGallery";
 
 const CONGRESS_GALLERY_DIR = path.join(
   process.cwd(),
@@ -134,7 +133,7 @@ export default async function PublicationsSection() {
                   </div>
 
                   <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
-                    <p className="text-sm font-medium leading-relaxed text-primary/82">
+                    <p className="text-sm font-normal leading-relaxed text-primary/82">
                       Local: {item.location}
                     </p>
                     {roleText ? (
@@ -160,7 +159,7 @@ export default async function PublicationsSection() {
           )}
         </div>
 
-        <CongressGallery items={congressGalleryItems} />
+        <DeferredCongressGallery items={congressGalleryItems} />
       </div>
     </section>
   );

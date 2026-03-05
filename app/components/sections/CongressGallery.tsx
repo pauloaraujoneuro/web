@@ -102,15 +102,15 @@ export default function CongressGallery({ items }: CongressGalleryProps) {
           >
             {items.map((item, index) => (
               <figure key={item.id} className="min-w-full">
-                <div className="relative aspect-[4/5] w-full bg-bg/70 sm:aspect-[16/10]">
+                <div className="relative aspect-4/5 w-full bg-bg/70 sm:aspect-16/10">
                   <Image
                     src={item.src}
                     alt={item.alt}
                     fill
                     className="h-full w-full object-contain"
                     sizes="(max-width: 640px) 94vw, (max-width: 1024px) 84vw, 980px"
-                    priority={index === 0}
-                    loading={index === 0 ? "eager" : "lazy"}
+                    quality={68}
+                    loading="lazy"
                   />
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-primary/70 via-primary/25 to-transparent px-4 py-3 text-bg sm:px-5">
                     <p className="text-xs text-bg/84">

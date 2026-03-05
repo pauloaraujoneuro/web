@@ -24,8 +24,8 @@ function HeroImageCard({ className = "" }: HeroImageCardProps) {
         alt="Retrato profissional do Dr. Paulo Araújo"
         width={900}
         height={1351}
-        sizes="(max-width: 640px) 92vw, (max-width: 1023px) 78vw, (max-width: 1279px) 44vw, 40vw"
-        quality={72}
+        sizes="(max-width: 640px) 92vw, (max-width: 1023px) 78vw, (max-width: 1279px) 44vw, 528px"
+        quality={68}
         className="h-auto w-full rounded-[0.45rem] object-cover object-top"
         priority
         fetchPriority="high"
@@ -51,7 +51,7 @@ export default function HeroSection() {
             {DOCTOR_NAME}
           </h1>
 
-          <p className="mt-3 text-balance text-base font-medium text-primary/78 sm:text-lg uppercase">
+          <p className="mt-3 text-balance text-base font-normal text-primary/78 sm:text-lg uppercase">
             {DOCTOR_SUBTITLE}
           </p>
 
@@ -71,7 +71,7 @@ export default function HeroSection() {
           <div className="stagger-grid mt-8 grid gap-3">
             {DOCTOR_CREDENTIALS.map((item) => (
               <article key={item} className="panel-line p-4">
-                <p className="text-sm font-medium leading-relaxed text-primary/88">
+                <p className="text-sm font-normal leading-relaxed text-primary/88">
                   {item}
                 </p>
               </article>

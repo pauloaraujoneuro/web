@@ -67,7 +67,7 @@ export default function BackgroundSection() {
                   <p className="text-base font-semibold text-bg">
                     {item.title}
                   </p>
-                  <p className="mt-1 text-sm font-medium text-bg/88">
+                  <p className="mt-1 text-sm font-normal text-bg/88">
                     {item.institution}
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-bg/80">
@@ -89,20 +89,20 @@ export default function BackgroundSection() {
             <Image
               src={DOCTOR_PROFILE_IMAGE_FRONT}
               alt="Dr. Paulo Araújo em retrato frontal"
-              width={1200}
-              height={1600}
+              width={900}
+              height={1351}
               sizes="(max-width: 767px) 100vw, 0px"
-              quality={70}
-              className="h-auto w-full rounded-[0.5rem] object-contain object-top md:hidden"
+              quality={68}
+              className="h-auto w-full rounded-lg object-contain object-top md:hidden"
             />
             <Image
               src={DOCTOR_PROFILE_IMAGE_FRONT_WIDE}
               alt="Dr. Paulo Araújo em retrato frontal"
-              width={1920}
-              height={1080}
-              sizes="(min-width: 768px) 66vw, 0px"
-              quality={70}
-              className="hidden h-auto w-full rounded-[0.5rem] object-contain object-top md:block"
+              width={1600}
+              height={1066}
+              sizes="(max-width: 767px) 0px, (max-width: 1279px) 100vw, 66vw"
+              quality={68}
+              className="hidden h-auto w-full rounded-lg object-contain object-top md:block"
             />
           </article>
         </div>

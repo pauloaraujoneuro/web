@@ -24,7 +24,7 @@ export default function ExpertiseSection() {
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary/72">
               Direcionamento clínico
             </p>
-            <p className="mt-2 text-base leading-relaxed font-medium text-primary/92 sm:text-[1.07rem]">
+            <p className="mt-2 text-base leading-relaxed font-normal text-primary/92 sm:text-[1.07rem]">
               Planejamento terapêutico orientado à recuperação de movimentos e à
               melhora da qualidade de vida.
             </p>
