@@ -23,7 +23,7 @@ import "./globals.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
   variable: "--font-poppins",
   display: "swap",
 });
@@ -144,9 +144,15 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: [{ url: "/logo-transparent.png", type: "image/png" }],
-    shortcut: [{ url: "/logo-transparent.png", type: "image/png" }],
-    apple: [{ url: "/logo-transparent.png", type: "image/png" }],
+    icon: [{ url: "/icons/favicon-32.png", type: "image/png", sizes: "32x32" }],
+    shortcut: [{ url: "/icons/favicon-32.png", type: "image/png" }],
+    apple: [
+      {
+        url: "/icons/apple-touch-icon.png",
+        type: "image/png",
+        sizes: "180x180",
+      },
+    ],
   },
   openGraph: {
     title: SITE_TITLE,
@@ -157,7 +163,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/logo-transparent.png",
+        url: "/og/og-image.png",
         width: 1200,
         height: 1200,
         alt: `${DOCTOR_NAME} - Neurocirurgião em Curitiba`,
@@ -168,7 +174,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/logo-transparent.png"],
+    images: ["/og/og-image.png"],
   },
   robots: {
     index: true,

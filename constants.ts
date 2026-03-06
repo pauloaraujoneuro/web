@@ -66,13 +66,13 @@ export interface CitySchedule {
 export const SITE_URL = "https://www.drpauloaraujo.com.br";
 
 // Brand Assets
-export const BRAND_LOGO_WORDMARK_INVERTED = "/logo-gray.png";
+export const BRAND_LOGO_WORDMARK_INVERTED = "/logo-gray.webp";
 export const BRAND_LOGO_HEADER = "/logo-lettering-cropped.webp";
 export const DOCTOR_PROFILE_IMAGE = "/pics/doutor-paulo-araujo-terno.webp";
 export const DOCTOR_PROFILE_IMAGE_FRONT =
-  "/pics/doutor-paulo-araujo-frente.jpeg";
+  "/pics/doutor-paulo-araujo-frente.webp";
 export const DOCTOR_PROFILE_IMAGE_FRONT_WIDE =
-  "/pics/doutor-paulo-araujo-frente-wide.jpeg";
+  "/pics/doutor-paulo-araujo-frente-wide.webp";
 
 // Doctor Information
 export const DOCTOR_NAME = "Paulo Araújo";
