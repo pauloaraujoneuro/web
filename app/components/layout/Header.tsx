@@ -13,6 +13,7 @@ import Link from "next/link";
 
 export default function Header() {
   const hasExternalWhatsApp = CONTACT_WHATSAPP_URL.startsWith("https://");
+  const headerNavItems = NAV_ITEMS.filter((item) => item.href !== "#faq");
 
   return (
     <header className="sticky top-0 z-50 border-b border-primary/10 bg-bg/96">
@@ -37,7 +38,7 @@ export default function Header() {
             />
           </Link>
 
-          <HeaderDesktopNav navItems={NAV_ITEMS} />
+          <HeaderDesktopNav navItems={headerNavItems} />
 
           <div className="hidden items-center gap-2 lg:flex">
             <a
@@ -60,7 +61,7 @@ export default function Header() {
           </div>
 
           <HeaderMobileMenu
-            navItems={NAV_ITEMS}
+            navItems={headerNavItems}
             instagramUrl={INSTAGRAM_URL}
             whatsappUrl={CONTACT_WHATSAPP_URL}
             hasExternalWhatsApp={hasExternalWhatsApp}

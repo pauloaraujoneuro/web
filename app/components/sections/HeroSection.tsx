@@ -1,5 +1,7 @@
 import Image from "next/image";
 import {
+  CONTACT_WHATSAPP_URL,
+  CTA_PRIMARY,
   DOCTOR_CREDENTIALS,
   DOCTOR_CRM,
   DOCTOR_NAME,
@@ -38,6 +40,8 @@ function HeroImageCard({ className = "" }: HeroImageCardProps) {
 }
 
 export default function HeroSection() {
+  const hasExternalWhatsApp = CONTACT_WHATSAPP_URL.startsWith("https://");
+
   return (
     <section
       id="sobre"
@@ -76,6 +80,17 @@ export default function HeroSection() {
                 </p>
               </article>
             ))}
+          </div>
+
+          <div className="mt-6 lg:hidden">
+            <a
+              href={CONTACT_WHATSAPP_URL}
+              target={hasExternalWhatsApp ? "_blank" : undefined}
+              rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
+              className="btn-primary w-full sm:w-auto"
+            >
+              {CTA_PRIMARY}
+            </a>
           </div>
         </div>
 

@@ -62,6 +62,12 @@ export interface CitySchedule {
   note: string;
 }
 
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
 // Domain
 export const SITE_URL = "https://www.drpauloaraujo.com.br";
 
@@ -103,6 +109,7 @@ export const NAV_ITEMS: NavigationItem[] = [
   { href: "#sobre", label: "Sobre" },
   { href: "#especialidades", label: "Especialidades" },
   { href: "#formacao", label: "Formação" },
+  { href: "#faq", label: "FAQ" },
   { href: "#publicacoes", label: "Publicações" },
   { href: "#contato", label: "Contato" },
 ];
@@ -203,10 +210,10 @@ export const CONTACT_EMAIL = "paraujomed@gmail.com";
 export const CONTACT_PHONE = "41 2018-0330";
 
 // WhatsApp Information
-export const CONTACT_WHATSAPP_NUMBER = "5541999467571";
-export const CONTACT_WHATSAPP_FORMATTED = "+55 41 99946-7571";
+export const CONTACT_WHATSAPP_NUMBER = "554120180330";
+export const CONTACT_WHATSAPP_FORMATTED = "+55 41 2018-0330";
 export const CONTACT_WHATSAPP_DEFAULT_TEXT =
-  "Olá! Encontrei seu site e gostaria de agendar uma consulta.";
+  "Olá! Encontrei o site do Dr. Paulo Araújo e gostaria de agendar uma consulta.";
 export const CONTACT_WHATSAPP_URL = CONTACT_WHATSAPP_NUMBER
   ? `https://wa.me/${CONTACT_WHATSAPP_NUMBER}?text=${encodeURIComponent(CONTACT_WHATSAPP_DEFAULT_TEXT)}`
   : "#contact";
@@ -288,6 +295,45 @@ export const CLINIC_HOURS = {
 // CTA Labels
 export const CTA_PRIMARY = "Agendar consulta";
 export const CTA_SECONDARY = "Ver local de atendimento";
+
+export const FAQ_ITEMS: FaqItem[] = [
+  {
+    id: "faq-primeira-consulta",
+    question: "Como funciona a primeira consulta?",
+    answer:
+      "A primeira consulta inclui avaliação clínica detalhada, revisão de exames e definição clara dos próximos passos de tratamento.",
+  },
+  {
+    id: "faq-atendimento-cidades",
+    question: "O atendimento acontece em quais cidades?",
+    answer:
+      "Os atendimentos presenciais acontecem em Curitiba e União da Vitória, com agenda organizada por disponibilidade em cada local.",
+  },
+  {
+    id: "faq-cirurgia-quando",
+    question: "Quando a cirurgia é indicada?",
+    answer:
+      "A indicação cirúrgica é feita apenas quando a avaliação clínica e os exames mostram benefício real em relação às alternativas conservadoras.",
+  },
+  {
+    id: "faq-exames-consulta",
+    question: "Preciso levar exames para a consulta?",
+    answer:
+      "Sim. Leve exames recentes, laudos e relatórios médicos para facilitar a análise e tornar a consulta mais objetiva.",
+  },
+  {
+    id: "faq-trata-plexo",
+    question: "Há atendimento para lesão de plexo braquial?",
+    answer:
+      "Sim. O atendimento contempla avaliação e planejamento terapêutico para lesões de plexo braquial e outras lesões de nervo periférico.",
+  },
+  {
+    id: "faq-agendamento",
+    question: "Como faço para agendar?",
+    answer:
+      "O agendamento pode ser feito diretamente pelo WhatsApp informado no site, com orientação sobre data e local de atendimento.",
+  },
+];
 
 // Publications / Works
 export const PUBLICATIONS: PublicationItem[] = [

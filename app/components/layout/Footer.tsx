@@ -55,6 +55,7 @@ export default function Footer() {
                     {DOCTOR_RQE}
                   </span>
                 </div>
+
               </div>
             </div>
           </section>
