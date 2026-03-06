@@ -1,8 +1,8 @@
-import { CONTACT_WHATSAPP_URL, FAQ_ITEMS } from "@/constants";
+import { CONTACT_WHATSAPP_FAQ_URL, FAQ_ITEMS } from "@/constants";
 import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
 
 export default function FaqSection() {
-  const hasExternalWhatsApp = CONTACT_WHATSAPP_URL.startsWith("https://");
+  const hasExternalWhatsApp = CONTACT_WHATSAPP_FAQ_URL.startsWith("https://");
 
   return (
     <section id="faq" className="section-shell section-anchor section-tone-faq">
@@ -39,16 +39,16 @@ export default function FaqSection() {
 
         <div className="mt-7 flex justify-center">
           <a
-            href={CONTACT_WHATSAPP_URL}
+            href={CONTACT_WHATSAPP_FAQ_URL}
             target={hasExternalWhatsApp ? "_blank" : undefined}
             rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
             className="faq-cta group"
           >
+            <span className="faq-cta-corner-icon" aria-hidden="true">
+              <WhatsAppIcon className="h-5 w-5" />
+            </span>
             <span className="faq-cta-kicker">Resposta rápida no WhatsApp</span>
             <span className="faq-cta-label">
-              <span className="faq-cta-icon-wrap" aria-hidden="true">
-                <WhatsAppIcon className="h-4.5 w-4.5" />
-              </span>
               <span>Agendar avaliação com a equipe</span>
             </span>
             <span className="faq-cta-subcopy">

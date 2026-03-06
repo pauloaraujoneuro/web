@@ -5,6 +5,7 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
   CONTACT_WHATSAPP_URL,
+  LOCATIONS_SCHEDULING_NOTE,
 } from "@/constants";
 import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
 import ContactMapEmbed from "@/app/components/sections/ContactMapEmbed";
@@ -38,21 +39,6 @@ function MailIcon() {
   );
 }
 
-function ClockIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      className="h-5 w-5"
-    >
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 7v5l3 2" />
-    </svg>
-  );
-}
-
 export default function ContactSection() {
   const hasExternalWhatsApp = CONTACT_WHATSAPP_URL.startsWith("https://");
 
@@ -82,26 +68,6 @@ export default function ContactSection() {
               </h3>
 
               <ul className="space-y-4 xl:space-y-5">
-                <li className="flex gap-3">
-                  <span className="mt-0.5 text-bg/90">
-                    <WhatsAppIcon className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold text-bg xl:text-base">
-                      Mensagem direta
-                    </p>
-                    <a
-                      href={CONTACT_WHATSAPP_URL}
-                      target={hasExternalWhatsApp ? "_blank" : undefined}
-                      rel={
-                        hasExternalWhatsApp ? "noopener noreferrer" : undefined
-                      }
-                      className="interactive-link whitespace-nowrap text-sm leading-relaxed text-bg/82 xl:text-lg"
-                    >
-                      Abrir conversa
-                    </a>
-                  </div>
-                </li>
                 <li className="flex gap-3">
                   <span className="mt-0.5 text-bg/90">
                     <PhoneIcon />
@@ -151,6 +117,9 @@ export default function ContactSection() {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary/72">
                 Locais
               </p>
+              <p className="mt-3 text-sm leading-relaxed text-primary/78">
+                {LOCATIONS_SCHEDULING_NOTE}
+              </p>
               <ul className="mt-4 space-y-4">
                 {CITY_SCHEDULES.map((schedule) => (
                   <li key={schedule.id} className="panel-line p-4">
@@ -160,16 +129,23 @@ export default function ContactSection() {
                     <p className="mt-1 text-sm leading-relaxed text-primary/82">
                       {schedule.location}
                     </p>
-                    <p className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-primary/85">
-                      <ClockIcon />
-                      {schedule.cadence}
-                    </p>
-                    <p className="mt-1 text-sm leading-relaxed text-primary/82">
-                      {schedule.availability}
-                    </p>
-                    <p className="mt-1 text-sm leading-relaxed text-primary/78">
-                      {schedule.note}
-                    </p>
+                    <a
+                      href={schedule.whatsappUrl}
+                      target={
+                        schedule.whatsappUrl.startsWith("https://")
+                          ? "_blank"
+                          : undefined
+                      }
+                      rel={
+                        schedule.whatsappUrl.startsWith("https://")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      className="interactive-link mt-2 text-sm font-semibold text-primary"
+                    >
+                      <WhatsAppIcon className="h-4.5 w-4.5" />
+                      {schedule.whatsappCtaLabel}
+                    </a>
                   </li>
                 ))}
               </ul>

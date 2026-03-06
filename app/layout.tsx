@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import {
   CLINIC_ADDRESS_CITY,
   CLINIC_ADDRESS_COUNTRY,
@@ -206,6 +208,8 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

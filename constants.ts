@@ -57,9 +57,8 @@ export interface CitySchedule {
   city: string;
   state: string;
   location: string;
-  cadence: string;
-  availability: string;
-  note: string;
+  whatsappCtaLabel: string;
+  whatsappUrl: string;
 }
 
 export interface FaqItem {
@@ -69,7 +68,7 @@ export interface FaqItem {
 }
 
 // Domain
-export const SITE_URL = "https://www.drpauloaraujo.com.br";
+export const SITE_URL = "https://www.pauloaraujoneuro.com.br";
 
 // Brand Assets
 export const BRAND_LOGO_WORDMARK_INVERTED = "/logo-gray.webp";
@@ -206,7 +205,7 @@ export const PROFESSIONAL_ROLES: ProfessionalRole[] = [
 ];
 
 // Contact Information
-export const CONTACT_EMAIL = "paraujomed@gmail.com";
+export const CONTACT_EMAIL = "pauloaraujoneuro@gmail.com";
 export const CONTACT_PHONE = "41 2018-0330";
 
 // WhatsApp Information
@@ -214,9 +213,27 @@ export const CONTACT_WHATSAPP_NUMBER = "554120180330";
 export const CONTACT_WHATSAPP_FORMATTED = "+55 41 2018-0330";
 export const CONTACT_WHATSAPP_DEFAULT_TEXT =
   "Olá! Encontrei o site do Dr. Paulo Araújo e gostaria de agendar uma consulta.";
-export const CONTACT_WHATSAPP_URL = CONTACT_WHATSAPP_NUMBER
-  ? `https://wa.me/${CONTACT_WHATSAPP_NUMBER}?text=${encodeURIComponent(CONTACT_WHATSAPP_DEFAULT_TEXT)}`
-  : "#contact";
+
+export function createWhatsAppUrl(message: string) {
+  return CONTACT_WHATSAPP_NUMBER
+    ? `https://wa.me/${CONTACT_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+    : "#contact";
+}
+
+export const CONTACT_WHATSAPP_URL = createWhatsAppUrl(
+  CONTACT_WHATSAPP_DEFAULT_TEXT,
+);
+
+export const CONTACT_WHATSAPP_FAQ_TEXT =
+  "Olá! Vi a seção de dúvidas no site do Dr. Paulo Araújo e gostaria de tirar uma dúvida e agendar uma avaliação.";
+export const CONTACT_WHATSAPP_FAQ_URL = createWhatsAppUrl(
+  CONTACT_WHATSAPP_FAQ_TEXT,
+);
+
+export const CONTACT_WHATSAPP_CURITIBA_TEXT =
+  "Olá! Gostaria de agendar uma consulta em Curitiba com o Dr. Paulo Araújo.";
+export const CONTACT_WHATSAPP_UNIAO_DA_VITORIA_TEXT =
+  "Olá! Gostaria de agendar uma consulta em União da Vitória com o Dr. Paulo Araújo.";
 export const CONTACT_WHATSAPP_LABEL = CONTACT_WHATSAPP_NUMBER
   ? CONTACT_WHATSAPP_FORMATTED
   : "WhatsApp pendente";
@@ -248,20 +265,21 @@ export const CITY_SCHEDULES: CitySchedule[] = [
     city: "Curitiba",
     state: "PR",
     location: "Hospital São Marcelino Champagnat",
-    cadence: "Agenda semanal",
-    availability: "Segunda a sexta, com horários agendados.",
-    note: "Principal base de atendimento.",
+    whatsappCtaLabel: "Agendar consulta em Curitiba",
+    whatsappUrl: createWhatsAppUrl(CONTACT_WHATSAPP_CURITIBA_TEXT),
   },
   {
     id: "schedule-uniao-da-vitoria",
     city: "União da Vitória",
     state: "PR",
     location: "Centro de Saúde São Camilo",
-    cadence: "Agenda periódica",
-    availability: "Datas específicas ao longo do mês.",
-    note: "Consulte no WhatsApp as próximas datas disponíveis.",
+    whatsappCtaLabel: "Agendar consulta em União da Vitória",
+    whatsappUrl: createWhatsAppUrl(CONTACT_WHATSAPP_UNIAO_DA_VITORIA_TEXT),
   },
 ];
+
+export const LOCATIONS_SCHEDULING_NOTE =
+  "Os horários de consulta são definidos conforme a agenda médica e a disponibilidade de cada local. Para confirmar datas e realizar o agendamento, entre em contato conosco pelo WhatsApp.";
 
 export const FIRST_APPOINTMENT_STEPS = [
   "Envie no WhatsApp sua cidade de preferência (Curitiba ou União da Vitória).",
@@ -299,39 +317,27 @@ export const CTA_SECONDARY = "Ver local de atendimento";
 export const FAQ_ITEMS: FaqItem[] = [
   {
     id: "faq-primeira-consulta",
-    question: "Como funciona a primeira consulta?",
+    question: "Como é a primeira consulta?",
     answer:
-      "A primeira consulta inclui avaliação clínica detalhada, revisão de exames e definição clara dos próximos passos de tratamento.",
-  },
-  {
-    id: "faq-atendimento-cidades",
-    question: "O atendimento acontece em quais cidades?",
-    answer:
-      "Os atendimentos presenciais acontecem em Curitiba e União da Vitória, com agenda organizada por disponibilidade em cada local.",
+      "Na primeira consulta, fazemos uma avaliação neurológica completa, revisamos seus exames com calma e conversamos sobre o melhor caminho para o seu caso. Quando há indicação cirúrgica, explicamos cada etapa do tratamento e do acompanhamento pós-operatório.",
   },
   {
     id: "faq-cirurgia-quando",
     question: "Quando a cirurgia é indicada?",
     answer:
-      "A indicação cirúrgica é feita apenas quando a avaliação clínica e os exames mostram benefício real em relação às alternativas conservadoras.",
+      "Isso depende do diagnóstico e do tempo de evolução dos sintomas. Em muitos casos, começamos com tratamento conservador, como fisioterapia e medicação. A cirurgia é indicada quando existe benefício real para sua recuperação e qualidade de vida.",
   },
   {
     id: "faq-exames-consulta",
-    question: "Preciso levar exames para a consulta?",
+    question: "Quais exames devo fazer ou levar?",
     answer:
-      "Sim. Leve exames recentes, laudos e relatórios médicos para facilitar a análise e tornar a consulta mais objetiva.",
-  },
-  {
-    id: "faq-trata-plexo",
-    question: "Há atendimento para lesão de plexo braquial?",
-    answer:
-      "Sim. O atendimento contempla avaliação e planejamento terapêutico para lesões de plexo braquial e outras lesões de nervo periférico.",
+      "Se possível, traga todos os exames relacionados ao problema, inclusive os antigos. Eles ajudam a entender a evolução do quadro. Se necessário, solicitamos exames complementares durante o atendimento.",
   },
   {
     id: "faq-agendamento",
-    question: "Como faço para agendar?",
+    question: "Como faço para agendar a consulta?",
     answer:
-      "O agendamento pode ser feito diretamente pelo WhatsApp informado no site, com orientação sobre data e local de atendimento.",
+      "O agendamento pode ser feito pelo WhatsApp informado no site. Nossa equipe orienta os próximos passos e ajuda você a escolher o melhor horário e local de atendimento.",
   },
 ];
 
