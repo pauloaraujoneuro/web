@@ -4,7 +4,6 @@ import {
   CONSULTATION_APPROACH_POINTS,
   CONTACT_EMAIL,
   CONTACT_PHONE,
-  CONTACT_WHATSAPP_URL,
   LOCATIONS_SCHEDULING_NOTE,
 } from "@/constants";
 import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
@@ -40,8 +39,6 @@ function MailIcon() {
 }
 
 export default function ContactSection() {
-  const hasExternalWhatsApp = CONTACT_WHATSAPP_URL.startsWith("https://");
-
   return (
     <section
       id="contato"

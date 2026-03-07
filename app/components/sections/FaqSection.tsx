@@ -1,5 +1,4 @@
 import { CONTACT_WHATSAPP_FAQ_URL, FAQ_ITEMS } from "@/constants";
-import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
 
 export default function FaqSection() {
   const hasExternalWhatsApp = CONTACT_WHATSAPP_FAQ_URL.startsWith("https://");
@@ -44,9 +43,6 @@ export default function FaqSection() {
             rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
             className="faq-cta group"
           >
-            <span className="faq-cta-corner-icon" aria-hidden="true">
-              <WhatsAppIcon className="h-5 w-5" />
-            </span>
             <span className="faq-cta-kicker">Resposta rápida no WhatsApp</span>
             <span className="faq-cta-label">
               <span>Agendar avaliação com a equipe</span>

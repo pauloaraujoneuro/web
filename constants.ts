@@ -239,7 +239,7 @@ export const CONTACT_WHATSAPP_LABEL = CONTACT_WHATSAPP_NUMBER
   : "WhatsApp pendente";
 
 // Social Media
-export const INSTAGRAM_URL = "https://www.instagram.com/drpauloaraujoneuro/";
+export const INSTAGRAM_URL = "https://www.instagram.com/pauloaraujoneuro/";
 
 // Service Locations
 export const SERVICE_LOCATIONS: ServiceLocation[] = [
@@ -265,7 +265,7 @@ export const CITY_SCHEDULES: CitySchedule[] = [
     city: "Curitiba",
     state: "PR",
     location: "Hospital São Marcelino Champagnat",
-    whatsappCtaLabel: "Agendar consulta em Curitiba",
+    whatsappCtaLabel: "Agendar em Curitiba",
     whatsappUrl: createWhatsAppUrl(CONTACT_WHATSAPP_CURITIBA_TEXT),
   },
   {
@@ -273,7 +273,7 @@ export const CITY_SCHEDULES: CitySchedule[] = [
     city: "União da Vitória",
     state: "PR",
     location: "Centro de Saúde São Camilo",
-    whatsappCtaLabel: "Agendar consulta em União da Vitória",
+    whatsappCtaLabel: "Agendar em União da Vitória",
     whatsappUrl: createWhatsAppUrl(CONTACT_WHATSAPP_UNIAO_DA_VITORIA_TEXT),
   },
 ];
