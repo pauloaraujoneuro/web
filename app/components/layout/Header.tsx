@@ -7,6 +7,7 @@ import {
   NAV_ITEMS,
 } from "@/constants";
 import InstagramIcon from "@/app/components/icons/InstagramIcon";
+import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
 import HeaderDesktopNav from "@/app/components/layout/HeaderDesktopNav";
 import HeaderMobileMenu from "@/app/components/layout/HeaderMobileMenu";
 import Link from "next/link";
@@ -50,14 +51,16 @@ export default function Header() {
             >
               <InstagramIcon className="h-4.5 w-4.5" />
             </a>
-            <a
+            <TrackedWhatsAppLink
               href={CONTACT_WHATSAPP_URL}
               target={hasExternalWhatsApp ? "_blank" : undefined}
               rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
               className="btn-primary whitespace-nowrap"
+              eventLocation="header_desktop"
+              eventLabel={CTA_PRIMARY}
             >
               {CTA_PRIMARY}
-            </a>
+            </TrackedWhatsAppLink>
           </div>
 
           <HeaderMobileMenu

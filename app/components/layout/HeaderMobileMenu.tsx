@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import type { NavigationItem } from "@/constants";
 import InstagramIcon from "@/app/components/icons/InstagramIcon";
+import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
 import useActiveSectionHash from "@/app/components/layout/useActiveSectionHash";
 
 interface HeaderMobileMenuProps {
@@ -75,15 +76,17 @@ export default function HeaderMobileMenu({
           </ul>
 
           <div className="mt-4 border-t border-primary/12 pt-4">
-            <a
+            <TrackedWhatsAppLink
               href={whatsappUrl}
               target={hasExternalWhatsApp ? "_blank" : undefined}
               rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
               className="btn-primary w-full whitespace-nowrap text-sm"
+              eventLocation="header_mobile_menu"
+              eventLabel={ctaPrimary}
               onClick={closeMenu}
             >
               {ctaPrimary}
-            </a>
+            </TrackedWhatsAppLink>
           </div>
         </div>
       </details>

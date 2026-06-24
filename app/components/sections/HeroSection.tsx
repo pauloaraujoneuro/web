@@ -1,4 +1,5 @@
 import Image from "next/image";
+import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
 import {
   CONTACT_WHATSAPP_URL,
   CTA_PRIMARY,
@@ -83,14 +84,16 @@ export default function HeroSection() {
           </div>
 
           <div className="mt-6 lg:hidden">
-            <a
+            <TrackedWhatsAppLink
               href={CONTACT_WHATSAPP_URL}
               target={hasExternalWhatsApp ? "_blank" : undefined}
               rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
               className="btn-primary w-full sm:w-auto"
+              eventLocation="hero_mobile"
+              eventLabel={CTA_PRIMARY}
             >
               {CTA_PRIMARY}
-            </a>
+            </TrackedWhatsAppLink>
           </div>
         </div>
 

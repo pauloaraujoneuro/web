@@ -7,6 +7,7 @@ import {
   LOCATIONS_SCHEDULING_NOTE,
 } from "@/constants";
 import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
+import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
 import ContactMapEmbed from "@/app/components/sections/ContactMapEmbed";
 
 function PhoneIcon() {
@@ -126,7 +127,7 @@ export default function ContactSection() {
                     <p className="mt-1 text-sm leading-relaxed text-primary/82">
                       {schedule.location}
                     </p>
-                    <a
+                    <TrackedWhatsAppLink
                       href={schedule.whatsappUrl}
                       target={
                         schedule.whatsappUrl.startsWith("https://")
@@ -139,10 +140,12 @@ export default function ContactSection() {
                           : undefined
                       }
                       className="interactive-link mt-2 text-sm font-semibold text-primary"
+                      eventLocation={`contact_${schedule.id}`}
+                      eventLabel={schedule.whatsappCtaLabel}
                     >
                       <WhatsAppIcon className="h-4.5 w-4.5" />
                       {schedule.whatsappCtaLabel}
-                    </a>
+                    </TrackedWhatsAppLink>
                   </li>
                 ))}
               </ul>

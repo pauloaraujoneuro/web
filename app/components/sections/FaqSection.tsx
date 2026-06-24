@@ -1,3 +1,4 @@
+import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
 import { CONTACT_WHATSAPP_FAQ_URL, FAQ_ITEMS } from "@/constants";
 
 export default function FaqSection() {
@@ -37,11 +38,13 @@ export default function FaqSection() {
         </div>
 
         <div className="mt-7 flex justify-center">
-          <a
+          <TrackedWhatsAppLink
             href={CONTACT_WHATSAPP_FAQ_URL}
             target={hasExternalWhatsApp ? "_blank" : undefined}
             rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
             className="faq-cta group"
+            eventLocation="faq"
+            eventLabel="Agendar avaliação com a equipe"
           >
             <span className="faq-cta-kicker">Resposta rápida no WhatsApp</span>
             <span className="faq-cta-label">
@@ -50,7 +53,7 @@ export default function FaqSection() {
             <span className="faq-cta-subcopy">
               Envie sua dúvida e receba orientação para o próximo passo.
             </span>
-          </a>
+          </TrackedWhatsAppLink>
         </div>
       </div>
     </section>
