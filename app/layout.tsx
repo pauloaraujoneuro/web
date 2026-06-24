@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleTagManager } from "@next/third-parties/google";
 import {
+  ANALYTICS_ENABLED,
   CLINIC_ADDRESS_CITY,
   CLINIC_ADDRESS_COUNTRY,
   CLINIC_ADDRESS_LINE,
@@ -16,6 +18,7 @@ import {
   DOCTOR_PROFILE_IMAGE,
   DOCTOR_PROFILE_URL,
   DOCTOR_RQE,
+  GOOGLE_TAG_ID,
   INSTAGRAM_URL,
   LATTES_URL,
   SERVICE_LOCATIONS,
@@ -208,6 +211,12 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         {children}
+        {/* Analytics - Only load in production or debug mode */}
+        {ANALYTICS_ENABLED &&
+          GOOGLE_TAG_ID &&
+          GOOGLE_TAG_ID.startsWith("GTM-") && (
+            <GoogleTagManager gtmId={GOOGLE_TAG_ID} />
+          )}
         <Analytics />
         <SpeedInsights />
       </body>
