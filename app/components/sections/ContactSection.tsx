@@ -1,6 +1,5 @@
 import {
   CITY_SCHEDULES,
-  CLINIC_MAP_EMBED_URL,
   CONSULTATION_APPROACH_POINTS,
   CONTACT_EMAIL,
   CONTACT_PHONE,
@@ -8,7 +7,6 @@ import {
 } from "@/constants";
 import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
 import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
-import ContactMapEmbed from "@/app/components/sections/ContactMapEmbed";
 
 function PhoneIcon() {
   return (
@@ -49,11 +47,11 @@ export default function ContactSection() {
         <div>
           <span className="badge">Contato</span>
           <h2 className="mt-4 text-balance text-3xl font-semibold text-primary sm:text-4xl">
-            Atendimento presencial em Curitiba e União da Vitória
+            Atendimento presencial em Campo Grande
           </h2>
           <p className="mt-4 text-base leading-relaxed text-primary/85">
-            Canais de contato e agenda por cidade para orientar seu agendamento
-            com clareza e previsibilidade.
+            Canais de contato e agenda em Campo Grande para orientar seu
+            agendamento com clareza e previsibilidade.
           </p>
         </div>
 
@@ -113,7 +111,7 @@ export default function ContactSection() {
           <div className="grid gap-6">
             <article className="card-surface p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary/72">
-                Locais
+                Local
               </p>
               <p className="mt-3 text-sm leading-relaxed text-primary/78">
                 {LOCATIONS_SCHEDULING_NOTE}
@@ -151,9 +149,6 @@ export default function ContactSection() {
               </ul>
             </article>
 
-            <article className="card-surface overflow-hidden p-2.5">
-              <ContactMapEmbed mapUrl={CLINIC_MAP_EMBED_URL} />
-            </article>
           </div>
         </div>
       </div>
