@@ -121,6 +121,8 @@ Markdown is semantic, and invalid/draft/unknown posts stay undiscoverable.
 
 ### T5: Implement specialist profile page
 
+**Status**: Complete
+
 **What**: Add `/sobre` using canonical identity, credentials, roles, formation,
 congress activity, and Campo Grande contextual CTA.
 **Where**: `app/sobre/page.tsx`

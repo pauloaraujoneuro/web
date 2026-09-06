@@ -343,6 +343,194 @@ button,
   }
 }
 
+.profile-hero {
+  display: grid;
+  gap: 1.75rem;
+  padding-block: 2rem 4rem;
+}
+
+.profile-portrait {
+  position: relative;
+  min-height: 22rem;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: #dbe4e8;
+  box-shadow: 0 20px 45px rgba(35, 62, 76, 0.12);
+}
+
+.profile-intro h1 {
+  margin-top: 0.85rem;
+  color: var(--primary);
+  font-size: clamp(2.25rem, 8vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.profile-title {
+  margin-top: 0.6rem;
+  color: var(--primary) !important;
+  font-size: 0.8rem !important;
+  font-weight: 700;
+}
+
+.profile-intro > p {
+  margin-top: 1rem;
+  color: #475569;
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.active-location-note {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 1.5rem;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 0.8rem 0.8rem 0;
+  background: var(--surface-subtle);
+  padding: 1rem;
+}
+
+.active-location-note span,
+.section-kicker,
+.profile-section-heading span {
+  color: #64748b;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.active-location-note strong { color: var(--primary); font-size: 0.9rem; }
+
+.profile-section {
+  padding-block: 3.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.profile-section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.profile-section-heading svg { margin-top: 0.2rem; color: var(--primary); }
+.profile-section-heading h2,
+.role-section h2 {
+  margin-top: 0.25rem;
+  color: var(--primary);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 700;
+}
+
+.focus-grid,
+.publication-list {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.focus-grid article,
+.publication-list article,
+.prior-role-list article,
+.current-role {
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  background: white;
+  padding: 1.15rem;
+}
+
+.focus-grid h3,
+.publication-list h3,
+.prior-role-list h3,
+.current-role h3 {
+  color: var(--primary);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.focus-grid p,
+.publication-list p,
+.prior-role-list p,
+.current-role p {
+  margin-top: 0.45rem;
+  color: #64748b;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+.publication-list span,
+.prior-role-list span,
+.current-role > span {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #64748b;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.profile-timeline-panel {
+  margin-inline: -0.75rem;
+  border: 0;
+  border-radius: 1.25rem;
+  background: linear-gradient(145deg, #1d323e, #233e4c);
+  padding-inline: 1.25rem;
+  color: white;
+}
+
+.profile-heading-dark svg,
+.profile-heading-dark h2 { color: white; }
+.profile-heading-dark span { color: #b9cbd4; }
+
+.profile-timeline {
+  display: grid;
+  gap: 0;
+  margin-top: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-timeline li {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-block: 1.1rem;
+}
+
+.profile-timeline li > span { color: #b9cbd4; font-size: 0.72rem; font-weight: 700; }
+.profile-timeline h3 { font-size: 0.95rem; font-weight: 700; }
+.profile-timeline p { margin-top: 0.3rem; color: #d9e3e8; font-size: 0.8rem; line-height: 1.5; }
+.profile-timeline small { display: block; margin-top: 0.5rem; color: #aebfc8; font-size: 0.72rem; line-height: 1.55; }
+
+.role-section { display: grid; gap: 2.5rem; }
+.current-role, .prior-role-list { margin-top: 1rem; }
+.prior-role-list { display: grid; gap: 0.75rem; }
+
+.credential-strip {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+  border-radius: 1rem;
+  background: var(--surface-subtle);
+  padding: 1.1rem;
+}
+
+.credential-strip p { color: #475569; font-size: 0.78rem; line-height: 1.55; }
+
+@media (min-width: 700px) {
+  .focus-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .publication-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .role-section { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .profile-timeline-panel { margin-inline: 0; padding-inline: 2.25rem; }
+}
+
+@media (min-width: 900px) {
+  .profile-hero { grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr); align-items: center; padding-block: 3rem 5.5rem; }
+  .profile-portrait { min-height: 34rem; }
+}
+
 .pill-navigation {
   display: flex;
   max-width: 100%;
