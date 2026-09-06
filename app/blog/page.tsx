@@ -43,10 +43,10 @@ function topicFor(post: BlogPost) {
   return "Conteúdo educativo";
 }
 
-function formatDate(date: string) {
+function formatDate(date: string, month: "long" | "short" = "long") {
   return new Intl.DateTimeFormat("pt-BR", {
     day: "2-digit",
-    month: "long",
+    month,
     year: "numeric",
     timeZone: "UTC",
   }).format(new Date(`${date}T12:00:00Z`));
@@ -96,7 +96,7 @@ export default function BlogPage() {
                   key={post.slug}
                   chip={topicFor(post)}
                   chipVariant="topic"
-                  meta={formatDate(post.publishDate)}
+                  meta={formatDate(post.publishDate, "short")}
                   title={post.title}
                   description={post.dek}
                   href={`/blog/${post.slug}`}

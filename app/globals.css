@@ -217,9 +217,9 @@ button,
 }
 
 .card-eyebrow-topic {
-  border: 1px solid var(--border-subtle);
-  background: var(--surface-subtle);
-  color: #35617a;
+  border: 1px solid rgba(53, 97, 122, 0.22);
+  background: #eaf1f6;
+  color: #2f5468;
 }
 
 .card-chip-row {
@@ -230,6 +230,7 @@ button,
 }
 
 .card-meta {
+  flex: 0 0 auto;
   color: #64748b;
   font-size: 0.72rem;
   font-weight: 600;
