@@ -8,6 +8,7 @@ import {
 import type { Location } from "@/app/lib/content-types";
 import { validateLocations } from "@/app/lib/content-validation";
 import { getPublishedTreatments } from "@/app/lib/treatments";
+import { getPublishedFaqs } from "@/app/lib/faqs";
 
 const campoGrande = SERVICE_LOCATIONS.find((item) => item.id === "campo-grande");
 
@@ -41,7 +42,9 @@ export const LOCATIONS: Location[] = [
       "cirurgia-coluna",
       "reabilitacao-neurocirurgica",
     ],
-    faqs: [],
+    faqs: getPublishedFaqs().filter(
+      (faq) => faq.category === "consulta" || faq.category === "atendimento",
+    ),
     ctaMessage: CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
     lastModified: "2026-09-06",
     email: CONTACT_EMAIL,

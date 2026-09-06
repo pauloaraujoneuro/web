@@ -153,6 +153,8 @@ and JSON-LD exactly matches visible content.
 
 ### T7: Implement location routes and SEO inventory
 
+**Status**: Complete
+
 **What**: Add location hub/detail pages, shared structured-data helpers, and a
 deterministic sitemap covering exactly the indexable route inventory.
 **Where**: `app/locais-de-atendimento/`, `app/lib/seo.ts`, `app/sitemap.ts`
