@@ -4,13 +4,14 @@ import { notFound } from "next/navigation";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ArticleAside from "@/app/components/content/ArticleAside";
+import RelatedLinks from "@/app/components/content/RelatedLinks";
 import AuthorCard from "@/app/components/content/AuthorCard";
 import Breadcrumb, { type BreadcrumbItem } from "@/app/components/content/Breadcrumb";
 import JsonLd from "@/app/components/content/JsonLd";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getVisiblePost, getVisiblePosts } from "@/app/lib/blog";
-import { getPublishedTreatments } from "@/app/lib/treatments";
+import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
   DOCTOR_CRM,
@@ -158,13 +159,13 @@ export default async function BlogArticlePage({ params }: Props) {
             {relatedTreatments.length ? (
               <section>
                 <h2>Informações relacionadas</h2>
-                <div className="related-grid">
-                  {relatedTreatments.map((treatment) => (
-                    <a key={treatment.slug} href={`/tratamentos/${treatment.slug}`}>
-                      {treatment.title}<span aria-hidden>→</span>
-                    </a>
-                  ))}
-                </div>
+                <RelatedLinks
+                  items={relatedTreatments.map((treatment) => ({
+                    href: `/tratamentos/${treatment.slug}`,
+                    title: treatment.title,
+                    eyebrow: TREATMENT_KIND_LABELS[treatment.kind],
+                  }))}
+                />
               </section>
             ) : null}
           </article>

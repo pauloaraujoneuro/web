@@ -21,6 +21,17 @@ test("Campo Grande page renders confirmed fields and omits unconfirmed address",
   await expect(page.getByRole("link", { name: "Agendar em Campo Grande" })).toHaveAttribute("href", /wa\.me\/554120180330/);
 });
 
+test("related links carry a label and never point at the current page", async ({ page }) => {
+  await page.goto("/locais-de-atendimento/campo-grande");
+
+  await expect(page.locator(".related-link").first().locator(".related-link-eyebrow")).toHaveText(
+    "Visão geral da área",
+  );
+  await expect(
+    page.locator('.faq-answer a[href="/locais-de-atendimento/campo-grande"]'),
+  ).toHaveCount(0);
+});
+
 test("unknown location returns not found", async ({ page }) => {
   const response = await page.goto("/locais-de-atendimento/nao-existe");
   expect(response?.status()).toBe(404);

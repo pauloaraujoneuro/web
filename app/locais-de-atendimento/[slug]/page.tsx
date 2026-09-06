@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Check, ClipboardList, Mail, MapPin } from "lucide-react";
+import { ClipboardList, Mail, MapPin } from "lucide-react";
 import Breadcrumb, { type BreadcrumbItem } from "@/app/components/content/Breadcrumb";
+import RelatedLinks from "@/app/components/content/RelatedLinks";
 import FaqAccordion from "@/app/components/content/FaqAccordion";
 import JsonLd from "@/app/components/content/JsonLd";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedLocation, getPublishedLocations } from "@/app/lib/locations";
-import { getPublishedTreatments } from "@/app/lib/treatments";
+import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 import { DOCTOR_CRM, DOCTOR_NAME, DOCTOR_RQE, SITE_URL } from "@/constants";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -122,19 +123,19 @@ export default async function LocationDetailPage({ params }: Props) {
 
         <section className="location-section">
           <div className="location-section-heading"><span>Áreas de atuação</span><h2>Informações relacionadas</h2></div>
-          <div className="related-grid">
-            {relatedTreatments.map((treatment) => (
-              <a key={treatment.slug} href={`/tratamentos/${treatment.slug}`}>
-                <span>{treatment.title}</span><Check aria-hidden size={18} strokeWidth={1.5} />
-              </a>
-            ))}
-          </div>
+          <RelatedLinks
+            items={relatedTreatments.map((treatment) => ({
+              href: `/tratamentos/${treatment.slug}`,
+              title: treatment.title,
+              eyebrow: TREATMENT_KIND_LABELS[treatment.kind],
+            }))}
+          />
         </section>
 
         {location.faqs.length ? (
           <section className="location-section">
             <div className="location-section-heading"><span>Dúvidas práticas</span><h2>Perguntas sobre o atendimento</h2></div>
-            <div className="mt-5"><FaqAccordion items={location.faqs} /></div>
+            <div className="mt-5"><FaqAccordion items={location.faqs} currentPath={`/locais-de-atendimento/${location.slug}`} /></div>
           </section>
         ) : null}
 

@@ -6,11 +6,16 @@ import AuthorCard from "@/app/components/content/AuthorCard";
 import Breadcrumb, { type BreadcrumbItem } from "@/app/components/content/Breadcrumb";
 import FaqAccordion from "@/app/components/content/FaqAccordion";
 import JsonLd from "@/app/components/content/JsonLd";
+import RelatedLinks from "@/app/components/content/RelatedLinks";
 import SectionToc from "@/app/components/content/SectionToc";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedPosts } from "@/app/lib/blog";
-import { getVisibleTreatment, getVisibleTreatments } from "@/app/lib/treatments";
+import {
+  getVisibleTreatment,
+  getVisibleTreatments,
+  TREATMENT_KIND_LABELS,
+} from "@/app/lib/treatments";
 import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
   DOCTOR_CRM,
@@ -168,32 +173,30 @@ export default async function TreatmentDetailPage({ params }: Props) {
 
             <section>
               <h2>Perguntas frequentes</h2>
-              <FaqAccordion items={treatment.faqs} />
+              <FaqAccordion items={treatment.faqs} currentPath={`/tratamentos/${treatment.slug}`} />
             </section>
 
             <section>
               <h2>Tratamentos relacionados</h2>
-              <div className="related-grid">
-                {related.map((item) => (
-                  <Link key={item.slug} href={`/tratamentos/${item.slug}`}>
-                    <span>{item.title}</span>
-                    <ArrowRight aria-hidden size={18} strokeWidth={1.5} />
-                  </Link>
-                ))}
-              </div>
+              <RelatedLinks
+                items={related.map((item) => ({
+                  href: `/tratamentos/${item.slug}`,
+                  title: item.title,
+                  eyebrow: TREATMENT_KIND_LABELS[item.kind],
+                }))}
+              />
             </section>
 
             {relatedPosts.length ? (
               <section>
                 <h2>Leituras relacionadas</h2>
-                <div className="related-grid">
-                  {relatedPosts.map((post) => (
-                    <Link key={post.slug} href={`/blog/${post.slug}`}>
-                      <span>{post.title}</span>
-                      <ArrowRight aria-hidden size={18} strokeWidth={1.5} />
-                    </Link>
-                  ))}
-                </div>
+                <RelatedLinks
+                  items={relatedPosts.map((post) => ({
+                    href: `/blog/${post.slug}`,
+                    title: post.title,
+                    eyebrow: "Artigo educativo",
+                  }))}
+                />
               </section>
             ) : null}
 
