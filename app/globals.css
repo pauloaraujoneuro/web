@@ -216,28 +216,48 @@ button,
   color: #eaf4f9;
 }
 
+.card-eyebrow-topic {
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-subtle);
+  color: #35617a;
+}
+
+.card-chip-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.card-meta {
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .content-card {
+  position: relative;
   display: flex;
   min-height: 15rem;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
   border: 1px solid var(--border-subtle);
   border-radius: 1rem;
   background: var(--surface-white);
-  padding: 1.25rem;
+  padding: 1.25rem 1.25rem 0;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.035);
 }
 
 @media (hover: hover) {
   .content-card,
-  .post-card,
   .location-card,
   .focus-grid article {
     transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
   }
 
   .content-card:hover,
-  .post-card:hover,
   .location-card:hover,
   .focus-grid article:hover {
     transform: translateY(-2px);
@@ -248,7 +268,6 @@ button,
 
 @media (prefers-reduced-motion: reduce) {
   .content-card,
-  .post-card,
   .location-card,
   .focus-grid article,
   .faq-plus {
@@ -256,14 +275,8 @@ button,
   }
 }
 
-.treatment-card {
-  position: relative;
-  overflow: hidden;
-  padding-bottom: 0;
-}
-
 /* Colour arrives on approach rather than sitting on every card at rest. */
-.treatment-card::before {
+.content-card::before {
   position: absolute;
   inset-inline: 0;
   top: 0;
@@ -303,15 +316,15 @@ button,
 }
 
 @media (hover: hover) {
-  .treatment-card:hover::before {
+  .content-card:hover::before {
     opacity: 1;
   }
 
-  .treatment-card:hover .card-link {
+  .content-card:hover .card-link {
     background: var(--accent-sky-soft);
   }
 
-  .treatment-card:hover .card-link-arrow {
+  .content-card:hover .card-link-arrow {
     transform: translateX(3px);
     background: #34576a;
   }
@@ -324,7 +337,7 @@ button,
 @media (prefers-reduced-motion: reduce) {
   .card-link,
   .card-link-arrow,
-  .treatment-card::before {
+  .content-card::before {
     transition: none !important;
   }
 }
@@ -1173,7 +1186,6 @@ button,
 }
 
 .featured-post > div > span,
-.post-card > span,
 .article-toc > span {
   color: #b9cbd4;
   font-size: 0.7rem;
@@ -1247,52 +1259,6 @@ button,
 @media (min-width: 1024px) {
   .post-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.post-card {
-  border: 1px solid var(--border-subtle);
-  border-radius: 1rem;
-  background: white;
-  padding: 1.25rem;
-}
-
-.post-card > span {
-  color: #64748b;
-}
-
-.post-card h3 {
-  margin-top: 0.55rem;
-  color: var(--primary);
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
-.post-card p {
-  margin-top: 0.6rem;
-  color: #64748b;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.post-card a {
-  display: inline-flex;
-  min-height: 3rem;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 1rem;
-  color: var(--primary);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.post-card a svg {
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@media (hover: hover) {
-  .post-card a:hover svg {
-    transform: translateX(3px);
   }
 }
 

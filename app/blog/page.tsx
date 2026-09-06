@@ -3,9 +3,12 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import PageIntro from "@/app/components/content/PageIntro";
+import ContentCard from "@/app/components/content/ContentCard";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedPosts, getVisiblePosts } from "@/app/lib/blog";
+import { getVisibleTreatments, TREATMENT_GROUPS } from "@/app/lib/treatments";
+import type { BlogPost } from "@/app/lib/content-types";
 import { isBlogHubIndexable } from "@/app/lib/seo";
 import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT, SITE_URL } from "@/constants";
 
@@ -22,6 +25,22 @@ export function generateMetadata(): Metadata {
     openGraph: { title, description, url: `${SITE_URL}/blog` },
     robots: indexable ? { index: true, follow: true } : { index: false, follow: true },
   };
+}
+
+/** The chip names the area an article belongs to, via its related treatments. */
+const groupLabelByTreatment = new Map(
+  getVisibleTreatments().map((treatment) => [
+    treatment.slug,
+    TREATMENT_GROUPS.find((group) => group.id === treatment.group)?.label ?? "",
+  ]),
+);
+
+function topicFor(post: BlogPost) {
+  for (const slug of post.relatedTreatmentSlugs) {
+    const label = groupLabelByTreatment.get(slug);
+    if (label) return label;
+  }
+  return "Conteúdo educativo";
 }
 
 function formatDate(date: string) {
@@ -73,12 +92,16 @@ export default function BlogPage() {
             <h2 className="section-title">Artigos mais recentes</h2>
             <div className="post-grid">
               {remaining.map((post) => (
-                <article className="post-card" key={post.slug}>
-                  <span>{formatDate(post.publishDate)}</span>
-                  <h3>{post.title}</h3>
-                  <p>{post.dek}</p>
-                  <Link href={`/blog/${post.slug}`}>Ler artigo <ArrowRight aria-hidden size={17} /></Link>
-                </article>
+                <ContentCard
+                  key={post.slug}
+                  chip={topicFor(post)}
+                  chipVariant="topic"
+                  meta={formatDate(post.publishDate)}
+                  title={post.title}
+                  description={post.dek}
+                  href={`/blog/${post.slug}`}
+                  actionLabel="Ler artigo"
+                />
               ))}
             </div>
           </section>
