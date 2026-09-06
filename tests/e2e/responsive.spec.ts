@@ -23,6 +23,22 @@ for (const route of publicRoutes) {
   });
 }
 
+test("every epic route remains usable at 320px", async ({ page }) => {
+  test.skip(test.info().project.name !== "mobile-chromium");
+  await page.setViewportSize({ width: 320, height: 720 });
+
+  for (const route of publicRoutes) {
+    await page.goto(route);
+    const dimensions = await page.evaluate(() => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+    }));
+    expect(dimensions.scrollWidth, `${route} overflowed at 320px`).toBeLessThanOrEqual(
+      dimensions.clientWidth,
+    );
+  }
+});
+
 test("mobile menu closes with Escape and restores focus", async ({ page }) => {
   test.skip(test.info().project.name !== "mobile-chromium");
   await page.goto("/tratamentos");

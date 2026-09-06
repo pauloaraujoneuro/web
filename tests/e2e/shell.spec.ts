@@ -3,8 +3,9 @@ import { expect, test } from "@playwright/test";
 test("global navigation exposes every epic section", async ({ page }) => {
   await page.goto("/");
 
-  if (test.info().project.name === "mobile-chromium") {
-    await page.getByLabel("Abrir menu").click();
+  const menuToggle = page.getByLabel("Abrir menu");
+  if (await menuToggle.isVisible()) {
+    await menuToggle.click();
   }
 
   const expectedLinks = [
@@ -16,7 +17,7 @@ test("global navigation exposes every epic section", async ({ page }) => {
   ] as const;
 
   for (const [name, href] of expectedLinks) {
-    const link = page.getByRole("link", { name, exact: true }).first();
+    const link = page.locator("header").getByRole("link", { name, exact: true }).first();
     await expect(link).toHaveAttribute("href", href);
     const box = await link.boundingBox();
     expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);

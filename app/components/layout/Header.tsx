@@ -32,7 +32,7 @@ export default function Header() {
               alt="Logo Paulo Araújo"
               width={376}
               height={73}
-              className="h-10 w-auto sm:h-11"
+              className="h-8 w-auto min-[360px]:h-10 sm:h-11"
               priority
               unoptimized
               fetchPriority="high"

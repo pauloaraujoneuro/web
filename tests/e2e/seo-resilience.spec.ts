@@ -1,0 +1,60 @@
+import { expect, test } from "@playwright/test";
+
+const expectedRoutes = [
+  "",
+  "/sobre",
+  "/tratamentos",
+  "/blog",
+  "/perguntas-frequentes",
+  "/locais-de-atendimento",
+  "/tratamentos/cirurgia-nervos-perifericos",
+  "/tratamentos/cirurgia-coluna",
+  "/tratamentos/reabilitacao-neurocirurgica",
+  "/blog/como-se-preparar-para-consulta-neurocirurgica",
+  "/locais-de-atendimento/campo-grande",
+];
+
+test("public routes expose exact unique canonical URLs", async ({ page }) => {
+  const canonicals = new Set<string>();
+  for (const route of expectedRoutes) {
+    await page.goto(route || "/");
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
+    expect(canonical).toBe(`https://www.pauloaraujoneuro.com.br${route}`);
+    canonicals.add(canonical!);
+  }
+  expect(canonicals.size).toBe(expectedRoutes.length);
+});
+
+test("robots and sitemap expose the same approved discovery boundary", async ({ request }) => {
+  const robots = await request.get("/robots.txt");
+  await expect(robots).toBeOK();
+  expect(await robots.text()).toContain("Allow: /");
+
+  const sitemap = await request.get("/sitemap.xml");
+  await expect(sitemap).toBeOK();
+  const xml = await sitemap.text();
+  for (const route of expectedRoutes) {
+    expect(xml).toContain(`<loc>https://www.pauloaraujoneuro.com.br${route}</loc>`);
+  }
+  expect((xml.match(/<loc>/g) ?? []).length).toBe(expectedRoutes.length);
+});
+
+test("core content and contact links remain usable without JavaScript", async ({ browser }) => {
+  const context = await browser.newContext({
+    baseURL: "http://127.0.0.1:3100",
+    javaScriptEnabled: false,
+  });
+  const page = await context.newPage();
+  await page.goto("/tratamentos/cirurgia-nervos-perifericos");
+
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Cirurgia de nervos periféricos");
+  await expect(page.getByRole("link", { name: /Agendar avaliação/ })).toHaveAttribute(
+    "href",
+    /wa\.me\/554120180330\?text=/,
+  );
+  await expect(page.getByRole("link", { name: "Reabilitação neurocirúrgica" })).toHaveAttribute(
+    "href",
+    "/tratamentos/reabilitacao-neurocirurgica",
+  );
+  await context.close();
+});

@@ -180,9 +180,11 @@ styles needed for 390px-first usability, keyboard access, and desktop scaling.
 react-best-practices
 **Done when**: routes pass at mobile/desktop widths, have no horizontal overflow,
 menus/accordions work by keyboard, CTAs remain usable, and `npm run check` passes.
-**Verification**: 11 unit tests passed; production build passed; 48 Playwright
-checks passed across mobile Chromium and desktop Chromium, with 2
-viewport-specific checks intentionally skipped. Full-page screenshots were
+**Verification**: 13 unit tests passed; lint and production build passed; 81
+Playwright checks passed across mobile (390px), tablet (768px) and desktop
+(1440px) Chromium, with 6 viewport-specific checks intentionally skipped.
+Adds a 320px overflow sweep over every epic route, canonical/robots/sitemap
+boundary checks, and a no-JavaScript journey. Full-page screenshots were
 reviewed at 390px and 1440px.
 **Tests**: e2e
 **Gate**: Build

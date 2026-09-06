@@ -34,7 +34,6 @@ export function validateTreatments(entries: Treatment[]) {
     (entry) => entry.slug,
   );
   const slugs = new Set(entries.map((entry) => entry.slug));
-  const postSlugs = new Set(["como-se-preparar-para-consulta-neurocirurgica"]);
 
   for (const entry of entries) {
     const source = `treatments.${entry.slug}`;
@@ -51,8 +50,18 @@ export function validateTreatments(entries: Treatment[]) {
     for (const target of entry.relatedTreatmentSlugs) {
       if (!slugs.has(target)) fail(source, "relatedTreatmentSlugs", `unknown target ${target}`);
     }
+  }
+}
+
+export function validateTreatmentPostReferences(
+  entries: Treatment[],
+  postSlugs: Set<string>,
+) {
+  for (const entry of entries) {
     for (const target of entry.relatedPostSlugs) {
-      if (!postSlugs.has(target)) fail(source, "relatedPostSlugs", `unknown target ${target}`);
+      if (!postSlugs.has(target)) {
+        fail(`treatments.${entry.slug}`, "relatedPostSlugs", `unknown target ${target}`);
+      }
     }
   }
 }
@@ -92,6 +101,10 @@ export function validatePosts(posts: BlogPost[], treatmentSlugs: Set<string>) {
     if (!ISO_DATE.test(post.publishDate)) fail(source, "publishDate", "must be an ISO date");
     if (!ISO_DATE.test(post.lastModified)) fail(source, "lastModified", "must be an ISO date");
     if (post.author !== "paulo-araujo") fail(source, "author", `unknown author ${post.author}`);
+    if (!Array.isArray(post.secondaryKeywords)) fail(source, "secondaryKeywords", "must be an array");
+    if (!Array.isArray(post.relatedTreatmentSlugs)) fail(source, "relatedTreatmentSlugs", "must be an array");
+    if (typeof post.featured !== "boolean") fail(source, "featured", "must be a boolean");
+    if (!Number.isInteger(post.order)) fail(source, "order", "must be an integer");
     if (post.state === "published" && !post.body.trim()) fail(source, "body", "is required");
     for (const target of post.relatedTreatmentSlugs) {
       if (!treatmentSlugs.has(target)) {

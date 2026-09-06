@@ -3,7 +3,10 @@ import path from "node:path";
 import matter from "gray-matter";
 import type { BlogFrontmatter, BlogPost } from "@/app/lib/content-types";
 import { getPublishedTreatments } from "@/app/lib/treatments";
-import { validatePosts } from "@/app/lib/content-validation";
+import {
+  validatePosts,
+  validateTreatmentPostReferences,
+} from "@/app/lib/content-validation";
 
 const postsDirectory = path.join(process.cwd(), "content", "posts");
 
@@ -60,6 +63,10 @@ export function getAllPosts() {
   validatePosts(
     posts,
     new Set(getPublishedTreatments().map((treatment) => treatment.slug)),
+  );
+  validateTreatmentPostReferences(
+    getPublishedTreatments(),
+    new Set(posts.map((post) => post.slug)),
   );
   return posts;
 }
