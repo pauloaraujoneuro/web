@@ -42,3 +42,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local design references (Google Stitch exports)
+/tmp
+
+# local agent settings
+.claude/settings.local.json
