@@ -12,6 +12,15 @@ test("FAQ page groups only non-empty published categories", async ({ page }) => 
   await expect(page.getByRole("heading", { level: 3, name: "Recuperação" })).toHaveCount(0);
 });
 
+test("the hub carries questions from approved treatments and none from drafts", async ({ page }) => {
+  await page.goto("/perguntas-frequentes");
+
+  await expect(page.getByText("Quais exames devo levar?", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("Quando devo procurar um especialista após o trauma?", { exact: true }),
+  ).toHaveCount(0);
+});
+
 test("visible FAQ answer exactly matches structured data", async ({ page }) => {
   await page.goto("/perguntas-frequentes");
 
