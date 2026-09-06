@@ -5,6 +5,7 @@ test("location hub exposes only the active Campo Grande location", async ({ page
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Onde encontrar o Dr. Paulo Araújo");
   await expect(page.getByRole("heading", { level: 2, name: "Campo Grande - MS" })).toHaveCount(1);
+  await expect(page.locator(".content-card .card-eyebrow-status")).toHaveText("Atendimento ativo");
   await expect(page.getByText("Curitiba", { exact: false })).toHaveCount(0);
   await expect(page.getByText("União da Vitória", { exact: false })).toHaveCount(0);
 });

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, MapPin } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
+import ContentCard from "@/app/components/content/ContentCard";
 import PageIntro from "@/app/components/content/PageIntro";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
@@ -32,16 +31,16 @@ export default function LocationsPage() {
         />
         <section className="location-grid" aria-label="Locais ativos">
           {locations.map((location) => (
-            <article className="location-card" key={location.slug}>
-              <div className="location-card-icon"><MapPin aria-hidden size={22} strokeWidth={1.5} /></div>
-              <span className="status-live">Atendimento ativo</span>
-              <h2>{location.city} - {location.state}</h2>
-              <p>{location.clinicName}</p>
-              <Link href={`/locais-de-atendimento/${location.slug}`}>
-                Ver informações para a consulta
-                <ArrowRight aria-hidden size={18} strokeWidth={1.5} />
-              </Link>
-            </article>
+            <ContentCard
+              key={location.slug}
+              chip="Atendimento ativo"
+              chipVariant="status"
+              headingLevel={2}
+              title={`${location.city} - ${location.state}`}
+              description={location.clinicName}
+              href={`/locais-de-atendimento/${location.slug}`}
+              actionLabel="Ver informações para a consulta"
+            />
           ))}
         </section>
         <div className="mt-12 sm:mt-16">

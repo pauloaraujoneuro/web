@@ -216,6 +216,22 @@ button,
   color: #eaf4f9;
 }
 
+.card-eyebrow-status {
+  border: 1px solid rgba(37, 211, 102, 0.32);
+  background: #eaf7ef;
+  color: #1f5c3a;
+}
+
+.card-eyebrow-status::before {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.45rem;
+  border-radius: 999px;
+  background: var(--accent-green);
+  content: "";
+}
+
 .card-eyebrow-topic {
   border: 1px solid rgba(53, 97, 122, 0.22);
   background: #eaf1f6;
@@ -253,13 +269,11 @@ button,
 
 @media (hover: hover) {
   .content-card,
-  .location-card,
   .focus-grid article {
     transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
   }
 
   .content-card:hover,
-  .location-card:hover,
   .focus-grid article:hover {
     transform: translateY(-2px);
     border-color: rgba(35, 62, 76, 0.28);
@@ -269,7 +283,6 @@ button,
 
 @media (prefers-reduced-motion: reduce) {
   .content-card,
-  .location-card,
   .focus-grid article,
   .faq-plus {
     transition: none !important;
@@ -761,27 +774,11 @@ button,
   .faq-category-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-.location-grid { display: grid; gap: 1rem; }
-
-.location-card {
-  border: 1px solid var(--border-subtle);
-  border-radius: 1.25rem;
-  background: white;
-  padding: 1.35rem;
-  box-shadow: 0 10px 30px rgba(35, 62, 76, 0.05);
-}
-
-.location-card-icon {
+.location-grid {
   display: grid;
-  width: 2.75rem;
-  height: 2.75rem;
-  place-items: center;
-  border-radius: 0.8rem;
-  background: var(--accent-sky);
-  color: var(--primary);
+  gap: 1rem;
 }
 
-.location-card > span,
 .clinic-summary span,
 .location-section-heading span {
   display: block;
@@ -791,32 +788,6 @@ button,
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-.location-card > span.status-live::before {
-  display: inline-block;
-  width: 0.45rem;
-  height: 0.45rem;
-  margin-right: 0.45rem;
-  border-radius: 999px;
-  background: var(--accent-green);
-  content: "";
-}
-
-.location-card h2 { margin-top: 0.35rem; color: var(--primary); font-size: 1.4rem; font-weight: 700; }
-.location-card > p { margin-top: 0.25rem; color: #64748b; }
-.location-card > a {
-  display: flex;
-  min-height: 3rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 0.75rem;
-  color: var(--primary);
-  font-size: 0.85rem;
-  font-weight: 700;
 }
 
 .location-hero {
