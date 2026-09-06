@@ -26,6 +26,10 @@ here than implementation speed.
    CDN config, placeholder images or invented facts into the app.
 5. **Preserve the established identity.** Brand petrol `#233E4C`, the real logo
    and portrait, the existing header, footer and floating WhatsApp action.
+   Two accents exist and stay small: `--accent-sky` for category chips, soft
+   callouts and icon plates; green for direct-contact and confirmation
+   affordances only. Green is a fill colour — use `--accent-green-ink` when it
+   carries an icon or label on a light surface, never `--accent-green` as text.
 
 ## Conventions
 

@@ -15,10 +15,24 @@
   --surface-dark: #1d323e;
   --border-subtle: #e2e8f0;
 
+  /*
+   * Accents, used sparingly.
+   * sky  — category chips, soft callouts, icon plates, light action on dark.
+   * green — direct-contact and confirmation affordances only. `green` is a
+   *   fill colour (never text on light); `green-ink` is the readable variant
+   *   for icons and labels on light surfaces.
+   */
+  --accent-sky: #cce7f4;
+  --accent-sky-soft: #e8f2f8;
+  --accent-green: #25d366;
+  --accent-green-ink: #0f7a3d;
+
   --anchor-offset: 74px;
 }
 
 @theme inline {
+  --color-accent-sky: var(--accent-sky);
+  --color-accent-green: var(--accent-green);
   --color-background: var(--bg);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-ui);
@@ -155,7 +169,7 @@ button,
   align-items: center;
   width: fit-content;
   border-radius: 999px;
-  background: #e3edf2;
+  background: var(--accent-sky);
   padding: 0.42rem 0.75rem;
   color: var(--primary);
   font-size: 0.7rem;
@@ -357,7 +371,7 @@ button,
   justify-content: center;
   gap: 0.6rem;
   border-radius: 0.85rem;
-  background: white;
+  background: var(--accent-sky);
   padding: 0.85rem 1.15rem;
   color: var(--primary);
   font-size: 0.925rem;
@@ -635,7 +649,7 @@ button,
   height: 2.75rem;
   place-items: center;
   border-radius: 0.8rem;
-  background: #e3edf2;
+  background: var(--accent-sky);
   color: var(--primary);
 }
 
@@ -649,6 +663,16 @@ button,
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.location-card > span.status-live::before {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.45rem;
+  border-radius: 999px;
+  background: var(--accent-green);
+  content: "";
 }
 
 .location-card h2 { margin-top: 0.35rem; color: var(--primary); font-size: 1.4rem; font-weight: 700; }
@@ -902,12 +926,13 @@ button,
 .check-list svg {
   flex: 0 0 auto;
   margin-top: 0.2rem;
-  color: var(--primary);
+  color: var(--accent-green-ink);
 }
 
 .soft-panel {
+  border: 1px solid var(--accent-sky);
   border-radius: 1rem;
-  background: var(--surface-subtle);
+  background: var(--accent-sky-soft);
   padding: 1.25rem;
 }
 

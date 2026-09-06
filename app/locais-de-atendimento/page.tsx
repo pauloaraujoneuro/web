@@ -34,7 +34,7 @@ export default function LocationsPage() {
           {locations.map((location) => (
             <article className="location-card" key={location.slug}>
               <div className="location-card-icon"><MapPin aria-hidden size={22} strokeWidth={1.5} /></div>
-              <span>Atendimento ativo</span>
+              <span className="status-live">Atendimento ativo</span>
               <h2>{location.city} - {location.state}</h2>
               <p>{location.clinicName}</p>
               <Link href={`/locais-de-atendimento/${location.slug}`}>
