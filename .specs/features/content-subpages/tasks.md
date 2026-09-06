@@ -105,6 +105,8 @@ is complete, and unknown/unpublished slugs return 404.
 
 ### T4: Implement Markdown blog hub and article template
 
+**Status**: Complete
+
 **What**: Add `/blog` and `/blog/[slug]` backed by repository Markdown with
 metadata, table of contents, article attribution, disclaimer, and relations.
 **Where**: `content/posts/`, `app/blog/`, `app/lib/blog.ts`
