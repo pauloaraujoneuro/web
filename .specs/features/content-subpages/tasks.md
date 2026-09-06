@@ -137,6 +137,8 @@ visible/structured facts share canonical sources.
 
 ### T6: Implement canonical FAQ page
 
+**Status**: Complete
+
 **What**: Add `/perguntas-frequentes` with grouped visible FAQs and matching
 FAQPage structured data.
 **Where**: `app/perguntas-frequentes/page.tsx`
