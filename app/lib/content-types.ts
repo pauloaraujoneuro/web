@@ -17,11 +17,14 @@ export interface TreatmentSection {
   bullets?: string[];
 }
 
+export type TreatmentKind = "overview" | "condition" | "procedure";
+
 export interface Treatment {
   slug: string;
   state: PublicationState;
   indexable: boolean;
   group: "peripheral-nerve" | "spine" | "rehabilitation";
+  kind: TreatmentKind;
   title: string;
   shortDescription: string;
   primaryIntent: string;

@@ -2,6 +2,7 @@ import type { BlogPost, Location, Treatment } from "@/app/lib/content-types";
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const TREATMENT_KINDS = new Set<Treatment["kind"]>(["overview", "condition", "procedure"]);
 
 function fail(source: string, field: string, detail: string): never {
   throw new Error(`${source}.${field}: ${detail}`);
@@ -38,6 +39,7 @@ export function validateTreatments(entries: Treatment[]) {
   for (const entry of entries) {
     const source = `treatments.${entry.slug}`;
     if (!SLUG.test(entry.slug)) fail(source, "slug", "must be lowercase and hyphenated");
+    if (!TREATMENT_KINDS.has(entry.kind)) fail(source, "kind", `unknown kind ${entry.kind}`);
     if (!ISO_DATE.test(entry.lastModified)) fail(source, "lastModified", "must be an ISO date");
     if (entry.state === "published" && entry.indexable) {
       if (!entry.summary.trim()) fail(source, "summary", "is required");

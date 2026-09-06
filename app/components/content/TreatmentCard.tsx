@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Treatment } from "@/app/lib/content-types";
+import { TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 
 export default function TreatmentCard({ treatment }: { treatment: Treatment }) {
   return (
     <article className="content-card group">
       <div>
-        <h3 className="text-lg font-semibold leading-snug text-slate-900">
+        <span className="card-eyebrow">{TREATMENT_KIND_LABELS[treatment.kind]}</span>
+        <h3 className="mt-2 text-lg font-semibold leading-snug text-slate-900">
           {treatment.title}
         </h3>
         <p className="mt-3 text-sm leading-6 text-slate-600">

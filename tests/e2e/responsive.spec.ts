@@ -4,6 +4,7 @@ const publicRoutes = [
   "/sobre",
   "/tratamentos",
   "/tratamentos/cirurgia-nervos-perifericos",
+  "/tratamentos/lesao-plexo-braquial",
   "/blog",
   "/blog/como-se-preparar-para-consulta-neurocirurgica",
   "/perguntas-frequentes",

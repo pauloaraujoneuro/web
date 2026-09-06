@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { getPublicRouteInventory, getSitemapEntries, isBlogHubIndexable } from "../../app/lib/seo";
 import { getPublishedPosts } from "../../app/lib/blog";
+import { getPublishedTreatments, getVisibleTreatments } from "../../app/lib/treatments";
 import { SITE_URL } from "../../constants";
 
 test("SEO inventory contains every and only published canonical route once", () => {
@@ -35,6 +36,19 @@ test("an empty blog is noindexable and omitted from public discovery", () => {
   assert.equal(isBlogHubIndexable(getPublishedPosts()), true);
   assert.equal(
     getPublicRouteInventory([]).some((entry) => entry.path === "/blog" || entry.path.startsWith("/blog/")),
+    false,
+  );
+});
+
+test("a treatment awaiting approval stays visible but out of public discovery", () => {
+  const visible = getVisibleTreatments().map((entry) => entry.slug);
+  const indexable = getPublishedTreatments().map((entry) => entry.slug);
+
+  assert.ok(visible.includes("lesao-plexo-braquial"));
+  assert.ok(!indexable.includes("lesao-plexo-braquial"));
+  assert.ok(indexable.every((slug) => visible.includes(slug)));
+  assert.equal(
+    getPublicRouteInventory().some((entry) => entry.path === "/tratamentos/lesao-plexo-braquial"),
     false,
   );
 });

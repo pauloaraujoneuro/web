@@ -8,7 +8,7 @@ import FaqAccordion from "@/app/components/content/FaqAccordion";
 import JsonLd from "@/app/components/content/JsonLd";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
-import { getPublishedTreatment, getPublishedTreatments } from "@/app/lib/treatments";
+import { getVisibleTreatment, getVisibleTreatments } from "@/app/lib/treatments";
 import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
   DOCTOR_CRM,
@@ -20,18 +20,21 @@ import {
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return getPublishedTreatments().map((treatment) => ({ slug: treatment.slug }));
+  return getVisibleTreatments().map((treatment) => ({ slug: treatment.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const treatment = getPublishedTreatment(slug);
+  const treatment = getVisibleTreatment(slug);
   if (!treatment) return { robots: { index: false, follow: true } };
   const url = `${SITE_URL}/tratamentos/${treatment.slug}`;
   return {
     title: treatment.metaTitle,
     description: treatment.metaDescription,
     alternates: { canonical: url },
+    robots: treatment.indexable
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
     openGraph: {
       title: treatment.metaTitle,
       description: treatment.metaDescription,
@@ -44,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TreatmentDetailPage({ params }: Props) {
   const { slug } = await params;
-  const treatment = getPublishedTreatment(slug);
+  const treatment = getVisibleTreatment(slug);
   if (!treatment) notFound();
 
   const breadcrumbs: BreadcrumbItem[] = [
@@ -52,7 +55,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
     { name: "Tratamentos", href: "/tratamentos" },
     { name: treatment.title },
   ];
-  const related = getPublishedTreatments().filter((item) =>
+  const related = getVisibleTreatments().filter((item) =>
     treatment.relatedTreatmentSlugs.includes(item.slug),
   );
   const pageUrl = `${SITE_URL}/tratamentos/${treatment.slug}`;

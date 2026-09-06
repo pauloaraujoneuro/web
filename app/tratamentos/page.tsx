@@ -6,7 +6,7 @@ import PageIntro from "@/app/components/content/PageIntro";
 import TreatmentCard from "@/app/components/content/TreatmentCard";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
-import { getPublishedTreatments, TREATMENT_GROUPS } from "@/app/lib/treatments";
+import { getVisibleTreatments, TREATMENT_GROUPS } from "@/app/lib/treatments";
 import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT, SITE_URL } from "@/constants";
 
 const title = "Tratamentos e áreas de atuação";
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default function TreatmentsPage() {
-  const treatments = getPublishedTreatments();
+  const treatments = getVisibleTreatments();
 
   return (
     <SiteShell>

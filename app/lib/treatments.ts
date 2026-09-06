@@ -1,4 +1,4 @@
-import type { Treatment } from "@/app/lib/content-types";
+import type { Treatment, TreatmentKind } from "@/app/lib/content-types";
 import { validateTreatments } from "@/app/lib/content-validation";
 
 const sharedFaq = (
@@ -20,6 +20,7 @@ export const TREATMENTS: Treatment[] = [
     state: "published",
     indexable: true,
     group: "peripheral-nerve",
+    kind: "overview",
     title: "Cirurgia de nervos periféricos",
     shortDescription:
       "Avaliação e reconstrução nervosa orientadas à recuperação de movimentos e sensibilidade.",
@@ -74,10 +75,94 @@ export const TREATMENTS: Treatment[] = [
     order: 1,
   },
   {
+    slug: "lesao-plexo-braquial",
+    state: "published",
+    indexable: false,
+    group: "peripheral-nerve",
+    kind: "condition",
+    title: "Lesão do plexo braquial",
+    shortDescription:
+      "Perda de força ou sensibilidade no braço após trauma, avaliada pelo mecanismo, pelo tempo e pelo exame neurológico.",
+    primaryIntent: "entender a avaliação e as condutas na lesão do plexo braquial",
+    metaTitle: "Lesão do plexo braquial em Campo Grande",
+    metaDescription:
+      "Entenda o que é a lesão do plexo braquial, quando procurar avaliação especializada e quais caminhos de tratamento existem.",
+    summary:
+      "O plexo braquial é a rede de nervos que sai da coluna cervical e comanda o movimento e a sensibilidade do ombro, do braço e da mão. Quando é lesionado, a conduta depende do mecanismo do trauma, do tempo decorrido e do que o exame neurológico mostra.",
+    sections: [
+      {
+        id: "o-que-e",
+        heading: "O que é o plexo braquial",
+        paragraphs: [
+          "O plexo braquial se origina nas raízes nervosas da coluna cervical, atravessa o pescoço e a região do ombro e se divide nos nervos que comandam todo o membro superior.",
+          "Uma lesão nessa rede interrompe a comunicação entre o sistema nervoso central e o braço, o que pode afetar movimentos, sensibilidade ou ambos, em graus variados.",
+        ],
+      },
+      {
+        id: "avaliacao",
+        heading: "Como a investigação é conduzida",
+        paragraphs: [
+          "A avaliação com especialista deve ser buscada assim que houver perda de movimento ou de sensibilidade no braço após um trauma: o intervalo entre a lesão e a consulta influencia as condutas disponíveis.",
+          "A consulta relaciona a história do trauma ao exame neurológico detalhado, que testa a força de cada grupo muscular e mapeia a sensibilidade do membro.",
+          "Exames de imagem e estudos eletrofisiológicos já realizados são revistos nesse contexto. A necessidade de novos exames e o momento adequado para repeti-los são definidos individualmente.",
+        ],
+      },
+      {
+        id: "condutas",
+        heading: "Possibilidades de tratamento",
+        paragraphs: [
+          "Parte dos casos evolui com recuperação sob acompanhamento clínico e reabilitação, sem necessidade de cirurgia.",
+          "Quando há indicação cirúrgica, as abordagens possíveis incluem a liberação do nervo de tecido cicatricial, o uso de enxertos nervosos para vencer falhas entre as extremidades e a transferência de nervos saudáveis para reinervar o músculo-alvo. A escolha é individual e discutida em consulta.",
+        ],
+      },
+    ],
+    indications: [
+      "Dificuldade para levantar o braço, afastar o ombro ou dobrar o cotovelo após o trauma.",
+      "Dormência ou perda de sensibilidade em faixas do braço, do antebraço ou da mão.",
+      "Dor em queimação ou em choque que persiste na região afetada.",
+      "Ausência de recuperação sob acompanhamento clínico.",
+    ],
+    limitations: [
+      "Nem toda lesão do plexo braquial tem indicação cirúrgica; parte dos casos recupera com acompanhamento e reabilitação.",
+      "Os objetivos funcionais são definidos caso a caso e discutidos abertamente antes de qualquer decisão. Não há promessa de resultado.",
+      "A reabilitação é parte indispensável do tratamento, com ou sem cirurgia.",
+    ],
+    carePath: [
+      "Revisão da história do trauma e dos atendimentos já realizados.",
+      "Exame neurológico do membro, com avaliação de força e sensibilidade.",
+      "Leitura conjunta dos exames de imagem e eletrofisiológicos disponíveis.",
+      "Definição compartilhada entre acompanhamento, reabilitação e possibilidade cirúrgica.",
+      "Reavaliações programadas para acompanhar a evolução.",
+    ],
+    faqs: [
+      sharedFaq(
+        "plexo-quando-procurar",
+        "Quando devo procurar um especialista após o trauma?",
+        "O quanto antes. O intervalo entre a lesão e a avaliação influencia as condutas disponíveis, por isso a consulta não deve ser adiada enquanto se aguarda uma recuperação espontânea.",
+      ),
+      sharedFaq(
+        "plexo-exames",
+        "Quais exames devo levar na consulta?",
+        "Leve todos os exames e laudos relacionados ao trauma, incluindo imagens em mídia digital, relatórios de atendimento de urgência e estudos eletrofisiológicos, mesmo que antigos.",
+      ),
+      sharedFaq(
+        "plexo-cirurgia",
+        "Toda lesão do plexo braquial precisa de cirurgia?",
+        "Não. Parte dos casos evolui com acompanhamento clínico e reabilitação. A indicação cirúrgica depende do tipo de lesão, da evolução e da avaliação presencial.",
+      ),
+    ],
+    relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "reabilitacao-neurocirurgica"],
+    relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
+    keywords: ["lesão do plexo braquial", "plexo braquial", "nervo periférico", "Campo Grande"],
+    lastModified: "2026-09-06",
+    order: 4,
+  },
+  {
     slug: "cirurgia-coluna",
     state: "published",
     indexable: true,
     group: "spine",
+    kind: "overview",
     title: "Cirurgia da coluna vertebral",
     shortDescription:
       "Investigação de patologias traumáticas e compressivas com foco em estabilidade e descompressão neural.",
@@ -134,6 +219,7 @@ export const TREATMENTS: Treatment[] = [
     state: "published",
     indexable: true,
     group: "rehabilitation",
+    kind: "overview",
     title: "Reabilitação neurocirúrgica",
     shortDescription:
       "Acompanhamento orientado ao ganho de movimentos e ao retorno funcional.",
@@ -187,6 +273,12 @@ export const TREATMENTS: Treatment[] = [
   },
 ];
 
+export const TREATMENT_KIND_LABELS: Record<TreatmentKind, string> = {
+  overview: "Visão geral da área",
+  condition: "Condição tratada",
+  procedure: "Procedimento",
+};
+
 export const TREATMENT_GROUPS: Array<{
   id: Treatment["group"];
   label: string;
@@ -209,10 +301,25 @@ export const TREATMENT_GROUPS: Array<{
   },
 ];
 
+function byCatalogOrder(a: Treatment, b: Treatment) {
+  return a.order - b.order || a.slug.localeCompare(b.slug);
+}
+
+/**
+ * Entries that have a real page: rendered, linked and navigable. Copy awaiting
+ * clinical approval stays visible but non-indexable until `indexable` flips.
+ */
+export function getVisibleTreatments(source = TREATMENTS) {
+  return source.filter((item) => item.state === "published").toSorted(byCatalogOrder);
+}
+
+export function getVisibleTreatment(slug: string) {
+  return getVisibleTreatments().find((item) => item.slug === slug);
+}
+
+/** The discovery surface: only these reach the sitemap and stay indexable. */
 export function getPublishedTreatments(source = TREATMENTS) {
-  return source
-    .filter((item) => item.state === "published" && item.indexable)
-    .toSorted((a, b) => a.order - b.order || a.slug.localeCompare(b.slug));
+  return getVisibleTreatments(source).filter((item) => item.indexable);
 }
 
 export function getPublishedTreatment(slug: string) {
