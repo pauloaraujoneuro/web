@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${SITE_URL}/tratamentos` },
-  openGraph: { title, description, url: `${SITE_URL}/tratamentos`, images: ["/og/og-image.png"] },
+  openGraph: { title, description, url: `${SITE_URL}/tratamentos` },
 };
 
 export default function TreatmentsPage() {

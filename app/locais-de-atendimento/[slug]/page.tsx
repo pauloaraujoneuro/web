@@ -29,7 +29,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: location.metaTitle,
       description: location.metaDescription,
       url,
-      images: ["/og/og-image.png"],
     },
   };
 }

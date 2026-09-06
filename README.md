@@ -36,12 +36,13 @@ one running from an earlier build, kill it first or the run tests stale output.
 | Route | Source |
 | --- | --- |
 | `/` | homepage sections in `app/components/sections/` |
-| `/sobre` | practitioner data in `constants.ts` |
+| `/sobre` | practitioner data in `constants/` |
 | `/tratamentos`, `/tratamentos/[slug]` | `app/lib/treatments.ts` |
 | `/blog`, `/blog/[slug]` | Markdown in `content/posts/` |
 | `/perguntas-frequentes` | `app/lib/faqs.ts` |
 | `/locais-de-atendimento`, `/locais-de-atendimento/[slug]` | `app/lib/locations.ts` |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | derived from `app/lib/seo.ts` |
+| `opengraph-image` (per route) | rendered by `app/lib/og.tsx` |
 
 ## Content model
 
@@ -49,6 +50,10 @@ Treatments, FAQs and locations live in typed catalogs; blog articles are
 Markdown with validated frontmatter. Page components receive content as props,
 so adding an entry to a catalog produces its page, its hub card, its internal
 links and its sitemap entry with no component changes.
+
+Catalog data lives apart from the code that reads it: treatment entries in
+`app/content/treatments/`, site facts in `constants/`, accessors and validation
+in `app/lib/`.
 
 `app/lib/content-validation.ts` runs at module load. A malformed entry fails the
 build rather than reaching production.

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${SITE_URL}/locais-de-atendimento` },
-  openGraph: { title, description, url: `${SITE_URL}/locais-de-atendimento`, images: ["/og/og-image.png"] },
+  openGraph: { title, description, url: `${SITE_URL}/locais-de-atendimento` },
 };
 
 export default function LocationsPage() {

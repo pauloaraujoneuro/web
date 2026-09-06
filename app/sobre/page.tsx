@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${SITE_URL}/sobre` },
-  openGraph: { title, description, url: `${SITE_URL}/sobre`, images: ["/og/og-image.png"] },
+  openGraph: { title, description, url: `${SITE_URL}/sobre` },
 };
 
 export default function AboutPage() {

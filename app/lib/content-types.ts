@@ -1,10 +1,14 @@
 export type PublicationState = "draft" | "published";
 
-export interface FaqItem {
+/** A question and its answer, before it is placed in the FAQ catalog. */
+export interface FaqSeed {
   id: string;
-  category: "consulta" | "tratamentos" | "recuperacao" | "atendimento";
   question: string;
   answer: string;
+}
+
+export interface FaqItem extends FaqSeed {
+  category: "consulta" | "tratamentos" | "recuperacao" | "atendimento";
   order: number;
   state: PublicationState;
   relatedHref?: string;

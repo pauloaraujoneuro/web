@@ -19,7 +19,7 @@ export function generateMetadata(): Metadata {
     title: "Blog e conteúdo educativo",
     description,
     alternates: { canonical: `${SITE_URL}/blog` },
-    openGraph: { title, description, url: `${SITE_URL}/blog`, images: ["/og/og-image.png"] },
+    openGraph: { title, description, url: `${SITE_URL}/blog` },
     robots: indexable ? { index: true, follow: true } : { index: false, follow: true },
   };
 }

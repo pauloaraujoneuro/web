@@ -65,7 +65,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: post.publishDate,
       modifiedTime: post.lastModified,
-      images: ["/og/og-image.png"],
     },
   };
 }
@@ -91,17 +90,29 @@ export default async function BlogArticlePage({ params }: Props) {
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": "MedicalWebPage",
+            "@type": ["MedicalWebPage", "BlogPosting"],
             "@id": pageUrl,
             url: pageUrl,
+            mainEntityOfPage: pageUrl,
+            headline: post.title,
             name: post.title,
             description: post.metaDescription,
+            abstract: post.dek,
+            inLanguage: "pt-BR",
+            keywords: [post.primaryKeyword, ...post.secondaryKeywords],
             datePublished: post.publishDate,
             dateModified: post.lastModified,
+            image: `${pageUrl}/opengraph-image`,
             author: {
               "@type": "Physician",
               name: `Dr. ${DOCTOR_NAME}`,
               identifier: [DOCTOR_CRM, DOCTOR_RQE],
+              url: `${SITE_URL}/sobre`,
+            },
+            publisher: {
+              "@type": "Physician",
+              name: `Dr. ${DOCTOR_NAME}`,
+              url: SITE_URL,
             },
           },
           {

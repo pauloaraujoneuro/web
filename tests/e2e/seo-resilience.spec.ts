@@ -65,6 +65,23 @@ test("robots names assistant crawlers explicitly", async ({ request }) => {
   expect(body).toContain("Sitemap: https://www.pauloaraujoneuro.com.br/sitemap.xml");
 });
 
+test("each route advertises its own generated preview image", async ({ page, request }) => {
+  const seen = new Set<string>();
+
+  for (const route of ["", "/tratamentos", "/tratamentos/cirurgia-coluna", "/blog/como-se-preparar-para-consulta-neurocirurgica"]) {
+    await page.goto(route || "/");
+    const image = await page.locator('meta[property="og:image"]').first().getAttribute("content");
+    expect(image, `${route} has no og:image`).toBeTruthy();
+    expect(image).toContain("/opengraph-image");
+    seen.add(image!.split("?")[0]);
+  }
+  expect(seen.size).toBe(4);
+
+  const rendered = await request.get("/tratamentos/cirurgia-coluna/opengraph-image");
+  await expect(rendered).toBeOK();
+  expect(rendered.headers()["content-type"]).toContain("image/png");
+});
+
 test("core content and contact links remain usable without JavaScript", async ({ browser }) => {
   const context = await browser.newContext({
     baseURL: "http://127.0.0.1:3100",

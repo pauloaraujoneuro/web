@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     title,
     description,
     url: `${SITE_URL}/perguntas-frequentes`,
-    images: ["/og/og-image.png"],
   },
 };
 

@@ -42,7 +42,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: treatment.metaDescription,
       url,
       type: "article",
-      images: ["/og/og-image.png"],
     },
   };
 }

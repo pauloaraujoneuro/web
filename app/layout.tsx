@@ -146,20 +146,11 @@ export const metadata: Metadata = {
     url: SITE_URL,
     locale: "pt_BR",
     type: "website",
-    images: [
-      {
-        url: "/og/og-image.png",
-        width: 1200,
-        height: 1200,
-        alt: `${DOCTOR_NAME} - Neurocirurgião em Campo Grande MS`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/og/og-image.png"],
   },
   robots: {
     index: true,
