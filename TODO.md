@@ -1,8 +1,9 @@
 # TODOs
 
-- [ ] Transfer Curitiba focused keywords to Campo Grande
-- [ ] Update address to this clinic:
-  - [ ] R. 15 de Novembro, 2808 – Jardim dos Estados,
-Campo Grande – MS, 79020-300
-  - [ ] https://diegoramosneuro.com.br
-  - [ ] https://diegoramosneuro.com.br/contato/
+- [x] Deploy code to config Google Tag Manager
+- [x] Confirm GTM works with Tag Assistant
+- [x] Share tag to Ketima
+- [x] Share sitemap.xml to google search console
+- [x] Transfer local SEO focus to Campo Grande
+- [x] Remove public street-address references from metadata and homepage
+- [x] Remove distant service-location references from metadata and homepage

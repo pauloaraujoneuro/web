@@ -41,12 +41,17 @@ export interface ProfessionalRole {
   title: string;
   institution: string;
   summary: string;
+  status: "active" | "deferred";
+  address?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  website?: string;
 }
 
 export interface ServiceLocation {
   id: string;
   name: string;
-  address: string;
   city: string;
   state: string;
   phone?: string;
@@ -99,9 +104,6 @@ export const DOCTOR_CREDENTIALS = [
 ];
 
 export const DOCTOR_REGISTRATION_BADGES = [DOCTOR_CRM, DOCTOR_RQE];
-
-export const DOCTOR_PROFILE_URL =
-  "https://hospitalmarcelino.com.br/medicos/paulo-victor-de-souza-araujo/";
 
 // Website Navigation
 export const NAV_ITEMS: NavigationItem[] = [
@@ -187,20 +189,36 @@ export const ACADEMIC_MILESTONES: AcademicMilestone[] = [
 // Professional Roles
 export const PROFESSIONAL_ROLES: ProfessionalRole[] = [
   {
-    id: "role-marcelino",
+    id: "role-protrauma",
     period: "Atual",
+    title: "Neurocirurgião",
+    institution: "Clínica Protrauma",
+    summary:
+      "Atendimento em Campo Grande com foco em cirurgia de nervo periférico, coluna e reabilitação neurocirúrgica.",
+    status: "active",
+    address: "R. 15 de Novembro, 2808 - Jardim dos Estados",
+    city: "Campo Grande",
+    state: "MS",
+    postalCode: "79020-300",
+    website: "https://www.protrauma.net/",
+  },
+  {
+    id: "role-marcelino",
+    period: "Atendimento anterior",
     title: "Neurocirurgião",
     institution: "Hospital São Marcelino Champagnat",
     summary:
-      "Atendimento com foco em cirurgia de nervo periférico, coluna e reabilitação neurocirúrgica.",
+      "Atuação prévia com foco em cirurgia de nervo periférico, coluna e reabilitação neurocirúrgica.",
+    status: "deferred",
   },
   {
     id: "role-sao-camilo",
-    period: "Atual",
+    period: "Atendimento anterior",
     title: "Neurocirurgião",
     institution: "Centro de Saúde São Camilo",
     summary:
-      "Atendimento em União da Vitória com foco em avaliação e conduta especializada.",
+      "Atuação prévia em União da Vitória com foco em avaliação e conduta especializada.",
+    status: "deferred",
   },
 ];
 
@@ -230,10 +248,8 @@ export const CONTACT_WHATSAPP_FAQ_URL = createWhatsAppUrl(
   CONTACT_WHATSAPP_FAQ_TEXT,
 );
 
-export const CONTACT_WHATSAPP_CURITIBA_TEXT =
-  "Olá! Gostaria de agendar uma consulta em Curitiba com o Dr. Paulo Araújo.";
-export const CONTACT_WHATSAPP_UNIAO_DA_VITORIA_TEXT =
-  "Olá! Gostaria de agendar uma consulta em União da Vitória com o Dr. Paulo Araújo.";
+export const CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT =
+  "Olá! Gostaria de agendar uma consulta em Campo Grande com o Dr. Paulo Araújo.";
 export const CONTACT_WHATSAPP_LABEL = CONTACT_WHATSAPP_NUMBER
   ? CONTACT_WHATSAPP_FORMATTED
   : "WhatsApp pendente";
@@ -244,37 +260,21 @@ export const INSTAGRAM_URL = "https://www.instagram.com/pauloaraujoneuro/";
 // Service Locations
 export const SERVICE_LOCATIONS: ServiceLocation[] = [
   {
-    id: "marcelino",
-    name: "Hospital São Marcelino Champagnat",
-    address: "Av. Presidente Affonso Camargo, 1399 - Cristo Rei",
-    city: "Curitiba",
-    state: "PR",
-  },
-  {
-    id: "sao-camilo",
-    name: "Centro de Saúde São Camilo",
-    address: "Unidade de atendimento ambulatorial",
-    city: "União da Vitória",
-    state: "PR",
+    id: "campo-grande",
+    name: "Clínica Protrauma",
+    city: "Campo Grande",
+    state: "MS",
   },
 ];
 
 export const CITY_SCHEDULES: CitySchedule[] = [
   {
-    id: "schedule-curitiba",
-    city: "Curitiba",
-    state: "PR",
-    location: "Hospital São Marcelino Champagnat",
-    whatsappCtaLabel: "Agendar em Curitiba",
-    whatsappUrl: createWhatsAppUrl(CONTACT_WHATSAPP_CURITIBA_TEXT),
-  },
-  {
-    id: "schedule-uniao-da-vitoria",
-    city: "União da Vitória",
-    state: "PR",
-    location: "Centro de Saúde São Camilo",
-    whatsappCtaLabel: "Agendar em União da Vitória",
-    whatsappUrl: createWhatsAppUrl(CONTACT_WHATSAPP_UNIAO_DA_VITORIA_TEXT),
+    id: "schedule-campo-grande",
+    city: "Campo Grande",
+    state: "MS",
+    location: "Clínica Protrauma",
+    whatsappCtaLabel: "Agendar em Campo Grande",
+    whatsappUrl: createWhatsAppUrl(CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT),
   },
 ];
 
@@ -282,7 +282,7 @@ export const LOCATIONS_SCHEDULING_NOTE =
   "Os horários de consulta são definidos conforme a agenda médica e a disponibilidade de cada local. Para confirmar datas e realizar o agendamento, entre em contato conosco pelo WhatsApp.";
 
 export const FIRST_APPOINTMENT_STEPS = [
-  "Envie no WhatsApp sua cidade de preferência (Curitiba ou União da Vitória).",
+  "Envie no WhatsApp sua disponibilidade para atendimento em Campo Grande.",
   "Informe seu principal sintoma e há quanto tempo ele começou.",
   "Se tiver exames, leve ou envie antes para orientar a consulta.",
 ];
@@ -295,13 +295,7 @@ export const CONSULTATION_APPROACH_POINTS = [
 
 // Clinic Information
 export const CLINIC_NAME = "Neurocirurgia - Paulo Araújo";
-export const CLINIC_ADDRESS_LINE = SERVICE_LOCATIONS[0].address;
-export const CLINIC_ADDRESS_CITY = SERVICE_LOCATIONS[0].city;
-export const CLINIC_ADDRESS_STATE = SERVICE_LOCATIONS[0].state;
-export const CLINIC_ADDRESS_COUNTRY = "Brasil";
-export const CLINIC_ADDRESS_FULL = `${SERVICE_LOCATIONS[0].name}, ${CLINIC_ADDRESS_LINE}, ${CLINIC_ADDRESS_CITY} - ${CLINIC_ADDRESS_STATE}, ${CLINIC_ADDRESS_COUNTRY}`;
-export const CLINIC_MAP_EMBED_URL =
-  "https://maps.google.com/maps?hl=pt-BR&q=Hospital+Sao+Marcelino+Champagnat,+Av.+Presidente+Affonso+Camargo,+1399+-+Cristo+Rei,+Curitiba+-+PR,+80050-370,+Brasil&z=16&iwloc=B&output=embed";
+export const CLINIC_COUNTRY = "Brasil";
 
 // Business Hours
 export const CLINIC_HOURS = {
@@ -388,14 +382,13 @@ export const CLINIC_INFO = {
     rqe: DOCTOR_RQE,
     registrations: DOCTOR_REGISTRATION_BADGES,
     credentials: DOCTOR_CREDENTIALS,
-    profileUrl: DOCTOR_PROFILE_URL,
+    professionalRoles: PROFESSIONAL_ROLES,
   },
   clinic: {
     name: CLINIC_NAME,
-    address: CLINIC_ADDRESS_FULL,
-    city: CLINIC_ADDRESS_CITY,
-    state: CLINIC_ADDRESS_STATE,
-    country: CLINIC_ADDRESS_COUNTRY,
+    city: SERVICE_LOCATIONS[0].city,
+    state: SERVICE_LOCATIONS[0].state,
+    country: CLINIC_COUNTRY,
     hours: CLINIC_HOURS,
     locations: SERVICE_LOCATIONS,
   },

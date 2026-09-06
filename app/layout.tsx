@@ -5,18 +5,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleTagManager } from "@next/third-parties/google";
 import {
   ANALYTICS_ENABLED,
-  CLINIC_ADDRESS_CITY,
-  CLINIC_ADDRESS_COUNTRY,
-  CLINIC_ADDRESS_LINE,
-  CLINIC_ADDRESS_STATE,
-  CLINIC_MAP_EMBED_URL,
   CLINIC_NAME,
   CONTACT_EMAIL,
   CONTACT_PHONE,
   DOCTOR_CRM,
   DOCTOR_NAME,
   DOCTOR_PROFILE_IMAGE,
-  DOCTOR_PROFILE_URL,
   DOCTOR_RQE,
   GOOGLE_TAG_ID,
   INSTAGRAM_URL,
@@ -33,22 +27,22 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const SITE_TITLE = `Neurocirurgião em Curitiba | ${DOCTOR_NAME}`;
+const SITE_TITLE = `Neurocirurgião em Campo Grande MS | ${DOCTOR_NAME}`;
 
 const SITE_DESCRIPTION =
-  "Neurocirurgião em Curitiba (PR), com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica.";
+  "Neurocirurgião em Campo Grande (MS), com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica.";
 
 const SITE_KEYWORDS = [
-  "Neurocirurgião em Curitiba",
-  "Neurocirurgia em Curitiba",
-  "Neurocirurgião Curitiba PR",
-  "Consulta com neurocirurgião em Curitiba",
+  "Neurocirurgião em Campo Grande",
+  "Neurocirurgia em Campo Grande",
+  "Neurocirurgião Campo Grande MS",
+  "Consulta com neurocirurgião em Campo Grande",
   "Cirurgia de nervo periférico",
-  "Cirurgia de nervo periférico em Curitiba",
-  "Cirurgia de coluna em Curitiba",
+  "Cirurgia de nervo periférico em Campo Grande",
+  "Cirurgia de coluna em Campo Grande",
   "Reabilitação neurocirúrgica",
-  "Tratamento de hérnia de disco em Curitiba",
-  "Tratamento de estenose de canal em Curitiba",
+  "Tratamento de hérnia de disco em Campo Grande",
+  "Tratamento de estenose de canal em Campo Grande",
   "Lesão de plexo braquial",
 ];
 
@@ -65,13 +59,6 @@ const PHYSICIAN_AND_CLINIC_JSON_LD = {
       medicalSpecialty: ["Neurosurgery"],
       telephone: CONTACT_PHONE,
       email: CONTACT_EMAIL,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: CLINIC_ADDRESS_LINE,
-        addressLocality: CLINIC_ADDRESS_CITY,
-        addressRegion: CLINIC_ADDRESS_STATE,
-        addressCountry: CLINIC_ADDRESS_COUNTRY,
-      },
       areaServed: SERVICE_LOCATIONS.map((location) => ({
         "@type": "City",
         name: location.city,
@@ -90,7 +77,7 @@ const PHYSICIAN_AND_CLINIC_JSON_LD = {
           name: "Reabilitação neurocirúrgica",
         },
       ],
-      sameAs: [INSTAGRAM_URL, DOCTOR_PROFILE_URL, LATTES_URL],
+      sameAs: [INSTAGRAM_URL, LATTES_URL],
       identifier: [
         {
           "@type": "PropertyValue",
@@ -112,14 +99,6 @@ const PHYSICIAN_AND_CLINIC_JSON_LD = {
       telephone: CONTACT_PHONE,
       email: CONTACT_EMAIL,
       medicalSpecialty: ["Neurosurgery"],
-      hasMap: CLINIC_MAP_EMBED_URL,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: CLINIC_ADDRESS_LINE,
-        addressLocality: CLINIC_ADDRESS_CITY,
-        addressRegion: CLINIC_ADDRESS_STATE,
-        addressCountry: CLINIC_ADDRESS_COUNTRY,
-      },
       areaServed: SERVICE_LOCATIONS.map((location) => ({
         "@type": "AdministrativeArea",
         name: `${location.city} - ${location.state}`,
@@ -171,7 +150,7 @@ export const metadata: Metadata = {
         url: "/og/og-image.png",
         width: 1200,
         height: 1200,
-        alt: `${DOCTOR_NAME} - Neurocirurgião em Curitiba`,
+        alt: `${DOCTOR_NAME} - Neurocirurgião em Campo Grande MS`,
       },
     ],
   },
