@@ -188,13 +188,32 @@ button,
 }
 
 .card-eyebrow {
-  display: block;
-  color: #64748b;
-  font-size: 0.68rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.63rem;
   font-weight: 700;
   letter-spacing: 0.11em;
   line-height: 1.3;
   text-transform: uppercase;
+}
+
+/* The chip encodes what the card opens: an area, a condition or a procedure. */
+.card-eyebrow-overview {
+  background: var(--accent-sky);
+  color: var(--primary);
+}
+
+.card-eyebrow-condition {
+  border: 1px solid var(--accent-sky);
+  background: var(--accent-sky-soft);
+  color: #35617a;
+}
+
+.card-eyebrow-procedure {
+  background: var(--primary);
+  color: #eaf4f9;
 }
 
 .content-card {
@@ -237,18 +256,77 @@ button,
   }
 }
 
+.treatment-card {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+/* Colour arrives on approach rather than sitting on every card at rest. */
+.treatment-card::before {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-sky), var(--secondary));
+  opacity: 0;
+  transition: opacity 200ms ease;
+  content: "";
+}
+
 .card-link {
-  display: inline-flex;
+  display: flex;
   min-height: 3rem;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  margin-top: 1.5rem;
+  margin: 1.5rem -1.25rem 0;
   border-top: 1px solid var(--border-subtle);
-  padding-top: 0.75rem;
+  background: var(--surface-subtle);
+  padding: 0.7rem 1.25rem;
   color: var(--primary);
   font-size: 0.875rem;
   font-weight: 700;
+  transition: background-color 200ms ease;
+}
+
+.card-link-arrow {
+  display: grid;
+  width: 1.9rem;
+  height: 1.9rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #ffffff;
+  transition: transform 200ms ease, background-color 200ms ease;
+}
+
+@media (hover: hover) {
+  .treatment-card:hover::before {
+    opacity: 1;
+  }
+
+  .treatment-card:hover .card-link {
+    background: var(--accent-sky-soft);
+  }
+
+  .treatment-card:hover .card-link-arrow {
+    transform: translateX(3px);
+    background: #34576a;
+  }
+}
+
+.card-link:focus-visible .card-link-arrow {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-link,
+  .card-link-arrow,
+  .treatment-card::before {
+    transition: none !important;
+  }
 }
 
 .faq-list {

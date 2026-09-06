@@ -13,6 +13,12 @@ test("treatment hub groups published catalog entries", async ({ page }) => {
   await expect(page.locator("#peripheral-nerve").getByRole("article")).toHaveCount(6);
   await expect(page.locator("#spine").getByRole("article")).toHaveCount(5);
   await expect(page.locator("#rehabilitation").getByRole("article")).toHaveCount(3);
+
+  // The chip tells the reader whether a card opens an area, a condition or a
+  // procedure, so each kind must keep its own styling hook.
+  await expect(page.locator("#peripheral-nerve .card-eyebrow-overview")).toHaveCount(1);
+  await expect(page.locator("#peripheral-nerve .card-eyebrow-condition")).toHaveCount(4);
+  await expect(page.locator("#peripheral-nerve .card-eyebrow-procedure")).toHaveCount(1);
 });
 
 test("published treatment renders the complete educational template", async ({ page }) => {
