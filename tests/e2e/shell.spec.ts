@@ -52,3 +52,13 @@ test("the WhatsApp action keeps its recognisable brand colours", async ({ page }
   expect(colours.background).toBe("rgb(37, 211, 102)");
   expect(colours.glyph).toBe("rgb(255, 255, 255)");
 });
+
+test("homepage area links stay legible on the dark panel", async ({ page }) => {
+  await page.goto("/");
+
+  const link = page.locator(".expertise-link").first();
+  await expect(link).toHaveAttribute("href", "/tratamentos/cirurgia-nervos-perifericos");
+  // Set in CSS, not via a text-* utility: unlayered `a { color: inherit }`
+  // outranks Tailwind's layered utilities and would leave this dark on dark.
+  await expect(link).toHaveCSS("color", "rgb(220, 234, 241)");
+});
