@@ -25,6 +25,7 @@
   --accent-sky: #cce7f4;
   --accent-sky-soft: #e8f2f8;
   --accent-green: #25d366;
+  --accent-green-hover: #20ba5a;
   --accent-green-ink: #0f7a3d;
 
   --anchor-offset: 74px;
@@ -33,6 +34,7 @@
 @theme inline {
   --color-accent-sky: var(--accent-sky);
   --color-accent-green: var(--accent-green);
+  --color-accent-green-hover: var(--accent-green-hover);
   --color-background: var(--bg);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-ui);
@@ -1303,6 +1305,8 @@ button:focus-visible {
   right: 0.75rem;
   bottom: 0.75rem;
   z-index: 60;
+  /* The unlayered anchor colour below outranks Tailwind's layered utilities. */
+  color: #ffffff;
 }
 
 @media (min-width: 640px) {

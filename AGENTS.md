@@ -30,6 +30,9 @@ here than implementation speed.
    callouts and icon plates; green for direct-contact and confirmation
    affordances only. Green is a fill colour — use `--accent-green-ink` when it
    carries an icon or label on a light surface, never `--accent-green` as text.
+   The floating WhatsApp button is the one exception: it reproduces WhatsApp's
+   own mark, green with a white glyph, because that pattern is recognised
+   instantly and logotypes are exempt from contrast minimums.
 
 ## Conventions
 

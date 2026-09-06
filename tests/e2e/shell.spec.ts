@@ -35,3 +35,20 @@ test("mobile page has no horizontal document overflow", async ({ page }) => {
 
   expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
 });
+
+test("the WhatsApp action keeps its recognisable brand colours", async ({ page }) => {
+  await page.goto("/");
+
+  const colours = await page.evaluate(() => {
+    const fab = document.querySelector(".fab-whatsapp")!;
+    return {
+      background: getComputedStyle(fab).backgroundColor,
+      glyph: getComputedStyle(fab.querySelector("svg")!).fill,
+    };
+  });
+
+  // Unlayered `a { color: inherit }` outranks Tailwind's layered utilities, so a
+  // text-* class alone cannot hold this glyph white.
+  expect(colours.background).toBe("rgb(37, 211, 102)");
+  expect(colours.glyph).toBe("rgb(255, 255, 255)");
+});
