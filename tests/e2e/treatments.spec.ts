@@ -23,6 +23,11 @@ test("published treatment renders the complete educational template", async ({ p
   await expect(page.getByRole("heading", { level: 2, name: "Etapas do cuidado" })).toBeVisible();
   await expect(page.getByText("Informação médica responsável")).toBeVisible();
   await expect(page.getByLabel("Autoria médica")).toContainText("CRM-PR 37567");
+  await expect(page.getByRole("heading", { level: 2, name: "Leituras relacionadas" })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Como se preparar para uma consulta neurocirúrgica" }),
+  ).toHaveAttribute("href", "/blog/como-se-preparar-para-consulta-neurocirurgica");
+  await expect(page.getByRole("navigation", { name: "Nesta página" })).toBeVisible();
 });
 
 test("a treatment awaiting approval is reachable but not indexable", async ({ page }) => {

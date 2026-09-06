@@ -6,8 +6,10 @@ import AuthorCard from "@/app/components/content/AuthorCard";
 import Breadcrumb, { type BreadcrumbItem } from "@/app/components/content/Breadcrumb";
 import FaqAccordion from "@/app/components/content/FaqAccordion";
 import JsonLd from "@/app/components/content/JsonLd";
+import SectionToc from "@/app/components/content/SectionToc";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
+import { getPublishedPosts } from "@/app/lib/blog";
 import { getVisibleTreatment, getVisibleTreatments } from "@/app/lib/treatments";
 import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
@@ -57,6 +59,9 @@ export default async function TreatmentDetailPage({ params }: Props) {
   ];
   const related = getVisibleTreatments().filter((item) =>
     treatment.relatedTreatmentSlugs.includes(item.slug),
+  );
+  const relatedPosts = getPublishedPosts().filter((post) =>
+    treatment.relatedPostSlugs.includes(post.slug),
   );
   const pageUrl = `${SITE_URL}/tratamentos/${treatment.slug}`;
 
@@ -119,6 +124,13 @@ export default async function TreatmentDetailPage({ params }: Props) {
 
         <div className="editorial-layout">
           <article className="article-body">
+            <SectionToc
+              items={treatment.sections.map((section) => ({
+                id: section.id,
+                text: section.heading,
+              }))}
+            />
+
             {treatment.sections.map((section) => (
               <section id={section.id} key={section.id}>
                 <h2>{section.heading}</h2>
@@ -171,6 +183,20 @@ export default async function TreatmentDetailPage({ params }: Props) {
                 ))}
               </div>
             </section>
+
+            {relatedPosts.length ? (
+              <section>
+                <h2>Leituras relacionadas</h2>
+                <div className="related-grid">
+                  {relatedPosts.map((post) => (
+                    <Link key={post.slug} href={`/blog/${post.slug}`}>
+                      <span>{post.title}</span>
+                      <ArrowRight aria-hidden size={18} strokeWidth={1.5} />
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ) : null}
 
             <aside className="medical-disclaimer">
               <strong>Informação médica responsável</strong>

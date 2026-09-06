@@ -51,6 +51,18 @@ test("mobile menu closes with Escape and restores focus", async ({ page }) => {
   await expect(toggle).toBeFocused();
 });
 
+test("in-page TOC anchors land below the sticky header", async ({ page }) => {
+  await page.goto("/tratamentos/mielopatia-cervical");
+  await page.getByRole("link", { name: "Conduta" }).click();
+  await page.waitForTimeout(900);
+
+  const { sectionTop, headerHeight } = await page.evaluate(() => ({
+    sectionTop: document.getElementById("tratamento")!.getBoundingClientRect().top,
+    headerHeight: document.querySelector("header.sticky")!.getBoundingClientRect().height,
+  }));
+  expect(sectionTop).toBeGreaterThanOrEqual(headerHeight);
+});
+
 test("FAQ disclosure works with keyboard input", async ({ page }) => {
   await page.goto("/perguntas-frequentes");
   const disclosure = page.locator(".subpage-faq summary").first();
