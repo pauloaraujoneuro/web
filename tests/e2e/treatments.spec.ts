@@ -9,7 +9,10 @@ test("treatment hub groups published catalog entries", async ({ page }) => {
   for (const heading of ["Nervo periférico", "Cirurgia da coluna", "Reabilitação neurocirúrgica"]) {
     await expect(page.getByRole("heading", { level: 2, name: heading })).toBeVisible();
   }
-  await expect(page.getByRole("link", { name: /Saiba mais/ })).toHaveCount(4);
+  await expect(page.getByRole("link", { name: /Saiba mais/ })).toHaveCount(14);
+  await expect(page.locator("#peripheral-nerve").getByRole("article")).toHaveCount(6);
+  await expect(page.locator("#spine").getByRole("article")).toHaveCount(5);
+  await expect(page.locator("#rehabilitation").getByRole("article")).toHaveCount(3);
 });
 
 test("published treatment renders the complete educational template", async ({ page }) => {

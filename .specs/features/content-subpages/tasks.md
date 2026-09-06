@@ -190,6 +190,36 @@ reviewed at 390px and 1440px.
 **Gate**: Build
 **Commit**: `test(subpages): verify responsive public journeys`
 
+### T9 — Populate the treatment catalog to procedure depth
+
+**Status**: Complete
+
+**What**: Separate visibility from indexability in the treatment catalog and fill
+the provisional topic backlog from the specification's Content Foundations table,
+plus the two rehabilitation topics named in the Stitch handoff.
+**Where**: `app/lib/treatments.ts`, `app/lib/content-types.ts`,
+`app/lib/content-validation.ts`, `app/tratamentos/`,
+`app/components/content/TreatmentCard.tsx`
+**Depends on**: T8
+**Requirement**: SUBP-10–14, SUBP-30–34, SUBP-37–38
+**Done when**: every catalog topic has a real page and hub card, entries awaiting
+clinical approval carry `robots: noindex` and stay out of the sitemap, and
+`npm run check` passes.
+**Verification**: 14 catalog entries across three groups; 3 indexable, 11
+awaiting clinician approval. 14 unit tests, lint, production build and 87
+Playwright checks passed across mobile, tablet and desktop; the SEO inventory
+still resolves to the 11 approved canonical routes.
+**Tests**: unit + e2e
+**Gate**: Build
+**Commit**: `feat(treatments): populate the catalog to procedure depth`
+
+**Publication gate**: `state: "published"` renders a page and links it from the
+hub; `indexable: true` is what admits it to the sitemap and removes the noindex
+directive. Clinical copy written for review therefore reaches the preview
+deployment without entering search results. Flipping a topic to `indexable: true`
+requires clinician approval of its copy; `state: "draft"` withdraws the page
+entirely.
+
 ## Diagram–Definition Cross-Check
 
 | Task | Depends On | Diagram Shows | Status |
