@@ -44,7 +44,7 @@ export default function LocationsPage() {
             </article>
           ))}
         </section>
-        <div className="mt-16 sm:mt-24">
+        <div className="mt-12 sm:mt-16">
           <AppointmentCta
             heading="Organize sua consulta presencial"
             body="A equipe confirma disponibilidade e orienta os próximos passos para atendimento em Campo Grande."

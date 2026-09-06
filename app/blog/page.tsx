@@ -84,7 +84,7 @@ export default function BlogPage() {
           </section>
         ) : null}
 
-        <div className="mt-16 sm:mt-24">
+        <div className="mt-12 sm:mt-16">
           <AppointmentCta
             heading="Tem dúvidas sobre o seu caso?"
             body="O conteúdo do blog é educativo. Para uma orientação individualizada, converse com a equipe e organize sua avaliação presencial."

@@ -42,7 +42,7 @@ export default function TreatmentsPage() {
           ))}
         </nav>
 
-        <div className="mt-12 space-y-14 sm:mt-16 sm:space-y-20">
+        <div className="mt-8 space-y-12 sm:mt-10 sm:space-y-16">
           {TREATMENT_GROUPS.map((group, groupIndex) => {
             const groupedTreatments = treatments.filter((item) => item.group === group.id);
             if (!groupedTreatments.length) return null;
@@ -67,7 +67,7 @@ export default function TreatmentsPage() {
           })}
         </div>
 
-        <div className="mt-16 sm:mt-24">
+        <div className="mt-12 sm:mt-16">
           <AppointmentCta
             heading="Converse com a equipe sobre sua avaliação"
             body="Atendimento presencial na Clínica Protrauma, em Campo Grande - MS. Leve seus exames anteriores para uma análise contextualizada."

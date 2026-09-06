@@ -212,7 +212,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
           </aside>
         </div>
 
-        <div className="mt-16 sm:mt-24">
+        <div className="mt-12 sm:mt-16">
           <AppointmentCta
             heading="Avalie seu caso com contexto e clareza"
             body="Converse com a equipe para organizar sua consulta presencial e saber quais exames levar."

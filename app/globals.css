@@ -144,8 +144,8 @@ button,
 }
 
 .page-intro {
-  max-width: 49rem;
-  padding-block: clamp(2.25rem, 7vw, 5rem);
+  max-width: 62rem;
+  padding-block: clamp(1.25rem, 3vw, 2rem) clamp(1.5rem, 4vw, 2.75rem);
 }
 
 .page-intro h1 {
@@ -160,7 +160,7 @@ button,
 
 .page-intro > p {
   margin-top: 1rem;
-  max-width: 43rem;
+  max-width: 46rem;
   color: #475569;
   font-size: clamp(1rem, 2.2vw, 1.125rem);
   line-height: 1.7;
@@ -328,6 +328,10 @@ button,
 
 .faq-list-dark .faq-plus {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.faq-list-dark .faq-answer a {
+  color: var(--accent-sky);
 }
 
 .author-card {

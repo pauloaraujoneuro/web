@@ -33,3 +33,14 @@ test("visible FAQ answer exactly matches structured data", async ({ page }) => {
 
   expect(schemaAnswer).toBe(visibleAnswer);
 });
+
+test("related links stay legible inside the dark FAQ panel", async ({ page }) => {
+  await page.goto("/perguntas-frequentes");
+  await page.getByText("Quando a cirurgia é indicada?", { exact: true }).click();
+
+  const colour = await page.evaluate(() => {
+    const link = document.querySelector(".faq-list-dark .faq-answer a");
+    return link ? getComputedStyle(link).color : null;
+  });
+  expect(colour).toBe("rgb(204, 231, 244)");
+});

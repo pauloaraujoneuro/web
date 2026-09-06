@@ -168,7 +168,7 @@ export default async function BlogArticlePage({ params }: Props) {
           <div className="detail-sidebar"><ArticleAside post={post} /></div>
         </div>
 
-        <div className="mt-16 sm:mt-24">
+        <div className="mt-12 sm:mt-16">
           <AppointmentCta
             heading="Uma avaliação considera o seu contexto"
             body="Organize seus exames e converse com a equipe para agendar uma consulta presencial em Campo Grande."
