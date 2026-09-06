@@ -6,18 +6,23 @@ import PageIntro from "@/app/components/content/PageIntro";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedPosts } from "@/app/lib/blog";
+import { isBlogHubIndexable } from "@/app/lib/seo";
 import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT, SITE_URL } from "@/constants";
 
 const title = "Conteúdo sobre neurocirurgia, coluna e nervos";
 const description =
   "Artigos educativos do Dr. Paulo Araújo sobre avaliação neurocirúrgica, nervos periféricos, coluna e recuperação funcional.";
 
-export const metadata: Metadata = {
-  title: "Blog e conteúdo educativo",
-  description,
-  alternates: { canonical: `${SITE_URL}/blog` },
-  openGraph: { title, description, url: `${SITE_URL}/blog`, images: ["/og/og-image.png"] },
-};
+export function generateMetadata(): Metadata {
+  const indexable = isBlogHubIndexable(getPublishedPosts());
+  return {
+    title: "Blog e conteúdo educativo",
+    description,
+    alternates: { canonical: `${SITE_URL}/blog` },
+    openGraph: { title, description, url: `${SITE_URL}/blog`, images: ["/og/og-image.png"] },
+    robots: indexable ? { index: true, follow: true } : { index: false, follow: true },
+  };
+}
 
 function formatDate(date: string) {
   return new Intl.DateTimeFormat("pt-BR", {

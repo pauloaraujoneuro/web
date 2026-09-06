@@ -76,7 +76,7 @@ export interface FaqItem {
 export const SITE_URL = "https://www.pauloaraujoneuro.com.br";
 
 // Brand Assets
-export const BRAND_LOGO_WORDMARK_INVERTED = "/logo-gray.webp";
+export const BRAND_LOGO_WORDMARK_INVERTED = "/logo-lettering-cropped.webp";
 export const BRAND_LOGO_HEADER = "/logo-lettering-cropped.webp";
 export const DOCTOR_PROFILE_IMAGE = "/pics/doutor-paulo-araujo-terno.webp";
 export const DOCTOR_PROFILE_IMAGE_FRONT =

@@ -34,9 +34,9 @@ export default function Footer() {
               <Image
                 src={BRAND_LOGO_WORDMARK_INVERTED}
                 alt="Marca Paulo Araújo"
-                width={560}
-                height={560}
-                className="h-auto w-full max-w-87.5 md:mx-auto md:max-w-75 xl:mx-0 xl:max-w-87.5"
+                width={700}
+                height={136}
+                className="h-auto w-full max-w-72 brightness-0 invert md:mx-auto xl:mx-0"
                 unoptimized
               />
 

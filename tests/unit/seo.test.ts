@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getPublicRouteInventory, getSitemapEntries } from "../../app/lib/seo";
+import { getPublicRouteInventory, getSitemapEntries, isBlogHubIndexable } from "../../app/lib/seo";
+import { getPublishedPosts } from "../../app/lib/blog";
 import { SITE_URL } from "../../constants";
 
 test("SEO inventory contains every and only published canonical route once", () => {
@@ -27,4 +28,13 @@ test("sitemap maps canonical URLs and content dates deterministically", () => {
   assert.equal(sitemap[0].url, SITE_URL);
   assert.equal(sitemap.at(-1)?.url, `${SITE_URL}/locais-de-atendimento/campo-grande`);
   assert.ok(sitemap.every((entry) => entry.lastModified === "2026-09-06"));
+});
+
+test("an empty blog is noindexable and omitted from public discovery", () => {
+  assert.equal(isBlogHubIndexable([]), false);
+  assert.equal(isBlogHubIndexable(getPublishedPosts()), true);
+  assert.equal(
+    getPublicRouteInventory([]).some((entry) => entry.path === "/blog" || entry.path.startsWith("/blog/")),
+    false,
+  );
 });

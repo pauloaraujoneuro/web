@@ -94,7 +94,7 @@ full-route navigation, reusable content primitives, and build/lint pass.
 **What**: Add `/tratamentos` and `/tratamentos/[slug]` from the canonical
 catalog, including related content, disclaimer, FAQ, author, and CTA.
 **Where**: `app/tratamentos/`, related content components
-**Depends on**: T4
+**Depends on**: T2
 **Requirement**: SUBP-10–14, SUBP-30–34, SUBP-37–38
 **Tools**: apply_patch; Skills: tlc-spec-driven, Next.js
 **Done when**: published treatments group/order correctly, representative detail
@@ -126,7 +126,7 @@ Markdown is semantic, and invalid/draft/unknown posts stay undiscoverable.
 **What**: Add `/sobre` using canonical identity, credentials, roles, formation,
 congress activity, and Campo Grande contextual CTA.
 **Where**: `app/sobre/page.tsx`
-**Depends on**: T5
+**Depends on**: T4
 **Requirement**: SUBP-06–09, SUBP-30, SUBP-34, SUBP-37
 **Tools**: apply_patch; Skills: tlc-spec-driven, Next.js
 **Done when**: profile has one H1, current/prior locations are unambiguous, and
@@ -169,6 +169,8 @@ deterministic sitemap covering exactly the indexable route inventory.
 
 ### T8: Verify and polish mobile-first behavior
 
+**Status**: Complete
+
 **What**: Add representative Playwright journeys and adjust only the responsive
 styles needed for 390px-first usability, keyboard access, and desktop scaling.
 **Where**: `tests/e2e/`, `playwright.config.ts`, `app/globals.css`, affected components
@@ -178,6 +180,10 @@ styles needed for 390px-first usability, keyboard access, and desktop scaling.
 react-best-practices
 **Done when**: routes pass at mobile/desktop widths, have no horizontal overflow,
 menus/accordions work by keyboard, CTAs remain usable, and `npm run check` passes.
+**Verification**: 11 unit tests passed; production build passed; 48 Playwright
+checks passed across mobile Chromium and desktop Chromium, with 2
+viewport-specific checks intentionally skipped. Full-page screenshots were
+reviewed at 390px and 1440px.
 **Tests**: e2e
 **Gate**: Build
 **Commit**: `test(subpages): verify responsive public journeys`

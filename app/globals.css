@@ -90,10 +90,9 @@ button,
 
 .skip-link {
   position: fixed;
-  left: 1rem;
-  top: 0.75rem;
+  left: -9999px;
+  top: 0;
   z-index: 100;
-  transform: translateY(-160%);
   border-radius: 0.75rem;
   background: white;
   padding: 0.75rem 1rem;
@@ -102,7 +101,8 @@ button,
 }
 
 .skip-link:focus {
-  transform: translateY(0);
+  left: 1rem;
+  top: 0.75rem;
 }
 
 .subpage-main {
@@ -181,6 +181,34 @@ button,
   background: var(--surface-white);
   padding: 1.25rem;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.035);
+}
+
+@media (hover: hover) {
+  .content-card,
+  .post-card,
+  .location-card,
+  .focus-grid article {
+    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .content-card:hover,
+  .post-card:hover,
+  .location-card:hover,
+  .focus-grid article:hover {
+    transform: translateY(-2px);
+    border-color: rgba(35, 62, 76, 0.28);
+    box-shadow: 0 14px 34px rgba(35, 62, 76, 0.09);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content-card,
+  .post-card,
+  .location-card,
+  .focus-grid article,
+  .faq-plus {
+    transition: none !important;
+  }
 }
 
 .card-link {

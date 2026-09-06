@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import type { NavigationItem } from "@/constants";
 import InstagramIcon from "@/app/components/icons/InstagramIcon";
@@ -25,6 +25,16 @@ export default function HeaderMobileMenu({
   const summaryRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
+  useEffect(() => {
+    const closeFromOutside = (event: PointerEvent) => {
+      if (detailsRef.current?.open && !detailsRef.current.contains(event.target as Node)) {
+        detailsRef.current.open = false;
+      }
+    };
+    document.addEventListener("pointerdown", closeFromOutside);
+    return () => document.removeEventListener("pointerdown", closeFromOutside);
+  }, []);
+
   const closeMenu = () => {
     if (detailsRef.current) {
       detailsRef.current.open = false;
@@ -44,7 +54,16 @@ export default function HeaderMobileMenu({
         <InstagramIcon className="h-4.5 w-4.5" />
       </a>
 
-      <details ref={detailsRef} className="mobile-menu relative">
+      <details
+        ref={detailsRef}
+        className="mobile-menu relative"
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && detailsRef.current?.open) {
+            event.preventDefault();
+            closeMenu();
+          }
+        }}
+      >
         <summary
           ref={summaryRef}
           className="mobile-menu-toggle icon-button flex h-11 w-11 list-none items-center justify-center cursor-pointer [&::-webkit-details-marker]:hidden"

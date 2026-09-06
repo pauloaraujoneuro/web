@@ -1,4 +1,11 @@
 import { DOCTOR_SUBTITLE, EXPERTISE_AREAS } from "@/constants";
+import Link from "next/link";
+
+const treatmentHrefByExpertiseId: Record<string, string> = {
+  "peripheral-nerves": "/tratamentos/cirurgia-nervos-perifericos",
+  spine: "/tratamentos/cirurgia-coluna",
+  rehabilitation: "/tratamentos/reabilitacao-neurocirurgica",
+};
 
 export default function ExpertiseSection() {
   return (
@@ -57,6 +64,9 @@ export default function ExpertiseSection() {
                       <li key={highlight}>{highlight}</li>
                     ))}
                   </ul>
+                  <Link className="mt-5 inline-flex min-h-12 items-center text-sm font-bold text-bg md:col-span-2" href={treatmentHrefByExpertiseId[area.id]}>
+                    Conhecer esta área <span aria-hidden className="ml-2">→</span>
+                  </Link>
                 </>
               ) : (
                 <>
@@ -74,6 +84,9 @@ export default function ExpertiseSection() {
                         <li key={highlight}>{highlight}</li>
                       ))}
                     </ul>
+                    <Link className="mt-5 inline-flex min-h-12 items-center text-sm font-bold text-bg" href={treatmentHrefByExpertiseId[area.id]}>
+                      Conhecer esta área <span aria-hidden className="ml-2">→</span>
+                    </Link>
                   </div>
                 </>
               )}
