@@ -39,6 +39,32 @@ test("robots and sitemap expose the same approved discovery boundary", async ({ 
   expect((xml.match(/<loc>/g) ?? []).length).toBe(expectedRoutes.length);
 });
 
+test("llms.txt exposes the same approved boundary as the sitemap", async ({ request }) => {
+  const response = await request.get("/llms.txt");
+  await expect(response).toBeOK();
+  expect(response.headers()["content-type"]).toContain("text/plain");
+
+  const body = await response.text();
+  expect(body.startsWith("# Dr. Paulo Araújo")).toBe(true);
+  expect(body).toContain("CRM-PR 37567");
+  for (const route of expectedRoutes) {
+    expect(body).toContain(`](https://www.pauloaraujoneuro.com.br${route}):`);
+  }
+  expect((body.match(/^- \[/gm) ?? []).length).toBe(expectedRoutes.length);
+  expect(body).not.toContain("/tratamentos/lesao-plexo-braquial");
+});
+
+test("robots names assistant crawlers explicitly", async ({ request }) => {
+  const robots = await request.get("/robots.txt");
+  await expect(robots).toBeOK();
+  const body = await robots.text();
+
+  for (const agent of ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended"]) {
+    expect(body).toContain(agent);
+  }
+  expect(body).toContain("Sitemap: https://www.pauloaraujoneuro.com.br/sitemap.xml");
+});
+
 test("core content and contact links remain usable without JavaScript", async ({ browser }) => {
   const context = await browser.newContext({
     baseURL: "http://127.0.0.1:3100",

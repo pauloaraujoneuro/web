@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getPublicRouteInventory, getSitemapEntries, isBlogHubIndexable } from "../../app/lib/seo";
+import { getLlmsTxt, getPublicRouteInventory, getSitemapEntries, isBlogHubIndexable } from "../../app/lib/seo";
 import { getPublishedPosts } from "../../app/lib/blog";
 import { getPublishedTreatments, getVisibleTreatments } from "../../app/lib/treatments";
 import { SITE_URL } from "../../constants";
@@ -31,6 +31,20 @@ test("sitemap maps canonical URLs and content dates deterministically", () => {
   assert.ok(sitemap.every((entry) => entry.lastModified === "2026-09-06"));
 });
 
+test("dated hubs inherit the freshest date of the content they list", () => {
+  const inventory = getPublicRouteInventory();
+  const dateFor = (path: string) =>
+    inventory.find((entry) => entry.path === path)?.lastModified;
+  const newestTreatment = inventory
+    .filter((entry) => entry.path.startsWith("/tratamentos/"))
+    .map((entry) => entry.lastModified)
+    .toSorted()
+    .at(-1);
+
+  assert.equal(dateFor("/tratamentos"), newestTreatment);
+  assert.ok(dateFor("")! >= newestTreatment!);
+});
+
 test("an empty blog is noindexable and omitted from public discovery", () => {
   assert.equal(isBlogHubIndexable([]), false);
   assert.equal(isBlogHubIndexable(getPublishedPosts()), true);
@@ -51,4 +65,21 @@ test("a treatment awaiting approval stays visible but out of public discovery", 
     getPublicRouteInventory().some((entry) => entry.path === "/tratamentos/lesao-plexo-braquial"),
     false,
   );
+});
+
+test("llms.txt lists exactly the approved routes, grouped by section", () => {
+  const inventory = getPublicRouteInventory();
+  const llms = getLlmsTxt(inventory);
+
+  for (const entry of inventory) {
+    assert.ok(
+      llms.includes(`](${SITE_URL}${entry.path}):`),
+      `missing ${entry.path}`,
+    );
+  }
+  assert.equal((llms.match(/^- \[/gm) ?? []).length, inventory.length);
+  assert.ok(!llms.includes("/tratamentos/lesao-plexo-braquial"));
+  for (const heading of ["## Páginas principais", "## Tratamentos", "## Artigos", "## Locais de atendimento"]) {
+    assert.ok(llms.includes(heading), `missing ${heading}`);
+  }
 });
