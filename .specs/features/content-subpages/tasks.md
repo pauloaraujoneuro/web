@@ -53,6 +53,8 @@ T7 → T8
 
 ### T1: Establish content and test foundation
 
+**Status**: Complete
+
 **What**: Add test tooling, Markdown dependencies, typed catalogs, publication
 filters, and build-time validation for treatments, posts, FAQs, and locations.
 **Where**: `package.json`, lockfile, `content/`, `app/lib/`, `tests/unit/`
