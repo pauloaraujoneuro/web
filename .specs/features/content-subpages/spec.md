@@ -170,7 +170,7 @@ building the underlying templates.
 | Architecture | Typed catalogs for treatments/FAQs/locations and Markdown for blog articles | Proven in the Dayara and Clínica Massoni reference sites and suitable for static SEO pages | Yes — direction accepted |
 | Epic output | Build complete reusable structures with representative seed content; defer the bulk content library | Keeps the epic structural while proving real end-to-end behavior | Yes |
 | Blog priority | `/blog` and `/blog/[slug]` are P1, not a later phase outside the epic | Explicitly requested | Yes |
-| Visual direction | Use Stitch explorations to extend Paulo's current Poppins typography, colors, header/footer, and restrained clinical language | This is page-system expansion, not a rebrand | Pending Stitch selection |
+| Visual direction | Adapt the supplied Stitch hierarchy and surface system while retaining Paulo's current Poppins typography, real logo/portrait, existing header/menu, and floating WhatsApp action | Captures the selected direction without importing generated HTML, fabricated facts, or unnecessary navigation changes | Yes |
 | Treatment publication | A detail page is indexable only after all required content fields are complete and approved | Prevents thin or placeholder medical pages |
 | Representative treatment seed | Use at least one approved entry to prove the production template; test fixtures prove unpublished and invalid states | Demonstrates the real route without forcing twelve articles of clinical copy into the structural epic | No |
 | Blog seed | Use at least one approved educational article if available; otherwise ship the blog hub as `noindex` with an intentional empty state and keep fixtures out of production discovery | An empty indexable content hub offers little search value | No |
@@ -519,6 +519,6 @@ Before Design begins, confirm or revise:
    an intentional empty state.
 2. Whether the provisional 12-treatment catalog should remain only a backlog in
    this epic or whether a defined subset must publish in the first release.
-3. The Stitch-selected visual direction while preserving the current brand.
+3. Any revision to the approved Stitch adaptation recorded in `context.md`.
 4. The conservative publication rules for clinical copy, contact details,
    credentials, offered services, street address, and map.
