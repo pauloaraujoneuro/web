@@ -1,6 +1,6 @@
 # SEO Subpage Foundation Epic — Specification
 
-**Status**: Draft — awaiting confirmation
+**Status**: Approved — implementation in progress
 
 **Created**: 2026-09-06
 

@@ -29,10 +29,10 @@
 ## Handoff
 
 - **Feature**: Paulo content subpages / `.specs/features/content-subpages/spec.md`
-- **Phase / Task**: Design — Stitch direction captured; test-stack decision required before Tasks/Execute
-- **Completed**: repository/reference audit, five-section route scope, three dynamic detail families, 49 acceptance requirements, implicit-requirement sweep, Stitch prompt and export review, implementation context, architecture design
-- **In-progress** (file:line): none
-- **Next step**: Confirm the proposed Node built-in unit + Playwright E2E test stack, create `tasks.md`, then implement the first shared-shell/component batch.
+- **Phase / Task**: Execute — T1 content and test foundation
+- **Completed**: specification, design, Stitch direction, test-stack decision, and eight-task execution plan
+- **In-progress** (file:line): `.specs/features/content-subpages/tasks.md:1`
+- **Next step**: Implement and verify T1, then continue sequentially through the approved eight-task batch.
 - **Blockers**: public Campo Grande WhatsApp/phone, MS credential display, and exact locally offered procedures require confirmation before production publication
 - **Uncommitted files**: pre-existing `app/layout.tsx`, `.agents/`, and `.claude/` are intentionally excluded from this feature
 - **Branch**: `docs/seo-subpage-foundation-spec`

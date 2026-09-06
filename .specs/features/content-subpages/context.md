@@ -179,3 +179,10 @@ dependencies or PR assets.
 - Interactive clinical timelines and metric dashboards.
 - Live maps before exact address and embed approval.
 - Full bulk treatment/article writing program.
+
+## Testing Decision
+
+- Use Node's built-in test runner through `tsx` for typed content and SEO logic.
+- Use Playwright for representative route, keyboard, and responsive journeys.
+- Prioritize visual and interaction coverage at a 390 px mobile viewport because
+  mobile accounts for approximately 90% of expected traffic.
