@@ -72,6 +72,8 @@ unit tests and lint pass.
 
 ### T2: Create shared subpage shell and content primitives
 
+**Status**: Complete
+
 **What**: Make global navigation route-aware and add the shared subpage shell,
 breadcrumbs, intro, cards, accordion, author, and appointment CTA primitives.
 **Where**: `app/components/`, `app/globals.css`, `constants.ts`

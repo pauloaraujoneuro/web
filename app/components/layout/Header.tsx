@@ -14,10 +14,10 @@ import Link from "next/link";
 
 export default function Header() {
   const hasExternalWhatsApp = CONTACT_WHATSAPP_URL.startsWith("https://");
-  const headerNavItems = NAV_ITEMS.filter((item) => item.href !== "#faq");
+  const headerNavItems = NAV_ITEMS;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-primary/10 bg-bg/96">
+    <header className="sticky top-0 z-50 border-b border-primary/10 bg-bg/96 backdrop-blur-xl">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-secondary/65 to-transparent" />
 
       <nav className="container-shell py-3">
@@ -46,7 +46,7 @@ export default function Header() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="icon-button h-10 w-10"
+              className="icon-button h-11 w-11"
               aria-label="Instagram"
             >
               <InstagramIcon className="h-4.5 w-4.5" />
