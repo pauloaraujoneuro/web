@@ -89,6 +89,8 @@ full-route navigation, reusable content primitives, and build/lint pass.
 
 ### T3: Implement treatment hub and detail template
 
+**Status**: Complete
+
 **What**: Add `/tratamentos` and `/tratamentos/[slug]` from the canonical
 catalog, including related content, disclaimer, FAQ, author, and CTA.
 **Where**: `app/tratamentos/`, related content components
