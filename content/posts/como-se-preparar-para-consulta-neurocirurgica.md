@@ -1,6 +1,7 @@
 ---
 slug: como-se-preparar-para-consulta-neurocirurgica
 state: published
+indexable: true
 title: Como se preparar para uma consulta neurocirúrgica
 metaDescription: Saiba quais informações e exames ajudam a tornar a primeira avaliação neurocirúrgica mais clara e produtiva.
 dek: Organizar a história dos sintomas e os exames anteriores ajuda a aproveitar melhor o encontro com o especialista.

@@ -107,6 +107,7 @@ export function validatePosts(posts: BlogPost[], treatmentSlugs: Set<string>) {
     if (!Array.isArray(post.relatedTreatmentSlugs)) fail(source, "relatedTreatmentSlugs", "must be an array");
     if (typeof post.featured !== "boolean") fail(source, "featured", "must be a boolean");
     if (!Number.isInteger(post.order)) fail(source, "order", "must be an integer");
+    if (typeof post.indexable !== "boolean") fail(source, "indexable", "must be a boolean");
     if (post.state === "published" && !post.body.trim()) fail(source, "body", "is required");
     for (const target of post.relatedTreatmentSlugs) {
       if (!treatmentSlugs.has(target)) {

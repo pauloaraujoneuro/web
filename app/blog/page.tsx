@@ -5,7 +5,7 @@ import Breadcrumb from "@/app/components/content/Breadcrumb";
 import PageIntro from "@/app/components/content/PageIntro";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
-import { getPublishedPosts } from "@/app/lib/blog";
+import { getPublishedPosts, getVisiblePosts } from "@/app/lib/blog";
 import { isBlogHubIndexable } from "@/app/lib/seo";
 import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT, SITE_URL } from "@/constants";
 
@@ -34,7 +34,7 @@ function formatDate(date: string) {
 }
 
 export default function BlogPage() {
-  const posts = getPublishedPosts();
+  const posts = getVisiblePosts();
   const featured = posts.find((post) => post.featured);
   const remaining = posts.filter((post) => post.slug !== featured?.slug);
 
@@ -56,7 +56,7 @@ export default function BlogPage() {
               <p>{featured.dek}</p>
               <div className="post-meta"><CalendarDays aria-hidden size={16} />{formatDate(featured.publishDate)}</div>
             </div>
-            <Link href={`/blog/${featured.slug}`}>
+            <Link className="btn-light" href={`/blog/${featured.slug}`}>
               Ler artigo
               <ArrowRight aria-hidden size={18} strokeWidth={1.5} />
             </Link>

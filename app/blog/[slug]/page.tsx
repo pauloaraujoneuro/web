@@ -9,7 +9,7 @@ import Breadcrumb, { type BreadcrumbItem } from "@/app/components/content/Breadc
 import JsonLd from "@/app/components/content/JsonLd";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
-import { getPublishedPost, getPublishedPosts } from "@/app/lib/blog";
+import { getVisiblePost, getVisiblePosts } from "@/app/lib/blog";
 import { getPublishedTreatments } from "@/app/lib/treatments";
 import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
@@ -46,18 +46,21 @@ function formatDate(date: string) {
 }
 
 export function generateStaticParams() {
-  return getPublishedPosts().map((post) => ({ slug: post.slug }));
+  return getVisiblePosts().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPublishedPost(slug);
+  const post = getVisiblePost(slug);
   if (!post) return { robots: { index: false, follow: true } };
   const url = `${SITE_URL}/blog/${post.slug}`;
   return {
     title: post.title,
     description: post.metaDescription,
     alternates: { canonical: url },
+    robots: post.indexable
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
     openGraph: {
       title: post.title,
       description: post.metaDescription,
@@ -71,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogArticlePage({ params }: Props) {
   const { slug } = await params;
-  const post = getPublishedPost(slug);
+  const post = getVisiblePost(slug);
   if (!post) notFound();
 
   const breadcrumbs: BreadcrumbItem[] = [

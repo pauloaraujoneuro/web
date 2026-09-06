@@ -71,7 +71,7 @@ Two independent flags decide how far an entry travels:
 
 Clinical copy is written as `published` + `indexable: false` so it can be
 reviewed on the deployment, then flipped to `indexable: true` once the clinician
-approves it.
+approves it. Treatments and blog articles both use this gate.
 
 ### Factual safety
 

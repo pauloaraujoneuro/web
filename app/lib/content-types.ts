@@ -74,6 +74,8 @@ export interface Location {
 export interface BlogFrontmatter {
   slug: string;
   state: PublicationState;
+  /** Same gate as treatments: a page can exist without entering search. */
+  indexable: boolean;
   title: string;
   metaDescription: string;
   dek: string;

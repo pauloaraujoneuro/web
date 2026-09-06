@@ -7,10 +7,22 @@ test("blog hub features a published article once", async ({ page }) => {
     "Conteúdo sobre neurocirurgia, coluna e nervos",
   );
   await expect(page.getByRole("heading", { level: 2, name: "Como se preparar para uma consulta neurocirúrgica" })).toHaveCount(1);
-  await expect(page.getByRole("link", { name: /Ler artigo/ })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: /Ler artigo/ }).first()).toHaveAttribute(
     "href",
     "/blog/como-se-preparar-para-consulta-neurocirurgica",
   );
+  await expect(page.locator(".post-card")).toHaveCount(3);
+});
+
+test("articles awaiting approval are listed but kept out of discovery", async ({ page, request }) => {
+  await page.goto("/blog/hernia-disco-lombar-quando-operar");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Hérnia de disco lombar");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).not.toContain("hernia-disco-lombar-quando-operar");
+  const llms = await (await request.get("/llms.txt")).text();
+  expect(llms).not.toContain("hernia-disco-lombar-quando-operar");
 });
 
 test("article renders markdown headings, attribution, disclaimer, and related links", async ({ page }) => {

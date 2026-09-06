@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getPublishedPost, getPublishedPosts } from "../../app/lib/blog";
+import { getPublishedPost, getPublishedPosts, getVisiblePosts } from "../../app/lib/blog";
 import { validatePosts, validateTreatmentPostReferences } from "../../app/lib/content-validation";
 import { TREATMENTS } from "../../app/lib/treatments";
 
@@ -32,4 +32,14 @@ test("treatment-to-article references use the live article catalog", () => {
     () => validateTreatmentPostReferences(TREATMENTS, new Set()),
     /treatments\.cirurgia-nervos-perifericos\.relatedPostSlugs: unknown target como-se-preparar-para-consulta-neurocirurgica/,
   );
+});
+
+test("articles awaiting approval stay visible but out of public discovery", () => {
+  const visible = getVisiblePosts().map((post) => post.slug);
+  const indexable = getPublishedPosts().map((post) => post.slug);
+
+  assert.ok(visible.length > indexable.length);
+  assert.ok(visible.includes("hernia-disco-lombar-quando-operar"));
+  assert.ok(!indexable.includes("hernia-disco-lombar-quando-operar"));
+  assert.ok(indexable.every((slug) => visible.includes(slug)));
 });

@@ -71,7 +71,8 @@ export function getAllPosts() {
   return posts;
 }
 
-export function getPublishedPosts() {
+/** Articles with a real page: rendered, listed on the hub and linked. */
+export function getVisiblePosts() {
   return getAllPosts()
     .filter((post) => post.state === "published")
     .toSorted(
@@ -80,6 +81,15 @@ export function getPublishedPosts() {
         a.order - b.order ||
         a.slug.localeCompare(b.slug),
     );
+}
+
+export function getVisiblePost(slug: string) {
+  return getVisiblePosts().find((post) => post.slug === slug);
+}
+
+/** The discovery surface: only these reach the sitemap and llms.txt. */
+export function getPublishedPosts() {
+  return getVisiblePosts().filter((post) => post.indexable);
 }
 
 export function getPublishedPost(slug: string) {
