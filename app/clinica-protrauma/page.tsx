@@ -51,6 +51,12 @@ export default function ClinicPage() {
           telephone: clinic.phone,
           image: `${SITE_URL}${clinic.imageSrc}`,
           hasMap: clinic.mapUrl,
+          openingHoursSpecification: clinic.openingHoursSpecification.map((entry) => ({
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: entry.days,
+            opens: entry.opens,
+            closes: entry.closes,
+          })),
           address: {
             "@type": "PostalAddress",
             streetAddress: `${clinic.streetAddress} - ${clinic.neighborhood}`,
@@ -117,6 +123,18 @@ export default function ClinicPage() {
               <MessageCircle aria-hidden size={16} strokeWidth={2} />
               Falar com a recepção
             </a>
+          </div>
+          <div>
+            <span className="card-eyebrow card-eyebrow-topic">Horários</span>
+            <ul className="clinic-hours">
+              {clinic.openingHours.map((entry) => (
+                <li key={entry.days}>
+                  <span>{entry.days}</span>
+                  <span>{entry.hours}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="clinic-hours-note">{clinic.openingHoursNote}</p>
           </div>
           <div>
             <span className="card-eyebrow card-eyebrow-topic">Na internet</span>

@@ -58,6 +58,7 @@ export const LOCATIONS: Location[] = [
     clinicSlug: protrauma.slug,
     streetAddress: fullAddress(protrauma),
     mapUrl: protrauma.mapUrl,
+    hours: `${protrauma.openingHours[0].days}, ${protrauma.openingHours[0].hours}`,
   },
 ];
 

@@ -65,6 +65,11 @@ export interface ClinicProfile {
   /** Query-based embed: a plain map with a pin, without the reviews panel. */
   mapEmbedUrl: string;
   socialLinks: Array<{ label: string; href: string }>;
+  openingHours: Array<{ days: string; hours: string }>;
+  /** Short caveat shown with the hours, e.g. holiday variation. */
+  openingHoursNote: string;
+  /** Machine-readable equivalent for schema.org. */
+  openingHoursSpecification: Array<{ days: string[]; opens: string; closes: string }>;
   imageSrc: string;
   imageAlt: string;
   lastModified: string;

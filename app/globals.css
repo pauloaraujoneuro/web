@@ -833,7 +833,6 @@ button,
 .bring-list p { color: #475569; font-size: 0.86rem; line-height: 1.55; }
 
 @media (min-width: 700px) {
-  .location-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .consultation-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .bring-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -922,6 +921,177 @@ button,
   line-height: 1.6;
 }
 
+.location-highlight {
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.35rem;
+  background: var(--surface-white);
+  box-shadow: 0 12px 34px rgba(35, 62, 76, 0.07);
+}
+
+.location-highlight-media {
+  position: relative;
+  background: var(--surface-subtle);
+}
+
+.location-highlight-media img {
+  display: block;
+  width: 100%;
+  height: clamp(11rem, 26vw, 17rem);
+  object-fit: cover;
+}
+
+.location-highlight-chip,
+.location-highlight-caption {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 0.4rem 0.8rem;
+  color: var(--primary);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+}
+
+.location-highlight-chip {
+  top: 0.9rem;
+  left: 0.9rem;
+}
+
+.location-highlight-chip::before {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.45rem;
+  border-radius: 999px;
+  background: var(--accent-green);
+  content: "";
+}
+
+.location-highlight-caption {
+  right: 0.9rem;
+  bottom: 0.9rem;
+  color: #475569;
+  font-size: 0.63rem;
+  letter-spacing: 0.09em;
+}
+
+.location-highlight-body {
+  padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+.location-highlight-body h2 {
+  color: var(--primary);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.location-highlight-lead {
+  margin-top: 0.6rem;
+  max-width: 44rem;
+  color: #475569;
+  line-height: 1.65;
+}
+
+.location-highlight-facts {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.35rem;
+}
+
+@media (min-width: 760px) {
+  .location-highlight-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.location-highlight-facts dt {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--primary);
+  font-size: 0.83rem;
+  font-weight: 700;
+}
+
+.location-highlight-facts dt svg {
+  color: var(--secondary);
+}
+
+.location-highlight-facts dd {
+  margin: 0.3rem 0 0;
+  color: #64748b;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.location-highlight-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.35rem;
+}
+
+.location-highlight-actions .btn-primary {
+  flex: 1 1 15rem;
+}
+
+.location-highlight-link {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.location-highlight-link svg {
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (hover: hover) {
+  .location-highlight-link:hover svg {
+    transform: translateX(3px);
+  }
+}
+
+.clinic-hours {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0;
+  list-style: none;
+}
+
+.clinic-hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: #475569;
+  font-size: 0.875rem;
+}
+
+.clinic-hours li span:first-child {
+  font-weight: 600;
+}
+
+.clinic-hours-note {
+  color: #64748b;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
 .clinic-photo {
   overflow: hidden;
   border: 1px solid var(--border-subtle);
@@ -944,7 +1114,13 @@ button,
 
 @media (min-width: 760px) {
   .clinic-facts {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .clinic-facts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

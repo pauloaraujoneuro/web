@@ -23,6 +23,19 @@ test("the clinic page carries the facility facts and structured data", async ({ 
     .find((value) => value["@type"] === "MedicalClinic");
   expect(clinic.address.postalCode).toBe("79020-300");
   expect(clinic.sameAs).toContain("https://www.instagram.com/protraumacampogrande/");
+  expect(clinic.openingHoursSpecification[0].opens).toBe("07:00");
+});
+
+test("the reception number appears on the clinic page only", async ({ page }) => {
+  await page.goto("/clinica-protrauma");
+  await expect(page.getByText("(67) 99912-0676")).toBeVisible();
+
+  // Everywhere else keeps the doctor's own number, so enquiries reach him.
+  for (const route of ["/", "/locais-de-atendimento", "/locais-de-atendimento/campo-grande"]) {
+    await page.goto(route);
+    await expect(page.getByText("99912-0676", { exact: false })).toHaveCount(0);
+    await expect(page.locator('a[href*="wa.me/556799120676"]')).toHaveCount(0);
+  }
 });
 
 test("the map is embedded lazily and without the reviews panel", async ({ page }) => {

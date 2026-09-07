@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
-import ContentCard from "@/app/components/content/ContentCard";
+import LocationHighlightCard from "@/app/components/content/LocationHighlightCard";
 import PageIntro from "@/app/components/content/PageIntro";
 import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedLocations } from "@/app/lib/locations";
+import { getClinic } from "@/app/lib/clinics";
 import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT, SITE_URL } from "@/constants";
 
 const title = "Locais de atendimento";
@@ -27,19 +28,14 @@ export default function LocationsPage() {
         <PageIntro
           eyebrow="Atendimento presencial"
           title="Onde encontrar o Dr. Paulo Araújo"
-          description="Confira o local de atendimento ativo e as orientações para organizar sua consulta. Endereço, mapa e horários só aparecem quando confirmados."
+          description="Confira o local de atendimento ativo, com endereço, horários e orientações para organizar sua consulta."
         />
         <section className="location-grid" aria-label="Locais ativos">
           {locations.map((location) => (
-            <ContentCard
+            <LocationHighlightCard
               key={location.slug}
-              chip="Atendimento ativo"
-              chipVariant="status"
-              headingLevel={2}
-              title={`${location.city} - ${location.state}`}
-              description={location.clinicName}
-              href={`/locais-de-atendimento/${location.slug}`}
-              actionLabel="Ver informações para a consulta"
+              location={location}
+              clinic={location.clinicSlug ? getClinic(location.clinicSlug) : undefined}
             />
           ))}
         </section>

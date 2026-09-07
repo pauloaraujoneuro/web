@@ -24,6 +24,19 @@ export const CLINICS: ClinicProfile[] = [
     mapUrl: "https://maps.app.goo.gl/WMUmV3pFGt4jbq768",
     mapEmbedUrl:
       "https://www.google.com/maps?q=R.%2015%20de%20Novembro%2C%202808%20-%20Jardim%20dos%20Estados%2C%20Campo%20Grande%20-%20MS%2C%2079020-300&output=embed",
+    openingHours: [
+      { days: "Segunda a sexta", hours: "07:00 às 19:00" },
+      { days: "Sábado e domingo", hours: "Fechado" },
+    ],
+    openingHoursNote:
+      "Os horários podem ser diferentes em feriados. Consultas acontecem mediante agendamento.",
+    openingHoursSpecification: [
+      {
+        days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "07:00",
+        closes: "19:00",
+      },
+    ],
     socialLinks: [
       { label: "Instagram", href: "https://www.instagram.com/protraumacampogrande/" },
       { label: "Facebook", href: "https://www.facebook.com/protrauma/" },
