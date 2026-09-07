@@ -88,6 +88,7 @@ export default function ClinicPage() {
             width={693}
             height={288}
             sizes="(min-width: 1024px) 60rem, 100vw"
+            quality={90}
             priority
           />
         </div>

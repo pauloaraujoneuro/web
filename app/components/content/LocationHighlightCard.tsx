@@ -32,9 +32,10 @@ export default function LocationHighlightCard({
             width={693}
             height={288}
             sizes="(min-width: 1024px) 62rem, 100vw"
+            quality={90}
           />
           <span className="location-highlight-chip">Atendimento ativo</span>
-          <span className="location-highlight-caption">Fachada · {clinic.name}</span>
+          <span className="location-highlight-caption">{clinic.name}</span>
         </div>
       ) : null}
 

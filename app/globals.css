@@ -941,6 +941,38 @@ button,
   object-fit: cover;
 }
 
+/*
+ * The source is 693px wide, so above roughly that width it is being upscaled.
+ * A slight blur and a small overscale hide the resampling artefacts; the scale
+ * keeps the blur from feathering the edges. Mobile renders near 1:1 and is left
+ * untouched.
+ */
+@media (min-width: 900px) {
+  .location-highlight-media img,
+  .clinic-photo img {
+    filter: blur(0.45px) saturate(1.06) contrast(1.02);
+    transform: scale(1.03);
+  }
+}
+
+.location-highlight-media::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 30, 38, 0.06) 0%,
+    rgba(15, 30, 38, 0) 38%,
+    rgba(15, 30, 38, 0.22) 100%
+  );
+  pointer-events: none;
+  content: "";
+}
+
+.location-highlight-chip,
+.location-highlight-caption {
+  z-index: 1;
+}
+
 .location-highlight-chip,
 .location-highlight-caption {
   position: absolute;
@@ -1068,6 +1100,7 @@ button,
 }
 
 .clinic-photo {
+  position: relative;
   overflow: hidden;
   border: 1px solid var(--border-subtle);
   border-radius: 1.25rem;
