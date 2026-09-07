@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("the clinic page carries the facility facts and structured data", async ({ page }) => {
-  await page.goto("/clinica-protrauma");
+  await page.goto("/clinica/protrauma");
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Clínica Protrauma em Campo Grande - MS",
@@ -28,7 +28,7 @@ test("the clinic page carries the facility facts and structured data", async ({ 
 });
 
 test("the reception number appears on the clinic page only", async ({ page }) => {
-  await page.goto("/clinica-protrauma");
+  await page.goto("/clinica/protrauma");
   await expect(page.getByText("(67) 99912-0676")).toBeVisible();
 
   // Everywhere else keeps the doctor's own number, so enquiries reach him.
@@ -40,7 +40,7 @@ test("the reception number appears on the clinic page only", async ({ page }) =>
 });
 
 test("the map is embedded lazily and without the reviews panel", async ({ page }) => {
-  await page.goto("/clinica-protrauma");
+  await page.goto("/clinica/protrauma");
 
   const frame = page.locator(".clinic-map iframe");
   await expect(frame).toHaveAttribute("loading", "lazy");
@@ -53,10 +53,10 @@ test("the clinic page is reachable from the hub, the footer and the site schema 
   await page.goto("/locais-de-atendimento");
   await expect(
     page.locator("footer").getByRole("link", { name: "Clínica Protrauma" }),
-  ).toHaveAttribute("href", "/clinica-protrauma");
+  ).toHaveAttribute("href", "/clinica/protrauma");
   await expect(
     page.locator(".location-highlight").getByRole("link", { name: /Sobre a Clínica Protrauma/ }),
-  ).toHaveAttribute("href", "/clinica-protrauma");
+  ).toHaveAttribute("href", "/clinica/protrauma");
 
   const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
   const graph = schemas.map((value) => JSON.parse(value)).find((value) => value["@graph"]);
@@ -69,7 +69,7 @@ test("the location page links to the clinic page and shows its map", async ({ pa
 
   await expect(page.getByRole("link", { name: /Ver contato e detalhes da clínica/ })).toHaveAttribute(
     "href",
-    "/clinica-protrauma",
+    "/clinica/protrauma",
   );
   await expect(page.locator(".clinic-map iframe")).toHaveCount(1);
 });

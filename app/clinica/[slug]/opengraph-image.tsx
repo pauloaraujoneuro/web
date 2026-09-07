@@ -6,17 +6,17 @@ export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
 export function generateStaticParams() {
-  return getVisibleClinics().map((clinic) => ({ clinicSlug: clinic.slug }));
+  return getVisibleClinics().map((clinic) => ({ slug: clinic.slug }));
 }
 
 export default async function Image({
   params,
 }: {
-  params: Promise<{ clinicSlug: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { clinicSlug } = await params;
-  const clinic = getVisibleClinic(clinicSlug);
-  if (!clinic) throw new Error(`clinics.${clinicSlug}: no published profile`);
+  const { slug } = await params;
+  const clinic = getVisibleClinic(slug);
+  if (!clinic) throw new Error(`clinics.${slug}: no published profile`);
   return renderOgImage({
     eyebrow: "Local de atendimento",
     title: `${clinic.name} em ${clinic.city} - ${clinic.state}`,

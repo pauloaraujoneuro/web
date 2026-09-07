@@ -26,8 +26,19 @@ export function getPublishedClinics(source = CLINICS) {
   return getVisibleClinics(source).filter((clinic) => clinic.indexable);
 }
 
+/**
+ * Clinic pages live under a static segment rather than at the site root: a
+ * root-level dynamic segment would claim every top-level path the site ever
+ * adds, and the slug alone ("protrauma") does not read as a URL on its own.
+ */
+export const CLINIC_PATH_PREFIX = "/clinica";
+
+export function clinicPath(clinic: ClinicProfile) {
+  return `${CLINIC_PATH_PREFIX}/${clinic.slug}`;
+}
+
 export function clinicUrl(clinic: ClinicProfile) {
-  return `${SITE_URL}/${clinic.slug}`;
+  return `${SITE_URL}${clinicPath(clinic)}`;
 }
 
 /**

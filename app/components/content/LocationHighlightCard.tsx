@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Clock, MapPin, Stethoscope } from "lucide-react";
 import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
 import type { ClinicProfile, Location } from "@/content/types";
-import { fullAddress } from "@/app/lib/clinics";
+import { clinicPath, fullAddress } from "@/app/lib/clinics";
 import { createWhatsAppUrl } from "@/constants";
 
 interface LocationHighlightCardProps {
@@ -90,7 +90,7 @@ export default function LocationHighlightCard({
             <ArrowRight aria-hidden size={17} strokeWidth={2} />
           </Link>
           {clinic ? (
-            <Link className="location-highlight-link" href={`/${clinic.slug}`}>
+            <Link className="location-highlight-link" href={clinicPath(clinic)}>
               Sobre a {clinic.name}
               <ArrowRight aria-hidden size={17} strokeWidth={2} />
             </Link>

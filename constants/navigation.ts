@@ -16,6 +16,6 @@ export const NAV_ITEMS: NavigationItem[] = [
  */
 export const FOOTER_NAV_ITEMS: NavigationItem[] = [
   ...NAV_ITEMS.slice(0, -1),
-  { href: "/clinica-protrauma", label: "Clínica Protrauma" },
+  { href: "/clinica/protrauma", label: "Clínica Protrauma" },
   NAV_ITEMS[NAV_ITEMS.length - 1],
 ];

@@ -13,6 +13,7 @@ import SiteShell from "@/app/components/layout/SiteShell";
 import { notFound } from "next/navigation";
 import {
   clinicEntityId,
+  clinicPath,
   clinicUrl,
   fullAddress,
   getVisibleClinic,
@@ -29,17 +30,17 @@ import {
   SITE_URL,
 } from "@/constants";
 
-type Props = { params: Promise<{ clinicSlug: string }> };
+type Props = { params: Promise<{ slug: string }> };
 
 /**
  * Clinic pages are built from the catalog that feeds the sitemap and llms.txt,
  * so a clinic can never be published into discovery without a route to land on.
  * Unknown slugs fall through to `notFound()` rather than to `dynamicParams:
  * false`, which answers correctly but logs an internal error for every stray
- * root-level URL a crawler tries.
+ * URL under `/clinica` a crawler tries.
  */
 export function generateStaticParams() {
-  return getVisibleClinics().map((clinic) => ({ clinicSlug: clinic.slug }));
+  return getVisibleClinics().map((clinic) => ({ slug: clinic.slug }));
 }
 
 function describe(clinic: ClinicProfile) {
@@ -50,22 +51,22 @@ function describe(clinic: ClinicProfile) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { clinicSlug } = await params;
-  const clinic = getVisibleClinic(clinicSlug);
+  const { slug } = await params;
+  const clinic = getVisibleClinic(slug);
   if (!clinic) return NOT_FOUND_METADATA;
   const { socialTitle, description } = describe(clinic);
   return buildPageMetadata({
     title: `${clinic.name} em ${clinic.city} - ${clinic.state}`,
     socialTitle,
     description,
-    path: `/${clinic.slug}`,
+    path: clinicPath(clinic),
     indexable: clinic.indexable,
   });
 }
 
 export default async function ClinicPage({ params }: Props) {
-  const { clinicSlug } = await params;
-  const clinic = getVisibleClinic(clinicSlug);
+  const { slug } = await params;
+  const clinic = getVisibleClinic(slug);
   if (!clinic) notFound();
   const pageUrl = clinicUrl(clinic);
   const location = getPublishedLocations().find(

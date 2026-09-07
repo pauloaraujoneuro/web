@@ -41,7 +41,7 @@ one running from an earlier build, kill it first or the run tests stale output.
 | `/blog`, `/blog/[slug]` | Markdown in `content/posts/` |
 | `/perguntas-frequentes` | `app/lib/faqs.ts` |
 | `/locais-de-atendimento`, `/locais-de-atendimento/[slug]` | `app/lib/locations.ts` |
-| `/[clinicSlug]` (e.g. `/clinica-protrauma`) | `content/clinics.ts` |
+| `/clinica/[slug]` (e.g. `/clinica/protrauma`) | `content/clinics.ts` |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | derived from `app/lib/seo.ts` |
 | `opengraph-image` (per route) | rendered by `app/lib/og.tsx` |
 

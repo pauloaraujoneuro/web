@@ -6,7 +6,7 @@ import type { ClinicProfile } from "@/content/types";
  */
 export const CLINICS: ClinicProfile[] = [
   {
-    slug: "clinica-protrauma",
+    slug: "protrauma",
     publicationState: "published",
     indexable: true,
     name: "Clínica Protrauma",

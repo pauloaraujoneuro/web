@@ -11,7 +11,7 @@ import { TREATMENTS } from "@/app/lib/treatments";
 import { getPublishedFaqs } from "@/app/lib/faqs";
 import { fullAddress, getVisibleClinic } from "@/app/lib/clinics";
 
-const protrauma = getVisibleClinic("clinica-protrauma");
+const protrauma = getVisibleClinic("protrauma");
 
 if (!protrauma) {
   throw new Error("locations.campo-grande: the Protrauma clinic profile is missing");

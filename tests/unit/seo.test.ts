@@ -33,7 +33,7 @@ test("SEO inventory contains every and only published canonical route once", () 
     "/blog/hernia-disco-lombar-quando-operar",
     "/blog/transferencia-nervosa-tetraplegia-maos",
     "/locais-de-atendimento/campo-grande",
-    "/clinica-protrauma",
+    "/clinica/protrauma",
   ]);
   assert.equal(new Set(paths).size, paths.length);
 });
@@ -42,7 +42,7 @@ test("sitemap maps canonical URLs and content dates deterministically", () => {
   const sitemap = getSitemapEntries();
   assert.equal(sitemap.length, 26);
   assert.equal(sitemap[0].url, SITE_URL);
-  assert.equal(sitemap.at(-1)?.url, `${SITE_URL}/clinica-protrauma`);
+  assert.equal(sitemap.at(-1)?.url, `${SITE_URL}/clinica/protrauma`);
   assert.ok(
     sitemap.every((entry) => /^\d{4}-\d{2}-\d{2}$/.test(String(entry.lastModified))),
   );

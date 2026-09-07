@@ -47,7 +47,7 @@ const SITE_KEYWORDS = [
   "Lesão de plexo braquial",
 ];
 
-const PRACTICE_CLINIC = getVisibleClinic("clinica-protrauma")!;
+const PRACTICE_CLINIC = getVisibleClinic("protrauma")!;
 
 const PHYSICIAN_AND_CLINIC_JSON_LD = {
   "@context": "https://schema.org",

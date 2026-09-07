@@ -145,7 +145,7 @@ test("location validation names unknown treatment references", () => {
 test("clinic validation rejects malformed facility facts", () => {
   assert.throws(
     () => validateClinics([{ ...CLINICS[0], postalCode: "79020300" }]),
-    /clinics\.clinica-protrauma\.postalCode: must be a Brazilian CEP/,
+    /clinics\.protrauma\.postalCode: must be a Brazilian CEP/,
   );
 
   assert.throws(
@@ -156,6 +156,6 @@ test("clinic validation rejects malformed facility facts", () => {
           openingHoursSpecification: [{ days: ["Monday"], opens: "19:00", closes: "07:00" }],
         },
       ]),
-    /clinics\.clinica-protrauma\.openingHoursSpecification: closes before it opens/,
+    /clinics\.protrauma\.openingHoursSpecification: closes before it opens/,
   );
 });

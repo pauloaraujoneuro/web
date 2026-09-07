@@ -26,7 +26,7 @@ const expectedRoutes = [
   "/blog/hernia-disco-lombar-quando-operar",
   "/blog/transferencia-nervosa-tetraplegia-maos",
   "/locais-de-atendimento/campo-grande",
-  "/clinica-protrauma",
+  "/clinica/protrauma",
 ];
 
 test("public routes expose exact unique canonical URLs", async ({ page }) => {
@@ -69,28 +69,33 @@ test("llms.txt exposes the same approved boundary as the sitemap", async ({ requ
 });
 
 /**
- * The clinic page is generated from the clinic catalog at the site root, so the
- * root namespace must stay closed: any other top-level path is a real 404, and
- * every clinic the sitemap advertises has a page behind it.
+ * The clinic page is generated from the clinic catalog under `/clinica`, so
+ * that namespace must stay closed: an unknown clinic slug is a real 404, and
+ * every clinic the sitemap advertises has a page behind it. The site root
+ * carries no dynamic segment, so a stray top-level path 404s as well.
  */
-test("catalog-driven clinic routes exist and the root namespace stays closed", async ({
+test("catalog-driven clinic routes exist and the clinic namespace stays closed", async ({
   page,
   request,
 }) => {
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  const clinicUrls = [...sitemap.matchAll(/<loc>https:\/\/www\.pauloaraujoneuro\.com\.br(\/[^/<]+)<\/loc>/g)]
-    .map((match) => match[1])
-    .filter((path) => path === "/clinica-protrauma");
-  expect(clinicUrls.length).toBe(1);
+  const clinicUrls = [
+    ...sitemap.matchAll(
+      /<loc>https:\/\/www\.pauloaraujoneuro\.com\.br(\/clinica\/[^<]+)<\/loc>/g,
+    ),
+  ].map((match) => match[1]);
+  expect(clinicUrls).toEqual(["/clinica/protrauma"]);
 
   for (const path of clinicUrls) {
     const response = await request.get(path);
     expect(response.status(), `${path} is in the sitemap without a page`).toBe(200);
   }
 
-  const unknown = await page.goto("/clinica-inexistente");
-  expect(unknown?.status()).toBe(404);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Página não encontrada");
+  for (const path of ["/clinica/inexistente", "/clinica-protrauma"]) {
+    const unknown = await page.goto(path);
+    expect(unknown?.status(), `${path} should not resolve`).toBe(404);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Página não encontrada");
+  }
 });
 
 test("robots names assistant crawlers explicitly", async ({ request }) => {

@@ -11,7 +11,7 @@ import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedLocation, getPublishedLocations } from "@/app/lib/locations";
 import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
-import { clinicEntityId, getVisibleClinic } from "@/app/lib/clinics";
+import { clinicEntityId, clinicPath, getVisibleClinic } from "@/app/lib/clinics";
 import { buildPageMetadata, NOT_FOUND_METADATA } from "@/app/lib/metadata";
 import { DOCTOR_CRM, DOCTOR_NAME, DOCTOR_RQE, SITE_URL } from "@/constants";
 
@@ -145,7 +145,7 @@ export default async function LocationDetailPage({ params }: Props) {
               <h2>Onde fica a {clinic.name}</h2>
               <p>
                 O atendimento acontece na {clinic.name}, em {clinic.neighborhood}.{" "}
-                <Link href={`/${clinic.slug}`}>Ver contato e detalhes da clínica</Link>.
+                <Link href={clinicPath(clinic)}>Ver contato e detalhes da clínica</Link>.
               </p>
             </div>
             <ClinicMap clinic={clinic} />

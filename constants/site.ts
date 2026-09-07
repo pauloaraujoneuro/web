@@ -115,7 +115,7 @@ export const PROFESSIONAL_ROLES: ProfessionalRole[] = [
     summary:
       "Atendimento em Campo Grande com foco em cirurgia de nervo periférico, coluna e reabilitação neurocirúrgica.",
     status: "active",
-    clinicSlug: "clinica-protrauma",
+    clinicSlug: "protrauma",
   },
   {
     id: "role-marcelino",
