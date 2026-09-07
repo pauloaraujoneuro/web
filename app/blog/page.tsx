@@ -4,27 +4,27 @@ import { ArrowRight, CalendarDays } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import PageIntro from "@/app/components/content/PageIntro";
 import ContentCard from "@/app/components/content/ContentCard";
-import AppointmentCta from "@/app/components/custom/AppointmentCta";
+import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
+import { buildPageMetadata } from "@/app/lib/metadata";
 import { getPublishedPosts, getVisiblePosts } from "@/app/lib/blog";
 import { getVisibleTreatments, TREATMENT_GROUPS } from "@/app/lib/treatments";
-import type { BlogPost } from "@/app/lib/content-types";
+import type { BlogPost } from "@/content/types";
 import { isBlogHubIndexable } from "@/app/lib/seo";
-import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT, SITE_URL } from "@/constants";
+import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT } from "@/constants";
 
 const title = "Conteúdo sobre neurocirurgia, coluna e nervos";
 const description =
   "Artigos educativos do Dr. Paulo Araújo sobre avaliação neurocirúrgica, nervos periféricos, coluna e recuperação funcional.";
 
 export function generateMetadata(): Metadata {
-  const indexable = isBlogHubIndexable(getPublishedPosts());
-  return {
+  return buildPageMetadata({
     title: "Blog e conteúdo educativo",
+    socialTitle: title,
     description,
-    alternates: { canonical: `${SITE_URL}/blog` },
-    openGraph: { title, description, url: `${SITE_URL}/blog` },
-    robots: indexable ? { index: true, follow: true } : { index: false, follow: true },
-  };
+    path: "/blog",
+    indexable: isBlogHubIndexable(getPublishedPosts()),
+  });
 }
 
 /** The chip names the area an article belongs to, via its related treatments. */

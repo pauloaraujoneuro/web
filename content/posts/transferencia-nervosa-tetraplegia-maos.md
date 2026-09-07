@@ -1,10 +1,10 @@
 ---
 slug: transferencia-nervosa-tetraplegia-maos
 state: published
-indexable: false
-title: "Transferência nervosa na tetraplegia: recuperar movimentos das mãos"
-metaDescription: Entenda como a transferência nervosa busca devolver movimentos do membro superior após lesão medular cervical.
-dek: A cirurgia aproveita nervos preservados acima da lesão para reativar movimentos escolhidos junto com o paciente.
+indexable: true
+title: "Transferência nervosa na tetraplegia: como a cirurgia é planejada"
+metaDescription: Entenda como a transferência nervosa é avaliada e planejada para buscar ganhos de movimento no membro superior após lesão medular cervical.
+dek: A cirurgia aproveita nervos preservados acima da lesão para trabalhar movimentos escolhidos junto com o paciente.
 publishDate: 2026-09-03
 lastModified: 2026-09-03
 primaryKeyword: transferência nervosa em tetraplegia
@@ -27,7 +27,7 @@ Após uma lesão medular cervical, parte das vias nervosas acima do nível da le
 
 ## Movimentos escolhidos, não recuperação da lesão
 
-O objetivo não é reverter a lesão medular. É devolver movimentos específicos que ampliam a autonomia — normalmente aqueles com maior impacto nas atividades diárias, como a extensão do cotovelo e a preensão da mão.
+O objetivo não é reverter a lesão medular. É buscar ganhos em movimentos específicos que podem ampliar a autonomia — normalmente aqueles com maior impacto nas atividades diárias, como a extensão do cotovelo e a preensão da mão. Os resultados variam conforme o caso.
 
 Esses alvos são definidos junto com o paciente antes da cirurgia, a partir do que já funciona e do que faria mais diferença na rotina.
 

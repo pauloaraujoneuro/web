@@ -16,6 +16,7 @@ function PhoneIcon() {
       stroke="currentColor"
       strokeWidth="1.8"
       className="h-5 w-5"
+      aria-hidden="true"
     >
       <path d="M5 4h3l1 5-2.2 1.6a15.8 15.8 0 0 0 6.6 6.6L15 15l5 1v3a1 1 0 0 1-1 1h-1c-7.7 0-14-6.3-14-14V5a1 1 0 0 1 1-1Z" />
     </svg>
@@ -30,6 +31,7 @@ function MailIcon() {
       stroke="currentColor"
       strokeWidth="1.8"
       className="h-5 w-5"
+      aria-hidden="true"
     >
       <path d="M4 6h16v12H4z" />
       <path d="m4 8 8 5 8-5" />

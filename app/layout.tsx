@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { getClinic } from "@/app/lib/clinics";
+import { clinicEntityId, clinicUrl, getVisibleClinic } from "@/app/lib/clinics";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleTagManager } from "@next/third-parties/google";
 import {
   ANALYTICS_ENABLED,
-  CLINIC_NAME,
   CONTACT_EMAIL,
   CONTACT_PHONE,
   DOCTOR_CRM,
@@ -48,7 +47,7 @@ const SITE_KEYWORDS = [
   "Lesão de plexo braquial",
 ];
 
-const PRACTICE_CLINIC = getClinic("clinica-protrauma")!;
+const PRACTICE_CLINIC = getVisibleClinic("clinica-protrauma")!;
 
 const PHYSICIAN_AND_CLINIC_JSON_LD = {
   "@context": "https://schema.org",
@@ -63,6 +62,7 @@ const PHYSICIAN_AND_CLINIC_JSON_LD = {
       medicalSpecialty: ["Neurosurgery"],
       telephone: CONTACT_PHONE,
       email: CONTACT_EMAIL,
+      worksFor: { "@id": clinicEntityId(PRACTICE_CLINIC) },
       areaServed: SERVICE_LOCATIONS.map((location) => ({
         "@type": "City",
         name: location.city,
@@ -95,11 +95,14 @@ const PHYSICIAN_AND_CLINIC_JSON_LD = {
         },
       ],
     },
+    // The facility is one entity site-wide. Its canonical node lives on the
+    // clinic page; the site graph points at the same `@id` so the address is
+    // never described twice under two different identifiers.
     {
       "@type": "MedicalClinic",
-      "@id": `${SITE_URL}#clinic`,
-      name: CLINIC_NAME,
-      url: SITE_URL,
+      "@id": clinicEntityId(PRACTICE_CLINIC),
+      name: PRACTICE_CLINIC.name,
+      url: clinicUrl(PRACTICE_CLINIC),
       telephone: CONTACT_PHONE,
       email: CONTACT_EMAIL,
       medicalSpecialty: ["Neurosurgery"],

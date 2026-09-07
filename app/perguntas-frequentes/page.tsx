@@ -3,8 +3,9 @@ import Breadcrumb from "@/app/components/content/Breadcrumb";
 import FaqAccordion from "@/app/components/content/FaqAccordion";
 import JsonLd from "@/app/components/content/JsonLd";
 import PageIntro from "@/app/components/content/PageIntro";
-import AppointmentCta from "@/app/components/custom/AppointmentCta";
+import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
+import { buildPageMetadata } from "@/app/lib/metadata";
 import { FAQ_CATEGORIES, getPublishedFaqs } from "@/app/lib/faqs";
 import { CONTACT_WHATSAPP_FAQ_TEXT, SITE_URL } from "@/constants";
 
@@ -12,16 +13,11 @@ const title = "Perguntas frequentes";
 const description =
   "Respostas gerais sobre consulta, tratamentos e atendimento neurocirúrgico com o Dr. Paulo Araújo em Campo Grande.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title,
   description,
-  alternates: { canonical: `${SITE_URL}/perguntas-frequentes` },
-  openGraph: {
-    title,
-    description,
-    url: `${SITE_URL}/perguntas-frequentes`,
-  },
-};
+  path: "/perguntas-frequentes",
+});
 
 export default function FrequentlyAskedQuestionsPage() {
   const faqs = getPublishedFaqs();

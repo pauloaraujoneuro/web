@@ -1,5 +1,5 @@
 import { FAQ_ITEMS as HOME_FAQS } from "@/constants";
-import type { FaqItem } from "@/app/lib/content-types";
+import type { FaqItem } from "@/content/types";
 import { getPublishedTreatments } from "@/app/lib/treatments";
 
 export const FAQ_CATEGORIES: Record<FaqItem["category"], string> = {
@@ -47,8 +47,8 @@ function classifyHomeFaqs(): FaqItem[] {
  * `/perguntas-frequentes` is indexable, and unapproved answers must not reach it
  * through the back door.
  */
-function treatmentFaqs(): FaqItem[] {
-  return getPublishedTreatments().flatMap((treatment, treatmentIndex) =>
+export function treatmentFaqs(treatments = getPublishedTreatments()): FaqItem[] {
+  return treatments.flatMap((treatment, treatmentIndex) =>
     treatment.faqs
       .filter((faq) => faq.state === "published")
       .map((faq, faqIndex) => ({

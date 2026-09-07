@@ -1,5 +1,5 @@
-import type { Treatment } from "@/app/lib/content-types";
-import { sharedFaq } from "@/app/content/treatments/shared";
+import type { Treatment } from "@/content/types";
+import { sharedFaq } from "@/content/treatments/shared";
 
 /** Spine topics. */
 export const SPINE_TREATMENTS: Treatment[] = [
@@ -63,7 +63,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
   {
     slug: "hernia-disco",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "spine",
     kind: "condition",
     title: "Hérnia de disco",
@@ -139,7 +139,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
   {
     slug: "estenose-canal-vertebral",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "spine",
     kind: "condition",
     title: "Estenose do canal vertebral",
@@ -215,7 +215,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
   {
     slug: "mielopatia-cervical",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "spine",
     kind: "condition",
     title: "Mielopatia cervical",
@@ -291,7 +291,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
   {
     slug: "fraturas-coluna",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "spine",
     kind: "condition",
     title: "Fraturas da coluna",

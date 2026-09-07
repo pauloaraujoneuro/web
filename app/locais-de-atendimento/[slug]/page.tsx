@@ -7,11 +7,12 @@ import ClinicMap from "@/app/components/content/ClinicMap";
 import RelatedLinks from "@/app/components/content/RelatedLinks";
 import FaqAccordion from "@/app/components/content/FaqAccordion";
 import JsonLd from "@/app/components/content/JsonLd";
-import AppointmentCta from "@/app/components/custom/AppointmentCta";
+import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedLocation, getPublishedLocations } from "@/app/lib/locations";
 import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
-import { getClinic } from "@/app/lib/clinics";
+import { clinicEntityId, getVisibleClinic } from "@/app/lib/clinics";
+import { buildPageMetadata, NOT_FOUND_METADATA } from "@/app/lib/metadata";
 import { DOCTOR_CRM, DOCTOR_NAME, DOCTOR_RQE, SITE_URL } from "@/constants";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -23,25 +24,19 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const location = getPublishedLocation(slug);
-  if (!location) return { robots: { index: false, follow: true } };
-  const url = `${SITE_URL}/locais-de-atendimento/${location.slug}`;
-  return {
+  if (!location) return NOT_FOUND_METADATA;
+  return buildPageMetadata({
     title: location.metaTitle,
     description: location.metaDescription,
-    alternates: { canonical: url },
-    openGraph: {
-      title: location.metaTitle,
-      description: location.metaDescription,
-      url,
-    },
-  };
+    path: `/locais-de-atendimento/${location.slug}`,
+  });
 }
 
 export default async function LocationDetailPage({ params }: Props) {
   const { slug } = await params;
   const location = getPublishedLocation(slug);
   if (!location) notFound();
-  const clinic = location.clinicSlug ? getClinic(location.clinicSlug) : undefined;
+  const clinic = location.clinicSlug ? getVisibleClinic(location.clinicSlug) : undefined;
   const pageUrl = `${SITE_URL}/locais-de-atendimento/${location.slug}`;
   const breadcrumbs: BreadcrumbItem[] = [
     { name: "Início", href: "/" },
@@ -57,24 +52,24 @@ export default async function LocationDetailPage({ params }: Props) {
       <JsonLd data={{
         "@context": "https://schema.org",
         "@graph": [
+          // This page answers the patient-journey question; the facility itself
+          // is described once, on the clinic page. Referencing that `@id` keeps
+          // a single MedicalClinic entity for the address instead of minting a
+          // competing one on every page that mentions it.
           {
-            "@type": "MedicalClinic",
-            "@id": `${pageUrl}#clinic`,
-            name: location.clinicName,
+            "@type": "MedicalWebPage",
+            "@id": pageUrl,
             url: pageUrl,
-            email: location.email,
-            telephone: location.phone,
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: location.city,
-              addressRegion: location.state,
-              streetAddress: location.streetAddress,
-              addressCountry: "BR",
-            },
-            employee: {
+            name: location.metaTitle,
+            description: location.metaDescription,
+            inLanguage: "pt-BR",
+            lastReviewed: location.lastModified,
+            ...(clinic ? { about: { "@id": clinicEntityId(clinic) } } : {}),
+            author: {
               "@type": "Physician",
               name: `Dr. ${DOCTOR_NAME}`,
               identifier: [DOCTOR_CRM, DOCTOR_RQE],
+              url: `${SITE_URL}/sobre`,
             },
           },
           {

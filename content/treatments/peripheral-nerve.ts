@@ -1,5 +1,5 @@
-import type { Treatment } from "@/app/lib/content-types";
-import { sharedFaq } from "@/app/content/treatments/shared";
+import type { Treatment } from "@/content/types";
+import { sharedFaq } from "@/content/treatments/shared";
 
 /** Peripheral nerve and brachial plexus topics. */
 export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
@@ -65,7 +65,7 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
   {
     slug: "lesao-plexo-braquial",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "peripheral-nerve",
     kind: "condition",
     title: "Lesão do plexo braquial",
@@ -126,7 +126,7 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
       sharedFaq(
         "plexo-quando-procurar",
         "Quando devo procurar um especialista após o trauma?",
-        "O quanto antes. O intervalo entre a lesão e a avaliação influencia as condutas disponíveis, por isso a consulta não deve ser adiada enquanto se aguarda uma recuperação espontânea.",
+        "Procure avaliação quando houver perda de força ou de sensibilidade que não melhora, dor intensa persistente ou dúvida sobre a evolução. O intervalo entre a lesão e a avaliação pode influenciar as condutas disponíveis, e esse prazo é discutido caso a caso.",
       ),
       sharedFaq(
         "plexo-exames",
@@ -148,12 +148,12 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
   {
     slug: "transferencia-nervosa-tetraplegia",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "peripheral-nerve",
     kind: "procedure",
     title: "Transferência nervosa em tetraplegia",
     shortDescription:
-      "Cirurgia que redireciona nervos preservados para recuperar movimentos úteis do membro superior.",
+      "Cirurgia que redireciona nervos preservados para buscar ganhos em movimentos do membro superior.",
     primaryIntent: "saber quem pode ser avaliado para transferência nervosa em tetraplegia",
     metaTitle: "Transferência nervosa em tetraplegia | Campo Grande",
     metaDescription:
@@ -165,7 +165,7 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
         id: "o-que-e",
         heading: "O que é a transferência nervosa",
         paragraphs: [
-          "Um nervo com função preservada e considerado dispensável é conectado ao nervo do músculo que se deseja reativar. O objetivo é devolver movimentos específicos, escolhidos junto com o paciente.",
+          "Um nervo com função preservada e considerado dispensável é conectado ao nervo do músculo que se pretende reinervar. O objetivo é buscar ganhos em movimentos específicos, escolhidos junto com o paciente.",
           "Os alvos mais frequentes são movimentos que impactam diretamente o dia a dia, como a extensão do cotovelo e a preensão da mão.",
         ],
       },
@@ -213,7 +213,7 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
       sharedFaq(
         "tetraplegia-resultado",
         "A cirurgia devolve todos os movimentos?",
-        "Não. O objetivo é recuperar movimentos específicos, definidos antes da cirurgia, que ampliem a autonomia nas atividades diárias.",
+        "Não. O objetivo é trabalhar movimentos específicos, definidos antes da cirurgia, que possam ampliar a autonomia nas atividades diárias. Os resultados variam conforme o caso e são discutidos individualmente.",
       ),
     ],
     relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "reabilitacao-neurocirurgica"],
@@ -225,7 +225,7 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
   {
     slug: "sindrome-tunel-carpo",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "peripheral-nerve",
     kind: "condition",
     title: "Síndrome do túnel do carpo",
@@ -301,7 +301,7 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
   {
     slug: "sindrome-cubital",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "peripheral-nerve",
     kind: "condition",
     title: "Síndrome do túnel cubital",
@@ -377,7 +377,7 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
   {
     slug: "sindrome-tunel-tarso",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "peripheral-nerve",
     kind: "condition",
     title: "Síndrome do túnel do tarso",

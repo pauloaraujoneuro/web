@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import type { BlogFrontmatter, BlogPost } from "@/app/lib/content-types";
-import { getPublishedTreatments } from "@/app/lib/treatments";
+import type { BlogFrontmatter, BlogPost } from "@/content/types";
+import { TREATMENTS } from "@/app/lib/treatments";
 import {
   validatePosts,
   validateTreatmentPostReferences,
@@ -60,14 +60,8 @@ export function getAllPosts() {
     .filter((filename) => filename.endsWith(".md"))
     .toSorted()
     .map(parsePost);
-  validatePosts(
-    posts,
-    new Set(getPublishedTreatments().map((treatment) => treatment.slug)),
-  );
-  validateTreatmentPostReferences(
-    getPublishedTreatments(),
-    new Set(posts.map((post) => post.slug)),
-  );
+  validatePosts(posts, TREATMENTS);
+  validateTreatmentPostReferences(TREATMENTS, posts);
   return posts;
 }
 

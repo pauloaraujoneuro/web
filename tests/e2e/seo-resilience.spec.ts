@@ -10,7 +10,21 @@ const expectedRoutes = [
   "/tratamentos/cirurgia-nervos-perifericos",
   "/tratamentos/cirurgia-coluna",
   "/tratamentos/reabilitacao-neurocirurgica",
+  "/tratamentos/lesao-plexo-braquial",
+  "/tratamentos/transferencia-nervosa-tetraplegia",
+  "/tratamentos/sindrome-tunel-carpo",
+  "/tratamentos/sindrome-cubital",
+  "/tratamentos/sindrome-tunel-tarso",
+  "/tratamentos/hernia-disco",
+  "/tratamentos/estenose-canal-vertebral",
+  "/tratamentos/mielopatia-cervical",
+  "/tratamentos/fraturas-coluna",
+  "/tratamentos/reeducacao-cortical-biofeedback",
+  "/tratamentos/orteses-dinamicas",
   "/blog/como-se-preparar-para-consulta-neurocirurgica",
+  "/blog/lesao-plexo-braquial-quando-operar",
+  "/blog/hernia-disco-lombar-quando-operar",
+  "/blog/transferencia-nervosa-tetraplegia-maos",
   "/locais-de-atendimento/campo-grande",
   "/clinica-protrauma",
 ];
@@ -52,7 +66,31 @@ test("llms.txt exposes the same approved boundary as the sitemap", async ({ requ
     expect(body).toContain(`](https://www.pauloaraujoneuro.com.br${route}):`);
   }
   expect((body.match(/^- \[/gm) ?? []).length).toBe(expectedRoutes.length);
-  expect(body).not.toContain("/tratamentos/lesao-plexo-braquial");
+});
+
+/**
+ * The clinic page is generated from the clinic catalog at the site root, so the
+ * root namespace must stay closed: any other top-level path is a real 404, and
+ * every clinic the sitemap advertises has a page behind it.
+ */
+test("catalog-driven clinic routes exist and the root namespace stays closed", async ({
+  page,
+  request,
+}) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  const clinicUrls = [...sitemap.matchAll(/<loc>https:\/\/www\.pauloaraujoneuro\.com\.br(\/[^/<]+)<\/loc>/g)]
+    .map((match) => match[1])
+    .filter((path) => path === "/clinica-protrauma");
+  expect(clinicUrls.length).toBe(1);
+
+  for (const path of clinicUrls) {
+    const response = await request.get(path);
+    expect(response.status(), `${path} is in the sitemap without a page`).toBe(200);
+  }
+
+  const unknown = await page.goto("/clinica-inexistente");
+  expect(unknown?.status()).toBe(404);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Página não encontrada");
 });
 
 test("robots names assistant crawlers explicitly", async ({ request }) => {

@@ -15,15 +15,18 @@ test("blog hub features a published article once", async ({ page }) => {
   await expect(page.locator(".post-grid .card-eyebrow-topic").first()).toHaveText("Nervo periférico");
 });
 
-test("articles awaiting approval are listed but kept out of discovery", async ({ page, request }) => {
+test("every listed article is open to search and present in both discovery files", async ({ page, request }) => {
   await page.goto("/blog/hernia-disco-lombar-quando-operar");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Hérnia de disco lombar");
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  await expect(page.locator('meta[name="robots"]')).not.toHaveAttribute(
+    "content",
+    /noindex/,
+  );
 
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  expect(sitemap).not.toContain("hernia-disco-lombar-quando-operar");
+  expect(sitemap).toContain("hernia-disco-lombar-quando-operar");
   const llms = await (await request.get("/llms.txt")).text();
-  expect(llms).not.toContain("hernia-disco-lombar-quando-operar");
+  expect(llms).toContain("hernia-disco-lombar-quando-operar");
 });
 
 test("article renders markdown headings, attribution, disclaimer, and related links", async ({ page }) => {
@@ -33,7 +36,7 @@ test("article renders markdown headings, attribution, disclaimer, and related li
   await expect(page.locator(".markdown-body").getByRole("heading", { level: 2 })).toHaveCount(4);
   await expect(page.getByLabel("Autoria médica")).toContainText("CRM-PR 37567");
   await expect(page.getByText("Aviso de responsabilidade médica")).toBeVisible();
-  await expect(page.getByRole("navigation", { name: "Índice do artigo" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Nesta leitura" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Cirurgia de nervos periféricos" })).toHaveAttribute("href", "/tratamentos/cirurgia-nervos-perifericos");
 });
 

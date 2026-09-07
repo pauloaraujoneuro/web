@@ -8,9 +8,10 @@ import FaqAccordion from "@/app/components/content/FaqAccordion";
 import JsonLd from "@/app/components/content/JsonLd";
 import RelatedLinks from "@/app/components/content/RelatedLinks";
 import SectionToc from "@/app/components/content/SectionToc";
-import AppointmentCta from "@/app/components/custom/AppointmentCta";
+import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedPosts } from "@/app/lib/blog";
+import { buildPageMetadata, NOT_FOUND_METADATA } from "@/app/lib/metadata";
 import {
   getVisibleTreatment,
   getVisibleTreatments,
@@ -33,22 +34,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const treatment = getVisibleTreatment(slug);
-  if (!treatment) return { robots: { index: false, follow: true } };
-  const url = `${SITE_URL}/tratamentos/${treatment.slug}`;
-  return {
+  if (!treatment) return NOT_FOUND_METADATA;
+  return buildPageMetadata({
     title: treatment.metaTitle,
     description: treatment.metaDescription,
-    alternates: { canonical: url },
-    robots: treatment.indexable
-      ? { index: true, follow: true }
-      : { index: false, follow: true },
-    openGraph: {
-      title: treatment.metaTitle,
-      description: treatment.metaDescription,
-      url,
-      type: "article",
-    },
-  };
+    path: `/tratamentos/${treatment.slug}`,
+    indexable: treatment.indexable,
+    openGraph: { type: "article", modifiedTime: treatment.lastModified },
+  });
 }
 
 export default async function TreatmentDetailPage({ params }: Props) {
@@ -75,19 +68,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
         data={{
           "@context": "https://schema.org",
           "@graph": [
-            {
-              "@type": "MedicalWebPage",
-              "@id": pageUrl,
-              url: pageUrl,
-              name: treatment.title,
-              description: treatment.metaDescription,
-              lastReviewed: treatment.lastModified,
-              author: {
-                "@type": "Physician",
-                name: `Dr. ${DOCTOR_NAME}`,
-                identifier: [DOCTOR_CRM, DOCTOR_RQE],
-              },
-            },
+            // Navigational only, so it stays on every visible page.
             {
               "@type": "BreadcrumbList",
               itemListElement: breadcrumbs.map((item, index) => ({
@@ -97,14 +78,36 @@ export default async function TreatmentDetailPage({ params }: Props) {
                 item: item.href ? `${SITE_URL}${item.href}` : pageUrl,
               })),
             },
-            {
-              "@type": "FAQPage",
-              mainEntity: treatment.faqs.map((faq) => ({
-                "@type": "Question",
-                name: faq.question,
-                acceptedAnswer: { "@type": "Answer", text: faq.answer },
-              })),
-            },
+            // Clinical structured data is an approval boundary, not a ranking
+            // one: copy still awaiting sign-off never describes itself to
+            // search engines or assistants as reviewed medical content.
+            ...(treatment.indexable
+              ? [
+                  {
+                    "@type": "MedicalWebPage",
+                    "@id": pageUrl,
+                    url: pageUrl,
+                    name: treatment.title,
+                    description: treatment.metaDescription,
+                    inLanguage: "pt-BR",
+                    lastReviewed: treatment.lastModified,
+                    author: {
+                      "@type": "Physician",
+                      name: `Dr. ${DOCTOR_NAME}`,
+                      identifier: [DOCTOR_CRM, DOCTOR_RQE],
+                      url: `${SITE_URL}/sobre`,
+                    },
+                  },
+                  {
+                    "@type": "FAQPage",
+                    mainEntity: treatment.faqs.map((faq) => ({
+                      "@type": "Question",
+                      name: faq.question,
+                      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+                    })),
+                  },
+                ]
+              : []),
           ],
         }}
       />

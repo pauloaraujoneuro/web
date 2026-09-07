@@ -4,21 +4,21 @@ import { ArrowDown } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import PageIntro from "@/app/components/content/PageIntro";
 import TreatmentCard from "@/app/components/content/TreatmentCard";
-import AppointmentCta from "@/app/components/custom/AppointmentCta";
+import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
+import { buildPageMetadata } from "@/app/lib/metadata";
 import { getVisibleTreatments, TREATMENT_GROUPS } from "@/app/lib/treatments";
-import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT, SITE_URL } from "@/constants";
+import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT } from "@/constants";
 
 const title = "Tratamentos e áreas de atuação";
 const description =
   "Conheça as áreas de atuação em nervos periféricos, coluna vertebral e reabilitação neurocirúrgica.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title,
   description,
-  alternates: { canonical: `${SITE_URL}/tratamentos` },
-  openGraph: { title, description, url: `${SITE_URL}/tratamentos` },
-};
+  path: "/tratamentos",
+});
 
 export default function TreatmentsPage() {
   const treatments = getVisibleTreatments();

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getPublishedPosts } from "@/app/lib/blog";
 import { getPublishedLocations } from "@/app/lib/locations";
 import { getPublishedTreatments } from "@/app/lib/treatments";
-import { getClinics } from "@/app/lib/clinics";
+import { getPublishedClinics } from "@/app/lib/clinics";
 import {
   DOCTOR_CRM,
   DOCTOR_NAME,
@@ -10,7 +10,7 @@ import {
   DOCTOR_SUBTITLE,
   SITE_URL,
 } from "@/constants";
-import type { BlogPost } from "@/app/lib/content-types";
+import type { BlogPost } from "@/content/types";
 
 /**
  * Fallback date for routes whose content carries no date of its own (home,
@@ -64,7 +64,7 @@ export function getPublicRouteInventory(
     priority: 0.8,
   }));
 
-  const clinicEntries = getClinics().map((clinic) => ({
+  const clinicEntries = getPublishedClinics().map((clinic) => ({
     path: `/${clinic.slug}`,
     title: `${clinic.name} em ${clinic.city} - ${clinic.state}`,
     description: clinic.tagline,
@@ -152,7 +152,7 @@ export function getSitemapEntries(): MetadataRoute.Sitemap {
   }));
 }
 
-const CLINIC_PATHS = new Set(getClinics().map((clinic) => `/${clinic.slug}`));
+const CLINIC_PATHS = new Set(getPublishedClinics().map((clinic) => `/${clinic.slug}`));
 
 /** Ordered; each route lands in the first section that claims it. */
 const LLMS_SECTIONS: Array<{ heading: string; matches: (path: string) => boolean }> = [

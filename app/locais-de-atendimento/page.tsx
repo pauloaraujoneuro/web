@@ -2,22 +2,22 @@ import type { Metadata } from "next";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import LocationHighlightCard from "@/app/components/content/LocationHighlightCard";
 import PageIntro from "@/app/components/content/PageIntro";
-import AppointmentCta from "@/app/components/custom/AppointmentCta";
+import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
+import { buildPageMetadata } from "@/app/lib/metadata";
 import { getPublishedLocations } from "@/app/lib/locations";
-import { getClinic } from "@/app/lib/clinics";
-import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT, SITE_URL } from "@/constants";
+import { getVisibleClinic } from "@/app/lib/clinics";
+import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT } from "@/constants";
 
 const title = "Locais de atendimento";
 const description =
   "Consulte o local confirmado para atendimento presencial com o Dr. Paulo Araújo em Campo Grande - MS.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title,
   description,
-  alternates: { canonical: `${SITE_URL}/locais-de-atendimento` },
-  openGraph: { title, description, url: `${SITE_URL}/locais-de-atendimento` },
-};
+  path: "/locais-de-atendimento",
+});
 
 export default function LocationsPage() {
   const locations = getPublishedLocations();
@@ -35,7 +35,7 @@ export default function LocationsPage() {
             <LocationHighlightCard
               key={location.slug}
               location={location}
-              clinic={location.clinicSlug ? getClinic(location.clinicSlug) : undefined}
+              clinic={location.clinicSlug ? getVisibleClinic(location.clinicSlug) : undefined}
             />
           ))}
         </section>

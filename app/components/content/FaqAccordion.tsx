@@ -1,4 +1,4 @@
-import type { FaqItem } from "@/app/lib/content-types";
+import type { FaqItem } from "@/content/types";
 
 export default function FaqAccordion({
   items,

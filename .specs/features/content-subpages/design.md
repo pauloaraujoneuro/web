@@ -116,7 +116,7 @@ files.
 | Existing mobile navigation | `app/components/layout/HeaderMobileMenu.tsx` | Preserve disclosure and focus behavior |
 | Existing footer | `app/components/layout/Footer.tsx` | Extend navigation and route links without replacing its identity |
 | Tracked WhatsApp link | `app/components/analytics/TrackedWhatsAppLink.tsx` | Canonical tracked CTA primitive |
-| Floating WhatsApp | `app/components/custom/WhatsAppFloatButton.tsx` | Keep as the sole fixed mobile conversion control |
+| Floating WhatsApp | `app/components/conversion/WhatsAppFloatButton.tsx` | Keep as the sole fixed mobile conversion control |
 | Existing FAQ disclosure | `app/components/sections/FaqSection.tsx` | Extract/reuse native accessible disclosure behavior |
 | Existing sections and constants | `app/components/sections/*`, `constants.ts` | Source approved profile, expertise, FAQ, and Campo Grande facts |
 | Existing design tokens | `app/globals.css` | Extend brand colors, surfaces, buttons, cards, and focus styles |
@@ -186,7 +186,7 @@ if that is simpler than retaining a named wrapper.
 ### AppointmentCta
 
 - **Purpose**: Render contextual appointment copy and tracked WhatsApp action.
-- **Location**: `app/components/custom/AppointmentCta.tsx`
+- **Location**: `app/components/conversion/AppointmentCta.tsx`
 - **Interface**: `AppointmentCta({ heading, body, message, eventLocation }): ReactNode`
 - **Dependencies**: WhatsApp URL helper and TrackedWhatsAppLink.
 - **Reuses**: Existing CTA and dark-petrol section styling.

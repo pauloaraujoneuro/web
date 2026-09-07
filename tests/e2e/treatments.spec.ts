@@ -36,18 +36,54 @@ test("published treatment renders the complete educational template", async ({ p
   await expect(page.getByRole("navigation", { name: "Nesta página" })).toBeVisible();
 });
 
-test("a treatment awaiting approval is reachable but not indexable", async ({ page }) => {
+test("every catalog treatment is reachable, canonical and open to search", async ({ page, request }) => {
   await page.goto("/tratamentos");
   await page.getByRole("link", { name: "Saiba mais" }).nth(1).click();
 
   await expect(page).toHaveURL(/\/tratamentos\/lesao-plexo-braquial$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Lesão do plexo braquial");
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  await expect(page.locator('meta[name="robots"]')).not.toHaveAttribute(
+    "content",
+    /noindex/,
+  );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
     "https://www.pauloaraujoneuro.com.br/tratamentos/lesao-plexo-braquial",
   );
   await expect(page.getByRole("link", { name: /Agendar avaliação/ })).toBeVisible();
+
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).toContain("/tratamentos/lesao-plexo-braquial<");
+});
+
+test("an approved treatment describes itself as reviewed medical content", async ({ page }) => {
+  await page.goto("/tratamentos/hernia-disco");
+
+  const graph = JSON.parse(
+    await page.locator('script[type="application/ld+json"]').last().textContent() ?? "{}",
+  )["@graph"];
+  const types = graph.map((node: { "@type": string }) => node["@type"]);
+
+  expect(types).toContain("BreadcrumbList");
+  expect(types).toContain("MedicalWebPage");
+  expect(types).toContain("FAQPage");
+});
+
+test("shares carry the page's own Twitter card, not the homepage's", async ({ page }) => {
+  await page.goto("/tratamentos/hernia-disco");
+
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    "content",
+    "summary_large_image",
+  );
+  const twitterTitle = await page
+    .locator('meta[name="twitter:title"]')
+    .getAttribute("content");
+  const ogTitle = await page
+    .locator('meta[property="og:title"]')
+    .getAttribute("content");
+  expect(twitterTitle).toBe(ogTitle);
+  expect(twitterTitle).toContain("Hérnia de disco");
 });
 
 test("unknown treatment returns not found", async ({ page }) => {

@@ -1,8 +1,8 @@
-import type { Treatment, TreatmentKind } from "@/app/lib/content-types";
+import type { Treatment, TreatmentKind } from "@/content/types";
 import { validateTreatments } from "@/app/lib/content-validation";
-import { PERIPHERAL_NERVE_TREATMENTS } from "@/app/content/treatments/peripheral-nerve";
-import { REHABILITATION_TREATMENTS } from "@/app/content/treatments/rehabilitation";
-import { SPINE_TREATMENTS } from "@/app/content/treatments/spine";
+import { PERIPHERAL_NERVE_TREATMENTS } from "@/content/treatments/peripheral-nerve";
+import { REHABILITATION_TREATMENTS } from "@/content/treatments/rehabilitation";
+import { SPINE_TREATMENTS } from "@/content/treatments/spine";
 
 export const TREATMENTS: Treatment[] = [
   ...PERIPHERAL_NERVE_TREATMENTS,

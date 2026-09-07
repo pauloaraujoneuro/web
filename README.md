@@ -37,11 +37,11 @@ one running from an earlier build, kill it first or the run tests stale output.
 | --- | --- |
 | `/` | homepage sections in `app/components/sections/` |
 | `/sobre` | practitioner data in `constants/` |
-| `/tratamentos`, `/tratamentos/[slug]` | `app/lib/treatments.ts` |
+| `/tratamentos`, `/tratamentos/[slug]` | `content/treatments/` |
 | `/blog`, `/blog/[slug]` | Markdown in `content/posts/` |
 | `/perguntas-frequentes` | `app/lib/faqs.ts` |
 | `/locais-de-atendimento`, `/locais-de-atendimento/[slug]` | `app/lib/locations.ts` |
-| `/clinica-protrauma` | `app/lib/clinics.ts` |
+| `/[clinicSlug]` (e.g. `/clinica-protrauma`) | `content/clinics.ts` |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | derived from `app/lib/seo.ts` |
 | `opengraph-image` (per route) | rendered by `app/lib/og.tsx` |
 
@@ -52,9 +52,11 @@ Markdown with validated frontmatter. Page components receive content as props,
 so adding an entry to a catalog produces its page, its hub card, its internal
 links and its sitemap entry with no component changes.
 
-Catalog data lives apart from the code that reads it: treatment entries in
-`app/content/treatments/`, site facts in `constants/`, accessors and validation
-in `app/lib/`.
+Catalog data lives apart from the code that reads it. `content/` holds authored
+source — treatment entries, clinic facts, article Markdown and the shared
+content types. `constants/` holds site-wide facts. `app/lib/` holds accessors,
+validation and anything composed from those sources. `app/` holds routes and
+rendering only.
 
 `app/lib/content-validation.ts` runs at module load. A malformed entry fails the
 build rather than reaching production.
@@ -67,7 +69,13 @@ Two independent flags decide how far an entry travels:
 | --- | --- |
 | `state: "draft"` | no page, no card, no links |
 | `state: "published"` | real page, hub card, internal links |
-| `indexable: false` | plus `robots: noindex`, and absent from sitemap and `llms.txt` |
+| `indexable: false` | plus `robots: noindex`, and absent from the sitemap, `llms.txt`, the FAQ hub, clinical structured data, and cross-links from indexable pages |
+
+Completeness is validated for everything `published`, indexable or not: a page a
+patient can open must never be half-written. The catalog currently ships fully
+indexable — the gate is the mechanism for withholding a page, not the approval
+workflow, because a flag someone has to remember to flip is a page that quietly
+never launches.
 | `indexable: true` | enters the sitemap, `llms.txt` and search results |
 
 Clinical copy is written as `published` + `indexable: false` so it can be

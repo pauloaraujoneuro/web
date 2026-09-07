@@ -5,13 +5,13 @@ import {
   LOCATIONS_SCHEDULING_NOTE,
   SERVICE_LOCATIONS,
 } from "@/constants";
-import type { Location } from "@/app/lib/content-types";
+import type { Location } from "@/content/types";
 import { validateLocations } from "@/app/lib/content-validation";
-import { getPublishedTreatments } from "@/app/lib/treatments";
+import { TREATMENTS } from "@/app/lib/treatments";
 import { getPublishedFaqs } from "@/app/lib/faqs";
-import { fullAddress, getClinic } from "@/app/lib/clinics";
+import { fullAddress, getVisibleClinic } from "@/app/lib/clinics";
 
-const protrauma = getClinic("clinica-protrauma");
+const protrauma = getVisibleClinic("clinica-protrauma");
 
 if (!protrauma) {
   throw new Error("locations.campo-grande: the Protrauma clinic profile is missing");
@@ -23,6 +23,11 @@ if (!campoGrande) {
   throw new Error("locations.campo-grande: canonical service location is missing");
 }
 
+/**
+ * Locations are composed rather than authored: every fact below is read from
+ * the site constants or the clinic catalog, so it lives in the lib layer beside
+ * its accessors instead of under `content/`.
+ */
 export const LOCATIONS: Location[] = [
   {
     slug: "campo-grande",
@@ -72,7 +77,4 @@ export function getPublishedLocation(slug: string) {
   return getPublishedLocations().find((item) => item.slug === slug);
 }
 
-validateLocations(
-  LOCATIONS,
-  new Set(getPublishedTreatments().map((treatment) => treatment.slug)),
-);
+validateLocations(LOCATIONS, TREATMENTS);

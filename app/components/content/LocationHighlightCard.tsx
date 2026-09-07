@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock, MapPin, Stethoscope } from "lucide-react";
 import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
-import type { ClinicProfile, Location } from "@/app/lib/content-types";
+import type { ClinicProfile, Location } from "@/content/types";
 import { fullAddress } from "@/app/lib/clinics";
 import { createWhatsAppUrl } from "@/constants";
 

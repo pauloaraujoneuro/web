@@ -49,6 +49,11 @@ export interface Treatment {
 
 export interface ClinicProfile {
   slug: string;
+  /** Same publication gate as treatments and articles: a clinic reaches the
+   *  catalog-driven route only when it is published, and search only when it is
+   *  also indexable. Named in full because `state` is the federative unit. */
+  publicationState: PublicationState;
+  indexable: boolean;
   name: string;
   tagline: string;
   description: string;

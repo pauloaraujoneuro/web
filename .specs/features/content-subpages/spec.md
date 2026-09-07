@@ -262,9 +262,12 @@ website as a diagnostic tool.
    exactly one H1, breadcrumb, summary, educational sections, indications,
    limitations or alternative-path guidance, care/recovery journey, visible FAQ,
    related content, author attribution, disclaimer, and contextual CTA.
-3. **SUBP-12** — WHEN a treatment is draft, incomplete, non-indexable, or unknown
-   THEN it SHALL not appear in the hub or sitemap and its public detail URL SHALL
-   resolve as not found rather than as a thin page.
+3. **SUBP-12** — WHEN a treatment is draft, incomplete, or unknown THEN it SHALL
+   not appear in the hub or sitemap and its public detail URL SHALL resolve as
+   not found rather than as a thin page; WHEN a published treatment is
+   non-indexable THEN it SHALL render a complete page that emits `noindex,follow`
+   and SHALL be withheld from the sitemap, `llms.txt`, the FAQ hub, cross-links
+   from indexable pages, and all clinical structured data.
 4. **SUBP-13** — WHEN treatment content is validated THEN duplicate slugs,
    duplicate canonical URLs, duplicate primary intents, invalid dates, missing
    required sections, or unknown cross-references SHALL fail with an error naming

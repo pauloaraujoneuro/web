@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { FAQ_CATEGORIES, getPublishedFaqs } from "../../app/lib/faqs";
+import { FAQ_CATEGORIES, getPublishedFaqs, treatmentFaqs } from "../../app/lib/faqs";
 import { getPublishedTreatments, getVisibleTreatments } from "../../app/lib/treatments";
 import { FAQ_ITEMS } from "../../constants";
 
@@ -15,25 +15,29 @@ test("every homepage question carries an explicit category and order", () => {
   }
 });
 
-test("the FAQ hub inherits questions from approved treatments only", () => {
-  const faqs = getPublishedFaqs();
-  const answers = new Set(faqs.map((faq) => faq.answer));
+test("the FAQ hub inherits questions from every approved treatment", () => {
+  const answers = new Set(getPublishedFaqs().map((faq) => faq.answer));
 
-  const approvedQuestion = getPublishedTreatments()[0].faqs[0];
-  assert.ok(answers.has(approvedQuestion.answer));
-
-  const awaitingApproval = getVisibleTreatments().filter(
-    (treatment) => !treatment.indexable,
-  );
-  assert.ok(awaitingApproval.length > 0, "expected unapproved treatments to exist");
-  for (const treatment of awaitingApproval) {
-    for (const faq of treatment.faqs) {
+  for (const treatment of getPublishedTreatments()) {
+    for (const faq of treatment.faqs.filter((item) => item.state === "published")) {
       assert.ok(
-        !answers.has(faq.answer),
-        `${treatment.slug} leaked "${faq.question}" into the indexable FAQ hub`,
+        answers.has(faq.answer),
+        `${treatment.slug} is approved but "${faq.question}" is missing from the hub`,
       );
     }
   }
+});
+
+/**
+ * `/perguntas-frequentes` is indexable, so it must never become the back door
+ * through which a withheld treatment's answers reach search.
+ */
+test("a treatment kept out of search keeps its answers out of the FAQ hub", () => {
+  const withheld = { ...getVisibleTreatments()[0], slug: "reservado", indexable: false };
+  const hub = treatmentFaqs(getPublishedTreatments([...getVisibleTreatments(), withheld]));
+
+  assert.ok(hub.length > 0);
+  assert.ok(!hub.some((faq) => faq.relatedHref === "/tratamentos/reservado"));
 });
 
 test("published questions are uniquely identified and deterministically ordered", () => {

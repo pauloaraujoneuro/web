@@ -3,8 +3,10 @@ import Image from "next/image";
 import { BookOpen, BriefcaseMedical, GraduationCap } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import JsonLd from "@/app/components/content/JsonLd";
-import AppointmentCta from "@/app/components/custom/AppointmentCta";
+import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
+import { buildPageMetadata } from "@/app/lib/metadata";
+import { clinicEntityId, getVisibleClinic } from "@/app/lib/clinics";
 import {
   ACADEMIC_MILESTONES,
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
@@ -25,12 +27,12 @@ const title = `Sobre o Dr. ${DOCTOR_NAME}`;
 const description =
   "Conheça a formação, trajetória e áreas de atuação do Dr. Paulo Araújo, neurocirurgião com atendimento presencial em Campo Grande - MS.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title,
   description,
-  alternates: { canonical: `${SITE_URL}/sobre` },
-  openGraph: { title, description, url: `${SITE_URL}/sobre` },
-};
+  path: "/sobre",
+  openGraph: { type: "profile" },
+});
 
 export default function AboutPage() {
   const currentRoles = PROFESSIONAL_ROLES.filter((role) => role.status === "active");
@@ -41,9 +43,10 @@ export default function AboutPage() {
       <JsonLd data={{
         "@context": "https://schema.org",
         "@type": "Physician",
-        "@id": `${SITE_URL}/sobre#physician`,
+        "@id": `${SITE_URL}#physician`,
         name: `Dr. ${DOCTOR_NAME}`,
-        url: `${SITE_URL}/sobre`,
+        url: SITE_URL,
+        mainEntityOfPage: `${SITE_URL}/sobre`,
         image: `${SITE_URL}${DOCTOR_PROFILE_IMAGE_FRONT_WIDE}`,
         description,
         medicalSpecialty: "Neurosurgery",
@@ -51,11 +54,18 @@ export default function AboutPage() {
           { "@type": "PropertyValue", propertyID: "CRM", value: DOCTOR_CRM },
           { "@type": "PropertyValue", propertyID: "RQE", value: DOCTOR_RQE },
         ],
-        workLocation: currentRoles.map((role) => ({
-          "@type": "MedicalClinic",
-          name: role.institution,
-          address: role.city && role.state ? `${role.city} - ${role.state}` : undefined,
-        })),
+        // Facilities that have a catalog entry are referenced by their canonical
+        // `@id`; only roles without one are described inline.
+        workLocation: currentRoles.map((role) => {
+          const clinic = role.clinicSlug ? getVisibleClinic(role.clinicSlug) : undefined;
+          if (clinic) return { "@id": clinicEntityId(clinic) };
+          return {
+            "@type": "MedicalClinic",
+            name: role.institution,
+            address:
+              role.city && role.state ? `${role.city} - ${role.state}` : undefined,
+          };
+        }),
       }} />
       <div className="subpage-shell">
         <Breadcrumb items={[{ name: "Início", href: "/" }, { name: "Sobre" }]} />

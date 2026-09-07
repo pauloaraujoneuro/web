@@ -50,8 +50,8 @@ here than implementation speed.
 
 ## Before you add a page
 
-Add the entry to its catalog (`app/lib/treatments.ts`, `faqs.ts`, `locations.ts`)
-or a Markdown file in `content/posts/`. Routing, hub cards, internal links,
+Add the entry to its catalog (`content/treatments/`, `content/clinics.ts`,
+`app/lib/faqs.ts`, `app/lib/locations.ts`) or a Markdown file in `content/posts/`. Routing, hub cards, internal links,
 sitemap and `llms.txt` follow automatically. Reach for a new component only when
 an existing one genuinely cannot express the layout — the component set is
 already broad.

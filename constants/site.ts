@@ -1,4 +1,4 @@
-import type { FaqSeed } from "@/app/lib/content-types";
+import type { FaqSeed } from "@/content/types";
 import type { AcademicMilestone, ExpertiseArea, ProfessionalRole } from "@/constants/types";
 
 // Domain
@@ -115,11 +115,7 @@ export const PROFESSIONAL_ROLES: ProfessionalRole[] = [
     summary:
       "Atendimento em Campo Grande com foco em cirurgia de nervo periférico, coluna e reabilitação neurocirúrgica.",
     status: "active",
-    address: "R. 15 de Novembro, 2808 - Jardim dos Estados",
-    city: "Campo Grande",
-    state: "MS",
-    postalCode: "79020-300",
-    website: "https://www.protrauma.net/",
+    clinicSlug: "clinica-protrauma",
   },
   {
     id: "role-marcelino",

@@ -1,7 +1,7 @@
 ---
 slug: hernia-disco-lombar-quando-operar
 state: published
-indexable: false
+indexable: true
 title: "Hérnia de disco lombar: quando a cirurgia entra em discussão"
 metaDescription: Entenda por que a maior parte das hérnias de disco lombares melhora sem cirurgia e quais sinais mudam essa conduta.
 dek: A maior parte dos casos melhora com tratamento conservador. Alguns sinais, porém, mudam a conversa.

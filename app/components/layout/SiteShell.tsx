@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Footer from "@/app/components/layout/Footer";
 import Header from "@/app/components/layout/Header";
-import WhatsAppFloatButton from "@/app/components/custom/WhatsAppFloatButton";
+import WhatsAppFloatButton from "@/app/components/conversion/WhatsAppFloatButton";
 
 interface SiteShellProps {
   children: ReactNode;

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ClinicProfile } from "@/content/types";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Clock, Globe, MapPin, Phone } from "lucide-react";
@@ -7,10 +8,18 @@ import ClinicMap from "@/app/components/content/ClinicMap";
 import JsonLd from "@/app/components/content/JsonLd";
 import PageIntro from "@/app/components/content/PageIntro";
 import RelatedLinks from "@/app/components/content/RelatedLinks";
-import AppointmentCta from "@/app/components/custom/AppointmentCta";
+import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
-import { clinicUrl, fullAddress, getClinic } from "@/app/lib/clinics";
-import { getPublishedLocation } from "@/app/lib/locations";
+import { notFound } from "next/navigation";
+import {
+  clinicEntityId,
+  clinicUrl,
+  fullAddress,
+  getVisibleClinic,
+  getVisibleClinics,
+} from "@/app/lib/clinics";
+import { buildPageMetadata, NOT_FOUND_METADATA } from "@/app/lib/metadata";
+import { getPublishedLocations } from "@/app/lib/locations";
 import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
@@ -20,22 +29,54 @@ import {
   SITE_URL,
 } from "@/constants";
 
-const clinic = getClinic("clinica-protrauma")!;
-const pageUrl = clinicUrl(clinic);
+type Props = { params: Promise<{ clinicSlug: string }> };
 
-const title = `${clinic.name} — onde o Dr. ${DOCTOR_NAME} atende em Campo Grande`;
-const description = `Endereço, contato e localização da ${clinic.name}, em ${clinic.city} - ${clinic.state}, onde o Dr. ${DOCTOR_NAME} realiza as consultas de neurocirurgia.`;
+/**
+ * Clinic pages are built from the catalog that feeds the sitemap and llms.txt,
+ * so a clinic can never be published into discovery without a route to land on.
+ * Unknown slugs fall through to `notFound()` rather than to `dynamicParams:
+ * false`, which answers correctly but logs an internal error for every stray
+ * root-level URL a crawler tries.
+ */
+export function generateStaticParams() {
+  return getVisibleClinics().map((clinic) => ({ clinicSlug: clinic.slug }));
+}
 
-export const metadata: Metadata = {
-  title: `${clinic.name} em Campo Grande - MS`,
-  description,
-  alternates: { canonical: pageUrl },
-  openGraph: { title, description, url: pageUrl, type: "website" },
-};
+function describe(clinic: ClinicProfile) {
+  return {
+    socialTitle: `${clinic.name} — onde o Dr. ${DOCTOR_NAME} atende em ${clinic.city}`,
+    description: `Endereço, contato e localização da ${clinic.name}, em ${clinic.city} - ${clinic.state}, onde o Dr. ${DOCTOR_NAME} realiza as consultas de neurocirurgia.`,
+  };
+}
 
-export default function ClinicPage() {
-  const location = getPublishedLocation("campo-grande");
-  const treatments = getPublishedTreatments();
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { clinicSlug } = await params;
+  const clinic = getVisibleClinic(clinicSlug);
+  if (!clinic) return NOT_FOUND_METADATA;
+  const { socialTitle, description } = describe(clinic);
+  return buildPageMetadata({
+    title: `${clinic.name} em ${clinic.city} - ${clinic.state}`,
+    socialTitle,
+    description,
+    path: `/${clinic.slug}`,
+    indexable: clinic.indexable,
+  });
+}
+
+export default async function ClinicPage({ params }: Props) {
+  const { clinicSlug } = await params;
+  const clinic = getVisibleClinic(clinicSlug);
+  if (!clinic) notFound();
+  const pageUrl = clinicUrl(clinic);
+  const location = getPublishedLocations().find(
+    (entry) => entry.clinicSlug === clinic.slug,
+  );
+  // The clinic page names the areas of practice, not the full condition
+  // catalog: the three overview pages are the right depth for a facility page,
+  // and each one leads on to its own conditions and procedures.
+  const treatments = getPublishedTreatments().filter(
+    (treatment) => treatment.kind === "overview",
+  );
 
   return (
     <SiteShell>
@@ -43,7 +84,7 @@ export default function ClinicPage() {
         data={{
           "@context": "https://schema.org",
           "@type": "MedicalClinic",
-          "@id": `${pageUrl}#clinic`,
+          "@id": clinicEntityId(clinic),
           name: clinic.name,
           description: clinic.description,
           url: pageUrl,
@@ -192,7 +233,7 @@ export default function ClinicPage() {
         <section className="location-section">
           <div className="location-section-heading">
             <span>Atendimento de neurocirurgia</span>
-            <h2>O que o Dr. {DOCTOR_NAME} atende na Protrauma</h2>
+            <h2>O que o Dr. {DOCTOR_NAME} atende na {clinic.name}</h2>
             <p>
               As consultas cobrem condições da coluna vertebral, dos nervos periféricos
               e necessidades de reabilitação neurocirúrgica. A conduta é definida na
@@ -230,8 +271,8 @@ export default function ClinicPage() {
           <AppointmentCta
             heading={`Agende sua avaliação na ${clinic.name}`}
             body={`Converse com a equipe para confirmar disponibilidade de agenda em ${clinic.city} - ${clinic.state}.`}
-            message={CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT}
-            eventLocation="clinic_protrauma_final"
+            message={location?.ctaMessage ?? CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT}
+            eventLocation={`clinic_${clinic.slug}_final`}
             label="Agendar avaliação"
           />
         </div>

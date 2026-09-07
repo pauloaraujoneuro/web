@@ -44,7 +44,7 @@ test("every epic route remains usable at 320px", async ({ page }) => {
 test("mobile menu closes with Escape and restores focus", async ({ page }) => {
   test.skip(test.info().project.name !== "mobile-chromium");
   await page.goto("/tratamentos");
-  const toggle = page.getByLabel("Abrir menu");
+  const toggle = page.getByLabel("Menu principal");
   await toggle.click();
   await expect(page.locator("details.mobile-menu")).toHaveAttribute("open", "");
   await page.keyboard.press("Escape");

@@ -39,11 +39,11 @@ export interface ProfessionalRole {
   institution: string;
   summary: string;
   status: "active" | "deferred";
-  address?: string;
+  /** Facility in the clinic catalog, when this role happens in one. Address and
+   *  contact facts are read from there rather than repeated here. */
+  clinicSlug?: string;
   city?: string;
   state?: string;
-  postalCode?: string;
-  website?: string;
 }
 
 export interface ServiceLocation {
@@ -62,4 +62,3 @@ export interface CitySchedule {
   whatsappCtaLabel: string;
   whatsappUrl: string;
 }
-

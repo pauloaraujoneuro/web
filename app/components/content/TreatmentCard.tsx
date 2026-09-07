@@ -1,4 +1,4 @@
-import type { Treatment } from "@/app/lib/content-types";
+import type { Treatment } from "@/content/types";
 import { TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 import ContentCard from "@/app/components/content/ContentCard";
 

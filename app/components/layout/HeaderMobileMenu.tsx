@@ -67,7 +67,7 @@ export default function HeaderMobileMenu({
         <summary
           ref={summaryRef}
           className="mobile-menu-toggle icon-button flex h-11 w-11 list-none items-center justify-center cursor-pointer [&::-webkit-details-marker]:hidden"
-          aria-label="Abrir menu"
+          aria-label="Menu principal"
         >
           <span className="mobile-menu-icon relative block h-5 w-6" aria-hidden="true">
             <span className="mobile-menu-line mobile-menu-line-top absolute left-0 top-0.5 block h-0.5 w-6 rounded-full bg-primary" />

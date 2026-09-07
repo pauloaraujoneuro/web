@@ -3,14 +3,15 @@ import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
-import ArticleAside from "@/app/components/content/ArticleAside";
+import SectionToc from "@/app/components/content/SectionToc";
 import RelatedLinks from "@/app/components/content/RelatedLinks";
 import AuthorCard from "@/app/components/content/AuthorCard";
 import Breadcrumb, { type BreadcrumbItem } from "@/app/components/content/Breadcrumb";
 import JsonLd from "@/app/components/content/JsonLd";
-import AppointmentCta from "@/app/components/custom/AppointmentCta";
+import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getVisiblePost, getVisiblePosts } from "@/app/lib/blog";
+import { buildPageMetadata, NOT_FOUND_METADATA } from "@/app/lib/metadata";
 import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
@@ -53,24 +54,19 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getVisiblePost(slug);
-  if (!post) return { robots: { index: false, follow: true } };
-  const url = `${SITE_URL}/blog/${post.slug}`;
-  return {
+  if (!post) return NOT_FOUND_METADATA;
+  return buildPageMetadata({
     title: post.title,
     description: post.metaDescription,
-    alternates: { canonical: url },
-    robots: post.indexable
-      ? { index: true, follow: true }
-      : { index: false, follow: true },
+    path: `/blog/${post.slug}`,
+    indexable: post.indexable,
     openGraph: {
-      title: post.title,
-      description: post.metaDescription,
-      url,
       type: "article",
       publishedTime: post.publishDate,
       modifiedTime: post.lastModified,
+      authors: [`${SITE_URL}/sobre`],
     },
-  };
+  });
 }
 
 export default async function BlogArticlePage({ params }: Props) {
@@ -93,7 +89,19 @@ export default async function BlogArticlePage({ params }: Props) {
       <JsonLd data={{
         "@context": "https://schema.org",
         "@graph": [
+          // Navigational only, so it stays on every visible article.
           {
+            "@type": "BreadcrumbList",
+            itemListElement: breadcrumbs.map((item, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: item.name,
+              item: item.href ? `${SITE_URL}${item.href}` : pageUrl,
+            })),
+          },
+          // An article awaiting clinical sign-off is readable on a preview URL
+          // but never announces itself as reviewed medical content.
+          ...(post.indexable ? [{
             "@type": ["MedicalWebPage", "BlogPosting"],
             "@id": pageUrl,
             url: pageUrl,
@@ -118,16 +126,7 @@ export default async function BlogArticlePage({ params }: Props) {
               name: `Dr. ${DOCTOR_NAME}`,
               url: SITE_URL,
             },
-          },
-          {
-            "@type": "BreadcrumbList",
-            itemListElement: breadcrumbs.map((item, index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              name: item.name,
-              item: item.href ? `${SITE_URL}${item.href}` : pageUrl,
-            })),
-          },
+          }] : []),
         ],
       }} />
       <div className="subpage-shell">
@@ -169,7 +168,16 @@ export default async function BlogArticlePage({ params }: Props) {
               </section>
             ) : null}
           </article>
-          <div className="detail-sidebar"><ArticleAside post={post} /></div>
+          <div className="detail-sidebar">
+            <SectionToc
+              label="Nesta leitura"
+              items={post.headings.map((heading) => ({
+                id: heading.id,
+                text: heading.text,
+                indented: heading.level === 3,
+              }))}
+            />
+          </div>
         </div>
 
         <div className="mt-12 sm:mt-16">

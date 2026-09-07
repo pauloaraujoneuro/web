@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("global navigation exposes every epic section", async ({ page }) => {
   await page.goto("/");
 
-  const menuToggle = page.getByLabel("Abrir menu");
+  const menuToggle = page.getByLabel("Menu principal");
   if (await menuToggle.isVisible()) {
     await menuToggle.click();
   }

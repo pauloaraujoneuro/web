@@ -1,5 +1,5 @@
 import { ExternalLink } from "lucide-react";
-import type { ClinicProfile } from "@/app/lib/content-types";
+import type { ClinicProfile } from "@/content/types";
 import { fullAddress } from "@/app/lib/clinics";
 
 /**

@@ -1,4 +1,4 @@
-import type { Treatment } from "@/app/lib/content-types";
+import type { Treatment } from "@/content/types";
 
 /** Treatment FAQs share a shape; only the question and answer differ. */
 export const sharedFaq = (

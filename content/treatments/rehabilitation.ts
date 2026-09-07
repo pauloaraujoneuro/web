@@ -1,5 +1,5 @@
-import type { Treatment } from "@/app/lib/content-types";
-import { sharedFaq } from "@/app/content/treatments/shared";
+import type { Treatment } from "@/content/types";
+import { sharedFaq } from "@/content/treatments/shared";
 
 /** Rehabilitation topics. */
 export const REHABILITATION_TREATMENTS: Treatment[] = [
@@ -63,7 +63,7 @@ export const REHABILITATION_TREATMENTS: Treatment[] = [
   {
     slug: "reeducacao-cortical-biofeedback",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "rehabilitation",
     kind: "procedure",
     title: "Reeducação cortical e biofeedback",
@@ -125,7 +125,7 @@ export const REHABILITATION_TREATMENTS: Treatment[] = [
   {
     slug: "orteses-dinamicas",
     state: "published",
-    indexable: false,
+    indexable: true,
     group: "rehabilitation",
     kind: "procedure",
     title: "Órteses dinâmicas e adaptações",
