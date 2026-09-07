@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { getClinic } from "@/app/lib/clinics";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -46,6 +47,8 @@ const SITE_KEYWORDS = [
   "Tratamento de estenose de canal em Campo Grande",
   "Lesão de plexo braquial",
 ];
+
+const PRACTICE_CLINIC = getClinic("clinica-protrauma")!;
 
 const PHYSICIAN_AND_CLINIC_JSON_LD = {
   "@context": "https://schema.org",
@@ -100,6 +103,17 @@ const PHYSICIAN_AND_CLINIC_JSON_LD = {
       telephone: CONTACT_PHONE,
       email: CONTACT_EMAIL,
       medicalSpecialty: ["Neurosurgery"],
+      // Publishable since the client confirmed the consulting address; PR #1 had
+      // stripped it only because no address was verified at the time.
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: `${PRACTICE_CLINIC.streetAddress} - ${PRACTICE_CLINIC.neighborhood}`,
+        addressLocality: PRACTICE_CLINIC.city,
+        addressRegion: PRACTICE_CLINIC.state,
+        postalCode: PRACTICE_CLINIC.postalCode,
+        addressCountry: "BR",
+      },
+      hasMap: PRACTICE_CLINIC.mapUrl,
       areaServed: SERVICE_LOCATIONS.map((location) => ({
         "@type": "AdministrativeArea",
         name: `${location.city} - ${location.state}`,

@@ -48,6 +48,18 @@ test("the map is embedded lazily and without the reviews panel", async ({ page }
   await expect(page.getByRole("link", { name: /Abrir no Google Maps/ })).toBeVisible();
 });
 
+test("the clinic page is reachable from the hub and the site schema carries the address", async ({ page }) => {
+  await page.goto("/locais-de-atendimento");
+  await expect(
+    page.locator(".location-highlight").getByRole("link", { name: /Sobre a Clínica Protrauma/ }),
+  ).toHaveAttribute("href", "/clinica-protrauma");
+
+  const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
+  const graph = schemas.map((value) => JSON.parse(value)).find((value) => value["@graph"]);
+  const clinic = graph["@graph"].find((node: { "@type": string }) => node["@type"] === "MedicalClinic");
+  expect(clinic.address.postalCode).toBe("79020-300");
+});
+
 test("the location page links to the clinic page and shows its map", async ({ page }) => {
   await page.goto("/locais-de-atendimento/campo-grande");
 
