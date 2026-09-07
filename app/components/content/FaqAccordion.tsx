@@ -1,11 +1,14 @@
-import type { FaqItem } from "@/content/types";
+import type { FaqSeed } from "@/content/types";
+
+/** Everything the accordion renders: a seed, plus an optional onward link. */
+type FaqAccordionItem = FaqSeed & { relatedHref?: string };
 
 export default function FaqAccordion({
   items,
   theme = "light",
   currentPath,
 }: {
-  items: FaqItem[];
+  items: FaqAccordionItem[];
   theme?: "light" | "dark";
   /** Suppresses a related link that points back at the current page. */
   currentPath?: string;

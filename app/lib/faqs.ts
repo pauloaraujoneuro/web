@@ -50,9 +50,13 @@ function classifyHomeFaqs(): FaqItem[] {
 export function treatmentFaqs(treatments = getPublishedTreatments()): FaqItem[] {
   return treatments.flatMap((treatment, treatmentIndex) =>
     treatment.faqs
-      .filter((faq) => faq.state === "published")
-      .map((faq, faqIndex) => ({
-        ...faq,
+      .filter((faq) => !faq.draft)
+      .map(({ id, question, answer }, faqIndex) => ({
+        id,
+        question,
+        answer,
+        category: "tratamentos" as const,
+        state: "published" as const,
         order: 100 + treatmentIndex * 10 + faqIndex,
         relatedHref: `/tratamentos/${treatment.slug}`,
       })),

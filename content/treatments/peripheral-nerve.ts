@@ -1,5 +1,4 @@
 import type { Treatment } from "@/content/types";
-import { sharedFaq } from "@/content/treatments/shared";
 
 /** Peripheral nerve and brachial plexus topics. */
 export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
@@ -50,11 +49,12 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
       "Definição compartilhada entre acompanhamento, reabilitação e possibilidade cirúrgica.",
     ],
     faqs: [
-      sharedFaq(
-        "nervo-exames",
-        "Quais exames devo levar?",
-        "Leve todos os exames relacionados ao problema, inclusive os antigos. Na consulta, o médico avalia se há necessidade de investigação complementar.",
-      ),
+      {
+        id: "nervo-exames",
+        question: "Quais exames devo levar?",
+        answer:
+          "Leve todos os exames relacionados ao problema, inclusive os antigos. Na consulta, o médico avalia se há necessidade de investigação complementar.",
+      },
     ],
     relatedTreatmentSlugs: ["reabilitacao-neurocirurgica"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -123,21 +123,24 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
       "Reavaliações programadas para acompanhar a evolução.",
     ],
     faqs: [
-      sharedFaq(
-        "plexo-quando-procurar",
-        "Quando devo procurar um especialista após o trauma?",
-        "Procure avaliação quando houver perda de força ou de sensibilidade que não melhora, dor intensa persistente ou dúvida sobre a evolução. O intervalo entre a lesão e a avaliação pode influenciar as condutas disponíveis, e esse prazo é discutido caso a caso.",
-      ),
-      sharedFaq(
-        "plexo-exames",
-        "Quais exames devo levar na consulta?",
-        "Leve todos os exames e laudos relacionados ao trauma, incluindo imagens em mídia digital, relatórios de atendimento de urgência e estudos eletrofisiológicos, mesmo que antigos.",
-      ),
-      sharedFaq(
-        "plexo-cirurgia",
-        "Toda lesão do plexo braquial precisa de cirurgia?",
-        "Não. Parte dos casos evolui com acompanhamento clínico e reabilitação. A indicação cirúrgica depende do tipo de lesão, da evolução e da avaliação presencial.",
-      ),
+      {
+        id: "plexo-quando-procurar",
+        question: "Quando devo procurar um especialista após o trauma?",
+        answer:
+          "Procure avaliação quando houver perda de força ou de sensibilidade que não melhora, dor intensa persistente ou dúvida sobre a evolução. O intervalo entre a lesão e a avaliação pode influenciar as condutas disponíveis, e esse prazo é discutido caso a caso.",
+      },
+      {
+        id: "plexo-exames",
+        question: "Quais exames devo levar na consulta?",
+        answer:
+          "Leve todos os exames e laudos relacionados ao trauma, incluindo imagens em mídia digital, relatórios de atendimento de urgência e estudos eletrofisiológicos, mesmo que antigos.",
+      },
+      {
+        id: "plexo-cirurgia",
+        question: "Toda lesão do plexo braquial precisa de cirurgia?",
+        answer:
+          "Não. Parte dos casos evolui com acompanhamento clínico e reabilitação. A indicação cirúrgica depende do tipo de lesão, da evolução e da avaliação presencial.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "reabilitacao-neurocirurgica"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -205,16 +208,18 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
       "Programa de reabilitação orientado no pós-operatório.",
     ],
     faqs: [
-      sharedFaq(
-        "tetraplegia-quem-avalia",
-        "Quem pode ser avaliado para a cirurgia?",
-        "Pessoas com tetraplegia ou tetraparesia por lesão medular cervical que mantenham grupos musculares funcionais acima do nível da lesão. A elegibilidade é definida no exame presencial.",
-      ),
-      sharedFaq(
-        "tetraplegia-resultado",
-        "A cirurgia devolve todos os movimentos?",
-        "Não. O objetivo é trabalhar movimentos específicos, definidos antes da cirurgia, que possam ampliar a autonomia nas atividades diárias. Os resultados variam conforme o caso e são discutidos individualmente.",
-      ),
+      {
+        id: "tetraplegia-quem-avalia",
+        question: "Quem pode ser avaliado para a cirurgia?",
+        answer:
+          "Pessoas com tetraplegia ou tetraparesia por lesão medular cervical que mantenham grupos musculares funcionais acima do nível da lesão. A elegibilidade é definida no exame presencial.",
+      },
+      {
+        id: "tetraplegia-resultado",
+        question: "A cirurgia devolve todos os movimentos?",
+        answer:
+          "Não. O objetivo é trabalhar movimentos específicos, definidos antes da cirurgia, que possam ampliar a autonomia nas atividades diárias. Os resultados variam conforme o caso e são discutidos individualmente.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "reabilitacao-neurocirurgica"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -281,16 +286,18 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
       "Decisão compartilhada entre conduta conservadora e cirúrgica.",
     ],
     faqs: [
-      sharedFaq(
-        "carpo-cirurgia-necessaria",
-        "Todo caso precisa de cirurgia?",
-        "Não. Quadros iniciais frequentemente melhoram com medidas conservadoras. A cirurgia é considerada quando os sintomas persistem ou quando há sinais de comprometimento mais avançado do nervo.",
-      ),
-      sharedFaq(
-        "carpo-exames",
-        "Preciso fazer eletroneuromiografia antes da consulta?",
-        "Não é necessário fazer exames por conta própria. Leve os que já possui; na consulta é avaliada a necessidade de investigação complementar.",
-      ),
+      {
+        id: "carpo-cirurgia-necessaria",
+        question: "Todo caso precisa de cirurgia?",
+        answer:
+          "Não. Quadros iniciais frequentemente melhoram com medidas conservadoras. A cirurgia é considerada quando os sintomas persistem ou quando há sinais de comprometimento mais avançado do nervo.",
+      },
+      {
+        id: "carpo-exames",
+        question: "Preciso fazer eletroneuromiografia antes da consulta?",
+        answer:
+          "Não é necessário fazer exames por conta própria. Leve os que já possui; na consulta é avaliada a necessidade de investigação complementar.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "sindrome-cubital"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -357,16 +364,18 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
       "Definição compartilhada da conduta.",
     ],
     faqs: [
-      sharedFaq(
-        "cubital-diferenca-carpo",
-        "Qual a diferença para a síndrome do túnel do carpo?",
-        "São nervos e locais diferentes. No túnel do carpo o nervo mediano é comprimido no punho e os sintomas atingem principalmente o polegar, o indicador e o médio. Na síndrome cubital, o nervo ulnar é comprimido no cotovelo e os sintomas atingem o dedo mínimo e o anelar.",
-      ),
-      sharedFaq(
-        "cubital-quando-operar",
-        "Quando a cirurgia é considerada?",
-        "Principalmente diante de perda de força, atrofia muscular ou sintomas que persistem apesar das medidas conservadoras. A decisão é individual e discutida em consulta.",
-      ),
+      {
+        id: "cubital-diferenca-carpo",
+        question: "Qual a diferença para a síndrome do túnel do carpo?",
+        answer:
+          "São nervos e locais diferentes. No túnel do carpo o nervo mediano é comprimido no punho e os sintomas atingem principalmente o polegar, o indicador e o médio. Na síndrome cubital, o nervo ulnar é comprimido no cotovelo e os sintomas atingem o dedo mínimo e o anelar.",
+      },
+      {
+        id: "cubital-quando-operar",
+        question: "Quando a cirurgia é considerada?",
+        answer:
+          "Principalmente diante de perda de força, atrofia muscular ou sintomas que persistem apesar das medidas conservadoras. A decisão é individual e discutida em consulta.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "sindrome-tunel-carpo"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -433,16 +442,18 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
       "Definição compartilhada entre conduta conservadora e cirúrgica.",
     ],
     faqs: [
-      sharedFaq(
-        "tarso-confusao",
-        "É comum confundir com outras causas de dor no pé?",
-        "Sim. Muitos pacientes chegam após longos tratamentos para outras causas de dor plantar. O exame direcionado ao trajeto do nervo ajuda a diferenciar os quadros.",
-      ),
-      sharedFaq(
-        "tarso-tratamento",
-        "O tratamento é sempre cirúrgico?",
-        "Não. Medidas conservadoras são a primeira abordagem em boa parte dos casos. A cirurgia é considerada quando a compressão é confirmada e os sintomas persistem.",
-      ),
+      {
+        id: "tarso-confusao",
+        question: "É comum confundir com outras causas de dor no pé?",
+        answer:
+          "Sim. Muitos pacientes chegam após longos tratamentos para outras causas de dor plantar. O exame direcionado ao trajeto do nervo ajuda a diferenciar os quadros.",
+      },
+      {
+        id: "tarso-tratamento",
+        question: "O tratamento é sempre cirúrgico?",
+        answer:
+          "Não. Medidas conservadoras são a primeira abordagem em boa parte dos casos. A cirurgia é considerada quando a compressão é confirmada e os sintomas persistem.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "reabilitacao-neurocirurgica"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],

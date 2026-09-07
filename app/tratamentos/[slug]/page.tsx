@@ -54,6 +54,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
     { name: "Tratamentos", href: "/tratamentos" },
     { name: treatment.title },
   ];
+  const faqs = treatment.faqs.filter((faq) => !faq.draft);
   const related = getVisibleTreatments().filter((item) =>
     treatment.relatedTreatmentSlugs.includes(item.slug),
   );
@@ -100,7 +101,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
                   },
                   {
                     "@type": "FAQPage",
-                    mainEntity: treatment.faqs.map((faq) => ({
+                    mainEntity: faqs.map((faq) => ({
                       "@type": "Question",
                       name: faq.question,
                       acceptedAnswer: { "@type": "Answer", text: faq.answer },
@@ -176,7 +177,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
 
             <section>
               <h2>Perguntas frequentes</h2>
-              <FaqAccordion items={treatment.faqs} currentPath={`/tratamentos/${treatment.slug}`} />
+              <FaqAccordion items={faqs} currentPath={`/tratamentos/${treatment.slug}`} />
             </section>
 
             <section>

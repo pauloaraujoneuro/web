@@ -1,5 +1,4 @@
 import type { Treatment } from "@/content/types";
-import { sharedFaq } from "@/content/treatments/shared";
 
 /** Rehabilitation topics. */
 export const REHABILITATION_TREATMENTS: Treatment[] = [
@@ -48,11 +47,12 @@ export const REHABILITATION_TREATMENTS: Treatment[] = [
       "Reavaliações para ajustar objetivos e estratégias.",
     ],
     faqs: [
-      sharedFaq(
-        "reabilitacao-tempo",
-        "Quanto tempo dura a reabilitação?",
-        "A duração varia conforme o diagnóstico, o procedimento e os objetivos funcionais. O cronograma é ajustado durante o acompanhamento.",
-      ),
+      {
+        id: "reabilitacao-tempo",
+        question: "Quanto tempo dura a reabilitação?",
+        answer:
+          "A duração varia conforme o diagnóstico, o procedimento e os objetivos funcionais. O cronograma é ajustado durante o acompanhamento.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "cirurgia-coluna"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -110,11 +110,12 @@ export const REHABILITATION_TREATMENTS: Treatment[] = [
       "Integração do movimento às atividades diárias.",
     ],
     faqs: [
-      sharedFaq(
-        "reeducacao-necessidade",
-        "Por que preciso treinar se a cirurgia já foi feita?",
-        "A cirurgia restabelece o caminho do nervo, mas o comando do movimento continua sendo cerebral. O treinamento dirigido é o que transforma a conexão recuperada em movimento útil no dia a dia.",
-      ),
+      {
+        id: "reeducacao-necessidade",
+        question: "Por que preciso treinar se a cirurgia já foi feita?",
+        answer:
+          "A cirurgia restabelece o caminho do nervo, mas o comando do movimento continua sendo cerebral. O treinamento dirigido é o que transforma a conexão recuperada em movimento útil no dia a dia.",
+      },
     ],
     relatedTreatmentSlugs: ["reabilitacao-neurocirurgica", "transferencia-nervosa-tetraplegia"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -172,11 +173,12 @@ export const REHABILITATION_TREATMENTS: Treatment[] = [
       "Reavaliações para ajustar a indicação à evolução.",
     ],
     faqs: [
-      sharedFaq(
-        "orteses-tempo",
-        "Por quanto tempo vou precisar usar?",
-        "O tempo de uso depende do quadro e da fase da recuperação. A indicação é revista nas reavaliações e ajustada conforme a função retorna.",
-      ),
+      {
+        id: "orteses-tempo",
+        question: "Por quanto tempo vou precisar usar?",
+        answer:
+          "O tempo de uso depende do quadro e da fase da recuperação. A indicação é revista nas reavaliações e ajustada conforme a função retorna.",
+      },
     ],
     relatedTreatmentSlugs: ["reabilitacao-neurocirurgica", "cirurgia-nervos-perifericos"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],

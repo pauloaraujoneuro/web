@@ -1,5 +1,4 @@
 import type { Treatment } from "@/content/types";
-import { sharedFaq } from "@/content/treatments/shared";
 
 /** Spine topics. */
 export const SPINE_TREATMENTS: Treatment[] = [
@@ -48,11 +47,12 @@ export const SPINE_TREATMENTS: Treatment[] = [
       "Discussão das alternativas e dos próximos passos.",
     ],
     faqs: [
-      sharedFaq(
-        "coluna-cirurgia",
-        "Todo problema de coluna precisa de cirurgia?",
-        "Não. A conduta depende da avaliação clínica e do impacto funcional. Tratamento conservador e reabilitação podem ser indicados em muitos casos.",
-      ),
+      {
+        id: "coluna-cirurgia",
+        question: "Todo problema de coluna precisa de cirurgia?",
+        answer:
+          "Não. A conduta depende da avaliação clínica e do impacto funcional. Tratamento conservador e reabilitação podem ser indicados em muitos casos.",
+      },
     ],
     relatedTreatmentSlugs: ["reabilitacao-neurocirurgica"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -119,16 +119,18 @@ export const SPINE_TREATMENTS: Treatment[] = [
       "Definição compartilhada entre tratamento conservador e cirúrgico.",
     ],
     faqs: [
-      sharedFaq(
-        "hernia-cirurgia",
-        "Toda hérnia de disco precisa de cirurgia?",
-        "Não. A maior parte dos casos melhora com tratamento conservador. A cirurgia é considerada diante de perda de força, dor incapacitante persistente ou sinais neurológicos de alerta.",
-      ),
-      sharedFaq(
-        "hernia-exame-imagem",
-        "Minha ressonância mostra hérnia. Isso já define o tratamento?",
-        "Não. O exame precisa ser interpretado junto ao exame neurológico. Alterações de imagem sem sintomas correspondentes são comuns e não determinam sozinhas a conduta.",
-      ),
+      {
+        id: "hernia-cirurgia",
+        question: "Toda hérnia de disco precisa de cirurgia?",
+        answer:
+          "Não. A maior parte dos casos melhora com tratamento conservador. A cirurgia é considerada diante de perda de força, dor incapacitante persistente ou sinais neurológicos de alerta.",
+      },
+      {
+        id: "hernia-exame-imagem",
+        question: "Minha ressonância mostra hérnia. Isso já define o tratamento?",
+        answer:
+          "Não. O exame precisa ser interpretado junto ao exame neurológico. Alterações de imagem sem sintomas correspondentes são comuns e não determinam sozinhas a conduta.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-coluna", "estenose-canal-vertebral"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -195,16 +197,18 @@ export const SPINE_TREATMENTS: Treatment[] = [
       "Definição compartilhada da conduta.",
     ],
     faqs: [
-      sharedFaq(
-        "estenose-caminhar",
-        "Por que a dor melhora quando sento?",
-        "Ao sentar ou inclinar o tronco à frente, o canal vertebral ganha espaço e a compressão sobre as estruturas nervosas diminui. Esse padrão é característico da estenose.",
-      ),
-      sharedFaq(
-        "estenose-cirurgia",
-        "A cirurgia é sempre necessária?",
-        "Não. O tratamento conservador é a primeira abordagem em boa parte dos casos. A cirurgia é considerada quando a limitação compromete a autonomia ou quando há déficit neurológico progressivo.",
-      ),
+      {
+        id: "estenose-caminhar",
+        question: "Por que a dor melhora quando sento?",
+        answer:
+          "Ao sentar ou inclinar o tronco à frente, o canal vertebral ganha espaço e a compressão sobre as estruturas nervosas diminui. Esse padrão é característico da estenose.",
+      },
+      {
+        id: "estenose-cirurgia",
+        question: "A cirurgia é sempre necessária?",
+        answer:
+          "Não. O tratamento conservador é a primeira abordagem em boa parte dos casos. A cirurgia é considerada quando a limitação compromete a autonomia ou quando há déficit neurológico progressivo.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-coluna", "hernia-disco"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -271,16 +275,18 @@ export const SPINE_TREATMENTS: Treatment[] = [
       "Definição compartilhada da conduta e do acompanhamento.",
     ],
     faqs: [
-      sharedFaq(
-        "mielopatia-diferenca",
-        "Qual a diferença para uma hérnia de disco cervical?",
-        "Na hérnia com compressão de raiz, o sintoma predominante costuma ser a dor irradiada para o braço. Na mielopatia, a medula é comprimida e os sinais aparecem como perda de destreza nas mãos e alteração do equilíbrio, muitas vezes sem dor importante.",
-      ),
-      sharedFaq(
-        "mielopatia-urgencia",
-        "É preciso procurar avaliação com urgência?",
-        "Sinais progressivos de perda de destreza, força ou equilíbrio devem ser avaliados sem adiamento, já que a conduta busca interromper a progressão do comprometimento.",
-      ),
+      {
+        id: "mielopatia-diferenca",
+        question: "Qual a diferença para uma hérnia de disco cervical?",
+        answer:
+          "Na hérnia com compressão de raiz, o sintoma predominante costuma ser a dor irradiada para o braço. Na mielopatia, a medula é comprimida e os sinais aparecem como perda de destreza nas mãos e alteração do equilíbrio, muitas vezes sem dor importante.",
+      },
+      {
+        id: "mielopatia-urgencia",
+        question: "É preciso procurar avaliação com urgência?",
+        answer:
+          "Sinais progressivos de perda de destreza, força ou equilíbrio devem ser avaliados sem adiamento, já que a conduta busca interromper a progressão do comprometimento.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-coluna", "reabilitacao-neurocirurgica"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
@@ -348,16 +354,18 @@ export const SPINE_TREATMENTS: Treatment[] = [
       "Reabilitação orientada conforme a fase da recuperação.",
     ],
     faqs: [
-      sharedFaq(
-        "fratura-cirurgia",
-        "Toda fratura da coluna precisa de cirurgia?",
-        "Não. Fraturas estáveis e sem comprometimento neurológico podem ser conduzidas de forma conservadora, com acompanhamento clínico e por imagem.",
-      ),
-      sharedFaq(
-        "fratura-segunda-opiniao",
-        "Posso buscar uma segunda opinião sobre a conduta indicada?",
-        "Sim. Leve os exames de imagem, os laudos e os relatórios do atendimento inicial para que a avaliação considere todo o histórico do caso.",
-      ),
+      {
+        id: "fratura-cirurgia",
+        question: "Toda fratura da coluna precisa de cirurgia?",
+        answer:
+          "Não. Fraturas estáveis e sem comprometimento neurológico podem ser conduzidas de forma conservadora, com acompanhamento clínico e por imagem.",
+      },
+      {
+        id: "fratura-segunda-opiniao",
+        question: "Posso buscar uma segunda opinião sobre a conduta indicada?",
+        answer:
+          "Sim. Leve os exames de imagem, os laudos e os relatórios do atendimento inicial para que a avaliação considere todo o histórico do caso.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-coluna", "reabilitacao-neurocirurgica"],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],

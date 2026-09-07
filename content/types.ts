@@ -7,6 +7,16 @@ export interface FaqSeed {
   answer: string;
 }
 
+/**
+ * A treatment's question as authored. Category, order and placement are decided
+ * by `app/lib/faqs.ts`, so the catalog can renumber the hub without every
+ * treatment file restating fields it does not choose.
+ */
+export interface TreatmentFaq extends FaqSeed {
+  /** Withholds one question while the rest of the page stays published. */
+  draft?: true;
+}
+
 export interface FaqItem extends FaqSeed {
   category: "consulta" | "tratamentos" | "recuperacao" | "atendimento";
   order: number;
@@ -39,7 +49,7 @@ export interface Treatment {
   indications: string[];
   limitations: string[];
   carePath: string[];
-  faqs: FaqItem[];
+  faqs: TreatmentFaq[];
   relatedTreatmentSlugs: string[];
   relatedPostSlugs: string[];
   keywords: string[];

@@ -19,7 +19,7 @@ test("the FAQ hub inherits questions from every approved treatment", () => {
   const answers = new Set(getPublishedFaqs().map((faq) => faq.answer));
 
   for (const treatment of getPublishedTreatments()) {
-    for (const faq of treatment.faqs.filter((item) => item.state === "published")) {
+    for (const faq of treatment.faqs.filter((item) => !item.draft)) {
       assert.ok(
         answers.has(faq.answer),
         `${treatment.slug} is approved but "${faq.question}" is missing from the hub`,
