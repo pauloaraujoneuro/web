@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ClipboardList, Mail, MapPin } from "lucide-react";
 import Breadcrumb, { type BreadcrumbItem } from "@/app/components/content/Breadcrumb";
+import ClinicMap from "@/app/components/content/ClinicMap";
 import RelatedLinks from "@/app/components/content/RelatedLinks";
 import FaqAccordion from "@/app/components/content/FaqAccordion";
 import JsonLd from "@/app/components/content/JsonLd";
@@ -9,6 +11,7 @@ import AppointmentCta from "@/app/components/custom/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedLocation, getPublishedLocations } from "@/app/lib/locations";
 import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
+import { getClinic } from "@/app/lib/clinics";
 import { DOCTOR_CRM, DOCTOR_NAME, DOCTOR_RQE, SITE_URL } from "@/constants";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -38,6 +41,7 @@ export default async function LocationDetailPage({ params }: Props) {
   const { slug } = await params;
   const location = getPublishedLocation(slug);
   if (!location) notFound();
+  const clinic = location.clinicSlug ? getClinic(location.clinicSlug) : undefined;
   const pageUrl = `${SITE_URL}/locais-de-atendimento/${location.slug}`;
   const breadcrumbs: BreadcrumbItem[] = [
     { name: "Início", href: "/" },
@@ -136,6 +140,20 @@ export default async function LocationDetailPage({ params }: Props) {
           <section className="location-section">
             <div className="location-section-heading"><span>Dúvidas práticas</span><h2>Perguntas sobre o atendimento</h2></div>
             <div className="mt-5"><FaqAccordion items={location.faqs} currentPath={`/locais-de-atendimento/${location.slug}`} /></div>
+          </section>
+        ) : null}
+
+        {clinic ? (
+          <section className="location-section">
+            <div className="location-section-heading">
+              <span>Como chegar</span>
+              <h2>Onde fica a {clinic.name}</h2>
+              <p>
+                O atendimento acontece na {clinic.name}, em {clinic.neighborhood}.{" "}
+                <Link href={`/${clinic.slug}`}>Ver contato e detalhes da clínica</Link>.
+              </p>
+            </div>
+            <ClinicMap clinic={clinic} />
           </section>
         ) : null}
 

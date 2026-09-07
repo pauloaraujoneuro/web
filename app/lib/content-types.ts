@@ -47,6 +47,29 @@ export interface Treatment {
   order: number;
 }
 
+export interface ClinicProfile {
+  slug: string;
+  name: string;
+  tagline: string;
+  description: string;
+  streetAddress: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  phone: string;
+  whatsappNumber: string;
+  whatsappLabel: string;
+  websiteUrl: string;
+  mapUrl: string;
+  /** Query-based embed: a plain map with a pin, without the reviews panel. */
+  mapEmbedUrl: string;
+  socialLinks: Array<{ label: string; href: string }>;
+  imageSrc: string;
+  imageAlt: string;
+  lastModified: string;
+}
+
 export interface Location {
   slug: string;
   active: boolean;
@@ -69,6 +92,8 @@ export interface Location {
   streetAddress?: string;
   hours?: string;
   mapUrl?: string;
+  /** The facility this location is hosted in, when it has its own page. */
+  clinicSlug?: string;
 }
 
 export interface BlogFrontmatter {

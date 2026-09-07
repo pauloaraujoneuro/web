@@ -10,6 +10,7 @@ const publicRoutes = [
   "/perguntas-frequentes",
   "/locais-de-atendimento",
   "/locais-de-atendimento/campo-grande",
+  "/clinica-protrauma",
 ];
 
 for (const route of publicRoutes) {

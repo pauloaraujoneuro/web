@@ -10,14 +10,18 @@ test("location hub exposes only the active Campo Grande location", async ({ page
   await expect(page.getByText("União da Vitória", { exact: false })).toHaveCount(0);
 });
 
-test("Campo Grande page renders confirmed fields and omits unconfirmed address", async ({ page }) => {
+test("Campo Grande page renders the fields the client confirmed", async ({ page }) => {
   await page.goto("/locais-de-atendimento/campo-grande");
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Neurocirurgião em Campo Grande - MS");
-  await expect(page.getByRole("heading", { level: 2, name: "Clínica Protrauma" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 2, name: "Clínica Protrauma", exact: true }),
+  ).toBeVisible();
   await expect(page.getByRole("heading", { level: 2, name: "O que trazer para a consulta" })).toBeVisible();
-  await expect(page.locator("address")).toHaveCount(0);
-  await expect(page.getByRole("link", { name: "Abrir mapa" })).toHaveCount(0);
+  // The address became publishable once the client supplied it; hours are still
+  // unconfirmed and must stay absent.
+  await expect(page.locator("address").first()).toContainText("R. 15 de Novembro, 2808");
+  await expect(page.getByText("Segunda a Sexta", { exact: false })).toHaveCount(0);
   await expect(page.getByRole("link", { name: "Agendar em Campo Grande" })).toHaveAttribute("href", /wa\.me\/554120180330/);
 });
 

@@ -19,15 +19,16 @@ test("SEO inventory contains every and only published canonical route once", () 
     "/tratamentos/reabilitacao-neurocirurgica",
     "/blog/como-se-preparar-para-consulta-neurocirurgica",
     "/locais-de-atendimento/campo-grande",
+    "/clinica-protrauma",
   ]);
   assert.equal(new Set(paths).size, paths.length);
 });
 
 test("sitemap maps canonical URLs and content dates deterministically", () => {
   const sitemap = getSitemapEntries();
-  assert.equal(sitemap.length, 11);
+  assert.equal(sitemap.length, 12);
   assert.equal(sitemap[0].url, SITE_URL);
-  assert.equal(sitemap.at(-1)?.url, `${SITE_URL}/locais-de-atendimento/campo-grande`);
+  assert.equal(sitemap.at(-1)?.url, `${SITE_URL}/clinica-protrauma`);
   assert.ok(sitemap.every((entry) => entry.lastModified === "2026-09-06"));
 });
 

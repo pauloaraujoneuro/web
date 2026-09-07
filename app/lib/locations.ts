@@ -9,6 +9,13 @@ import type { Location } from "@/app/lib/content-types";
 import { validateLocations } from "@/app/lib/content-validation";
 import { getPublishedTreatments } from "@/app/lib/treatments";
 import { getPublishedFaqs } from "@/app/lib/faqs";
+import { fullAddress, getClinic } from "@/app/lib/clinics";
+
+const protrauma = getClinic("clinica-protrauma");
+
+if (!protrauma) {
+  throw new Error("locations.campo-grande: the Protrauma clinic profile is missing");
+}
 
 const campoGrande = SERVICE_LOCATIONS.find((item) => item.id === "campo-grande");
 
@@ -48,6 +55,9 @@ export const LOCATIONS: Location[] = [
     ctaMessage: CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
     lastModified: "2026-09-06",
     email: CONTACT_EMAIL,
+    clinicSlug: protrauma.slug,
+    streetAddress: fullAddress(protrauma),
+    mapUrl: protrauma.mapUrl,
   },
 ];
 

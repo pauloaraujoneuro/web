@@ -12,6 +12,7 @@ const expectedRoutes = [
   "/tratamentos/reabilitacao-neurocirurgica",
   "/blog/como-se-preparar-para-consulta-neurocirurgica",
   "/locais-de-atendimento/campo-grande",
+  "/clinica-protrauma",
 ];
 
 test("public routes expose exact unique canonical URLs", async ({ page }) => {

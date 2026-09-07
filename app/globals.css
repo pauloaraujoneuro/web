@@ -922,6 +922,145 @@ button,
   line-height: 1.6;
 }
 
+.clinic-photo {
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  background: var(--surface-white);
+  box-shadow: 0 10px 30px rgba(35, 62, 76, 0.06);
+}
+
+.clinic-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.clinic-facts {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 760px) {
+  .clinic-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.clinic-facts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  background: var(--surface-white);
+  padding: 1.15rem;
+}
+
+.clinic-facts p {
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.clinic-facts p svg {
+  display: inline;
+  margin-right: 0.3rem;
+  color: var(--primary);
+  vertical-align: -2px;
+}
+
+.clinic-facts a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  color: var(--primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.clinic-social {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0;
+}
+
+.clinic-social a {
+  min-height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-subtle);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+}
+
+.clinic-map {
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  background: var(--surface-white);
+  margin-top: 1.5rem;
+}
+
+.clinic-map iframe {
+  display: block;
+  width: 100%;
+  height: clamp(15rem, 42vw, 24rem);
+  border: 0;
+}
+
+.clinic-map-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-subtle);
+  padding: 0.85rem 1.15rem;
+}
+
+.clinic-map-footer address {
+  color: #475569;
+  font-size: 0.85rem;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.clinic-map-footer a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.clinic-crosslink {
+  margin-top: 1.25rem;
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.clinic-crosslink a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.clinic-note {
+  margin-top: 1.5rem;
+  color: #64748b;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
 .pill-navigation {
   display: flex;
   max-width: 100%;

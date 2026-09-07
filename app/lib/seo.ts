@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getPublishedPosts } from "@/app/lib/blog";
 import { getPublishedLocations } from "@/app/lib/locations";
 import { getPublishedTreatments } from "@/app/lib/treatments";
+import { getClinics } from "@/app/lib/clinics";
 import {
   DOCTOR_CRM,
   DOCTOR_NAME,
@@ -63,10 +64,19 @@ export function getPublicRouteInventory(
     priority: 0.8,
   }));
 
+  const clinicEntries = getClinics().map((clinic) => ({
+    path: `/${clinic.slug}`,
+    title: `${clinic.name} em ${clinic.city} - ${clinic.state}`,
+    description: clinic.tagline,
+    lastModified: clinic.lastModified,
+    priority: 0.7,
+  }));
+
   const datedSections = [
     ...treatmentEntries,
     ...postEntries,
     ...locationEntries,
+    ...clinicEntries,
   ].map((entry) => entry.lastModified);
 
   const staticRoutes: RouteInventoryEntry[] = [
@@ -124,6 +134,7 @@ export function getPublicRouteInventory(
     ...treatmentEntries,
     ...postEntries,
     ...locationEntries,
+    ...clinicEntries,
   ];
   const urls = inventory.map((entry) => `${SITE_URL}${entry.path}`);
   if (new Set(urls).size !== urls.length) {
@@ -141,14 +152,18 @@ export function getSitemapEntries(): MetadataRoute.Sitemap {
   }));
 }
 
+const CLINIC_PATHS = new Set(getClinics().map((clinic) => `/${clinic.slug}`));
+
+/** Ordered; each route lands in the first section that claims it. */
 const LLMS_SECTIONS: Array<{ heading: string; matches: (path: string) => boolean }> = [
-  { heading: "Páginas principais", matches: (path) => !path.includes("/", 1) },
   { heading: "Tratamentos", matches: (path) => path.startsWith("/tratamentos/") },
   { heading: "Artigos", matches: (path) => path.startsWith("/blog/") },
   {
     heading: "Locais de atendimento",
     matches: (path) => path.startsWith("/locais-de-atendimento/"),
   },
+  { heading: "Clínicas", matches: (path) => CLINIC_PATHS.has(path) },
+  { heading: "Páginas principais", matches: () => true },
 ];
 
 /**
@@ -165,8 +180,21 @@ export function getLlmsTxt(inventory = getPublicRouteInventory()) {
     "",
   ];
 
-  for (const section of LLMS_SECTIONS) {
-    const entries = inventory.filter((entry) => section.matches(entry.path));
+  const claimed = new Set<string>();
+  const orderedSections = [
+    LLMS_SECTIONS.at(-1)!,
+    ...LLMS_SECTIONS.slice(0, -1),
+  ];
+
+  for (const section of orderedSections) {
+    const entries = inventory.filter(
+      (entry) =>
+        !claimed.has(entry.path) &&
+        (section.heading === "Páginas principais"
+          ? LLMS_SECTIONS.slice(0, -1).every((other) => !other.matches(entry.path))
+          : section.matches(entry.path)),
+    );
+    for (const entry of entries) claimed.add(entry.path);
     if (!entries.length) continue;
     lines.push(`## ${section.heading}`, "");
     for (const entry of entries) {
