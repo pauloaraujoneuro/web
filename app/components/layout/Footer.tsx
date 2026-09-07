@@ -11,7 +11,7 @@ import {
   INSTAGRAM_URL,
   LATTES_URL,
   LATTES_URL_LABEL,
-  NAV_ITEMS,
+  FOOTER_NAV_ITEMS,
 } from "@/constants";
 import InstagramIcon from "@/app/components/icons/InstagramIcon";
 import LattesIcon from "@/app/components/icons/LattesIcon";
@@ -65,7 +65,7 @@ export default function Footer() {
               Navegação
             </h3>
             <ul className="mt-4 space-y-2">
-              {NAV_ITEMS.map((item) => (
+              {FOOTER_NAV_ITEMS.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Clock, Globe, MapPin, Phone } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import ClinicMap from "@/app/components/content/ClinicMap";
 import JsonLd from "@/app/components/content/JsonLd";
@@ -93,56 +93,77 @@ export default function ClinicPage() {
         </div>
 
         <section className="clinic-facts" aria-label="Contato e endereço">
-          <div>
-            <span className="card-eyebrow card-eyebrow-topic">Endereço</span>
-            <p>
+          <article className="clinic-fact">
+            <span className="clinic-fact-icon">
+              <MapPin aria-hidden size={19} strokeWidth={1.8} />
+            </span>
+            <span className="clinic-fact-label">Endereço</span>
+            <address>
               {clinic.streetAddress}
               <br />
-              {clinic.neighborhood}, {clinic.city} - {clinic.state}
+              {clinic.neighborhood}
               <br />
-              CEP {clinic.postalCode}
-            </p>
-            <a href={clinic.mapUrl} target="_blank" rel="noopener noreferrer">
-              <MapPin aria-hidden size={16} strokeWidth={2} />
-              Ver rota no mapa
-            </a>
-          </div>
-          <div>
-            <span className="card-eyebrow card-eyebrow-topic">Contato da clínica</span>
-            <p>
-              <Phone aria-hidden size={15} strokeWidth={2} /> {clinic.phone}
-              <br />
-              <MessageCircle aria-hidden size={15} strokeWidth={2} /> WhatsApp{" "}
-              {clinic.whatsappLabel}
-            </p>
+              {clinic.city} - {clinic.state}, {clinic.postalCode}
+            </address>
             <a
+              className="clinic-fact-action"
+              href={clinic.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ver rota no mapa
+              <ArrowUpRight aria-hidden size={16} strokeWidth={2} />
+            </a>
+          </article>
+
+          <article className="clinic-fact">
+            <span className="clinic-fact-icon">
+              <Phone aria-hidden size={19} strokeWidth={1.8} />
+            </span>
+            <span className="clinic-fact-label">Contato da clínica</span>
+            <ul className="clinic-fact-list">
+              <li>
+                <span>Telefone</span>
+                <strong>{clinic.phone}</strong>
+              </li>
+              <li>
+                <span>WhatsApp</span>
+                <strong>{clinic.whatsappLabel}</strong>
+              </li>
+            </ul>
+            <a
+              className="clinic-fact-action"
               href={`https://wa.me/${clinic.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <MessageCircle aria-hidden size={16} strokeWidth={2} />
               Falar com a recepção
+              <ArrowUpRight aria-hidden size={16} strokeWidth={2} />
             </a>
-          </div>
-          <div>
-            <span className="card-eyebrow card-eyebrow-topic">Horários</span>
-            <ul className="clinic-hours">
+          </article>
+
+          <article className="clinic-fact">
+            <span className="clinic-fact-icon">
+              <Clock aria-hidden size={19} strokeWidth={1.8} />
+            </span>
+            <span className="clinic-fact-label">Horários</span>
+            <ul className="clinic-fact-list">
               {clinic.openingHours.map((entry) => (
                 <li key={entry.days}>
                   <span>{entry.days}</span>
-                  <span>{entry.hours}</span>
+                  <strong>{entry.hours}</strong>
                 </li>
               ))}
             </ul>
-            <p className="clinic-hours-note">{clinic.openingHoursNote}</p>
-          </div>
-          <div>
-            <span className="card-eyebrow card-eyebrow-topic">Na internet</span>
-            <p>{clinic.tagline}</p>
-            <a href={clinic.websiteUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink aria-hidden size={16} strokeWidth={2} />
-              protrauma.net
-            </a>
+            <p className="clinic-fact-note">{clinic.openingHoursNote}</p>
+          </article>
+
+          <article className="clinic-fact">
+            <span className="clinic-fact-icon">
+              <Globe aria-hidden size={19} strokeWidth={1.8} />
+            </span>
+            <span className="clinic-fact-label">Na internet</span>
+            <p className="clinic-fact-text">{clinic.tagline}</p>
             <div className="clinic-social">
               {clinic.socialLinks.map((item) => (
                 <a
@@ -155,7 +176,16 @@ export default function ClinicPage() {
                 </a>
               ))}
             </div>
-          </div>
+            <a
+              className="clinic-fact-action"
+              href={clinic.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              protrauma.net
+              <ArrowUpRight aria-hidden size={16} strokeWidth={2} />
+            </a>
+          </article>
         </section>
 
         <section className="location-section">

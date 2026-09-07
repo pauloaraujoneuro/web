@@ -12,7 +12,8 @@ test("the clinic page carries the facility facts and structured data", async ({ 
     "href",
     "https://wa.me/556799120676",
   );
-  await expect(page.getByRole("link", { name: "protrauma.net" })).toHaveAttribute(
+  await expect(page.locator(".clinic-fact")).toHaveCount(4);
+  await expect(page.getByRole("link", { name: /protrauma\.net/ })).toHaveAttribute(
     "href",
     "https://www.protrauma.net/",
   );
@@ -48,8 +49,11 @@ test("the map is embedded lazily and without the reviews panel", async ({ page }
   await expect(page.getByRole("link", { name: /Abrir no Google Maps/ })).toBeVisible();
 });
 
-test("the clinic page is reachable from the hub and the site schema carries the address", async ({ page }) => {
+test("the clinic page is reachable from the hub, the footer and the site schema carries the address", async ({ page }) => {
   await page.goto("/locais-de-atendimento");
+  await expect(
+    page.locator("footer").getByRole("link", { name: "Clínica Protrauma" }),
+  ).toHaveAttribute("href", "/clinica-protrauma");
   await expect(
     page.locator(".location-highlight").getByRole("link", { name: /Sobre a Clínica Protrauma/ }),
   ).toHaveAttribute("href", "/clinica-protrauma");
