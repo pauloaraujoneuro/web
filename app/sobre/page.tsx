@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { BookOpen, BriefcaseMedical, GraduationCap } from "lucide-react";
+import Link from "next/link";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import JsonLd from "@/app/components/content/JsonLd";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { buildPageMetadata } from "@/app/lib/metadata";
-import { clinicEntityId, getVisibleClinic } from "@/app/lib/clinics";
+import { clinicEntityId, clinicPath, getVisibleClinic } from "@/app/lib/clinics";
+import { getPublishedTreatments } from "@/app/lib/treatments";
 import {
   ACADEMIC_MILESTONES,
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
   DOCTOR_CREDENTIALS,
   DOCTOR_CRM,
   DOCTOR_NAME,
+  DOCTOR_PROFILE_IMAGE,
   DOCTOR_PROFILE_IMAGE_FRONT_WIDE,
   DOCTOR_RQE,
   DOCTOR_SHORT_BIO,
@@ -37,6 +39,10 @@ export const metadata: Metadata = buildPageMetadata({
 export default function AboutPage() {
   const currentRoles = PROFESSIONAL_ROLES.filter((role) => role.status === "active");
   const priorRoles = PROFESSIONAL_ROLES.filter((role) => role.status === "deferred");
+  const practiceClinic = getVisibleClinic("protrauma");
+  // `knowsAbout` is read from the published catalog rather than restated here,
+  // so a treatment can never claim expertise the site does not describe.
+  const knowsAbout = getPublishedTreatments().map((treatment) => treatment.title);
 
   return (
     <SiteShell>
@@ -47,9 +53,14 @@ export default function AboutPage() {
         name: `Dr. ${DOCTOR_NAME}`,
         url: SITE_URL,
         mainEntityOfPage: `${SITE_URL}/sobre`,
-        image: `${SITE_URL}${DOCTOR_PROFILE_IMAGE_FRONT_WIDE}`,
+        image: `${SITE_URL}${DOCTOR_PROFILE_IMAGE}`,
         description,
         medicalSpecialty: "Neurosurgery",
+        knowsAbout,
+        alumniOf: ACADEMIC_MILESTONES.map((milestone) => ({
+          "@type": "EducationalOrganization",
+          name: milestone.organization,
+        })),
         identifier: [
           { "@type": "PropertyValue", propertyID: "CRM", value: DOCTOR_CRM },
           { "@type": "PropertyValue", propertyID: "RQE", value: DOCTOR_RQE },
@@ -73,36 +84,63 @@ export default function AboutPage() {
         <header className="profile-hero">
           <div className="profile-portrait">
             <Image
-              src={DOCTOR_PROFILE_IMAGE_FRONT_WIDE}
+              src={DOCTOR_PROFILE_IMAGE}
               alt={`Dr. ${DOCTOR_NAME}, neurocirurgião`}
               fill
               priority
-              sizes="(min-width: 900px) 42vw, 100vw"
+              sizes="(min-width: 900px) 26rem, 100vw"
               className="object-cover object-top"
             />
           </div>
           <div className="profile-intro">
             <span className="eyebrow">Perfil médico</span>
             <h1>Dr. {DOCTOR_NAME}</h1>
-            <p className="profile-title">{DOCTOR_TITLE} · {DOCTOR_CRM} · {DOCTOR_RQE}</p>
+            <p className="profile-title">{DOCTOR_TITLE}</p>
+            <ul className="profile-registrations">
+              <li>{DOCTOR_CRM}</li>
+              <li>{DOCTOR_RQE}</li>
+            </ul>
             <p>{DOCTOR_SHORT_BIO}</p>
-            <div className="active-location-note">
-              <span>Atendimento presencial atual</span>
-              <strong>Clínica Protrauma · Campo Grande - MS</strong>
-            </div>
+            {practiceClinic ? (
+              <Link className="active-location-note" href={clinicPath(practiceClinic)}>
+                <span>Atendimento presencial atual</span>
+                <strong>{practiceClinic.name} · {practiceClinic.city} - {practiceClinic.state}</strong>
+                <small>Ver endereço, horários e como chegar</small>
+              </Link>
+            ) : null}
           </div>
         </header>
 
         <section className="profile-section">
           <div className="profile-section-heading">
-            <BriefcaseMedical aria-hidden size={22} strokeWidth={1.5} />
             <div><span>Atuação</span><h2>Áreas de foco</h2></div>
+          </div>
+          <div className="focus-lead">
+            <div className="focus-lead-photo">
+              <Image
+                src={DOCTOR_PROFILE_IMAGE_FRONT_WIDE}
+                alt={`Dr. ${DOCTOR_NAME} em atendimento`}
+                fill
+                sizes="(min-width: 900px) 28rem, 100vw"
+                className="object-cover object-top"
+              />
+            </div>
+            <p>
+              O atendimento reúne três frentes: cirurgia de nervo periférico, cirurgia
+              de coluna e reabilitação neurocirúrgica. A conduta de cada caso é definida
+              na avaliação presencial, a partir do exame clínico e dos exames disponíveis.
+            </p>
           </div>
           <div className="focus-grid">
             {EXPERTISE_AREAS.map((area) => (
               <article key={area.id}>
                 <h3>{area.title}</h3>
                 <p>{area.description}</p>
+                <ul className="focus-highlights">
+                  {area.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>
@@ -110,7 +148,6 @@ export default function AboutPage() {
 
         <section className="profile-section profile-timeline-panel">
           <div className="profile-section-heading profile-heading-dark">
-            <GraduationCap aria-hidden size={22} strokeWidth={1.5} />
             <div><span>Trajetória acadêmica</span><h2>Formação e fellowship</h2></div>
           </div>
           <ol className="profile-timeline">
@@ -146,7 +183,6 @@ export default function AboutPage() {
 
         <section className="profile-section">
           <div className="profile-section-heading">
-            <BookOpen aria-hidden size={22} strokeWidth={1.5} />
             <div><span>Atualização científica</span><h2>Congressos e atividade acadêmica</h2></div>
           </div>
           <div className="publication-list">

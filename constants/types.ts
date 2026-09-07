@@ -27,7 +27,10 @@ export interface AcademicMilestone {
   id: string;
   period: string;
   title: string;
+  /** Display string, city included: "Universidade Federal do Paraná (UFPR), Curitiba, PR". */
   institution: string;
+  /** The bare organisation name, for `alumniOf` in the profile schema. */
+  organization: string;
   summary: string;
   details?: string[];
 }

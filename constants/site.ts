@@ -76,6 +76,7 @@ export const ACADEMIC_MILESTONES: AcademicMilestone[] = [
     period: "2022",
     title: "Mestrado em Clínica Cirúrgica",
     institution: "Universidade Federal do Paraná (UFPR), Curitiba, PR",
+    organization: "Universidade Federal do Paraná",
     summary: "Foco em formação cirúrgica e aprofundamento em neurocirurgia.",
   },
   {
@@ -83,6 +84,7 @@ export const ACADEMIC_MILESTONES: AcademicMilestone[] = [
     period: "2017 - 2022",
     title: "Especialização - Residência médica em Neurocirurgia",
     institution: "Hospital Universitário Cajuru (HUC), Curitiba, PR",
+    organization: "Hospital Universitário Cajuru",
     summary:
       "Formação prática e técnica em neurocirurgia durante o programa de residência médica.",
   },
@@ -91,6 +93,7 @@ export const ACADEMIC_MILESTONES: AcademicMilestone[] = [
     period: "2022 - 2023",
     title: "Especialização (Fellowship) em Nervo Periférico",
     institution: "Rede SARAH de Hospitais de Reabilitação, Brasília, DF",
+    organization: "Rede SARAH de Hospitais de Reabilitação",
     summary:
       "Aprimoramento dedicado à cirurgia de nervo periférico e estratégias de reconstrução funcional.",
   },
@@ -100,6 +103,7 @@ export const ACADEMIC_MILESTONES: AcademicMilestone[] = [
     title: "Graduação em Medicina",
     institution:
       "Universidade Federal de Campina Grande (UFCG), Campina Grande, PB",
+    organization: "Universidade Federal de Campina Grande",
     summary:
       "Formação médica de base com preparação para atuação clínica e cirúrgica.",
   },
