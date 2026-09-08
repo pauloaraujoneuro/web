@@ -46,8 +46,13 @@ test("sitemap maps canonical URLs and content dates deterministically", () => {
   assert.ok(
     sitemap.every((entry) => /^\d{4}-\d{2}-\d{2}$/.test(String(entry.lastModified))),
   );
-  // The homepage is as fresh as the freshest thing it leads to.
-  assert.equal(sitemap[0].lastModified, "2026-09-06");
+  // The homepage is as fresh as the freshest thing it leads to. Derived rather
+  // than pinned: a pinned date turns every content edit into a test failure.
+  const detailDates = getPublicRouteInventory()
+    .filter((entry) => entry.path.split("/").length > 2)
+    .map((entry) => entry.lastModified);
+  assert.ok(detailDates.length > 0);
+  assert.equal(sitemap[0].lastModified, detailDates.toSorted().at(-1));
 });
 
 test("dated hubs inherit the freshest date of the content they list", () => {

@@ -16,35 +16,97 @@ export const SPINE_TREATMENTS: Treatment[] = [
     metaDescription:
       "Entenda como é feita a avaliação neurocirúrgica da coluna e como são discutidas opções conservadoras, reabilitação e cirurgia.",
     summary:
-      "A avaliação da coluna considera sintomas, exame neurológico, impacto funcional e exames de imagem para definir uma conduta proporcional ao caso.",
+      "A avaliação da coluna considera sintomas, exame neurológico, impacto funcional e exames de imagem para definir uma conduta proporcional ao caso. A maior parte das dores de coluna não tem indicação cirúrgica.",
     sections: [
       {
         id: "quadros-avaliados",
         heading: "Quadros avaliados",
         paragraphs: [
-          "A atuação inclui avaliação de hérnia de disco, estenose do canal, mielopatia cervical e fraturas da coluna.",
+          "A cirurgia da coluna reúne procedimentos diferentes para problemas estruturais distintos das colunas cervical, torácica e lombar. Não é uma operação única.",
+          "A avaliação inclui hérnia de disco com dor irradiada, estenose do canal, mielopatia cervical, fraturas e quadros de instabilidade.",
         ],
       },
       {
-        id: "planejamento",
-        heading: "Planejamento individualizado",
+        id: "quando-avaliar",
+        heading: "Quando a cirurgia entra na discussão",
         paragraphs: [
-          "Quando uma cirurgia é considerada, o planejamento busca equilibrar descompressão neural, estabilidade e preservação dos tecidos.",
+          "A cirurgia passa a ser considerada quando existe um diagnóstico anatômico definido para o qual o procedimento tem um alvo plausível — e não pela intensidade da dor isoladamente.",
+        ],
+        bullets: [
+          "Déficit neurológico progressivo, como perda de força que aumenta.",
+          "Compressão da medula cervical com sinais de mielopatia.",
+          "Dor irradiada persistente, com perda funcional, que não melhorou com tratamento conservador adequado e cujo exame de imagem corresponde aos sintomas.",
+          "Fraturas instáveis ou com repercussão neurológica.",
+        ],
+      },
+      {
+        id: "imagem-nao-e-diagnostico",
+        heading: "O exame de imagem não decide sozinho",
+        paragraphs: [
+          "Alterações em ressonância são comuns e aparecem também em pessoas sem sintomas. O achado de imagem precisa corresponder à história clínica e ao exame neurológico.",
+          "Por isso a investigação começa pela consulta. Diretrizes internacionais desaconselham imagem de rotina na dor lombar sem sinais de alerta, e o exame é pedido quando o resultado pode mudar a conduta.",
+        ],
+      },
+      {
+        id: "tipos-de-procedimento",
+        heading: "O que a cirurgia pode envolver",
+        paragraphs: [
+          "Procedimentos diferentes resolvem problemas diferentes, e a escolha depende do diagnóstico, da anatomia e da estabilidade da coluna.",
+        ],
+        bullets: [
+          "Descompressão: ampliar o espaço ao redor das estruturas nervosas.",
+          "Discectomia: retirar o fragmento de disco que comprime a raiz nervosa.",
+          "Artrodese: unir segmentos vertebrais quando há necessidade de estabilização.",
+          "Instrumentação: parafusos, hastes ou espaçadores usados como apoio à estabilização, quando indicados.",
+          "\"Minimamente invasivo\" descreve a via de acesso, não um procedimento único — e não significa, por si só, resultado melhor a longo prazo.",
+        ],
+      },
+      {
+        id: "decisao-por-diagnostico",
+        heading: "A decisão muda conforme o diagnóstico",
+        paragraphs: [
+          "Não existe uma regra única para \"cirurgia de coluna\": cada condição tem evidência e momento próprios.",
+        ],
+        bullets: [
+          "Hérnia de disco lombar: boa parte dos casos melhora sem cirurgia, e o material herniado com frequência é reabsorvido ao longo dos meses.",
+          "Estenose de canal com sintomas toleráveis: acompanhar costuma ser razoável, e a piora progressiva não é a regra.",
+          "Mielopatia cervical moderada ou grave: diretrizes internacionais recomendam tratamento cirúrgico.",
+          "Fratura sem déficit neurológico: a evidência que compara cirurgia e tratamento conservador é conflitante, e a decisão é individual.",
+        ],
+      },
+      {
+        id: "sinais-de-alerta",
+        heading: "Sinais que pedem avaliação urgente",
+        paragraphs: [
+          "Alguns sintomas mudam a urgência da avaliação e devem ser levados a um serviço de emergência, e não aguardar consulta eletiva.",
+        ],
+        bullets: [
+          "Perda do controle da urina ou retenção urinária associada a sintomas neurológicos.",
+          "Perda de sensibilidade na região genital ou perineal.",
+          "Perda de força que progride rapidamente.",
+          "Sintomas neurológicos graves nas duas pernas.",
+          "Trauma recente da coluna com fraqueza ou dormência.",
         ],
       },
     ],
     indications: [
       "Sintomas neurológicos relacionados a condições compressivas da coluna.",
+      "Dor irradiada persistente, com perda funcional, após tratamento conservador adequado.",
+      "Sinais de mielopatia cervical.",
       "Fraturas que precisam de avaliação de estabilidade.",
     ],
     limitations: [
       "Muitos quadros podem ser acompanhados com medidas conservadoras.",
       "A presença de uma alteração no exame de imagem, isoladamente, não define a necessidade de cirurgia.",
+      "A dor lombar inespecífica, sem diagnóstico anatômico correspondente, não costuma ter alvo cirúrgico.",
+      "Cirurgia da coluna não é sinônimo de artrodese nem de colocação de parafusos.",
+      "O tempo de recuperação varia conforme o procedimento e o diagnóstico.",
     ],
     carePath: [
-      "Entendimento dos sintomas e tratamentos prévios.",
+      "Entendimento dos sintomas, do impacto funcional e dos tratamentos prévios.",
       "Exame neurológico e revisão das imagens disponíveis.",
-      "Discussão das alternativas e dos próximos passos.",
+      "Discussão das alternativas conservadoras, de reabilitação e cirúrgicas.",
+      "Definição conjunta dos próximos passos e do acompanhamento.",
     ],
     faqs: [
       {
@@ -53,11 +115,66 @@ export const SPINE_TREATMENTS: Treatment[] = [
         answer:
           "Não. A conduta depende da avaliação clínica e do impacto funcional. Tratamento conservador e reabilitação podem ser indicados em muitos casos.",
       },
+      {
+        id: "coluna-ressonancia",
+        question: "Uma ressonância alterada significa que preciso operar?",
+        answer:
+          "Não por si só. Alterações de disco e de canal aparecem também em pessoas sem sintomas. O achado precisa corresponder à história e ao exame neurológico para orientar a conduta.",
+      },
+      {
+        id: "coluna-so-cirurgia",
+        question: "O neurocirurgião só trata com cirurgia?",
+        answer:
+          "Não. Boa parte das consultas termina em conduta conservadora, reabilitação ou acompanhamento. A avaliação existe para definir se há um problema com alvo cirúrgico.",
+      },
+      {
+        id: "coluna-descompressao-artrodese",
+        question: "Qual a diferença entre descompressão e artrodese?",
+        answer:
+          "A descompressão amplia o espaço ao redor das estruturas nervosas. A artrodese une segmentos vertebrais quando existe necessidade de estabilização. São objetivos diferentes e nem sempre andam juntos.",
+      },
+      {
+        id: "coluna-parafusos",
+        question: "Toda cirurgia de coluna coloca parafusos?",
+        answer:
+          "Não. A instrumentação é usada quando o caso exige estabilização. Muitas descompressões e discectomias são feitas sem parafusos.",
+      },
+      {
+        id: "coluna-minimamente-invasiva",
+        question: "Cirurgia minimamente invasiva é sempre melhor?",
+        answer:
+          "O termo descreve a via de acesso, não um procedimento único. A escolha depende do diagnóstico e da anatomia, e a via de acesso isoladamente não determina o resultado a longo prazo.",
+      },
+      {
+        id: "coluna-urgencia",
+        question: "Quando a dor nas costas vira urgência?",
+        answer:
+          "Perda do controle da urina, dormência na região genital, perda de força que progride rapidamente ou sintomas neurológicos graves nas duas pernas exigem avaliação de emergência, sem aguardar consulta eletiva.",
+      },
+      {
+        id: "coluna-dor-residual",
+        question: "Posso continuar com dor depois da cirurgia?",
+        answer:
+          "Pode. Cada procedimento tem um alvo definido — por exemplo, aliviar a dor irradiada ou descomprimir a medula — e nem toda dor tem a mesma origem. Os objetivos e os limites esperados são discutidos antes da decisão.",
+      },
     ],
-    relatedTreatmentSlugs: ["reabilitacao-neurocirurgica"],
+    relatedTreatmentSlugs: [
+      "hernia-disco",
+      "estenose-canal-vertebral",
+      "mielopatia-cervical",
+      "fraturas-coluna",
+      "reabilitacao-neurocirurgica",
+    ],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
-    keywords: ["cirurgia da coluna", "neurocirurgia", "Campo Grande"],
-    lastModified: "2026-09-06",
+    keywords: [
+      "cirurgia da coluna",
+      "neurocirurgia",
+      "hérnia de disco",
+      "estenose de canal",
+      "mielopatia cervical",
+      "Campo Grande",
+    ],
+    lastModified: "2026-09-07",
     order: 2,
   },
   {
