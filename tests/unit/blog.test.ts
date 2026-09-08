@@ -10,10 +10,25 @@ test("published posts are deterministic and expose parsed headings", () => {
 
   assert.equal(posts.length, 4);
   assert.equal(posts[0].slug, "como-se-preparar-para-consulta-neurocirurgica");
-  assert.deepEqual(
-    posts[0].headings.map((heading) => heading.id),
-    ["reuna-a-historia-do-problema", "separe-exames-e-documentos", "o-que-acontece-durante-a-avaliacao"],
-  );
+
+  // The heading contract, not the current headings: anchors must be unique,
+  // URL-safe and derived from real headings, so the in-page table of contents
+  // never points at something that is not there. Pinning the list instead made
+  // every edit to an article a test failure.
+  for (const post of posts) {
+    assert.ok(post.headings.length > 0, `${post.slug} parsed no headings`);
+    const ids = post.headings.map((heading) => heading.id);
+    assert.equal(new Set(ids).size, ids.length, `${post.slug} has duplicate anchors`);
+    for (const heading of post.headings) {
+      assert.match(heading.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/, `${post.slug}: ${heading.id}`);
+      assert.ok(heading.text.trim().length > 0);
+      assert.ok(heading.level === 2 || heading.level === 3);
+      assert.ok(
+        post.body.includes(heading.text),
+        `${post.slug}: heading "${heading.text}" is not in the body`,
+      );
+    }
+  }
 });
 
 test("unknown published post is absent", () => {

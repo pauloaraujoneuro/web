@@ -33,7 +33,23 @@ test("article renders markdown headings, attribution, disclaimer, and related li
   await page.goto("/blog/como-se-preparar-para-consulta-neurocirurgica");
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Como se preparar para uma consulta neurocirúrgica");
-  await expect(page.locator(".markdown-body").getByRole("heading", { level: 2 })).toHaveCount(4);
+  // The table of contents must list exactly the headings the article renders.
+  // Pinning a count instead made every edit to the article a test failure, and
+  // it never checked the thing that actually breaks: a TOC that drifts from the
+  // body and links to an anchor that is not there.
+  const tocLinks = page.getByRole("navigation", { name: "Nesta leitura" }).getByRole("link");
+  // Direct children only: the page appends its own "Informações relacionadas"
+  // heading inside the same article element, and that one is not part of the
+  // markdown, so it is correctly absent from the contents list.
+  const bodyHeadings = page.locator(".markdown-body > h2, .markdown-body > h3");
+  const headingCount = await bodyHeadings.count();
+  expect(headingCount).toBeGreaterThanOrEqual(4);
+  await expect(tocLinks).toHaveCount(headingCount);
+  for (const href of await tocLinks.evaluateAll((links) =>
+    links.map((link) => link.getAttribute("href") ?? ""),
+  )) {
+    await expect(page.locator(href)).toHaveCount(1);
+  }
   await expect(page.getByLabel("Autoria médica")).toContainText("CRM-PR 37567");
   await expect(page.getByText("Aviso de responsabilidade médica")).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Nesta leitura" })).toBeVisible();
