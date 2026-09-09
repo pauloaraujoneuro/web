@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ClinicProfile } from "@/content/types";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Clock, Globe, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import ClinicMap from "@/app/components/content/ClinicMap";
 import JsonLd from "@/app/components/content/JsonLd";
@@ -139,9 +139,6 @@ export default async function ClinicPage({ params }: Props) {
 
         <section className="clinic-facts" aria-label="Contato e endereço">
           <article className="clinic-fact">
-            <span className="clinic-fact-icon">
-              <MapPin aria-hidden size={19} strokeWidth={1.8} />
-            </span>
             <span className="clinic-fact-label">Endereço</span>
             <address>
               {clinic.streetAddress}
@@ -162,9 +159,6 @@ export default async function ClinicPage({ params }: Props) {
           </article>
 
           <article className="clinic-fact">
-            <span className="clinic-fact-icon">
-              <Phone aria-hidden size={19} strokeWidth={1.8} />
-            </span>
             <span className="clinic-fact-label">Contato da clínica</span>
             <ul className="clinic-fact-list">
               <li>
@@ -176,38 +170,18 @@ export default async function ClinicPage({ params }: Props) {
                 <strong>{clinic.whatsappLabel}</strong>
               </li>
             </ul>
-            {/* Two different destinations, named so nobody has to guess which
-                one answers: the clinic's own reception, and the practice's
-                line for scheduling with the doctor. */}
-            <div className="clinic-fact-actions">
-              <TrackedWhatsAppLink
-                href={createWhatsAppUrl(
-                  location?.ctaMessage ?? CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary clinic-fact-cta"
-                eventLocation={`clinic_${clinic.slug}_contact_card`}
-                eventLabel={`Agendar com o Dr. ${DOCTOR_NAME}`}
-              >
-                Agendar com o Dr. {DOCTOR_NAME}
-              </TrackedWhatsAppLink>
-              <a
-                className="clinic-fact-action"
-                href={`https://wa.me/${clinic.whatsappNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Falar com a recepção
-                <ArrowUpRight aria-hidden size={16} strokeWidth={2} />
-              </a>
-            </div>
+            <a
+              className="clinic-fact-action"
+              href={`https://wa.me/${clinic.whatsappNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Falar com a recepção
+              <ArrowUpRight aria-hidden size={16} strokeWidth={2} />
+            </a>
           </article>
 
           <article className="clinic-fact">
-            <span className="clinic-fact-icon">
-              <Clock aria-hidden size={19} strokeWidth={1.8} />
-            </span>
             <span className="clinic-fact-label">Horários</span>
             <ul className="clinic-fact-list">
               {clinic.openingHours.map((entry) => (
@@ -221,9 +195,6 @@ export default async function ClinicPage({ params }: Props) {
           </article>
 
           <article className="clinic-fact">
-            <span className="clinic-fact-icon">
-              <Globe aria-hidden size={19} strokeWidth={1.8} />
-            </span>
             <span className="clinic-fact-label">Na internet</span>
             <p className="clinic-fact-text">{clinic.tagline}</p>
             <div className="clinic-social">
@@ -248,7 +219,28 @@ export default async function ClinicPage({ params }: Props) {
               <ArrowUpRight aria-hidden size={16} strokeWidth={2} />
             </a>
           </article>
-        </section>
+          </section>
+
+        {/* The cards above are the clinic's own contacts. Scheduling a
+            neurosurgical consultation goes to the practice, so it gets one
+            unambiguous action rather than a button competing inside a card. */}
+        <div className="clinic-contact-cta">
+          <p>
+            Consultas de neurocirurgia são agendadas com a equipe do Dr. {DOCTOR_NAME}.
+          </p>
+          <TrackedWhatsAppLink
+            href={createWhatsAppUrl(
+              location?.ctaMessage ?? CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+            eventLocation={`clinic_${clinic.slug}_contact`}
+            eventLabel={`Agendar com o Dr. ${DOCTOR_NAME}`}
+          >
+            Agendar com o Dr. {DOCTOR_NAME}
+          </TrackedWhatsAppLink>
+        </div>
 
         <section className="location-section">
           <div className="location-section-heading">

@@ -1382,39 +1382,37 @@ a.active-location-note:focus-visible {
     opacity: 1;
   }
 
-  .clinic-fact:hover .clinic-fact-actions {
-  display: grid;
-  gap: 0.55rem;
-  margin-top: auto;
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 0.85rem;
+  .clinic-fact:hover .clinic-contact-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem 1.5rem;
+  margin-top: 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  background: var(--surface-subtle);
+  padding: 1.1rem 1.25rem;
 }
 
-.clinic-fact-actions .clinic-fact-action {
-  margin-top: 0;
-  border-top: 0;
-  padding-top: 0;
+.clinic-contact-cta p {
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
-.clinic-fact-cta {
-  justify-content: center;
-  padding-block: 0.62rem;
-  font-size: 0.85rem;
+.clinic-contact-cta .btn-primary {
+  min-height: 3rem;
+  flex: 1 1 auto;
+}
+
+@media (min-width: 620px) {
+  .clinic-contact-cta .btn-primary { flex: 0 0 auto; }
 }
 
 .clinic-fact-action svg {
     transform: translate(2px, -2px);
   }
-}
-
-.clinic-fact-icon {
-  display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
-  place-items: center;
-  border-radius: 0.8rem;
-  background: var(--accent-sky);
-  color: var(--primary);
 }
 
 .clinic-fact-label {
@@ -1486,24 +1484,32 @@ a.active-location-note:focus-visible {
   font-weight: 700;
 }
 
-.clinic-fact-actions {
-  display: grid;
-  gap: 0.55rem;
-  margin-top: auto;
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 0.85rem;
+.clinic-contact-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem 1.5rem;
+  margin-top: 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  background: var(--surface-subtle);
+  padding: 1.1rem 1.25rem;
 }
 
-.clinic-fact-actions .clinic-fact-action {
-  margin-top: 0;
-  border-top: 0;
-  padding-top: 0;
+.clinic-contact-cta p {
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
-.clinic-fact-cta {
-  justify-content: center;
-  padding-block: 0.62rem;
-  font-size: 0.85rem;
+.clinic-contact-cta .btn-primary {
+  min-height: 3rem;
+  flex: 1 1 auto;
+}
+
+@media (min-width: 620px) {
+  .clinic-contact-cta .btn-primary { flex: 0 0 auto; }
 }
 
 .clinic-fact-action svg {
