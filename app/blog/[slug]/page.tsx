@@ -137,9 +137,15 @@ export default async function BlogArticlePage({ params }: Props) {
           <p>{post.dek}</p>
           <div className="article-byline">
             <AuthorCard compact />
-            <p>
-              Publicado em {formatDate(post.publishDate)}
-              {post.lastModified !== post.publishDate ? ` · Atualizado em ${formatDate(post.lastModified)}` : ""}
+            <p className="article-dates">
+              <time dateTime={post.publishDate}>
+                Publicado em {formatDate(post.publishDate)}
+              </time>
+              {post.lastModified !== post.publishDate ? (
+                <time dateTime={post.lastModified}>
+                  Atualizado em {formatDate(post.lastModified)}
+                </time>
+              ) : null}
             </p>
           </div>
         </header>

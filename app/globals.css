@@ -1910,6 +1910,18 @@ a.active-location-note:focus-visible {
   font-size: 0.75rem;
 }
 
+.article-dates {
+  display: grid;
+  gap: 0.2rem;
+}
+
+/* Each date holds its own line: the pair reads as two facts, not as one
+   sentence broken wherever the column happened to run out. */
+.article-dates time {
+  display: block;
+  white-space: nowrap;
+}
+
 .markdown-body {
   min-width: 0;
   color: #334155;
@@ -2001,7 +2013,12 @@ a.active-location-note:focus-visible {
   }
 
   .featured-post > a { width: auto; min-width: 12rem; }
-  .article-byline { grid-template-columns: minmax(0, 25rem) auto; align-items: end; }
+  .article-byline {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .article-byline > .article-dates { justify-items: end; text-align: right; }
 }
 
 a:focus-visible,
