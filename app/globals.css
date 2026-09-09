@@ -2001,9 +2001,14 @@ a.active-location-note:focus-visible {
   line-height: 1.7;
 }
 
+/* Card and dates sit next to each other and are read together. Pushing the
+   dates to the far edge of the header opened a gap wide enough that they
+   stopped looking related to the byline at all. */
 .article-byline {
-  display: grid;
-  gap: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.75rem;
   margin-top: 1.5rem;
 }
 
@@ -2115,12 +2120,7 @@ a.active-location-note:focus-visible {
   }
 
   .featured-post > a { width: auto; min-width: 12rem; }
-  .article-byline {
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: center;
-  }
 
-  .article-byline > .article-dates { justify-items: end; text-align: right; }
 }
 
 a:focus-visible,
