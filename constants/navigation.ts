@@ -7,15 +7,15 @@ export const NAV_ITEMS: NavigationItem[] = [
   { href: "/blog", label: "Blog" },
   { href: "/perguntas-frequentes", label: "Dúvidas frequentes" },
   { href: "/locais-de-atendimento", label: "Atendimento" },
-  { href: "/#contato", label: "Contato" },
 ];
 
 /**
- * The footer carries one extra entry: the clinic page has no place in the
- * header, but needs a site-wide link to be found.
+ * The footer carries two entries the header does not: the clinic page, which
+ * still needs a site-wide link to be found, and the contact anchor, whose job
+ * in the header was already done by the appointment button beside it.
  */
 export const FOOTER_NAV_ITEMS: NavigationItem[] = [
-  ...NAV_ITEMS.slice(0, -1),
+  ...NAV_ITEMS,
   { href: "/clinica/protrauma", label: "Clínica Protrauma" },
-  NAV_ITEMS[NAV_ITEMS.length - 1],
+  { href: "/#contato", label: "Contato" },
 ];

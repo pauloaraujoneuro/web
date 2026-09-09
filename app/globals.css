@@ -423,8 +423,21 @@ body::after {
   border-color: rgba(255, 255, 255, 0.1);
 }
 
+/* The rows fill the panel, but the prose inside them keeps a readable measure
+   instead of running the full width of a wide screen. */
+.faq-answer p {
+  max-width: 60ch;
+}
+
 .faq-list-dark .faq-plus {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(37, 211, 102, 0.16);
+  color: var(--accent-green);
+}
+
+/* Open questions keep the accent on the marker, so the row that is expanded is
+   identifiable at a glance in a long list. */
+.faq-list-dark .subpage-faq[open] {
+  border-color: rgba(37, 211, 102, 0.32);
 }
 
 .faq-list-dark .faq-answer a {
@@ -801,6 +814,7 @@ a.active-location-note:focus-visible {
 }
 
 .faq-page-panel {
+  position: relative;
   overflow: hidden;
   border-radius: 1.25rem;
   background: linear-gradient(145deg, #1d323e, #233e4c);
@@ -808,9 +822,19 @@ a.active-location-note:focus-visible {
   color: white;
 }
 
+/* A single band of the accent along the top edge, so the panel reads as part
+   of the brand rather than as another block of navy. */
+.faq-page-panel::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-green), rgba(37, 211, 102, 0));
+  content: "";
+}
+
 .faq-page-heading { max-width: 40rem; }
 .faq-page-heading > span {
-  color: #b9cbd4;
+  color: var(--accent-green);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -870,16 +894,21 @@ a.active-location-note:focus-visible {
 }
 
 .faq-topic-index a > span {
-  color: #9fb6c2;
+  color: var(--accent-green);
   font-size: 0.7rem;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
+}
+
+.faq-topic-index a:hover,
+.faq-topic-index a:focus-visible {
+  border-color: rgba(37, 211, 102, 0.55);
 }
 
 .faq-topic-list {
   display: grid;
   gap: 2.5rem;
   margin-top: 2.5rem;
-  max-width: 52rem;
 }
 
 .faq-topic {
@@ -900,9 +929,9 @@ a.active-location-note:focus-visible {
 
 .faq-topic h3 > span {
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(37, 211, 102, 0.16);
   padding: 0.15rem 0.5rem;
-  color: #9fb6c2;
+  color: var(--accent-green);
   font-size: 0.7rem;
   letter-spacing: 0;
   font-variant-numeric: tabular-nums;
@@ -936,8 +965,10 @@ a.active-location-note:focus-visible {
 
 .faq-topic-more[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
 
+.faq-topic-more > summary { color: var(--accent-green); }
+
 .faq-topic-more > summary:hover,
-.faq-topic-more > summary:focus-visible { color: white; }
+.faq-topic-more > summary:focus-visible { color: #5ce894; }
 
 .faq-topic-more[open] > summary { margin-bottom: 0.15rem; }
 

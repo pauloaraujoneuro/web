@@ -84,7 +84,8 @@ export default function FrequentlyAskedQuestionsPage() {
                     <details className="faq-topic-more">
                       <summary>
                         Ver mais {rest.length}{" "}
-                        {rest.length === 1 ? "pergunta" : "perguntas"} sobre {topic.label}
+                        {rest.length === 1 ? "pergunta" : "perguntas"}
+                        <span className="sr-only"> sobre {topic.label}</span>
                       </summary>
                       <FaqAccordion items={rest} theme="dark" />
                     </details>
