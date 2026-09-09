@@ -9,6 +9,7 @@ import JsonLd from "@/app/components/content/JsonLd";
 import PageIntro from "@/app/components/content/PageIntro";
 import RelatedLinks from "@/app/components/content/RelatedLinks";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
+import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { notFound } from "next/navigation";
 import {
@@ -24,6 +25,7 @@ import { getPublishedLocations } from "@/app/lib/locations";
 import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
+  createWhatsAppUrl,
   DOCTOR_CRM,
   DOCTOR_NAME,
   DOCTOR_RQE,
@@ -174,15 +176,32 @@ export default async function ClinicPage({ params }: Props) {
                 <strong>{clinic.whatsappLabel}</strong>
               </li>
             </ul>
-            <a
-              className="clinic-fact-action"
-              href={`https://wa.me/${clinic.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Falar com a recepção
-              <ArrowUpRight aria-hidden size={16} strokeWidth={2} />
-            </a>
+            {/* Two different destinations, named so nobody has to guess which
+                one answers: the clinic's own reception, and the practice's
+                line for scheduling with the doctor. */}
+            <div className="clinic-fact-actions">
+              <TrackedWhatsAppLink
+                href={createWhatsAppUrl(
+                  location?.ctaMessage ?? CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary clinic-fact-cta"
+                eventLocation={`clinic_${clinic.slug}_contact_card`}
+                eventLabel={`Agendar com o Dr. ${DOCTOR_NAME}`}
+              >
+                Agendar com o Dr. {DOCTOR_NAME}
+              </TrackedWhatsAppLink>
+              <a
+                className="clinic-fact-action"
+                href={`https://wa.me/${clinic.whatsappNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Falar com a recepção
+                <ArrowUpRight aria-hidden size={16} strokeWidth={2} />
+              </a>
+            </div>
           </article>
 
           <article className="clinic-fact">

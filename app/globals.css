@@ -1382,7 +1382,27 @@ a.active-location-note:focus-visible {
     opacity: 1;
   }
 
-  .clinic-fact:hover .clinic-fact-action svg {
+  .clinic-fact:hover .clinic-fact-actions {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: auto;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.85rem;
+}
+
+.clinic-fact-actions .clinic-fact-action {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+
+.clinic-fact-cta {
+  justify-content: center;
+  padding-block: 0.62rem;
+  font-size: 0.85rem;
+}
+
+.clinic-fact-action svg {
     transform: translate(2px, -2px);
   }
 }
@@ -1464,6 +1484,26 @@ a.active-location-note:focus-visible {
   color: var(--primary);
   font-size: 0.875rem;
   font-weight: 700;
+}
+
+.clinic-fact-actions {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: auto;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.85rem;
+}
+
+.clinic-fact-actions .clinic-fact-action {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+
+.clinic-fact-cta {
+  justify-content: center;
+  padding-block: 0.62rem;
+  font-size: 0.85rem;
 }
 
 .clinic-fact-action svg {
