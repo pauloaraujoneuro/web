@@ -116,6 +116,11 @@ export default function AboutPage() {
             <div><span>Atuação</span><h2>Áreas de foco</h2></div>
           </div>
           <div className="focus-lead">
+            <p>
+              O atendimento reúne três frentes: cirurgia de nervo periférico, cirurgia
+              de coluna e reabilitação neurocirúrgica. A conduta de cada caso é definida
+              na avaliação presencial, a partir do exame clínico e dos exames disponíveis.
+            </p>
             <div className="focus-lead-photo">
               <Image
                 src={DOCTOR_PROFILE_IMAGE_FRONT_WIDE}
@@ -125,11 +130,6 @@ export default function AboutPage() {
                 className="object-cover object-top"
               />
             </div>
-            <p>
-              O atendimento reúne três frentes: cirurgia de nervo periférico, cirurgia
-              de coluna e reabilitação neurocirúrgica. A conduta de cada caso é definida
-              na avaliação presencial, a partir do exame clínico e dos exames disponíveis.
-            </p>
           </div>
           <div className="focus-grid">
             {EXPERTISE_AREAS.map((area) => (

@@ -802,8 +802,8 @@ a.active-location-note:focus-visible {
 .credential-strip p { color: #475569; font-size: 0.78rem; line-height: 1.55; }
 
 @media (min-width: 700px) {
-  .focus-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
-  .focus-lead { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 1.75rem; }
+  .focus-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .focus-lead { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 1.75rem; }
   .publication-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .role-section { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .profile-timeline-panel { margin-inline: 0; padding-inline: 2.25rem; }
