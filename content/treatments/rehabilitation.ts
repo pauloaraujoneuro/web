@@ -132,7 +132,12 @@ export const REHABILITATION_TREATMENTS: Treatment[] = [
           "Pelo reaparecimento de atividade muscular no exame, às vezes com apoio de recursos que ajudam a captar contrações ainda muito fracas. Esse é um marco que muda a etapa do treino.",
       },
     ],
-    relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "cirurgia-coluna"],
+    relatedTreatmentSlugs: [
+      "reeducacao-cortical-biofeedback",
+      "orteses-dinamicas",
+      "cirurgia-nervos-perifericos",
+      "cirurgia-coluna",
+    ],
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
     keywords: ["reabilitação neurocirúrgica", "recuperação funcional"],
     lastModified: "2026-09-07",

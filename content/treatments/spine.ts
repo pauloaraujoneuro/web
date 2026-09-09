@@ -165,7 +165,10 @@ export const SPINE_TREATMENTS: Treatment[] = [
       "fraturas-coluna",
       "reabilitacao-neurocirurgica",
     ],
-    relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
+    relatedPostSlugs: [
+      "como-se-preparar-para-consulta-neurocirurgica",
+      "hernia-disco-lombar-quando-operar",
+    ],
     keywords: [
       "cirurgia da coluna",
       "neurocirurgia",
@@ -310,7 +313,10 @@ export const SPINE_TREATMENTS: Treatment[] = [
       },
     ],
     relatedTreatmentSlugs: ["cirurgia-coluna", "estenose-canal-vertebral"],
-    relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
+    relatedPostSlugs: [
+      "como-se-preparar-para-consulta-neurocirurgica",
+      "hernia-disco-lombar-quando-operar",
+    ],
     keywords: ["hérnia de disco", "dor ciática", "coluna", "Campo Grande"],
     lastModified: "2026-09-07",
     order: 9,
