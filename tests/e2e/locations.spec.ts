@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { CONTACT_WHATSAPP_NUMBER } from "../../constants";
 
 test("location hub exposes only the active Campo Grande location", async ({ page }) => {
   await page.goto("/locais-de-atendimento");
@@ -9,7 +10,7 @@ test("location hub exposes only the active Campo Grande location", async ({ page
   await expect(page.getByText("R. 15 de Novembro, 2808", { exact: false }).first()).toBeVisible();
   await expect(
     page.locator(".location-highlight").getByRole("link", { name: "Agendar avaliação" }),
-  ).toHaveAttribute("href", /wa\.me\/554120180330/);
+  ).toHaveAttribute("href", new RegExp(`wa\\.me/${CONTACT_WHATSAPP_NUMBER}`));
   await expect(page.getByText("Curitiba", { exact: false })).toHaveCount(0);
   await expect(page.getByText("União da Vitória", { exact: false })).toHaveCount(0);
 });
@@ -25,7 +26,7 @@ test("Campo Grande page renders the fields the client confirmed", async ({ page 
   // Address and hours became publishable once the client supplied them.
   await expect(page.locator("address").first()).toContainText("R. 15 de Novembro, 2808");
   await expect(page.getByText("Segunda a sexta", { exact: false }).first()).toBeVisible();
-  await expect(page.getByRole("link", { name: "Agendar em Campo Grande" })).toHaveAttribute("href", /wa\.me\/554120180330/);
+  await expect(page.getByRole("link", { name: "Agendar em Campo Grande" })).toHaveAttribute("href", new RegExp(`wa\\.me/${CONTACT_WHATSAPP_NUMBER}`));
 });
 
 test("related links carry a label and never point at the current page", async ({ page }) => {

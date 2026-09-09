@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { CONTACT_WHATSAPP_NUMBER } from "../../constants";
 
 const expectedRoutes = [
   "",
@@ -137,7 +138,7 @@ test("core content and contact links remain usable without JavaScript", async ({
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Cirurgia de nervos periféricos");
   await expect(page.getByRole("link", { name: /Agendar avaliação/ })).toHaveAttribute(
     "href",
-    /wa\.me\/554120180330\?text=/,
+    new RegExp(`wa\\.me/${CONTACT_WHATSAPP_NUMBER}\\?text=`),
   );
   await expect(page.getByRole("link", { name: "Reabilitação neurocirúrgica" })).toHaveAttribute(
     "href",

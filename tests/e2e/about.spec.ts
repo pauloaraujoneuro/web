@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { CONTACT_WHATSAPP_NUMBER } from "../../constants";
 
 test("profile separates current attendance from education and prior work", async ({ page }) => {
   await page.goto("/sobre");
@@ -17,5 +18,5 @@ test("profile exposes canonical credentials and tracked appointment path", async
   await expect(page.getByText("CRM-PR 37567", { exact: false }).first()).toBeVisible();
   await expect(page.getByText("RQE 29967", { exact: false }).first()).toBeVisible();
   const cta = page.getByRole("link", { name: /Agendar avaliação/ }).last();
-  await expect(cta).toHaveAttribute("href", /wa\.me\/554120180330/);
+  await expect(cta).toHaveAttribute("href", new RegExp(`wa\\.me/${CONTACT_WHATSAPP_NUMBER}`));
 });

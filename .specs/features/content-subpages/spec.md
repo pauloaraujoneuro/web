@@ -175,7 +175,7 @@ building the underlying templates.
 | Representative treatment seed | Use at least one approved entry to prove the production template; test fixtures prove unpublished and invalid states | Demonstrates the real route without forcing twelve articles of clinical copy into the structural epic | No |
 | Blog seed | Use at least one approved educational article if available; otherwise ship the blog hub as `noindex` with an intentional empty state and keep fixtures out of production discovery | An empty indexable content hub offers little search value | No |
 | Clinical copy | Base drafts on current approved claims and authoritative sources; clinician approval is required before indexing | Existing homepage blurbs are not sufficient for every detail page | No |
-| Contact number | Continue using `+55 41 2018-0330` until a replacement is supplied | It is the only verified number in the repository | No |
+| Contact number | `+55 67 2180-4099`, the Campo Grande line supplied by the client, replacing the Curitiba number the spec held while none existed | Matches where the practice actually attends | No |
 | Registration display | Preserve `CRM-PR 37567` and `RQE 29967`; do not infer an MS registration | No confirmed alternative exists in the repository | No |
 | Initial location | Clínica Protrauma, Campo Grande–MS is the sole active location; street address/map remain omitted until approved | Matches PR #1 and avoids republishing intentionally removed details | No |
 | URL format | Lowercase, accent-free, hyphenated Portuguese slugs; no city keyword stuffing outside truthful location intent | Produces durable canonical URLs and reduces cannibalization | Yes — default |
