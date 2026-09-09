@@ -19,6 +19,14 @@ export interface TreatmentFaq extends FaqSeed {
 
 export interface FaqItem extends FaqSeed {
   category: "consulta" | "tratamentos" | "recuperacao" | "atendimento";
+  /**
+   * The subject a reader would scan for, and the axis the hub groups by. The
+   * four categories stopped separating anything once the treatment catalog
+   * grew: they put 114 of 117 questions in one bucket.
+   */
+  topic: string;
+  /** Anchor and grouping key for `topic`. */
+  topicId: string;
   order: number;
   state: PublicationState;
   relatedHref?: string;

@@ -46,7 +46,7 @@ export default function Header() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="icon-button h-11 w-11"
+              className="icon-button header-social h-11 w-11"
               aria-label="Instagram"
             >
               <InstagramIcon className="h-4.5 w-4.5" />

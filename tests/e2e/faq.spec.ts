@@ -15,10 +15,20 @@ test("FAQ page groups only non-empty published categories", async ({ page }) => 
 test("the hub carries the questions answered on approved treatment pages", async ({ page }) => {
   await page.goto("/perguntas-frequentes");
 
-  await expect(page.getByText("Quais exames devo levar?", { exact: true })).toBeVisible();
   await expect(
     page.getByText("Quando devo procurar um especialista após o trauma?", { exact: true }),
   ).toBeVisible();
+
+  // A long topic shows its first questions and folds the rest away. The folded
+  // ones stay in the document — they are in the page's structured data and must
+  // remain indexable — and one interaction brings them into view.
+  const folded = page.getByText("Quais exames devo levar?", { exact: true });
+  await expect(folded).toBeAttached();
+  await expect(folded).toBeHidden();
+  // The nested question accordions are summaries too; the disclosure is the
+  // direct child.
+  await page.locator(".faq-topic-more", { has: folded }).locator("> summary").click();
+  await expect(folded).toBeVisible();
 });
 
 test("visible FAQ answer exactly matches structured data", async ({ page }) => {

@@ -37,7 +37,13 @@ function classifyHomeFaqs(): FaqItem[] {
     if (!classification) {
       throw new Error(`faqs.${item.id}: missing category classification`);
     }
-    return { ...item, ...classification, state: "published" as const };
+    return {
+      ...item,
+      ...classification,
+      topic: FAQ_CATEGORIES[classification.category],
+      topicId: classification.category,
+      state: "published" as const,
+    };
   });
 }
 
@@ -56,6 +62,8 @@ export function treatmentFaqs(treatments = getPublishedTreatments()): FaqItem[] 
         question,
         answer,
         category: "tratamentos" as const,
+        topic: treatment.title,
+        topicId: treatment.slug,
         state: "published" as const,
         order: 100 + treatmentIndex * 10 + faqIndex,
         relatedHref: `/tratamentos/${treatment.slug}`,
@@ -64,6 +72,21 @@ export function treatmentFaqs(treatments = getPublishedTreatments()): FaqItem[] 
 }
 
 export const FAQS: FaqItem[] = [...classifyHomeFaqs(), ...treatmentFaqs()];
+
+/**
+ * Questions grouped the way the hub presents them: in catalog order, so the
+ * consultation questions lead and the treatments follow the order they have
+ * everywhere else on the site.
+ */
+export function getFaqTopics(source = getPublishedFaqs()) {
+  const topics = new Map<string, { id: string; label: string; items: FaqItem[] }>();
+  for (const faq of source) {
+    const topic = topics.get(faq.topicId) ?? { id: faq.topicId, label: faq.topic, items: [] };
+    topic.items.push(faq);
+    topics.set(faq.topicId, topic);
+  }
+  return [...topics.values()];
+}
 
 export function getPublishedFaqs(source = FAQS) {
   const published = source.filter((item) => item.state === "published");

@@ -831,14 +831,66 @@ a.active-location-note:focus-visible {
   line-height: 1.65;
 }
 
-.faq-category-list {
-  display: grid;
-  gap: 2rem;
+/* Topics are wildly uneven — two questions here, nine there — so they stack in
+   one readable column instead of a two-column grid that left one side empty
+   for the height of the longest group. The index above carries the scanning. */
+.faq-topic-index {
   margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 1.5rem;
 }
 
-.faq-category-list h3 {
-  margin-bottom: 0.65rem;
+.faq-topic-index ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.faq-topic-index a {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.4rem 0.85rem;
+  color: #e2ecf1;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.faq-topic-index a:hover,
+.faq-topic-index a:focus-visible {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.faq-topic-index a > span {
+  color: #9fb6c2;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.faq-topic-list {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+  max-width: 52rem;
+}
+
+.faq-topic {
+  scroll-margin-top: calc(var(--anchor-offset) + 1rem);
+}
+
+.faq-topic h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
   color: #d8e6ed;
   font-size: 0.75rem;
   font-weight: 700;
@@ -846,9 +898,48 @@ a.active-location-note:focus-visible {
   text-transform: uppercase;
 }
 
-@media (min-width: 800px) {
-  .faq-category-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.faq-topic h3 > span {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.15rem 0.5rem;
+  color: #9fb6c2;
+  font-size: 0.7rem;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
 }
+
+.faq-topic-more > summary {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  border-radius: 999px;
+  color: #b9cbd4;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-topic-more > summary::-webkit-details-marker { display: none; }
+
+.faq-topic-more > summary::after {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.faq-topic-more[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
+
+.faq-topic-more > summary:hover,
+.faq-topic-more > summary:focus-visible { color: white; }
+
+.faq-topic-more[open] > summary { margin-bottom: 0.15rem; }
 
 .location-grid {
   display: grid;
@@ -1151,8 +1242,19 @@ a.active-location-note:focus-visible {
   padding-top: 1.35rem;
 }
 
-.location-highlight-actions .btn-primary {
-  flex: 1 1 15rem;
+.location-highlight-actions .btn-primary,
+.location-highlight-actions .btn-secondary {
+  flex: 1 1 13rem;
+}
+
+@media (min-width: 900px) {
+  .location-highlight-actions .btn-primary,
+  .location-highlight-actions .btn-secondary {
+    flex: 0 1 auto;
+  }
+
+  /* The ghost link ends the row, so its arrow is the only one on it. */
+  .location-highlight-actions .location-highlight-link { margin-left: auto; }
 }
 
 .location-highlight-link {
@@ -2544,6 +2646,18 @@ button:focus-visible {
   background: rgba(35, 62, 76, 0.11);
   color: var(--primary);
   box-shadow: inset 0 -1px 0 rgba(35, 62, 76, 0.24);
+}
+
+/* The desktop bar turns on at 1024px but its full-size contents need about
+   1140px, so between those widths the row overflowed the document. The links
+   tighten and the social icon steps out until there is room for both. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .nav-link {
+    padding-inline: 0.4rem;
+    font-size: 0.83rem;
+  }
+
+  .header-social { display: none; }
 }
 
 .mobile-nav-link {

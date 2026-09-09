@@ -41,6 +41,28 @@ test("every epic route remains usable at 320px", async ({ page }) => {
   }
 });
 
+/**
+ * The desktop navigation turns on at 1024px, and its contents nearly fill the
+ * bar: a longer label pushed the row past the viewport between 1024 and 1200px
+ * while every existing check — all of them mobile — stayed green.
+ */
+test("the header fits from the moment the desktop bar appears", async ({ page }) => {
+  test.skip(test.info().project.name !== "desktop-chromium");
+
+  for (const width of [1024, 1100, 1200, 1280, 1440]) {
+    await page.setViewportSize({ width, height: 800 });
+    await page.goto("/perguntas-frequentes");
+    const dimensions = await page.evaluate(() => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+    }));
+    expect(dimensions.scrollWidth, `header overflowed at ${width}px`).toBeLessThanOrEqual(
+      dimensions.clientWidth,
+    );
+    await expect(page.getByRole("link", { name: "Dúvidas frequentes" }).first()).toBeVisible();
+  }
+});
+
 test("mobile menu closes with Escape and restores focus", async ({ page }) => {
   test.skip(test.info().project.name !== "mobile-chromium");
   await page.goto("/tratamentos");

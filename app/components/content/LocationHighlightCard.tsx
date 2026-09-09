@@ -85,9 +85,8 @@ export default function LocationHighlightCard({
           >
             Agendar avaliação
           </TrackedWhatsAppLink>
-          <Link className="location-highlight-link" href={detailHref}>
+          <Link className="btn-secondary min-h-12" href={detailHref}>
             Ver informações para a consulta
-            <ArrowRight aria-hidden size={17} strokeWidth={2} />
           </Link>
           {clinic ? (
             <Link className="location-highlight-link" href={clinicPath(clinic)}>

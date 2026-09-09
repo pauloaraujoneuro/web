@@ -12,7 +12,7 @@ test("global navigation exposes every epic section", async ({ page }) => {
     ["Sobre", "/sobre"],
     ["Tratamentos", "/tratamentos"],
     ["Blog", "/blog"],
-    ["Perguntas", "/perguntas-frequentes"],
+    ["Dúvidas frequentes", "/perguntas-frequentes"],
     ["Atendimento", "/locais-de-atendimento"],
   ] as const;
 

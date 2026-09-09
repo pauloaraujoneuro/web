@@ -6,7 +6,7 @@ import PageIntro from "@/app/components/content/PageIntro";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { buildPageMetadata } from "@/app/lib/metadata";
-import { FAQ_CATEGORIES, getPublishedFaqs } from "@/app/lib/faqs";
+import { getFaqTopics, getPublishedFaqs } from "@/app/lib/faqs";
 import { CONTACT_WHATSAPP_FAQ_TEXT, SITE_URL } from "@/constants";
 
 const title = "Perguntas frequentes";
@@ -21,10 +21,10 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function FrequentlyAskedQuestionsPage() {
   const faqs = getPublishedFaqs();
-  const categories = Object.entries(FAQ_CATEGORIES).flatMap(([id, label]) => {
-    const items = faqs.filter((item) => item.category === id);
-    return items.length ? [{ id, label, items }] : [];
-  });
+  const topics = getFaqTopics(faqs);
+  // Long topics open with a readable handful; the rest stays one tap away
+  // rather than pushing every other topic off the screen.
+  const VISIBLE_PER_TOPIC = 4;
 
   return (
     <SiteShell>
@@ -54,13 +54,44 @@ export default function FrequentlyAskedQuestionsPage() {
             <h2>Encontre uma orientação inicial</h2>
             <p>Abra cada pergunta para ler a resposta completa. O conteúdo permanece disponível mesmo sem JavaScript.</p>
           </div>
-          <div className="faq-category-list">
-            {categories.map((category) => (
-              <section key={category.id}>
-                <h3>{category.label}</h3>
-                <FaqAccordion items={category.items} theme="dark" />
-              </section>
-            ))}
+
+          <nav className="faq-topic-index" aria-label="Assuntos">
+            <ul>
+              {topics.map((topic) => (
+                <li key={topic.id}>
+                  <a href={`#faq-${topic.id}`}>
+                    {topic.label}
+                    <span aria-hidden>{topic.items.length}</span>
+                    <span className="sr-only">{topic.items.length} perguntas</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="faq-topic-list">
+            {topics.map((topic) => {
+              const visible = topic.items.slice(0, VISIBLE_PER_TOPIC);
+              const rest = topic.items.slice(VISIBLE_PER_TOPIC);
+              return (
+                <section key={topic.id} id={`faq-${topic.id}`} className="faq-topic">
+                  <h3>
+                    {topic.label}
+                    <span aria-hidden>{topic.items.length}</span>
+                  </h3>
+                  <FaqAccordion items={visible} theme="dark" />
+                  {rest.length ? (
+                    <details className="faq-topic-more">
+                      <summary>
+                        Ver mais {rest.length}{" "}
+                        {rest.length === 1 ? "pergunta" : "perguntas"} sobre {topic.label}
+                      </summary>
+                      <FaqAccordion items={rest} theme="dark" />
+                    </details>
+                  ) : null}
+                </section>
+              );
+            })}
           </div>
         </section>
 
