@@ -639,7 +639,6 @@ a.active-location-note:focus-visible {
 .focus-lead {
   display: grid;
   gap: 1.25rem;
-  margin-top: 1.5rem;
 }
 
 .focus-lead-photo {
@@ -651,7 +650,7 @@ a.active-location-note:focus-visible {
 }
 
 .focus-lead p {
-  align-self: center;
+  margin-top: 1rem;
   color: #475569;
   font-size: 0.95rem;
   line-height: 1.75;
@@ -803,7 +802,14 @@ a.active-location-note:focus-visible {
 
 @media (min-width: 700px) {
   .focus-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .focus-lead { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 1.75rem; }
+  /* The heading travels with the paragraph: a lone three-line paragraph beside
+     a photo half a metre tall had nothing to hold it, whichever way it was
+     aligned. Together they are a block that can sit against the image. */
+  .focus-lead {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem;
+    align-items: center;
+  }
   .publication-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .role-section { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .profile-timeline-panel { margin-inline: 0; padding-inline: 2.25rem; }
