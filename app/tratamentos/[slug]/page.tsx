@@ -121,7 +121,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
             <p>{treatment.summary}</p>
           </div>
           <aside className="detail-hero-card">
-            <span>Como começa</span>
+            <span>A primeira consulta</span>
             <p>História clínica, exame neurológico e revisão dos exames já disponíveis.</p>
             <Link href="/locais-de-atendimento/campo-grande">
               Ver atendimento em Campo Grande
