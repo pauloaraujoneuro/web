@@ -10,12 +10,11 @@ export const NAV_ITEMS: NavigationItem[] = [
 ];
 
 /**
- * The footer carries two entries the header does not: the clinic page, which
- * still needs a site-wide link to be found, and the contact anchor, whose job
- * in the header was already done by the appointment button beside it.
+ * The footer carries one entry the header does not: the clinic page, which
+ * still needs a site-wide link to be found. Contact is not among them — the
+ * footer's own contact column lists the phone, e-mail and social links.
  */
 export const FOOTER_NAV_ITEMS: NavigationItem[] = [
   ...NAV_ITEMS,
   { href: "/clinica/protrauma", label: "Clínica Protrauma" },
-  { href: "/#contato", label: "Contato" },
 ];
