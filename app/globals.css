@@ -1382,35 +1382,7 @@ a.active-location-note:focus-visible {
     opacity: 1;
   }
 
-  .clinic-fact:hover .clinic-contact-cta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.9rem 1.5rem;
-  margin-top: 1rem;
-  border: 1px solid var(--border-subtle);
-  border-radius: 1rem;
-  background: var(--surface-subtle);
-  padding: 1.1rem 1.25rem;
-}
-
-.clinic-contact-cta p {
-  color: #475569;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.clinic-contact-cta .btn-primary {
-  min-height: 3rem;
-  flex: 1 1 auto;
-}
-
-@media (min-width: 620px) {
-  .clinic-contact-cta .btn-primary { flex: 0 0 auto; }
-}
-
-.clinic-fact-action svg {
+  .clinic-fact:hover .clinic-fact-action svg {
     transform: translate(2px, -2px);
   }
 }
@@ -1466,8 +1438,10 @@ a.active-location-note:focus-visible {
 }
 
 .clinic-fact-note {
+  margin-top: auto;
+  padding-top: 0.7rem;
   color: #64748b;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   line-height: 1.5;
 }
 
@@ -1484,34 +1458,6 @@ a.active-location-note:focus-visible {
   font-weight: 700;
 }
 
-.clinic-contact-cta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.9rem 1.5rem;
-  margin-top: 1rem;
-  border: 1px solid var(--border-subtle);
-  border-radius: 1rem;
-  background: var(--surface-subtle);
-  padding: 1.1rem 1.25rem;
-}
-
-.clinic-contact-cta p {
-  color: #475569;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.clinic-contact-cta .btn-primary {
-  min-height: 3rem;
-  flex: 1 1 auto;
-}
-
-@media (min-width: 620px) {
-  .clinic-contact-cta .btn-primary { flex: 0 0 auto; }
-}
-
 .clinic-fact-action svg {
   transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1524,13 +1470,21 @@ a.active-location-note:focus-visible {
 
 .clinic-social a {
   display: inline-flex;
-  min-height: 2.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
   align-items: center;
+  justify-content: center;
   border-radius: 999px;
   border: 1px solid var(--border-subtle);
   background: var(--surface-subtle);
-  padding: 0.4rem 0.85rem;
-  font-size: 0.8rem;
+  color: var(--primary);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.clinic-social a:hover,
+.clinic-social a:focus-visible {
+  border-color: rgba(35, 62, 76, 0.45);
+  background: var(--accent-sky-soft);
 }
 
 .clinic-map {

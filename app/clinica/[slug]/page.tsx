@@ -4,12 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
+import FacebookIcon from "@/app/components/icons/FacebookIcon";
+import InstagramIcon from "@/app/components/icons/InstagramIcon";
 import ClinicMap from "@/app/components/content/ClinicMap";
 import JsonLd from "@/app/components/content/JsonLd";
 import PageIntro from "@/app/components/content/PageIntro";
 import RelatedLinks from "@/app/components/content/RelatedLinks";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
-import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { notFound } from "next/navigation";
 import {
@@ -25,7 +26,6 @@ import { getPublishedLocations } from "@/app/lib/locations";
 import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
-  createWhatsAppUrl,
   DOCTOR_CRM,
   DOCTOR_NAME,
   DOCTOR_RQE,
@@ -33,6 +33,24 @@ import {
 } from "@/constants";
 
 type Props = { params: Promise<{ slug: string }> };
+
+/**
+ * Keyed by host rather than by label: the catalog is free to call the link
+ * whatever reads best without the icon silently disappearing.
+ */
+const SOCIAL_ICONS: Record<string, (props: { className?: string }) => React.ReactElement> = {
+  "instagram.com": InstagramIcon,
+  "facebook.com": FacebookIcon,
+};
+
+function socialIconFor(href: string) {
+  try {
+    const host = new URL(href).hostname.replace(/^www\./, "");
+    return SOCIAL_ICONS[host];
+  } catch {
+    return undefined;
+  }
+}
 
 /**
  * Clinic pages are built from the catalog that feeds the sitemap and llms.txt,
@@ -198,16 +216,20 @@ export default async function ClinicPage({ params }: Props) {
             <span className="clinic-fact-label">Na internet</span>
             <p className="clinic-fact-text">{clinic.tagline}</p>
             <div className="clinic-social">
-              {clinic.socialLinks.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {clinic.socialLinks.map((item) => {
+                const Icon = socialIconFor(item.href);
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${clinic.name} no ${item.label}`}
+                  >
+                    {Icon ? <Icon className="h-5 w-5" /> : item.label}
+                  </a>
+                );
+              })}
             </div>
             <a
               className="clinic-fact-action"
@@ -219,28 +241,8 @@ export default async function ClinicPage({ params }: Props) {
               <ArrowUpRight aria-hidden size={16} strokeWidth={2} />
             </a>
           </article>
-          </section>
+        </section>
 
-        {/* The cards above are the clinic's own contacts. Scheduling a
-            neurosurgical consultation goes to the practice, so it gets one
-            unambiguous action rather than a button competing inside a card. */}
-        <div className="clinic-contact-cta">
-          <p>
-            Consultas de neurocirurgia são agendadas com a equipe do Dr. {DOCTOR_NAME}.
-          </p>
-          <TrackedWhatsAppLink
-            href={createWhatsAppUrl(
-              location?.ctaMessage ?? CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-            eventLocation={`clinic_${clinic.slug}_contact`}
-            eventLabel={`Agendar com o Dr. ${DOCTOR_NAME}`}
-          >
-            Agendar com o Dr. {DOCTOR_NAME}
-          </TrackedWhatsAppLink>
-        </div>
 
         <section className="location-section">
           <div className="location-section-heading">
