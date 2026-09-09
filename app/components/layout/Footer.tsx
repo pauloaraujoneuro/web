@@ -11,7 +11,7 @@ import {
   INSTAGRAM_URL,
   LATTES_URL,
   LATTES_URL_LABEL,
-  NAV_ITEMS,
+  FOOTER_NAV_ITEMS,
 } from "@/constants";
 import InstagramIcon from "@/app/components/icons/InstagramIcon";
 import LattesIcon from "@/app/components/icons/LattesIcon";
@@ -34,9 +34,9 @@ export default function Footer() {
               <Image
                 src={BRAND_LOGO_WORDMARK_INVERTED}
                 alt="Marca Paulo Araújo"
-                width={560}
-                height={560}
-                className="h-auto w-full max-w-87.5 md:mx-auto md:max-w-75 xl:mx-0 xl:max-w-87.5"
+                width={700}
+                height={136}
+                className="h-auto w-full max-w-72 brightness-0 invert md:mx-auto xl:mx-0"
                 unoptimized
               />
 
@@ -65,7 +65,7 @@ export default function Footer() {
               Navegação
             </h3>
             <ul className="mt-4 space-y-2">
-              {NAV_ITEMS.map((item) => (
+              {FOOTER_NAV_ITEMS.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}

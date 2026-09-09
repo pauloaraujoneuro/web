@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import type { NavigationItem } from "@/constants";
 import InstagramIcon from "@/app/components/icons/InstagramIcon";
 import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
-import useActiveSectionHash from "@/app/components/layout/useActiveSectionHash";
 
 interface HeaderMobileMenuProps {
   navItems: NavigationItem[];
@@ -22,11 +22,23 @@ export default function HeaderMobileMenu({
   ctaPrimary,
 }: HeaderMobileMenuProps) {
   const detailsRef = useRef<HTMLDetailsElement>(null);
-  const { activeHash, setActiveHash } = useActiveSectionHash(navItems);
+  const summaryRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const closeFromOutside = (event: PointerEvent) => {
+      if (detailsRef.current?.open && !detailsRef.current.contains(event.target as Node)) {
+        detailsRef.current.open = false;
+      }
+    };
+    document.addEventListener("pointerdown", closeFromOutside);
+    return () => document.removeEventListener("pointerdown", closeFromOutside);
+  }, []);
 
   const closeMenu = () => {
     if (detailsRef.current) {
       detailsRef.current.open = false;
+      summaryRef.current?.focus();
     }
   };
 
@@ -36,16 +48,26 @@ export default function HeaderMobileMenu({
         href={instagramUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="icon-button h-10 w-10"
+        className="icon-button h-11 w-11"
         aria-label="Instagram"
       >
         <InstagramIcon className="h-4.5 w-4.5" />
       </a>
 
-      <details ref={detailsRef} className="mobile-menu relative">
+      <details
+        ref={detailsRef}
+        className="mobile-menu relative"
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && detailsRef.current?.open) {
+            event.preventDefault();
+            closeMenu();
+          }
+        }}
+      >
         <summary
-          className="mobile-menu-toggle icon-button flex h-10 w-10 list-none items-center justify-center cursor-pointer [&::-webkit-details-marker]:hidden"
-          aria-label="Abrir menu"
+          ref={summaryRef}
+          className="mobile-menu-toggle icon-button flex h-11 w-11 list-none items-center justify-center cursor-pointer [&::-webkit-details-marker]:hidden"
+          aria-label="Menu principal"
         >
           <span className="mobile-menu-icon relative block h-5 w-6" aria-hidden="true">
             <span className="mobile-menu-line mobile-menu-line-top absolute left-0 top-0.5 block h-0.5 w-6 rounded-full bg-primary" />
@@ -56,23 +78,24 @@ export default function HeaderMobileMenu({
 
         <div className="absolute right-0 top-[calc(100%+0.7rem)] z-10 w-[min(92vw,22rem)] rounded-xl border border-primary/15 bg-bg/96 p-4 shadow-lg">
           <ul className="space-y-1.5">
-            {navItems.map((item) => (
-              <li key={item.href}>
+            {navItems.map((item) => {
+              const itemPath = item.href.split("#")[0];
+              const isActive =
+                itemPath !== "/" &&
+                (pathname === itemPath || pathname.startsWith(`${itemPath}/`));
+              return <li key={item.href}>
                 <a
                   href={item.href}
-                  className={`mobile-nav-link block whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold text-primary/92 transition hover:bg-primary/8 ${
-                    item.href === activeHash ? "mobile-nav-link-active" : ""
+                  className={`mobile-nav-link flex min-h-12 items-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold text-primary/92 transition hover:bg-primary/8 ${
+                    isActive ? "mobile-nav-link-active" : ""
                   }`}
-                  aria-current={item.href === activeHash ? "location" : undefined}
-                  onClick={() => {
-                    setActiveHash(item.href);
-                    closeMenu();
-                  }}
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={closeMenu}
                 >
                   {item.label}
                 </a>
               </li>
-            ))}
+            })}
           </ul>
 
           <div className="mt-4 border-t border-primary/12 pt-4">

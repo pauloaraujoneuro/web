@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dr. Paulo Araújo — Neurocirurgia
 
-## Getting Started
+Institutional and educational site for Dr. Paulo Araújo, neurosurgeon
+(`CRM-PR 37567` • `RQE 29967`), practising at Clínica Protrauma in
+Campo Grande – MS. Built with Next.js App Router, TypeScript and Tailwind 4.
 
-First, run the development server:
+Production: <https://www.pauloaraujoneuro.com.br>
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Node 22 or newer. `npm run check` is the full gate and must pass before a PR:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run check        # unit tests → lint → production build → Playwright (prod server)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Individual steps:
 
-## Learn More
+```bash
+npm run test:unit    # tsx + node:test, for content and SEO logic
+npm run test:e2e     # Playwright against the dev server
+npm run lint
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+`npm run test:e2e` reuses a server already listening on port 3100. If you left
+one running from an earlier build, kill it first or the run tests stale output.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Routes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Route | Source |
+| --- | --- |
+| `/` | homepage sections in `app/components/sections/` |
+| `/sobre` | practitioner data in `constants/` |
+| `/tratamentos`, `/tratamentos/[slug]` | `content/treatments/` |
+| `/blog`, `/blog/[slug]` | Markdown in `content/posts/` |
+| `/perguntas-frequentes` | `app/lib/faqs.ts` |
+| `/locais-de-atendimento`, `/locais-de-atendimento/[slug]` | `app/lib/locations.ts` |
+| `/clinica/[slug]` (e.g. `/clinica/protrauma`) | `content/clinics.ts` |
+| `/sitemap.xml`, `/robots.txt`, `/llms.txt` | derived from `app/lib/seo.ts` |
+| `opengraph-image` (per route) | rendered by `app/lib/og.tsx` |
 
-## Deploy on Vercel
+## Content model
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Treatments, FAQs and locations live in typed catalogs; blog articles are
+Markdown with validated frontmatter. Page components receive content as props,
+so adding an entry to a catalog produces its page, its hub card, its internal
+links and its sitemap entry with no component changes.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Catalog data lives apart from the code that reads it. `content/` holds authored
+source — treatment entries, clinic facts, article Markdown and the shared
+content types. `constants/` holds site-wide facts. `app/lib/` holds accessors,
+validation and anything composed from those sources. `app/` holds routes and
+rendering only.
+
+`app/lib/content-validation.ts` runs at module load. A malformed entry fails the
+build rather than reaching production.
+
+### Publication gate
+
+Two independent flags decide how far an entry travels:
+
+| Flag | Effect |
+| --- | --- |
+| `state: "draft"` | no page, no card, no links |
+| `state: "published"` | real page, hub card, internal links |
+| `indexable: false` | plus `robots: noindex`, and absent from the sitemap, `llms.txt`, the FAQ hub, clinical structured data, and cross-links from indexable pages |
+
+Completeness is validated for everything `published`, indexable or not: a page a
+patient can open must never be half-written. The catalog currently ships fully
+indexable — the gate is the mechanism for withholding a page, not the approval
+workflow, because a flag someone has to remember to flip is a page that quietly
+never launches.
+| `indexable: true` | enters the sitemap, `llms.txt` and search results |
+
+Clinical copy is written as `published` + `indexable: false` so it can be
+reviewed on the deployment, then flipped to `indexable: true` once the clinician
+approves it. Treatments and blog articles both use this gate.
+
+### Factual safety
+
+Every public fact traces to `constants.ts` or an approved catalog field. Design
+references and generated mockups are not sources of fact: addresses, phone
+numbers, hours, memberships, outcome statistics and clinical timings are only
+published once the client confirms them. Optional fields omit cleanly rather
+than rendering an empty container.
+
+## Specification
+
+Feature work follows `.specs/features/content-subpages/` — specification,
+design, task breakdown with verification evidence, and the implementation
+context that records which design decisions were accepted and which generated
+details were rejected.
+
+## Deployment
+
+Vercel, deployed from `main`, with a preview deployment per pull request.

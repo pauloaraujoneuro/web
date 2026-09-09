@@ -1,26 +1,28 @@
 "use client";
 
 import type { NavigationItem } from "@/constants";
-import useActiveSectionHash from "@/app/components/layout/useActiveSectionHash";
+import { usePathname } from "next/navigation";
 
 interface HeaderDesktopNavProps {
   navItems: NavigationItem[];
 }
 
 export default function HeaderDesktopNav({ navItems }: HeaderDesktopNavProps) {
-  const { activeHash, setActiveHash } = useActiveSectionHash(navItems);
+  const pathname = usePathname();
 
   return (
     <ul className="hidden items-center gap-1 lg:flex">
       {navItems.map((item) => {
-        const isActive = item.href === activeHash;
+        const itemPath = item.href.split("#")[0];
+        const isActive =
+          itemPath !== "/" &&
+          (pathname === itemPath || pathname.startsWith(`${itemPath}/`));
         return (
           <li key={item.href}>
             <a
               href={item.href}
               className={`nav-link ${isActive ? "nav-link-active" : ""}`}
-              aria-current={isActive ? "location" : undefined}
-              onClick={() => setActiveHash(item.href)}
+              aria-current={isActive ? "page" : undefined}
             >
               {item.label}
             </a>

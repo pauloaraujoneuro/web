@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import { clinicEntityId, clinicUrl, getVisibleClinic } from "@/app/lib/clinics";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleTagManager } from "@next/third-parties/google";
 import {
   ANALYTICS_ENABLED,
-  CLINIC_NAME,
   CONTACT_EMAIL,
   CONTACT_PHONE,
   DOCTOR_CRM,
@@ -46,6 +47,8 @@ const SITE_KEYWORDS = [
   "Lesão de plexo braquial",
 ];
 
+const PRACTICE_CLINIC = getVisibleClinic("protrauma")!;
+
 const PHYSICIAN_AND_CLINIC_JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
@@ -59,6 +62,7 @@ const PHYSICIAN_AND_CLINIC_JSON_LD = {
       medicalSpecialty: ["Neurosurgery"],
       telephone: CONTACT_PHONE,
       email: CONTACT_EMAIL,
+      worksFor: { "@id": clinicEntityId(PRACTICE_CLINIC) },
       areaServed: SERVICE_LOCATIONS.map((location) => ({
         "@type": "City",
         name: location.city,
@@ -91,14 +95,28 @@ const PHYSICIAN_AND_CLINIC_JSON_LD = {
         },
       ],
     },
+    // The facility is one entity site-wide. Its canonical node lives on the
+    // clinic page; the site graph points at the same `@id` so the address is
+    // never described twice under two different identifiers.
     {
       "@type": "MedicalClinic",
-      "@id": `${SITE_URL}#clinic`,
-      name: CLINIC_NAME,
-      url: SITE_URL,
+      "@id": clinicEntityId(PRACTICE_CLINIC),
+      name: PRACTICE_CLINIC.name,
+      url: clinicUrl(PRACTICE_CLINIC),
       telephone: CONTACT_PHONE,
       email: CONTACT_EMAIL,
       medicalSpecialty: ["Neurosurgery"],
+      // Publishable since the client confirmed the consulting address; PR #1 had
+      // stripped it only because no address was verified at the time.
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: `${PRACTICE_CLINIC.streetAddress} - ${PRACTICE_CLINIC.neighborhood}`,
+        addressLocality: PRACTICE_CLINIC.city,
+        addressRegion: PRACTICE_CLINIC.state,
+        postalCode: PRACTICE_CLINIC.postalCode,
+        addressCountry: "BR",
+      },
+      hasMap: PRACTICE_CLINIC.mapUrl,
       areaServed: SERVICE_LOCATIONS.map((location) => ({
         "@type": "AdministrativeArea",
         name: `${location.city} - ${location.state}`,
@@ -145,20 +163,11 @@ export const metadata: Metadata = {
     url: SITE_URL,
     locale: "pt_BR",
     type: "website",
-    images: [
-      {
-        url: "/og/og-image.png",
-        width: 1200,
-        height: 1200,
-        alt: `${DOCTOR_NAME} - Neurocirurgião em Campo Grande MS`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/og/og-image.png"],
   },
   robots: {
     index: true,
@@ -181,6 +190,13 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${poppins.className} ${poppins.variable}`}>
       <head>
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            src="//unpkg.com/react-grab/dist/index.global.js"
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+          />
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

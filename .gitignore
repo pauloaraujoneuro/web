@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+/playwright-report/
+/test-results/
 
 # next.js
 /.next/
@@ -40,3 +42,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local design references (Google Stitch exports)
+/tmp
+
+# local agent settings (skills and agent definitions stay tracked)
+.claude/settings.local.json

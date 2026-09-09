@@ -1,0 +1,80 @@
+import {
+  CONTACT_EMAIL,
+  CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
+  FIRST_APPOINTMENT_STEPS,
+  LOCATIONS_SCHEDULING_NOTE,
+  SERVICE_LOCATIONS,
+} from "@/constants";
+import type { Location } from "@/content/types";
+import { validateLocations } from "@/app/lib/content-validation";
+import { TREATMENTS } from "@/app/lib/treatments";
+import { getPublishedFaqs } from "@/app/lib/faqs";
+import { fullAddress, getVisibleClinic } from "@/app/lib/clinics";
+
+const protrauma = getVisibleClinic("protrauma");
+
+if (!protrauma) {
+  throw new Error("locations.campo-grande: the Protrauma clinic profile is missing");
+}
+
+const campoGrande = SERVICE_LOCATIONS.find((item) => item.id === "campo-grande");
+
+if (!campoGrande) {
+  throw new Error("locations.campo-grande: canonical service location is missing");
+}
+
+/**
+ * Locations are composed rather than authored: every fact below is read from
+ * the site constants or the clinic catalog, so it lives in the lib layer beside
+ * its accessors instead of under `content/`.
+ */
+export const LOCATIONS: Location[] = [
+  {
+    slug: "campo-grande",
+    active: true,
+    indexable: true,
+    clinicName: campoGrande.name,
+    city: campoGrande.city,
+    state: campoGrande.state,
+    metaTitle: "Neurocirurgião em Campo Grande - MS",
+    metaDescription:
+      "Informações para avaliação neurocirúrgica com o Dr. Paulo Araújo na Clínica Protrauma, em Campo Grande - MS.",
+    introduction:
+      "Atendimento presencial para avaliação de condições da coluna, nervos periféricos e necessidades de reabilitação neurocirúrgica.",
+    schedulingGuidance: LOCATIONS_SCHEDULING_NOTE,
+    firstAppointmentSteps: FIRST_APPOINTMENT_STEPS,
+    whatToBring: [
+      "Documento de identificação.",
+      "Exames e laudos relacionados ao problema, inclusive os antigos.",
+      "Lista atualizada de medicamentos em uso.",
+      "Relatórios de tratamentos ou cirurgias anteriores, quando disponíveis.",
+    ],
+    relatedTreatmentSlugs: [
+      "cirurgia-nervos-perifericos",
+      "cirurgia-coluna",
+      "reabilitacao-neurocirurgica",
+    ],
+    faqs: getPublishedFaqs().filter(
+      (faq) => faq.category === "consulta" || faq.category === "atendimento",
+    ),
+    ctaMessage: CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
+    lastModified: "2026-09-06",
+    email: CONTACT_EMAIL,
+    clinicSlug: protrauma.slug,
+    streetAddress: fullAddress(protrauma),
+    mapUrl: protrauma.mapUrl,
+    hours: `${protrauma.openingHours[0].days}, ${protrauma.openingHours[0].hours}`,
+  },
+];
+
+export function getPublishedLocations(source = LOCATIONS) {
+  return source
+    .filter((item) => item.active && item.indexable)
+    .toSorted((a, b) => a.city.localeCompare(b.city));
+}
+
+export function getPublishedLocation(slug: string) {
+  return getPublishedLocations().find((item) => item.slug === slug);
+}
+
+validateLocations(LOCATIONS, TREATMENTS);

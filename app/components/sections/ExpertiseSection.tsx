@@ -1,4 +1,12 @@
 import { DOCTOR_SUBTITLE, EXPERTISE_AREAS } from "@/constants";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+const treatmentHrefByExpertiseId: Record<string, string> = {
+  "peripheral-nerves": "/tratamentos/cirurgia-nervos-perifericos",
+  spine: "/tratamentos/cirurgia-coluna",
+  rehabilitation: "/tratamentos/reabilitacao-neurocirurgica",
+};
 
 export default function ExpertiseSection() {
   return (
@@ -57,6 +65,10 @@ export default function ExpertiseSection() {
                       <li key={highlight}>{highlight}</li>
                     ))}
                   </ul>
+                  <Link className="expertise-link md:col-span-2" href={treatmentHrefByExpertiseId[area.id]}>
+                    Conhecer esta área
+                    <ArrowRight aria-hidden size={17} strokeWidth={2} />
+                  </Link>
                 </>
               ) : (
                 <>
@@ -74,6 +86,10 @@ export default function ExpertiseSection() {
                         <li key={highlight}>{highlight}</li>
                       ))}
                     </ul>
+                    <Link className="expertise-link" href={treatmentHrefByExpertiseId[area.id]}>
+                      Conhecer esta área
+                    <ArrowRight aria-hidden size={17} strokeWidth={2} />
+                    </Link>
                   </div>
                 </>
               )}
