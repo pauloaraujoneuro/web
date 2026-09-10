@@ -4,7 +4,7 @@ test("the clinic page carries the facility facts and structured data", async ({ 
   await page.goto("/clinica/protrauma");
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Clínica Protrauma em Campo Grande - MS",
+    "INCC - Instituto de Nervos, Cérebro e Coluna em Campo Grande - MS",
   );
   await expect(page.getByText("R. 15 de Novembro, 2808", { exact: false }).first()).toBeVisible();
   await expect(page.getByText("79020-300", { exact: false }).first()).toBeVisible();
@@ -23,7 +23,12 @@ test("the clinic page carries the facility facts and structured data", async ({ 
     .map((value) => JSON.parse(value))
     .find((value) => value["@type"] === "MedicalClinic");
   expect(clinic.address.postalCode).toBe("79020-300");
-  expect(clinic.sameAs).toContain("https://www.instagram.com/protraumacampogrande/");
+  expect(clinic.name).toBe("INCC - Instituto de Nervos, Cérebro e Coluna");
+  expect(clinic.address.streetAddress).toContain("3º andar");
+  expect(clinic.sameAs).toBeUndefined();
+  expect(clinic.containedInPlace.sameAs).toContain(
+    "https://www.instagram.com/protraumacampogrande/",
+  );
   expect(clinic.openingHoursSpecification[0].opens).toBe("07:00");
 });
 
@@ -52,10 +57,10 @@ test("the map is embedded lazily and without the reviews panel", async ({ page }
 test("the clinic page is reachable from the hub, the footer and the site schema carries the address", async ({ page }) => {
   await page.goto("/locais-de-atendimento");
   await expect(
-    page.locator("footer").getByRole("link", { name: "Clínica Protrauma" }),
+    page.locator("footer").getByRole("link", { name: "INCC - Instituto de Nervos, Cérebro e Coluna" }),
   ).toHaveAttribute("href", "/clinica/protrauma");
   await expect(
-    page.locator(".location-highlight").getByRole("link", { name: /Sobre a Clínica Protrauma/ }),
+    page.locator(".location-highlight").getByRole("link", { name: /Sobre o INCC - Instituto de Nervos, Cérebro e Coluna/ }),
   ).toHaveAttribute("href", "/clinica/protrauma");
 
   const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();

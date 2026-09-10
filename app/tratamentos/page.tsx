@@ -70,7 +70,7 @@ export default function TreatmentsPage() {
         <div className="mt-12 sm:mt-16">
           <AppointmentCta
             heading="Converse com a equipe sobre sua avaliação"
-            body="Atendimento presencial na Clínica Protrauma, em Campo Grande - MS. Leve seus exames anteriores para uma análise contextualizada."
+            body="Atendimento presencial no INCC - Instituto de Nervos, Cérebro e Coluna, em Campo Grande - MS. Leve seus exames anteriores para uma análise contextualizada."
             message={CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT}
             eventLocation="treatments_hub_final"
           />

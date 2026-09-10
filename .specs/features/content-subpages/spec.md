@@ -176,7 +176,7 @@ building the underlying templates.
 | Blog seed | Use at least one approved educational article if available; otherwise ship the blog hub as `noindex` with an intentional empty state and keep fixtures out of production discovery | An empty indexable content hub offers little search value | No |
 | Clinical copy | Base drafts on current approved claims and authoritative sources; clinician approval is required before indexing | Existing homepage blurbs are not sufficient for every detail page | No |
 | Contact number | `+55 67 2180-4099`, the Campo Grande line supplied by the client, replacing the Curitiba number the spec held while none existed | Matches where the practice actually attends | No |
-| Registration display | Preserve `CRM-PR 37567` and `RQE 29967`; do not infer an MS registration | No confirmed alternative exists in the repository | No |
+| Registration display | Show `CRM-MS 16562` and `RQE 9823` (MS registration confirmed by the client on 2026-09-10, replacing `CRM-PR 37567` / `RQE 29967`) | Doctor now practises in Campo Grande–MS | No |
 | Initial location | Clínica Protrauma, Campo Grande–MS is the sole active location; street address/map remain omitted until approved | Matches PR #1 and avoids republishing intentionally removed details | No |
 | URL format | Lowercase, accent-free, hyphenated Portuguese slugs; no city keyword stuffing outside truthful location intent | Produces durable canonical URLs and reduces cannibalization | Yes — default |
 | Legacy navigation | Global navigation becomes route-aware while valuable homepage section anchors remain reachable as `/#section` | Bare hashes fail when the header appears on inner routes | Yes — functional requirement |

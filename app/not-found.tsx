@@ -53,17 +53,13 @@ export default function NotFound() {
             </h1>
 
             <p className="mt-4 text-base leading-relaxed text-primary/85 sm:text-lg">
-              A rota que você tentou acessar não existe ou foi movida. Use os botões abaixo para voltar à página inicial e continuar sua navegação.
+              A rota que você tentou acessar não existe ou foi movida. Use o botão abaixo para voltar à página inicial e continuar sua navegação.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/" className="btn-primary w-full sm:w-auto">
                 <HomeIcon />
                 Ir para a página inicial
-              </Link>
-
-              <Link href="/#contact" className="btn-secondary w-full sm:w-auto">
-                Falar com a clínica
               </Link>
             </div>
           </div>

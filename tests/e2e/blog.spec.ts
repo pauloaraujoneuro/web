@@ -50,7 +50,7 @@ test("article renders markdown headings, attribution, disclaimer, and related li
   )) {
     await expect(page.locator(href)).toHaveCount(1);
   }
-  await expect(page.getByLabel("Autoria médica")).toContainText("CRM-PR 37567");
+  await expect(page.getByLabel("Autoria médica")).toContainText("CRM-MS 16562");
   await expect(page.getByText("Aviso de responsabilidade médica")).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Nesta leitura" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Cirurgia de nervos periféricos" })).toHaveAttribute("href", "/tratamentos/cirurgia-nervos-perifericos");

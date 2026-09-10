@@ -9,11 +9,11 @@ export const CLINICS: ClinicProfile[] = [
     slug: "protrauma",
     publicationState: "published",
     indexable: true,
-    name: "Clínica Protrauma",
-    tagline: "Clínica de ortopedia e traumatologia em Campo Grande - MS",
+    name: "INCC - Instituto de Nervos, Cérebro e Coluna",
+    tagline: "No 3º andar do prédio da Clínica Protrauma, em Campo Grande - MS",
     description:
-      "A Clínica Protrauma reúne atendimento em ortopedia e traumatologia para adultos e crianças em Campo Grande. É onde o Dr. Paulo Araújo realiza as consultas de neurocirurgia, com estrutura para avaliação clínica e acompanhamento.",
-    streetAddress: "R. 15 de Novembro, 2808",
+      "O INCC - Instituto de Nervos, Cérebro e Coluna fica no 3º andar do prédio da Clínica Protrauma, em Campo Grande. É onde o Dr. Paulo Araújo realiza as consultas de neurocirurgia, com estrutura para avaliação clínica e acompanhamento.",
+    streetAddress: "R. 15 de Novembro, 2808 - 3º andar",
     neighborhood: "Jardim dos Estados",
     city: "Campo Grande",
     state: "MS",
@@ -44,7 +44,7 @@ export const CLINICS: ClinicProfile[] = [
     ],
     imageSrc: "/pics/clinica-protrauma.webp",
     imageAlt: "Fachada da Clínica Protrauma, em Campo Grande - MS",
-    lastModified: "2026-09-06",
+    lastModified: "2026-09-10",
   },
 ];
 

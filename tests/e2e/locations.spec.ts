@@ -20,7 +20,7 @@ test("Campo Grande page renders the fields the client confirmed", async ({ page 
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Neurocirurgião em Campo Grande - MS");
   await expect(
-    page.getByRole("heading", { level: 2, name: "Clínica Protrauma", exact: true }),
+    page.getByRole("heading", { level: 2, name: "INCC - Instituto de Nervos, Cérebro e Coluna", exact: true }),
   ).toBeVisible();
   await expect(page.getByRole("heading", { level: 2, name: "O que trazer para a consulta" })).toBeVisible();
   // Address and hours became publishable once the client supplied them.

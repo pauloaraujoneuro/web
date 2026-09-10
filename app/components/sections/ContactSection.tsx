@@ -2,26 +2,12 @@ import {
   CITY_SCHEDULES,
   CONSULTATION_APPROACH_POINTS,
   CONTACT_EMAIL,
-  CONTACT_PHONE,
+  CONTACT_WHATSAPP_FORMATTED,
+  CONTACT_WHATSAPP_URL,
   LOCATIONS_SCHEDULING_NOTE,
 } from "@/constants";
 import WhatsAppIcon from "@/app/components/icons/WhatsAppIcon";
 import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
-
-function PhoneIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      className="h-5 w-5"
-      aria-hidden="true"
-    >
-      <path d="M5 4h3l1 5-2.2 1.6a15.8 15.8 0 0 0 6.6 6.6L15 15l5 1v3a1 1 0 0 1-1 1h-1c-7.7 0-14-6.3-14-14V5a1 1 0 0 1 1-1Z" />
-    </svg>
-  );
-}
 
 function MailIcon() {
   return (
@@ -68,15 +54,22 @@ export default function ContactSection() {
               <ul className="space-y-4 xl:space-y-5">
                 <li className="flex gap-3">
                   <span className="mt-0.5 text-bg/90">
-                    <PhoneIcon />
+                    <WhatsAppIcon className="h-5 w-5" />
                   </span>
                   <div>
                     <p className="text-sm font-semibold text-bg xl:text-base">
-                      Telefone fixo
+                      WhatsApp
                     </p>
-                    <p className="text-sm leading-relaxed text-bg/82 xl:text-lg">
-                      {CONTACT_PHONE}
-                    </p>
+                    <TrackedWhatsAppLink
+                      href={CONTACT_WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="interactive-link whitespace-nowrap text-sm leading-relaxed text-bg/82 xl:text-lg"
+                      eventLocation="contact_card"
+                      eventLabel="WhatsApp"
+                    >
+                      {CONTACT_WHATSAPP_FORMATTED}
+                    </TrackedWhatsAppLink>
                   </div>
                 </li>
                 <li className="flex gap-3">
