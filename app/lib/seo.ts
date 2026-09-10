@@ -16,7 +16,7 @@ import type { BlogPost } from "@/content/types";
  * Fallback date for routes whose content carries no date of its own (home,
  * profile, FAQ). Dated sections derive their own value from the catalogs.
  */
-const CONTENT_BASELINE = "2026-09-06";
+const CONTENT_BASELINE = "2026-09-10";
 
 export interface RouteInventoryEntry {
   path: string;

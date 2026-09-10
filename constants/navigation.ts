@@ -16,5 +16,5 @@ export const NAV_ITEMS: NavigationItem[] = [
  */
 export const FOOTER_NAV_ITEMS: NavigationItem[] = [
   ...NAV_ITEMS,
-  { href: "/clinica/protrauma", label: "Clínica Protrauma" },
+  { href: "/clinica/protrauma", label: "INCC - Instituto de Nervos, Cérebro e Coluna" },
 ];

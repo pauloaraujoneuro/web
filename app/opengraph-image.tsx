@@ -8,6 +8,6 @@ export default function Image() {
   return renderOgImage({
     eyebrow: "Neurocirurgia",
     title: "Cirurgia de coluna, nervos periféricos e reabilitação",
-    description: "Atendimento presencial na Clínica Protrauma, em Campo Grande - MS.",
+    description: "Atendimento presencial no INCC - Instituto de Nervos, Cérebro e Coluna, em Campo Grande - MS.",
   });
 }

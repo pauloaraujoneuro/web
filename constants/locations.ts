@@ -8,7 +8,7 @@ import {
 export const SERVICE_LOCATIONS: ServiceLocation[] = [
   {
     id: "campo-grande",
-    name: "Clínica Protrauma",
+    name: "INCC - Instituto de Nervos, Cérebro e Coluna",
     city: "Campo Grande",
     state: "MS",
   },
@@ -19,7 +19,7 @@ export const CITY_SCHEDULES: CitySchedule[] = [
     id: "schedule-campo-grande",
     city: "Campo Grande",
     state: "MS",
-    location: "Clínica Protrauma",
+    location: "INCC - Instituto de Nervos, Cérebro e Coluna",
     whatsappCtaLabel: "Agendar em Campo Grande",
     whatsappUrl: createWhatsAppUrl(CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT),
   },

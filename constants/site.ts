@@ -16,23 +16,36 @@ export const DOCTOR_PROFILE_IMAGE_FRONT_WIDE =
 // Doctor Information
 export const DOCTOR_NAME = "Paulo Araújo";
 export const DOCTOR_FULL_NAME = "Paulo Victor de Souza Araújo";
-export const DOCTOR_CRM = "CRM-PR 37567";
-export const DOCTOR_RQE = "RQE 29967";
+export const DOCTOR_CRM = "CRM-MS 16562";
+export const DOCTOR_RQE = "RQE 9823";
 export const DOCTOR_TITLE = "Neurocirurgião";
 export const DOCTOR_SUBTITLE = "Cirurgia de Coluna, Nervo e Reabilitação";
 export const DOCTOR_HEADLINE = `${DOCTOR_NAME} | ${DOCTOR_TITLE} | ${DOCTOR_SUBTITLE}`;
 export const DOCTOR_SHORT_BIO =
-  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna do Hospital Universitário Cajuru, com fellowship em nervo periférico pela Rede SARAH e mestrado em medicina cirúrgica pela UFPR. Atua com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial.";
+  "Preceptor do serviço de neurocirurgia da Santa Casa de Campo Grande, foi chefe do serviço de nervo periférico e preceptor do serviço de coluna do Hospital Universitário Cajuru de 2023 a 2026, com fellowship em nervo periférico pela Rede SARAH e mestrado em medicina cirúrgica pela UFPR. Atua com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial.";
 export const DOCTOR_SHORTER_BIO =
   "Atua com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial.";
 
 export const DOCTOR_CREDENTIALS = [
-  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru, Curitiba, PR",
+  "Chefe do serviço de nervo periférico e preceptor do serviço de coluna na residência de neurocirurgia do Hospital Universitário Cajuru, Curitiba, PR, de 2023 a 2026",
+  "Preceptor do serviço de neurocirurgia do Hospital Santa Casa de Campo Grande, MS",
   "Mestre em Medicina Cirúrgica pela UFPR, Curitiba, PR",
   "Fellowship em nervo periférico pela Rede SARAH, Brasília, DF",
 ];
 
 export const DOCTOR_REGISTRATION_BADGES = [DOCTOR_CRM, DOCTOR_RQE];
+
+/** Current hospital role, published as `hospitalAffiliation` in schema.org. */
+export const DOCTOR_HOSPITAL_AFFILIATION = {
+  "@type": "Hospital",
+  name: "Hospital Santa Casa de Campo Grande",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Campo Grande",
+    addressRegion: "MS",
+    addressCountry: "BR",
+  },
+};
 
 // Expertise
 export const EXPERTISE_AREAS: ExpertiseArea[] = [
@@ -115,7 +128,7 @@ export const PROFESSIONAL_ROLES: ProfessionalRole[] = [
     id: "role-protrauma",
     period: "Atual",
     title: "Neurocirurgião",
-    institution: "Clínica Protrauma",
+    institution: "INCC - Instituto de Nervos, Cérebro e Coluna",
     summary:
       "Atendimento em Campo Grande com foco em cirurgia de nervo periférico, coluna e reabilitação neurocirúrgica.",
     status: "active",

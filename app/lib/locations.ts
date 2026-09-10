@@ -38,7 +38,7 @@ export const LOCATIONS: Location[] = [
     state: campoGrande.state,
     metaTitle: "Neurocirurgião em Campo Grande - MS",
     metaDescription:
-      "Informações para avaliação neurocirúrgica com o Dr. Paulo Araújo na Clínica Protrauma, em Campo Grande - MS.",
+      "Informações para avaliação neurocirúrgica com o Dr. Paulo Araújo no INCC - Instituto de Nervos, Cérebro e Coluna, em Campo Grande - MS.",
     introduction:
       "Atendimento presencial para avaliação de condições da coluna, nervos periféricos e necessidades de reabilitação neurocirúrgica.",
     schedulingGuidance: LOCATIONS_SCHEDULING_NOTE,

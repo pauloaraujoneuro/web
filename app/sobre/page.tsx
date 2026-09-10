@@ -13,6 +13,7 @@ import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
   DOCTOR_CREDENTIALS,
   DOCTOR_CRM,
+  DOCTOR_HOSPITAL_AFFILIATION,
   DOCTOR_NAME,
   DOCTOR_PROFILE_IMAGE,
   DOCTOR_PROFILE_IMAGE_FRONT_WIDE,
@@ -65,6 +66,7 @@ export default function AboutPage() {
           { "@type": "PropertyValue", propertyID: "CRM", value: DOCTOR_CRM },
           { "@type": "PropertyValue", propertyID: "RQE", value: DOCTOR_RQE },
         ],
+        hospitalAffiliation: DOCTOR_HOSPITAL_AFFILIATION,
         // Facilities that have a catalog entry are referenced by their canonical
         // `@id`; only roles without one are described inline.
         workLocation: currentRoles.map((role) => {

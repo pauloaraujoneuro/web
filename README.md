@@ -1,7 +1,7 @@
 # Dr. Paulo Araújo — Neurocirurgia
 
 Institutional and educational site for Dr. Paulo Araújo, neurosurgeon
-(`CRM-PR 37567` • `RQE 29967`), practising at Clínica Protrauma in
+(`CRM-MS 16562` • `RQE 9823`), practising at Clínica Protrauma in
 Campo Grande – MS. Built with Next.js App Router, TypeScript and Tailwind 4.
 
 Production: <https://www.pauloaraujoneuro.com.br>

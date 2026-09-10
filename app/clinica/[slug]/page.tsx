@@ -25,6 +25,7 @@ import { buildPageMetadata, NOT_FOUND_METADATA } from "@/app/lib/metadata";
 import { getPublishedLocations } from "@/app/lib/locations";
 import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 import {
+  CONTACT_PHONE,
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
   DOCTOR_CRM,
   DOCTOR_NAME,
@@ -66,7 +67,7 @@ export function generateStaticParams() {
 function describe(clinic: ClinicProfile) {
   return {
     socialTitle: `${clinic.name} — onde o Dr. ${DOCTOR_NAME} atende em ${clinic.city}`,
-    description: `Endereço, contato e localização da ${clinic.name}, em ${clinic.city} - ${clinic.state}, onde o Dr. ${DOCTOR_NAME} realiza as consultas de neurocirurgia.`,
+    description: `Endereço, contato e localização do ${clinic.name}, em ${clinic.city} - ${clinic.state}, onde o Dr. ${DOCTOR_NAME} realiza as consultas de neurocirurgia.`,
   };
 }
 
@@ -109,8 +110,17 @@ export default async function ClinicPage({ params }: Props) {
           name: clinic.name,
           description: clinic.description,
           url: pageUrl,
-          sameAs: [clinic.websiteUrl, ...clinic.socialLinks.map((item) => item.href)],
-          telephone: clinic.phone,
+          // The website and social profiles belong to the Protrauma building the
+          // practice sits in, not to this clinic: describing them as `sameAs`
+          // would tell search engines the two are the same business.
+          containedInPlace: {
+            "@type": "MedicalClinic",
+            name: "Clínica Protrauma",
+            url: clinic.websiteUrl,
+            sameAs: clinic.socialLinks.map((item) => item.href),
+          },
+          // Same number as the site-wide graph, which shares this `@id`.
+          telephone: CONTACT_PHONE,
           image: `${SITE_URL}${clinic.imageSrc}`,
           hasMap: clinic.mapUrl,
           openingHoursSpecification: clinic.openingHoursSpecification.map((entry) => ({

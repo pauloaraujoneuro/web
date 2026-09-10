@@ -62,7 +62,7 @@ test("llms.txt exposes the same approved boundary as the sitemap", async ({ requ
 
   const body = await response.text();
   expect(body.startsWith("# Dr. Paulo Araújo")).toBe(true);
-  expect(body).toContain("CRM-PR 37567");
+  expect(body).toContain("CRM-MS 16562");
   for (const route of expectedRoutes) {
     expect(body).toContain(`](https://www.pauloaraujoneuro.com.br${route}):`);
   }
