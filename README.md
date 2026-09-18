@@ -92,10 +92,11 @@ than rendering an empty container.
 
 ## Specification
 
-Feature work follows `.specs/features/content-subpages/` — specification,
-design, task breakdown with verification evidence, and the implementation
-context that records which design decisions were accepted and which generated
-details were rejected.
+Feature work follows `.specs/features/<feature>/` — specification, design,
+task breakdown with verification evidence, and the implementation context that
+records which design decisions were accepted and which generated details were
+rejected. That directory is a local working space and is gitignored, so ask a
+maintainer for a copy rather than expecting it in a fresh clone.
 
 ## Deployment
 

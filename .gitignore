@@ -48,3 +48,6 @@ next-env.d.ts
 
 # local agent settings (skills and agent definitions stay tracked)
 .claude/settings.local.json
+
+# spec workspace (local only, never pushed)
+/.specs

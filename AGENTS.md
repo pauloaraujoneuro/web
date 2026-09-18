@@ -64,7 +64,8 @@ already broad.
   for routes, keyboard interaction and responsive behaviour.
 - Verify visually at 390px and 1440px. Screenshots catch what assertions miss —
   a duplicated heading, a footer gap, a card that reads badly.
-- Keep local design exports (`tmp/`) out of the commit.
+- Keep local design exports (`tmp/`) and the spec workspace (`.specs/`) out of
+  the commit; both are gitignored and stay on the machine.
 - Record substantive work in `.specs/features/<feature>/tasks.md` with the
   verification evidence, not just the claim.
 
