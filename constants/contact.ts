@@ -1,10 +1,10 @@
 // Contact Information
 export const CONTACT_EMAIL = "pauloaraujoneuro@gmail.com";
-export const CONTACT_PHONE = "67 2180-4099";
+export const CONTACT_PHONE = "67 4042-0561";
 
 // WhatsApp Information
-export const CONTACT_WHATSAPP_NUMBER = "556721804099";
-export const CONTACT_WHATSAPP_FORMATTED = "+55 67 2180-4099";
+export const CONTACT_WHATSAPP_NUMBER = "556740420561";
+export const CONTACT_WHATSAPP_FORMATTED = "+55 67 4042-0561";
 export const CONTACT_WHATSAPP_DEFAULT_TEXT =
   "Olá! Encontrei o site do Dr. Paulo Araújo e gostaria de agendar uma consulta.";
 
