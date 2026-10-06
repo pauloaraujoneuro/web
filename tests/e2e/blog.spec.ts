@@ -11,7 +11,7 @@ test("blog hub features a published article once", async ({ page }) => {
     "href",
     "/blog/como-se-preparar-para-consulta-neurocirurgica",
   );
-  await expect(page.locator(".post-grid .content-card")).toHaveCount(3);
+  await expect(page.locator(".post-grid .content-card")).toHaveCount(17);
   await expect(page.locator(".post-grid .card-eyebrow-topic").first()).toHaveText("Nervo periférico");
 });
 
@@ -54,6 +54,43 @@ test("article renders markdown headings, attribution, disclaimer, and related li
   await expect(page.getByText("Aviso de responsabilidade médica")).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Nesta leitura" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Cirurgia de nervos periféricos" })).toHaveAttribute("href", "/tratamentos/cirurgia-nervos-perifericos");
+});
+
+test("article illustrations render as figures, never inside a paragraph", async ({ page }) => {
+  await page.goto("/blog/tetraplegia-dobrar-cotovelo-abrir-mao");
+
+  const figures = page.locator(".markdown-body figure.content-figure");
+  await expect(figures).toHaveCount(5);
+  await expect(page.locator(".markdown-body p figure")).toHaveCount(0);
+  for (const alt of await figures.getByRole("img").evaluateAll((images) =>
+    images.map((image) => image.getAttribute("alt") ?? ""),
+  )) {
+    expect(alt.length).toBeGreaterThan(40);
+  }
+  // Each zoom link is named after its own figure, so a screen reader's link
+  // list does not read five identical "Ampliar ilustração" entries.
+  const zoomNames = await figures.getByRole("link").evaluateAll((links) =>
+    links.map((link) => link.getAttribute("aria-label")),
+  );
+  expect(new Set(zoomNames).size).toBe(5);
+
+  // Image search attribution: the article's structured data lists the drawings.
+  const graph = JSON.parse(
+    await page.locator('script[type="application/ld+json"]').last().textContent() ?? "{}",
+  )["@graph"];
+  const article = graph.find((node: { "@type": string[] }) =>
+    Array.isArray(node["@type"]) && node["@type"].includes("BlogPosting"),
+  );
+  expect(article.image).toHaveLength(6);
+});
+
+test("an illustration below the fold is lazy-loaded and keeps its space", async ({ page }) => {
+  await page.goto("/blog/pe-caido-tratamento");
+
+  const image = page.locator(".markdown-body figure img").last();
+  await expect(image).toHaveAttribute("loading", "lazy");
+  await expect(image).toHaveAttribute("width", "1024");
+  await expect(image).toHaveAttribute("height", "552");
 });
 
 test("unknown article returns not found", async ({ page }) => {

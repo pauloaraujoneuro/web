@@ -1,9 +1,11 @@
 import type {
   BlogPost,
   ClinicProfile,
+  ContentFigure,
   Location,
   Treatment,
 } from "@/content/types";
+import { FIGURE_SIZES } from "@/content/figures";
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -39,6 +41,32 @@ function assertUnique<T>(
     seen.set(value, source);
   }
 }
+
+/**
+ * Screen readers announce alt text in full, so it describes what the
+ * illustration teaches in a sentence or two — not a caption, not a keyword list.
+ */
+const MAX_ALT_LENGTH = 250;
+
+function assertFigure(source: string, field: string, figure: ContentFigure) {
+  if (!FIGURE_SIZES[figure.src]) fail(source, field, `unregistered image ${figure.src}`);
+  if (!figure.alt.trim()) fail(source, field, `${figure.src} needs alt text`);
+  if (figure.alt.length > MAX_ALT_LENGTH) {
+    fail(source, field, `${figure.src} alt text exceeds ${MAX_ALT_LENGTH} characters`);
+  }
+}
+
+/** Any Markdown image, including forms the figure pipeline does not read. */
+const ANY_MARKDOWN_IMAGE = /!\[/;
+/**
+ * The one supported form: `![alt](src "caption")` alone on its line. A lone
+ * image is the only one the article renderer can lift out of its paragraph,
+ * and the only one `extractFigures` reads, so anything else would either nest
+ * a <figure> inside a <p> or skip validation entirely.
+ */
+const STANDALONE_MARKDOWN_IMAGE = /^!\[[^\]]*\]\(\s*\S+?(?:\s+"[^"]*")?\s*\)$/;
+/** Site-relative links written in an article body. */
+const BODY_LINK = /\]\(\/(blog|tratamentos)\/([^)\s#?]+)/g;
 
 interface ReferenceTarget {
   visible: boolean;
@@ -112,6 +140,9 @@ export function validateTreatments(entries: Treatment[]) {
       if (!entry.carePath.length) fail(source, "carePath", "is required");
       if (!entry.faqs.length) fail(source, "faqs", "is required");
     }
+    for (const section of entry.sections) {
+      if (section.figure) assertFigure(source, `sections.${section.id}.figure`, section.figure);
+    }
     const from = targets.get(entry.slug)!;
     for (const target of entry.relatedTreatmentSlugs) {
       if (target === entry.slug) fail(source, "relatedTreatmentSlugs", "refers to itself");
@@ -167,6 +198,7 @@ export function validatePosts(posts: BlogPost[], treatments: Treatment[]) {
     (entry) => entry.slug,
   );
   const targets = treatmentTargets(treatments);
+  const articles = postTargets(posts);
   for (const post of posts) {
     const source = `posts.${post.slug}`;
     if (!SLUG.test(post.slug)) fail(source, "slug", "must be lowercase and hyphenated");
@@ -188,7 +220,18 @@ export function validatePosts(posts: BlogPost[], treatments: Treatment[]) {
       if (!post.body.trim()) fail(source, "body", "is required");
       if (post.headings.length < 2) fail(source, "headings", "requires at least two sections");
     }
+    for (const line of post.body.split("\n")) {
+      if (ANY_MARKDOWN_IMAGE.test(line) && !STANDALONE_MARKDOWN_IMAGE.test(line.trim())) {
+        fail(source, "body", `images must stand alone on their line as ![alt](src "caption"): ${line.trim().slice(0, 60)}`);
+      }
+    }
+    for (const figure of post.figures) assertFigure(source, "figures", figure);
     const from = { visible: post.state === "published", indexable: post.indexable };
+    // Body links follow the same rule as frontmatter relations: the target
+    // must exist, and an indexable article only links to indexable pages.
+    for (const [, section, slug] of post.body.matchAll(BODY_LINK)) {
+      assertReference(source, "body", slug, section === "blog" ? articles : targets, from);
+    }
     for (const target of post.relatedTreatmentSlugs) {
       assertReference(source, "relatedTreatmentSlugs", target, targets, from);
     }

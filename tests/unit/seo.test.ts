@@ -22,12 +22,27 @@ test("SEO inventory contains every and only published canonical route once", () 
     "/tratamentos/sindrome-tunel-carpo",
     "/tratamentos/sindrome-cubital",
     "/tratamentos/sindrome-tunel-tarso",
+    "/tratamentos/pe-caido",
     "/tratamentos/hernia-disco",
     "/tratamentos/estenose-canal-vertebral",
     "/tratamentos/mielopatia-cervical",
     "/tratamentos/fraturas-coluna",
     "/tratamentos/reeducacao-cortical-biofeedback",
     "/tratamentos/orteses-dinamicas",
+    "/blog/recuperacao-apos-cirurgia-de-nervo",
+    "/blog/fisioterapia-apos-cirurgia-de-nervo",
+    "/blog/nervo-pode-voltar-a-funcionar-anos-depois",
+    "/blog/ate-quando-operar-nervo-apos-acidente",
+    "/blog/perda-movimento-braco-acidente-moto",
+    "/blog/resultados-cirurgia-plexo-braquial",
+    "/blog/transferencia-nervosa-neurotizacao",
+    "/blog/enxerto-de-nervo",
+    "/blog/pe-caido-tratamento",
+    "/blog/lesao-tendao-ou-nervo",
+    "/blog/transferencia-nervosa-lesao-medular-prazo",
+    "/blog/tetraplegia-dobrar-cotovelo-abrir-mao",
+    "/blog/dor-neuropatica-lesao-medular",
+    "/blog/tetraplegia-c6-c7-cirurgia",
     "/blog/como-se-preparar-para-consulta-neurocirurgica",
     "/blog/lesao-plexo-braquial-quando-operar",
     "/blog/hernia-disco-lombar-quando-operar",
@@ -40,7 +55,7 @@ test("SEO inventory contains every and only published canonical route once", () 
 
 test("sitemap maps canonical URLs and content dates deterministically", () => {
   const sitemap = getSitemapEntries();
-  assert.equal(sitemap.length, 26);
+  assert.equal(sitemap.length, 41);
   assert.equal(sitemap[0].url, SITE_URL);
   assert.equal(sitemap.at(-1)?.url, `${SITE_URL}/clinica/protrauma`);
   assert.ok(
@@ -53,6 +68,24 @@ test("sitemap maps canonical URLs and content dates deterministically", () => {
     .map((entry) => entry.lastModified);
   assert.ok(detailDates.length > 0);
   assert.equal(sitemap[0].lastModified, detailDates.toSorted().at(-1));
+});
+
+test("the sitemap lists each page's illustrations, absolute and once", () => {
+  const sitemap = getSitemapEntries();
+  const article = sitemap.find((entry) => entry.url.endsWith("/blog/pe-caido-tratamento"));
+  const treatment = sitemap.find((entry) => entry.url.endsWith("/tratamentos/pe-caido"));
+
+  assert.equal(article?.images?.length, 4);
+  assert.equal(treatment?.images?.length, 3);
+  for (const entry of sitemap) {
+    const images = entry.images ?? [];
+    assert.equal(new Set(images).size, images.length, `${entry.url} repeats an image`);
+    for (const image of images) {
+      assert.ok(image.startsWith(`${SITE_URL}/images/conteudo/`), `${entry.url}: ${image}`);
+    }
+  }
+  // Pages without illustrations carry no empty image list.
+  assert.equal(sitemap[0].images, undefined);
 });
 
 test("dated hubs inherit the freshest date of the content they list", () => {

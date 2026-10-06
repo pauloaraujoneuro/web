@@ -319,7 +319,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
     ],
     keywords: ["hérnia de disco", "dor ciática", "coluna", "Campo Grande"],
     lastModified: "2026-09-07",
-    order: 9,
+    order: 10,
   },
   {
     slug: "estenose-canal-vertebral",
@@ -443,7 +443,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
     keywords: ["estenose de canal", "canal estreito", "coluna lombar", "Campo Grande"],
     lastModified: "2026-09-07",
-    order: 10,
+    order: 11,
   },
   {
     slug: "mielopatia-cervical",
@@ -585,7 +585,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
     keywords: ["mielopatia cervical", "compressão medular", "coluna cervical", "Campo Grande"],
     lastModified: "2026-09-07",
-    order: 11,
+    order: 12,
   },
   {
     slug: "fraturas-coluna",
@@ -727,6 +727,6 @@ export const SPINE_TREATMENTS: Treatment[] = [
     relatedPostSlugs: ["como-se-preparar-para-consulta-neurocirurgica"],
     keywords: ["fratura da coluna", "trauma raquimedular", "estabilização", "Campo Grande"],
     lastModified: "2026-09-07",
-    order: 12,
+    order: 13,
   },
 ];

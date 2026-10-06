@@ -48,6 +48,11 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
           "O músculo que fica muito tempo sem inervação perde progressivamente a capacidade de ser reinervado com sucesso. Por isso o intervalo entre a lesão e a reconstrução influencia o que ainda é possível fazer.",
           "Ao mesmo tempo, parte das lesões por estiramento ou compressão se recupera sozinha. Acompanhar por um período definido pode ser a conduta correta, e o exame seriado é o que mostra se a recuperação está acontecendo.",
         ],
+        figure: {
+          src: "/images/conteudo/atrofia-muscular-apos-denervacao.webp",
+          alt: "Ilustração em três etapas da evolução de um músculo do braço sem inervação: músculo normal, músculo desnervado com volume reduzido e atrofia avançada, com fibras substituídas por tecido fibroso e gordura.",
+          caption: "Sem o estímulo do nervo, o músculo perde volume com o tempo — por isso o intervalo até a reconstrução pesa no resultado.",
+        },
       },
       {
         id: "abordagens",
@@ -64,6 +69,11 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
           "A recuperação de um nervo é medida em meses, não em dias ou semanas. O tempo depende da distância entre o reparo e o músculo, da gravidade da lesão, da idade e da reabilitação.",
           "Em algumas transferências nervosas, a primeira atividade muscular perceptível pode levar por volta de dois a seis meses, e o ganho de força e o reaprendizado do movimento continuam por muito mais tempo. Esse intervalo é específico de cada reconstrução e não vale como previsão geral.",
         ],
+        figure: {
+          src: "/images/conteudo/regeneracao-nervo-apos-reparo.webp",
+          alt: "Ilustração de um nervo reparado cirurgicamente, mostrando o ponto de sutura e novas fibras nervosas (axônios) crescendo a partir dele dentro das camadas do nervo.",
+          caption: "Depois do reparo, as novas fibras nervosas crescem a partir do ponto de sutura, em média cerca de 1 milímetro por dia.",
+        },
       },
       {
         id: "sinais-de-alerta",
@@ -161,14 +171,22 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
       "sindrome-tunel-carpo",
       "sindrome-cubital",
       "sindrome-tunel-tarso",
+      "pe-caido",
       "reabilitacao-neurocirurgica",
     ],
     relatedPostSlugs: [
       "como-se-preparar-para-consulta-neurocirurgica",
       "lesao-plexo-braquial-quando-operar",
+      "ate-quando-operar-nervo-apos-acidente",
+      "recuperacao-apos-cirurgia-de-nervo",
+      "fisioterapia-apos-cirurgia-de-nervo",
+      "enxerto-de-nervo",
+      "transferencia-nervosa-neurotizacao",
+      "lesao-tendao-ou-nervo",
+      "nervo-pode-voltar-a-funcionar-anos-depois",
     ],
     keywords: ["nervo periférico", "reconstrução nervosa", "Campo Grande"],
-    lastModified: "2026-09-07",
+    lastModified: "2026-10-05",
     order: 1,
   },
   {
@@ -194,6 +212,11 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
           "O plexo braquial é a rede de nervos que sai das raízes cervicais e comanda os movimentos e a sensibilidade do membro superior.",
           "A lesão pode variar do estiramento, que pode se recuperar sozinho, até a ruptura ou o arrancamento da raiz junto à medula. Cada uma dessas situações tem potencial de recuperação diferente, e por isso o diagnóstico do tipo de lesão orienta tudo o que vem depois.",
         ],
+        figure: {
+          src: "/images/conteudo/anatomia-plexo-braquial.webp",
+          alt: "Ilustração anatômica do plexo braquial saindo das raízes C5 a T1 no pescoço, formando os troncos superior, médio e inferior e dando origem aos nervos musculocutâneo, axilar, radial, mediano e ulnar.",
+          caption: "O plexo braquial: raízes nervosas de C5 a T1 que formam os nervos do ombro, do braço e da mão.",
+        },
       },
       {
         id: "quem-atinge",
@@ -202,6 +225,11 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
           "As lesões graves do adulto que chegam à cirurgia estão associadas, na grande maioria, a trauma de alta energia. Nas séries cirúrgicas internacionais, os acidentes de motocicleta respondem pela maior parte dos casos fechados, e a maioria dos pacientes é composta por homens jovens.",
           "Esses números descrevem quem chega à cirurgia, e não todas as lesões de plexo — muitas lesões mais leves não seguem esse perfil.",
         ],
+        figure: {
+          src: "/images/conteudo/mecanismo-lesao-plexo-braquial-acidente-moto.webp",
+          alt: "Ilustração de um acidente de moto em que o ombro é empurrado para um lado e a cabeça e o pescoço para o outro, com detalhe dos nervos do plexo braquial estirados, rompidos ou arrancados.",
+          caption: "No acidente de moto, o ombro vai para um lado e o pescoço para o outro: o estiramento pode estirar, romper ou arrancar os nervos.",
+        },
       },
       {
         id: "avaliacao",
@@ -315,9 +343,13 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
     relatedPostSlugs: [
       "como-se-preparar-para-consulta-neurocirurgica",
       "lesao-plexo-braquial-quando-operar",
+      "perda-movimento-braco-acidente-moto",
+      "resultados-cirurgia-plexo-braquial",
+      "transferencia-nervosa-neurotizacao",
+      "enxerto-de-nervo",
     ],
     keywords: ["lesão do plexo braquial", "plexo braquial", "nervo periférico", "Campo Grande"],
-    lastModified: "2026-09-07",
+    lastModified: "2026-10-05",
     order: 4,
   },
   {
@@ -343,6 +375,11 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
           "Na transferência nervosa, um nervo doador que continua funcionando passa a comandar um músculo que ficou paralisado, sendo ligado próximo a ele.",
           "É diferente da transferência de tendão, que redireciona a força de um músculo que já funciona. A reconstrução moderna combina as duas estratégias com frequência, em vez de tratá-las como alternativas concorrentes.",
         ],
+        figure: {
+          src: "/images/conteudo/transferencia-supinador-interosseo-posterior.webp",
+          alt: "Ilustração da transferência do nervo do músculo supinador para o nervo interósseo posterior no antebraço, reativando os músculos extensores e permitindo esticar os dedos e abrir a mão.",
+          caption: "Exemplo de transferência: o nervo do supinador passa a comandar os extensores dos dedos, para abrir a mão.",
+        },
       },
       {
         id: "avaliacao",
@@ -369,6 +406,11 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
           "Os movimentos a serem trabalhados são definidos antes da cirurgia, em conjunto, e o planejamento é multiprofissional. Depois de uma transferência nervosa, o reaprendizado é parte do tratamento: no início o novo movimento depende do comando do músculo doador, e a separação dos dois comandos é construída na reabilitação.",
           "Os resultados publicados vêm de séries pequenas e heterogêneas, com medidas próprias de cada estudo. Eles servem para orientar o planejamento, não para prever o resultado de uma pessoa.",
         ],
+        figure: {
+          src: "/images/conteudo/transferencia-nervosa-extensao-cotovelo-triceps.webp",
+          alt: "Ilustração da transferência nervosa para o nervo do tríceps no braço, com comparação entre o cotovelo sem capacidade de extensão antes da cirurgia e o cotovelo estendido depois.",
+          caption: "Extensão do cotovelo, um dos alvos mais frequentes: um ramo nervoso do ombro passa a comandar o tríceps.",
+        },
       },
     ],
     indications: [
@@ -443,9 +485,12 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
     relatedPostSlugs: [
       "como-se-preparar-para-consulta-neurocirurgica",
       "transferencia-nervosa-tetraplegia-maos",
+      "tetraplegia-dobrar-cotovelo-abrir-mao",
+      "tetraplegia-c6-c7-cirurgia",
+      "transferencia-nervosa-lesao-medular-prazo",
     ],
     keywords: ["transferência nervosa", "tetraplegia", "lesão medular", "Campo Grande"],
-    lastModified: "2026-09-07",
+    lastModified: "2026-10-05",
     order: 5,
   },
   {
@@ -825,5 +870,151 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
     keywords: ["túnel do tarso", "nervo tibial", "dor no pé", "Campo Grande"],
     lastModified: "2026-09-07",
     order: 8,
+  },
+  {
+    slug: "pe-caido",
+    state: "published",
+    indexable: true,
+    group: "peripheral-nerve",
+    kind: "condition",
+    title: "Pé caído (lesão do nervo fibular)",
+    shortDescription:
+      "Perda de força para levantar a ponta do pé, quase sempre por lesão do nervo fibular junto ao joelho.",
+    primaryIntent: "entender o tratamento do pé caído por lesão do nervo fibular",
+    metaTitle: "Pé caído e lesão do nervo fibular em Campo Grande",
+    metaDescription:
+      "Entenda o pé caído por lesão do nervo fibular, como é feita a avaliação e quando considerar neurólise, enxerto de nervo ou transferência de tendão.",
+    summary:
+      "O pé caído é a perda de força para levantar a ponta do pé, que passa a arrastar no chão ao caminhar. Na maior parte das vezes, a causa é uma lesão do nervo fibular, e o tratamento depende do tipo de lesão e do tempo desde o trauma.",
+    sections: [
+      {
+        id: "o-que-e",
+        heading: "O que é o pé caído",
+        paragraphs: [
+          "Pé caído é quando a pessoa perde a força para levantar a ponta do pé. O pé fica arrastando no chão ao caminhar, e muitas vezes é preciso levantar mais o joelho para não tropeçar.",
+          "Isso costuma acontecer porque o nervo fibular foi lesionado. Esse nervo passa bem perto da parte externa do joelho, logo abaixo da pele, o que o torna vulnerável a compressão, estiramento ou lesão direta em traumas, luxações de joelho e até em cirurgias ortopédicas na região.",
+        ],
+        figure: {
+          src: "/images/conteudo/pe-caido-nervo-fibular.webp",
+          alt: "Ilustração comparando uma perna normal, em que o nervo fibular comum ativa o músculo tibial anterior para levantar o pé, com uma perna com dano no nervo fibular junto à fíbula, músculos inativos e o pé caído.",
+          caption: "O nervo fibular passa junto à parte externa do joelho; quando lesionado, o pé deixa de ser levantado ao caminhar.",
+        },
+      },
+      {
+        id: "avaliacao",
+        heading: "Como a avaliação é conduzida",
+        paragraphs: [
+          "A consulta procura entender como e quando a perda de força começou — trauma, luxação do joelho, cirurgia na região ou compressão — e examina a força para levantar o pé e os dedos, a sensibilidade no dorso do pé e a marcha.",
+          "A eletroneuromiografia e, em casos selecionados, os exames de imagem ajudam a definir se o nervo está apenas comprimido, se perdeu a continuidade e se há sinais de recuperação. Nem toda fraqueza para levantar o pé vem do nervo fibular: causas na coluna lombar e outras doenças neurológicas fazem parte do diagnóstico diferencial.",
+        ],
+      },
+      {
+        id: "cirurgia-do-nervo",
+        heading: "Quando o próprio nervo pode ser tratado",
+        paragraphs: [
+          "A escolha da cirurgia depende principalmente de dois fatores: o tipo de lesão do nervo e o tempo decorrido desde o acidente ou a cirurgia.",
+        ],
+        bullets: [
+          "Liberação do nervo (neurólise): indicada quando o nervo está apenas comprimido ou preso em tecido cicatricial, sem estar rompido.",
+          "Reparo ou enxerto de nervo: usado quando a continuidade do nervo foi interrompida. Funciona melhor quando realizado nos primeiros 6 meses após o trauma e quando o segmento lesionado é curto.",
+        ],
+        figure: {
+          src: "/images/conteudo/neurolise-liberacao-do-nervo.webp",
+          alt: "Ilustração da neurólise: antes, o nervo comprimido por tecido cicatricial; durante, a cicatriz sendo removida com instrumentos cirúrgicos; depois, o nervo liberado e com a continuidade preservada.",
+          caption: "Na neurólise, o nervo é liberado da cicatriz que o comprime, sem precisar ser cortado.",
+        },
+      },
+      {
+        id: "transferencia-de-tendao",
+        heading: "Quando o nervo não tem mais como se recuperar",
+        paragraphs: [
+          "Em lesões muito antigas, acima de 12 a 18 meses, a recuperação do próprio nervo deixa de ser esperada. É possível então redirecionar o tendão de outro músculo da perna, o tibial posterior, para puxar o pé para cima.",
+          "Essa transferência de tendão pode ser feita mesmo anos depois da lesão original, desde que o músculo doador esteja saudável e a articulação do tornozelo ainda tenha mobilidade preservada. O objetivo é voltar a caminhar com menos dependência da órtese e menos risco de quedas.",
+        ],
+        figure: {
+          src: "/images/conteudo/transferencia-tendao-pe-caido.webp",
+          alt: "Ilustração da transferência de tendão para dorsiflexão do pé: o tendão do músculo tibial posterior é desviado por um novo trajeto até o dorso do pé, permitindo levantar a ponta do pé quando o nervo fibular não se recupera.",
+          caption: "Quando o nervo não tem mais como se recuperar, um tendão saudável é redirecionado para levantar o pé.",
+        },
+      },
+      {
+        id: "tempo",
+        heading: "O tempo importa, mas nunca é tarde para avaliar",
+        paragraphs: [
+          "Quanto mais cedo a avaliação, maiores as chances de recuperação do próprio nervo, sem precisar recorrer à transferência de tendão.",
+          "Ainda assim, pacientes com lesões de anos atrás também devem ser avaliados. Durante o acompanhamento, ou quando a cirurgia não é indicada, órteses ajudam a caminhar com mais segurança.",
+        ],
+      },
+    ],
+    indications: [
+      "Dificuldade para levantar a ponta do pé ou pé que arrasta ao caminhar.",
+      "Perda de força no pé após trauma, luxação do joelho ou cirurgia na região.",
+      "Lesão do nervo fibular sem sinais de recuperação durante o acompanhamento.",
+      "Pé caído antigo, com uso de órtese, para avaliar a possibilidade de transferência de tendão.",
+    ],
+    limitations: [
+      "Nem todo pé caído tem origem no nervo fibular: causas na coluna e outras doenças neurológicas precisam ser afastadas.",
+      "Lesões por compressão ou estiramento podem se recuperar sem cirurgia, e o acompanhamento define o momento de intervir.",
+      "O reparo e o enxerto de nervo funcionam melhor quando feitos cedo e em segmentos curtos; em lesões antigas, a recuperação do próprio nervo deixa de ser esperada.",
+      "A transferência de tendão depende de um músculo doador saudável e de um tornozelo com mobilidade preservada.",
+    ],
+    carePath: [
+      "Revisão da história do trauma ou da cirurgia e dos exames anteriores.",
+      "Exame da força, da sensibilidade e da marcha.",
+      "Eletroneuromiografia e exames de imagem quando ajudam a definir o tipo de lesão.",
+      "Escolha entre acompanhamento, cirurgia do nervo ou transferência de tendão, conforme o tipo de lesão e o tempo decorrido.",
+    ],
+    faqs: [
+      {
+        id: "pe-caido-tem-tratamento",
+        question: "Pé caído tem tratamento?",
+        answer:
+          "Sim. Conforme o tipo de lesão e o tempo desde o trauma, as opções incluem liberar o nervo, repará-lo com sutura ou enxerto, ou transferir um tendão para levantar o pé. A indicação é definida na avaliação.",
+      },
+      {
+        id: "pe-caido-melhora-sozinho",
+        question: "O pé caído pode melhorar sozinho?",
+        answer:
+          "Pode, quando o nervo foi apenas comprimido ou estirado. Por isso parte dos casos é acompanhada por um período, com exames seriados que mostram se a recuperação começou.",
+      },
+      {
+        id: "pe-caido-prazo",
+        question: "Até quando é possível operar o nervo?",
+        answer:
+          "O reparo ou enxerto funciona melhor nos primeiros 6 meses após o trauma. Depois de 12 a 18 meses, a recuperação do próprio nervo deixa de ser esperada, e a transferência de tendão passa a ser a principal opção.",
+      },
+      {
+        id: "pe-caido-lesao-antiga",
+        question: "Uma lesão de anos atrás ainda tem tratamento?",
+        answer:
+          "Pode ter. A transferência de tendão pode ser feita mesmo anos depois da lesão, desde que o músculo doador esteja saudável e o tornozelo tenha mobilidade preservada.",
+      },
+      {
+        id: "pe-caido-ortese",
+        question: "Vou precisar usar órtese?",
+        answer:
+          "A órtese ajuda a caminhar com mais segurança durante o acompanhamento ou quando a cirurgia não é indicada. Depois de uma transferência de tendão, o objetivo é reduzir a dependência dela, sem garantia de que isso aconteça em todos os casos.",
+      },
+      {
+        id: "pe-caido-cirurgia-joelho",
+        question: "O pé caído pode aparecer depois de uma cirurgia no joelho?",
+        answer:
+          "Pode. O nervo fibular passa logo abaixo da pele, na parte externa do joelho, e pode ser comprimido ou lesionado em traumas, luxações e cirurgias da região. A avaliação define o tipo de lesão.",
+      },
+    ],
+    relatedTreatmentSlugs: [
+      "cirurgia-nervos-perifericos",
+      "orteses-dinamicas",
+      "reabilitacao-neurocirurgica",
+    ],
+    relatedPostSlugs: [
+      "pe-caido-tratamento",
+      "enxerto-de-nervo",
+      "ate-quando-operar-nervo-apos-acidente",
+      "nervo-pode-voltar-a-funcionar-anos-depois",
+    ],
+    keywords: ["pé caído", "nervo fibular", "transferência de tendão", "Campo Grande"],
+    lastModified: "2026-10-05",
+    order: 9,
   },
 ];

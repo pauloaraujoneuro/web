@@ -4,6 +4,7 @@ import { ArrowRight, Check, Route } from "lucide-react";
 import { notFound } from "next/navigation";
 import AuthorCard from "@/app/components/content/AuthorCard";
 import Breadcrumb, { type BreadcrumbItem } from "@/app/components/content/Breadcrumb";
+import ContentFigure from "@/app/components/content/ContentFigure";
 import FaqAccordion from "@/app/components/content/FaqAccordion";
 import JsonLd from "@/app/components/content/JsonLd";
 import RelatedLinks from "@/app/components/content/RelatedLinks";
@@ -11,6 +12,7 @@ import SectionToc from "@/app/components/content/SectionToc";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedPosts } from "@/app/lib/blog";
+import { treatmentFigureUrls } from "@/app/lib/figures";
 import { buildPageMetadata, NOT_FOUND_METADATA } from "@/app/lib/metadata";
 import {
   getVisibleTreatment,
@@ -62,6 +64,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
     treatment.relatedPostSlugs.includes(post.slug),
   );
   const pageUrl = `${SITE_URL}/tratamentos/${treatment.slug}`;
+  const figureUrls = treatmentFigureUrls(treatment);
 
   return (
     <SiteShell>
@@ -92,6 +95,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
                     description: treatment.metaDescription,
                     inLanguage: "pt-BR",
                     lastReviewed: treatment.lastModified,
+                    ...(figureUrls.length ? { image: figureUrls } : {}),
                     author: {
                       "@type": "Physician",
                       name: `Dr. ${DOCTOR_NAME}`,
@@ -146,6 +150,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
                 {section.bullets?.length ? (
                   <ul>{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
                 ) : null}
+                {section.figure ? <ContentFigure {...section.figure} /> : null}
               </section>
             ))}
 

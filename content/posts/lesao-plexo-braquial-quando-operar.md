@@ -6,7 +6,7 @@ title: "Lesão de plexo braquial no adulto: como é feito o diagnóstico"
 metaDescription: Entenda como a lesão de plexo braquial é investigada no adulto e quais achados orientam a decisão entre acompanhar e operar.
 dek: A investigação combina a história do trauma, o exame neurológico e os exames já realizados para definir o caminho do tratamento.
 publishDate: 2026-09-05
-lastModified: 2026-09-07
+lastModified: 2026-10-05
 primaryKeyword: lesão de plexo braquial
 secondaryKeywords:
   - diagnóstico de plexo braquial
@@ -26,7 +26,7 @@ relatedTreatmentSlugs:
 
 A maior parte das lesões de plexo braquial no adulto decorre de traumas com tração brusca entre o pescoço e o ombro. Saber como o acidente aconteceu ajuda a estimar quais estruturas foram afetadas e com que intensidade.
 
-As séries cirúrgicas internacionais mostram um padrão consistente: as lesões graves que chegam à cirurgia estão associadas quase sempre a trauma de alta energia, com acidentes de motocicleta respondendo pela maior parte dos casos fechados e predomínio de homens jovens. Esse perfil descreve quem chega à cirurgia — muitas lesões mais leves não seguem esse padrão.
+As séries cirúrgicas internacionais mostram um padrão consistente: as lesões graves que chegam à cirurgia estão associadas quase sempre a trauma de alta energia, com acidentes de motocicleta respondendo pela maior parte dos casos fechados e predomínio de homens jovens. Esse perfil descreve quem chega à cirurgia — muitas lesões mais leves não seguem esse padrão. O mecanismo do acidente de moto, e o padrão de fraqueza que cada parte do plexo produz, estão ilustrados em [perda de movimento do braço após acidente de moto](/blog/perda-movimento-braco-acidente-moto).
 
 Registrar a data do evento também importa, e por um motivo biológico específico.
 
@@ -69,7 +69,7 @@ Alguns achados, logo após o trauma, pedem avaliação sem espera:
 
 Parte dos casos evolui bem com acompanhamento clínico e reabilitação. A cirurgia entra em discussão quando há sinais de descontinuidade das estruturas nervosas ou quando o acompanhamento não mostra a recuperação esperada.
 
-Quando indicada, a reconstrução pode envolver a liberação do nervo de tecido cicatricial, o uso de enxertos para vencer falhas entre as extremidades ou a transferência de nervos saudáveis para reinervar o músculo-alvo. Em casos selecionados entram ainda a transferência muscular funcional e procedimentos sobre tendões.
+Quando indicada, a reconstrução pode envolver a liberação do nervo de tecido cicatricial, o uso de [enxertos](/blog/enxerto-de-nervo) para vencer falhas entre as extremidades ou a [transferência de nervos saudáveis](/blog/transferencia-nervosa-neurotizacao) para reinervar o músculo-alvo. Em casos selecionados entram ainda a transferência muscular funcional e procedimentos sobre tendões.
 
 Nenhuma dessas técnicas é superior às outras de modo geral. Elas resolvem problemas anatômicos diferentes, e a escolha depende do que o exame e os estudos mostraram.
 
@@ -82,6 +82,8 @@ Ou seja: o período de observação tem tarefas próprias. Não é tempo vazio.
 ## Sobre os números que circulam
 
 Revisões que reúnem dados de centenas de pacientes descrevem recuperação motora útil com frequência bem maior quando a cirurgia acontece cedo, comparada a atrasos longos. Esses números são importantes para orientar o serviço, mas não se traduzem em probabilidade individual: vêm de grupos selecionados, com lesões e definições de resultado diferentes entre os estudos.
+
+Os resultados publicados, e como o sucesso é medido nesses estudos, estão reunidos em [cirurgia de lesão do plexo braquial: ajuste de expectativas](/blog/resultados-cirurgia-plexo-braquial).
 
 O que se pode discutir de forma honesta em consulta são os objetivos concretos — flexão do cotovelo, estabilidade do ombro, função da mão, controle da dor — e o que é razoável esperar de cada um.
 

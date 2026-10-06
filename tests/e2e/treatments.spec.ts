@@ -9,15 +9,15 @@ test("treatment hub groups published catalog entries", async ({ page }) => {
   for (const heading of ["Nervo periférico", "Cirurgia da coluna", "Reabilitação neurocirúrgica"]) {
     await expect(page.getByRole("heading", { level: 2, name: heading })).toBeVisible();
   }
-  await expect(page.getByRole("link", { name: /Saiba mais/ })).toHaveCount(14);
-  await expect(page.locator("#peripheral-nerve").getByRole("article")).toHaveCount(6);
+  await expect(page.getByRole("link", { name: /Saiba mais/ })).toHaveCount(15);
+  await expect(page.locator("#peripheral-nerve").getByRole("article")).toHaveCount(7);
   await expect(page.locator("#spine").getByRole("article")).toHaveCount(5);
   await expect(page.locator("#rehabilitation").getByRole("article")).toHaveCount(3);
 
   // The chip tells the reader whether a card opens an area, a condition or a
   // procedure, so each kind must keep its own styling hook.
   await expect(page.locator("#peripheral-nerve .card-eyebrow-overview")).toHaveCount(1);
-  await expect(page.locator("#peripheral-nerve .card-eyebrow-condition")).toHaveCount(4);
+  await expect(page.locator("#peripheral-nerve .card-eyebrow-condition")).toHaveCount(5);
   await expect(page.locator("#peripheral-nerve .card-eyebrow-procedure")).toHaveCount(1);
 });
 
@@ -84,6 +84,26 @@ test("shares carry the page's own Twitter card, not the homepage's", async ({ pa
     .getAttribute("content");
   expect(twitterTitle).toBe(ogTitle);
   expect(twitterTitle).toContain("Hérnia de disco");
+});
+
+test("treatment sections show their illustrations with alt text, caption and zoom link", async ({ page }) => {
+  await page.goto("/tratamentos/pe-caido");
+
+  const figures = page.locator(".article-body figure.content-figure");
+  await expect(figures).toHaveCount(3);
+  const first = figures.first();
+  await expect(first.getByRole("img")).toHaveAttribute("alt", /nervo fibular/);
+  await expect(first.locator("figcaption")).toContainText("parte externa do joelho");
+  await expect(first.getByRole("link", { name: /^Ampliar ilustração/ })).toHaveAttribute(
+    "href",
+    "/images/conteudo/pe-caido-nervo-fibular.webp",
+  );
+
+  const graph = JSON.parse(
+    await page.locator('script[type="application/ld+json"]').last().textContent() ?? "{}",
+  )["@graph"];
+  const medicalPage = graph.find((node: { "@type": string }) => node["@type"] === "MedicalWebPage");
+  expect(medicalPage.image).toHaveLength(3);
 });
 
 test("unknown treatment returns not found", async ({ page }) => {

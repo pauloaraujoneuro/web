@@ -16,12 +16,27 @@ const expectedRoutes = [
   "/tratamentos/sindrome-tunel-carpo",
   "/tratamentos/sindrome-cubital",
   "/tratamentos/sindrome-tunel-tarso",
+  "/tratamentos/pe-caido",
   "/tratamentos/hernia-disco",
   "/tratamentos/estenose-canal-vertebral",
   "/tratamentos/mielopatia-cervical",
   "/tratamentos/fraturas-coluna",
   "/tratamentos/reeducacao-cortical-biofeedback",
   "/tratamentos/orteses-dinamicas",
+  "/blog/recuperacao-apos-cirurgia-de-nervo",
+  "/blog/fisioterapia-apos-cirurgia-de-nervo",
+  "/blog/nervo-pode-voltar-a-funcionar-anos-depois",
+  "/blog/ate-quando-operar-nervo-apos-acidente",
+  "/blog/perda-movimento-braco-acidente-moto",
+  "/blog/resultados-cirurgia-plexo-braquial",
+  "/blog/transferencia-nervosa-neurotizacao",
+  "/blog/enxerto-de-nervo",
+  "/blog/pe-caido-tratamento",
+  "/blog/lesao-tendao-ou-nervo",
+  "/blog/transferencia-nervosa-lesao-medular-prazo",
+  "/blog/tetraplegia-dobrar-cotovelo-abrir-mao",
+  "/blog/dor-neuropatica-lesao-medular",
+  "/blog/tetraplegia-c6-c7-cirurgia",
   "/blog/como-se-preparar-para-consulta-neurocirurgica",
   "/blog/lesao-plexo-braquial-quando-operar",
   "/blog/hernia-disco-lombar-quando-operar",
@@ -53,6 +68,10 @@ test("robots and sitemap expose the same approved discovery boundary", async ({ 
     expect(xml).toContain(`<loc>https://www.pauloaraujoneuro.com.br${route}</loc>`);
   }
   expect((xml.match(/<loc>/g) ?? []).length).toBe(expectedRoutes.length);
+  // Illustrations ride along as image entries on the page that explains them.
+  expect(xml).toContain(
+    "<image:loc>https://www.pauloaraujoneuro.com.br/images/conteudo/anatomia-plexo-braquial.webp</image:loc>",
+  );
 });
 
 test("llms.txt exposes the same approved boundary as the sitemap", async ({ request }) => {
