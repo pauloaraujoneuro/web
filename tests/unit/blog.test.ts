@@ -8,8 +8,8 @@ import { TREATMENTS } from "../../app/lib/treatments";
 test("published posts are deterministic and expose parsed headings", () => {
   const posts = getPublishedPosts();
 
-  assert.equal(posts.length, 4);
-  assert.equal(posts[0].slug, "como-se-preparar-para-consulta-neurocirurgica");
+  assert.equal(posts.length, 18);
+  assert.equal(posts[0].slug, "recuperacao-apos-cirurgia-de-nervo");
 
   // The heading contract, not the current headings: anchors must be unique,
   // URL-safe and derived from real headings, so the in-page table of contents
@@ -39,7 +39,7 @@ test("article validation rejects malformed required frontmatter", () => {
   const invalid = { ...getPublishedPosts()[0], featured: undefined as unknown as boolean };
   assert.throws(
     () => validatePosts([invalid], TREATMENTS),
-    /posts\.como-se-preparar-para-consulta-neurocirurgica\.featured: must be a boolean/,
+    new RegExp(`posts\\.${invalid.slug}\\.featured: must be a boolean`),
   );
 });
 
