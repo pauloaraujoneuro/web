@@ -64,3 +64,8 @@ Nenhuma dessas cirurgias funciona sozinha. Após a transferência de nervo, é n
 Nem todo paciente é candidato às mesmas técnicas: a escolha depende do nível exato da lesão, dos músculos que ainda funcionam e do tempo desde o trauma. Uma avaliação individualizada com neurocirurgião especializado em nervos periféricos é o passo necessário para saber quais transferências — de nervo, de tendão ou uma combinação das duas — são indicadas em cada caso. O tempo também conta: veja [até quando a transferência nervosa é possível após a lesão medular](/blog/transferencia-nervosa-lesao-medular-prazo).
 
 > Este texto é educativo. A elegibilidade e os objetivos são definidos em avaliação presencial, sem promessa de resultado.
+
+## Referências
+
+1. Missen KJ, Brown JM, Mandeville RM, et al. [Neurophysiological recovery following nerve transfer surgery to restore upper limb function after cervical spinal cord injury](https://pmc.ncbi.nlm.nih.gov/articles/PMC13587116/). *Annals of Neurology*, 2026.
+2. Javeed S, Dibble CF, Greenberg JK, et al. [Upper limb nerve transfer surgery in patients with tetraplegia](https://pmc.ncbi.nlm.nih.gov/articles/PMC9706368/). *JAMA Network Open*, 2022.

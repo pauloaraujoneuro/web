@@ -82,3 +82,8 @@ A cirurgia costuma trazer melhores resultados quando planejada nos primeiros mes
 A avaliação para saber se a transferência de nervo é indicada depende do nível da lesão medular, da força residual dos músculos e, principalmente, de exames de eletroneuromiografia, que mostram quais nervos doadores e receptores ainda estão saudáveis o suficiente para a cirurgia. Uma consulta com o neurocirurgião especialista em nervos periféricos é o passo indicado para avaliar essas opções de forma individualizada.
 
 > Este texto é educativo. A elegibilidade e os objetivos são definidos em avaliação presencial, sem promessa de resultado.
+
+## Referências
+
+1. Javeed S, Dibble CF, Greenberg JK, et al. [Upper limb nerve transfer surgery in patients with tetraplegia](https://pmc.ncbi.nlm.nih.gov/articles/PMC9706368/). *JAMA Network Open*, 2022.
+2. van Zyl N, Hill B, Cooper C, Hahn J, Galea MP. [Expanding traditional tendon-based techniques with nerve transfers for the restoration of upper limb function in tetraplegia: a prospective case series](https://pubmed.ncbi.nlm.nih.gov/31280969/). *The Lancet*, 2019.
