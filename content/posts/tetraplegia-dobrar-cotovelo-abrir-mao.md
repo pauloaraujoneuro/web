@@ -65,7 +65,7 @@ Transferência do nervo do músculo braquial para o nervo interósseo anterior, 
 
 Estudos recentes mostram ganhos consistentes de função. Em um estudo publicado na JAMA Network Open, a maior parte dos pacientes recuperou força útil: cerca de 70% conseguiram estender o cotovelo contra a gravidade, 79% recuperaram a extensão dos dedos (abrir a mão) e 52% recuperaram algum grau de flexão dos dedos. Outro estudo prospectivo, publicado na revista Lancet, mostrou melhora significativa na força de preensão, na pinça e nos testes funcionais de uso da mão após dois anos de acompanhamento.
 
-Um estudo do Journal of Neurosurgery: Spine reforça esse padrão: as transferências voltadas para abrir a mão e estender o punho e os dedos tiveram resultados mais consistentes, com força útil em mais da metade dos pacientes, enquanto as transferências para fechar a mão e fazer pinça tiveram recuperação mais variável.
+Os números do próprio estudo da JAMA Network Open mostram um padrão que se repete na literatura: as transferências voltadas para abrir a mão e estender o cotovelo e os dedos têm resultados mais consistentes, enquanto as transferências para fechar a mão e fazer pinça têm recuperação mais variável e mais lenta — no estudo, o tempo mediano até a força útil para fechar os dedos foi de cerca de quatro anos.
 
 Esses percentuais descrevem os grupos estudados e ajudam a planejar o tratamento, mas não representam a chance de recuperação de uma pessoa específica.
 

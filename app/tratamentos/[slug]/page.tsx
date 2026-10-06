@@ -12,6 +12,7 @@ import SectionToc from "@/app/components/content/SectionToc";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getPublishedPosts } from "@/app/lib/blog";
+import { treatmentFigureUrls } from "@/app/lib/figures";
 import { buildPageMetadata, NOT_FOUND_METADATA } from "@/app/lib/metadata";
 import {
   getVisibleTreatment,
@@ -63,9 +64,7 @@ export default async function TreatmentDetailPage({ params }: Props) {
     treatment.relatedPostSlugs.includes(post.slug),
   );
   const pageUrl = `${SITE_URL}/tratamentos/${treatment.slug}`;
-  const figureUrls = treatment.sections.flatMap((section) =>
-    section.figure ? [`${SITE_URL}${section.figure.src}`] : [],
-  );
+  const figureUrls = treatmentFigureUrls(treatment);
 
   return (
     <SiteShell>

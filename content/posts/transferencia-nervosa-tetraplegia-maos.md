@@ -40,7 +40,7 @@ São mecanismos distintos, com consequências práticas distintas:
 - A transferência nervosa depende de o músculo-alvo ainda estar em condições de ser reinervado, e o resultado leva meses para aparecer.
 - A transferência de tendão produz um efeito mecânico mais previsível no tempo, mas consome um músculo que já era funcional.
 
-Por muitos anos, a transferência de tendão foi a única opção cirúrgica para recuperar função da mão após lesão medular cervical. É uma técnica eficaz e consolidada, mas tem limitações: cada tendão transferido geralmente restaura apenas um movimento, exige imobilização prolongada (6 a 12 semanas de gesso ou tala) e, ao longo dos anos, pode perder de 17% a 20% da força conquistada.
+Por muitos anos, a transferência de tendão foi a única opção cirúrgica para recuperar função da mão após lesão medular cervical. É uma técnica eficaz e consolidada, mas tem limitações: cada tendão transferido geralmente restaura apenas um movimento, exige imobilização prolongada (6 a 12 semanas de gesso ou tala) e, ao longo dos anos, parte da força conquistada pode se perder.
 
 Em relação à técnica tradicional, a transferência de nervo traz algumas vantagens:
 
@@ -100,3 +100,8 @@ Coortes multicêntricas publicam médias de força de preensão e de pinça apó
 O que se pode combinar antes da cirurgia é concreto: quais movimentos serão trabalhados, em que ordem, com que prazo de reabilitação e quais tarefas do dia a dia eles pretendem tornar possíveis.
 
 > Este texto é educativo. A elegibilidade e os objetivos são definidos em avaliação presencial, sem promessa de resultado.
+
+## Referências
+
+1. van Zyl N, Hill B, Cooper C, Hahn J, Galea MP. [Expanding traditional tendon-based techniques with nerve transfers for the restoration of upper limb function in tetraplegia: a prospective case series](https://pubmed.ncbi.nlm.nih.gov/31280969/). *The Lancet*, 2019.
+2. Javeed S, Dibble CF, Greenberg JK, et al. [Upper limb nerve transfer surgery in patients with tetraplegia](https://pmc.ncbi.nlm.nih.gov/articles/PMC9706368/). *JAMA Network Open*, 2022.

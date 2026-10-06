@@ -8,9 +8,11 @@ import { FIGURE_SIZES } from "@/content/figures";
  * their own labels, which get small on a phone, so the caption offers the
  * full-size file rather than asking the reader to pinch-zoom the page.
  */
-export default function ContentFigure({ src, alt, caption }: ContentFigureData) {
+const ContentFigure = ({ src, alt, caption }: ContentFigureData) => {
   const size = FIGURE_SIZES[src];
-  if (!size) return null;
+  // Validation should have caught this; failing the build beats an
+  // illustration silently missing from a published page.
+  if (!size) throw new Error(`ContentFigure: unregistered image ${src}`);
 
   return (
     <figure className="content-figure">
@@ -37,4 +39,6 @@ export default function ContentFigure({ src, alt, caption }: ContentFigureData) 
       </figcaption>
     </figure>
   );
-}
+};
+
+export default ContentFigure;

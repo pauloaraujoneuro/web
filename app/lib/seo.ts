@@ -11,6 +11,7 @@ import {
   SITE_URL,
 } from "@/constants";
 import type { BlogPost } from "@/content/types";
+import { postFigureUrls, treatmentFigureUrls } from "@/app/lib/figures";
 
 /**
  * Fallback date for routes whose content carries no date of its own (home,
@@ -50,9 +51,7 @@ export function getPublicRouteInventory(
     description: entry.shortDescription,
     lastModified: entry.lastModified,
     priority: 0.8,
-    images: entry.sections.flatMap((section) =>
-      section.figure ? [`${SITE_URL}${section.figure.src}`] : [],
-    ),
+    images: treatmentFigureUrls(entry),
   }));
   const postEntries = posts.map((entry) => ({
     path: `/blog/${entry.slug}`,
@@ -60,7 +59,7 @@ export function getPublicRouteInventory(
     description: entry.metaDescription,
     lastModified: entry.lastModified,
     priority: 0.7,
-    images: entry.figures.map((figure) => `${SITE_URL}${figure.src}`),
+    images: postFigureUrls(entry),
   }));
   const locationEntries = locations.map((entry) => ({
     path: `/locais-de-atendimento/${entry.slug}`,

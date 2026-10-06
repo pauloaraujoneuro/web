@@ -95,3 +95,36 @@ test("validation rejects an unregistered image and a figure without alt text", (
     /treatments\.pe-caido\.sections\.o-que-e\.figure: .* needs alt text/,
   );
 });
+
+test("an image that does not stand alone on its line fails the build", () => {
+  const post = getPublishedPost("pe-caido-tratamento")!;
+  const inline = `${post.body}\n\nVeja ![nervo](/images/conteudo/pe-caido-nervo-fibular.webp) acima.`;
+  const reference = `${post.body}\n\n![nervo][figura]\n\n[figura]: /images/conteudo/pe-caido-nervo-fibular.webp`;
+
+  for (const body of [inline, reference]) {
+    assert.throws(
+      () => validatePosts([{ ...post, body }], TREATMENTS),
+      /posts\.pe-caido-tratamento\.body: images must stand alone on their line/,
+    );
+  }
+});
+
+test("article body links must point at pages that exist", () => {
+  const posts = getPublishedPosts();
+  const post = posts.find((entry) => entry.slug === "pe-caido-tratamento")!;
+  const broken = (href: string) => [
+    ...posts.filter((entry) => entry !== post),
+    { ...post, body: `${post.body}\n\nLeia [este texto](${href}).` },
+  ];
+
+  assert.throws(
+    () => validatePosts(broken("/blog/enxerto-de-nervos"), TREATMENTS),
+    /posts\.pe-caido-tratamento\.body: unknown target enxerto-de-nervos/,
+  );
+  assert.throws(
+    () => validatePosts(broken("/tratamentos/nao-existe"), TREATMENTS),
+    /posts\.pe-caido-tratamento\.body: unknown target nao-existe/,
+  );
+  assert.doesNotThrow(() => validatePosts(broken("/blog/enxerto-de-nervo#como-o-enxerto-funciona"), TREATMENTS));
+});
+

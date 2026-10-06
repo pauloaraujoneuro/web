@@ -12,6 +12,7 @@ import JsonLd from "@/app/components/content/JsonLd";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { getVisiblePost, getVisiblePosts } from "@/app/lib/blog";
+import { postFigureUrls } from "@/app/lib/figures";
 import { buildPageMetadata, NOT_FOUND_METADATA } from "@/app/lib/metadata";
 import { getPublishedTreatments, TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 import {
@@ -130,7 +131,7 @@ export default async function BlogArticlePage({ params }: Props) {
             // image search can attribute each drawing to the page that explains it.
             image: [
               `${pageUrl}/opengraph-image`,
-              ...post.figures.map((figure) => `${SITE_URL}${figure.src}`),
+              ...postFigureUrls(post),
             ],
             author: {
               "@type": "Physician",
