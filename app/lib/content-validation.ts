@@ -1,9 +1,11 @@
 import type {
   BlogPost,
   ClinicProfile,
+  ContentFigure,
   Location,
   Treatment,
 } from "@/content/types";
+import { FIGURE_SIZES } from "@/content/figures";
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -37,6 +39,20 @@ function assertUnique<T>(
     const previous = seen.get(value);
     if (previous) fail(source, label, `duplicates ${previous}`);
     seen.set(value, source);
+  }
+}
+
+/**
+ * Screen readers announce alt text in full, so it describes what the
+ * illustration teaches in a sentence or two — not a caption, not a keyword list.
+ */
+const MAX_ALT_LENGTH = 250;
+
+function assertFigure(source: string, field: string, figure: ContentFigure) {
+  if (!FIGURE_SIZES[figure.src]) fail(source, field, `unregistered image ${figure.src}`);
+  if (!figure.alt.trim()) fail(source, field, `${figure.src} needs alt text`);
+  if (figure.alt.length > MAX_ALT_LENGTH) {
+    fail(source, field, `${figure.src} alt text exceeds ${MAX_ALT_LENGTH} characters`);
   }
 }
 
@@ -111,6 +127,9 @@ export function validateTreatments(entries: Treatment[]) {
       if (!entry.limitations.length) fail(source, "limitations", "is required");
       if (!entry.carePath.length) fail(source, "carePath", "is required");
       if (!entry.faqs.length) fail(source, "faqs", "is required");
+    }
+    for (const section of entry.sections) {
+      if (section.figure) assertFigure(source, `sections.${section.id}.figure`, section.figure);
     }
     const from = targets.get(entry.slug)!;
     for (const target of entry.relatedTreatmentSlugs) {
@@ -188,6 +207,7 @@ export function validatePosts(posts: BlogPost[], treatments: Treatment[]) {
       if (!post.body.trim()) fail(source, "body", "is required");
       if (post.headings.length < 2) fail(source, "headings", "requires at least two sections");
     }
+    for (const figure of post.figures) assertFigure(source, "figures", figure);
     const from = { visible: post.state === "published", indexable: post.indexable };
     for (const target of post.relatedTreatmentSlugs) {
       assertReference(source, "relatedTreatmentSlugs", target, targets, from);

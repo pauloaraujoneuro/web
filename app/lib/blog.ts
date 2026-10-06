@@ -35,6 +35,17 @@ function extractHeadings(body: string): BlogPost["headings"] {
     });
 }
 
+/** `![alt](src "caption")` — the only image form articles use. */
+const MARKDOWN_IMAGE = /!\[([^\]]*)\]\(\s*(\S+?)(?:\s+"([^"]*)")?\s*\)/g;
+
+function extractFigures(body: string): BlogPost["figures"] {
+  return [...body.matchAll(MARKDOWN_IMAGE)].map(([, alt, src, caption]) => ({
+    src,
+    alt: alt.trim(),
+    ...(caption?.trim() ? { caption: caption.trim() } : {}),
+  }));
+}
+
 function parsePost(filename: string): BlogPost {
   const raw = fs.readFileSync(path.join(postsDirectory, filename), "utf8");
   const { data, content } = matter(raw);
@@ -50,6 +61,7 @@ function parsePost(filename: string): BlogPost {
         : String(data.lastModified),
     body: content.trim(),
     headings: extractHeadings(content),
+    figures: extractFigures(content),
   };
 }
 

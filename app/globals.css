@@ -2137,6 +2137,52 @@ a.active-location-note:focus-visible {
   text-underline-offset: 0.2em;
 }
 
+/* Illustrations in articles and treatment sections. The drawings are
+   white-ground plates, so a hairline border keeps them from bleeding into the
+   page; the caption row holds the zoom link at a full touch target. */
+.content-figure {
+  margin-block: 1.75rem;
+}
+
+.content-figure img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  background: white;
+}
+
+.content-figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-top: 0.5rem;
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.content-figure figcaption > span {
+  flex: 1 1 16rem;
+}
+
+.content-figure .content-figure-zoom {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.content-figure .content-figure-zoom:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .article-toc {
   border: 1px solid var(--border-subtle);
   border-radius: 1rem;

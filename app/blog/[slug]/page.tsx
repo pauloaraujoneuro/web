@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import SectionToc from "@/app/components/content/SectionToc";
 import RelatedLinks from "@/app/components/content/RelatedLinks";
 import AuthorCard from "@/app/components/content/AuthorCard";
+import ContentFigure from "@/app/components/content/ContentFigure";
 import Breadcrumb, { type BreadcrumbItem } from "@/app/components/content/Breadcrumb";
 import JsonLd from "@/app/components/content/JsonLd";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
@@ -36,6 +37,17 @@ const markdownComponents: Components = {
   h2: ({ children }) => <h2 id={headingId(children)}>{children}</h2>,
   h3: ({ children }) => <h3 id={headingId(children)}>{children}</h3>,
   a: ({ href, children }) => <a href={href}>{children}</a>,
+  // Markdown wraps a standalone image in a paragraph, and a <figure> cannot
+  // live inside a <p>; unwrap it so the figure stands as its own block.
+  p: ({ node, children }) => {
+    const [only, ...rest] = node?.children ?? [];
+    const isLoneImage = !rest.length && only?.type === "element" && only.tagName === "img";
+    return isLoneImage ? <>{children}</> : <p>{children}</p>;
+  },
+  img: ({ src, alt, title }) =>
+    typeof src === "string" ? (
+      <ContentFigure src={src} alt={alt ?? ""} caption={title ?? undefined} />
+    ) : null,
 };
 
 function formatDate(date: string) {
@@ -114,7 +126,12 @@ export default async function BlogArticlePage({ params }: Props) {
             keywords: [post.primaryKeyword, ...post.secondaryKeywords],
             datePublished: post.publishDate,
             dateModified: post.lastModified,
-            image: `${pageUrl}/opengraph-image`,
+            // The social card first, then the article's own illustrations, so
+            // image search can attribute each drawing to the page that explains it.
+            image: [
+              `${pageUrl}/opengraph-image`,
+              ...post.figures.map((figure) => `${SITE_URL}${figure.src}`),
+            ],
             author: {
               "@type": "Physician",
               name: `Dr. ${DOCTOR_NAME}`,

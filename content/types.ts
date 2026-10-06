@@ -32,11 +32,23 @@ export interface FaqItem extends FaqSeed {
   relatedHref?: string;
 }
 
+/**
+ * An illustration placed in content. `src` must be registered in
+ * `content/figures.ts`; alt and caption are written for the place it appears.
+ */
+export interface ContentFigure {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface TreatmentSection {
   id: string;
   heading: string;
   paragraphs: string[];
   bullets?: string[];
+  /** Shown after the section's text. */
+  figure?: ContentFigure;
 }
 
 export type TreatmentKind = "overview" | "condition" | "procedure";
@@ -147,4 +159,6 @@ export interface BlogFrontmatter {
 export interface BlogPost extends BlogFrontmatter {
   body: string;
   headings: Array<{ id: string; text: string; level: 2 | 3 }>;
+  /** Images written in the Markdown body, in reading order. */
+  figures: ContentFigure[];
 }
