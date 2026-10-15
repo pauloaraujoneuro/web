@@ -19,9 +19,11 @@ test("the clinic page carries the facility facts and structured data", async ({ 
   );
 
   const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
+  // The site-wide identity also names this clinic (same `@id`); the page's own
+  // node is the one that describes the building around it.
   const clinic = schemas
     .map((value) => JSON.parse(value))
-    .find((value) => value["@type"] === "MedicalClinic");
+    .find((value) => value["@type"] === "MedicalClinic" && value.containedInPlace);
   expect(clinic.address.postalCode).toBe("79020-300");
   expect(clinic.name).toBe("INCC - Instituto de Nervos, Cérebro e Coluna");
   expect(clinic.address.streetAddress).toContain("3º andar");
@@ -64,8 +66,10 @@ test("the clinic page is reachable from the hub, the footer and the site schema 
   ).toHaveAttribute("href", "/clinica/protrauma");
 
   const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
-  const graph = schemas.map((value) => JSON.parse(value)).find((value) => value["@graph"]);
-  const clinic = graph["@graph"].find((node: { "@type": string }) => node["@type"] === "MedicalClinic");
+  const clinic = schemas
+    .map((value) => JSON.parse(value))
+    .find((value) => value["@type"] === "MedicalClinic");
+  expect(clinic["@id"]).toBe("https://www.pauloaraujoneuro.com.br/clinica/protrauma#clinic");
   expect(clinic.address.postalCode).toBe("79020-300");
 });
 

@@ -1,27 +1,12 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { clinicEntityId, clinicUrl, getVisibleClinic } from "@/app/lib/clinics";
+import JsonLd from "@/app/components/content/JsonLd";
+import { getSiteJsonLd } from "@/app/lib/site-schema";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleTagManager } from "@next/third-parties/google";
-import {
-  ANALYTICS_ENABLED,
-  CONTACT_EMAIL,
-  CONTACT_PHONE,
-  DOCTOR_CRM,
-  DOCTOR_FULL_NAME,
-  DOCTOR_HOSPITAL_AFFILIATION,
-  DOCTOR_NAME,
-  DOCTOR_PROFILE_IMAGE,
-  DOCTOR_RQE,
-  DOCTOR_TITLE,
-  GOOGLE_TAG_ID,
-  INSTAGRAM_URL,
-  LATTES_URL,
-  SERVICE_LOCATIONS,
-  SITE_URL,
-} from "@/constants";
+import { ANALYTICS_ENABLED, DOCTOR_NAME, GOOGLE_TAG_ID, SITE_URL } from "@/constants";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -36,6 +21,8 @@ const SITE_TITLE = `Neurocirurgião em Campo Grande MS | ${DOCTOR_NAME}`;
 const SITE_DESCRIPTION =
   "Neurocirurgião em Campo Grande (MS), com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica.";
 
+const SITE_JSON_LD = getSiteJsonLd(SITE_DESCRIPTION);
+
 const SITE_KEYWORDS = [
   "Neurocirurgião em Campo Grande",
   "Neurocirurgia em Campo Grande",
@@ -49,100 +36,6 @@ const SITE_KEYWORDS = [
   "Tratamento de estenose de canal em Campo Grande",
   "Lesão de plexo braquial",
 ];
-
-const PRACTICE_CLINIC = getVisibleClinic("protrauma")!;
-
-const PHYSICIAN_AND_CLINIC_JSON_LD = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Physician",
-      "@id": `${SITE_URL}#physician`,
-      name: DOCTOR_NAME,
-      alternateName: [`Dr. ${DOCTOR_NAME}`, DOCTOR_FULL_NAME],
-      jobTitle: DOCTOR_TITLE,
-      url: SITE_URL,
-      image: `${SITE_URL}${DOCTOR_PROFILE_IMAGE}`,
-      description: SITE_DESCRIPTION,
-      medicalSpecialty: ["Neurosurgery"],
-      telephone: CONTACT_PHONE,
-      email: CONTACT_EMAIL,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: `${PRACTICE_CLINIC.streetAddress} - ${PRACTICE_CLINIC.neighborhood}`,
-        addressLocality: PRACTICE_CLINIC.city,
-        addressRegion: PRACTICE_CLINIC.state,
-        postalCode: PRACTICE_CLINIC.postalCode,
-        addressCountry: "BR",
-      },
-      worksFor: { "@id": clinicEntityId(PRACTICE_CLINIC) },
-      hospitalAffiliation: DOCTOR_HOSPITAL_AFFILIATION,
-      areaServed: SERVICE_LOCATIONS.map((location) => ({
-        "@type": "City",
-        name: location.city,
-      })),
-      availableService: [
-        {
-          "@type": "MedicalProcedure",
-          name: "Cirurgia de nervo periférico",
-        },
-        {
-          "@type": "MedicalProcedure",
-          name: "Cirurgia de coluna",
-        },
-        {
-          "@type": "MedicalTherapy",
-          name: "Reabilitação neurocirúrgica",
-        },
-      ],
-      sameAs: [INSTAGRAM_URL, LATTES_URL],
-      identifier: [
-        {
-          "@type": "PropertyValue",
-          propertyID: "CRM",
-          value: DOCTOR_CRM,
-        },
-        {
-          "@type": "PropertyValue",
-          propertyID: "RQE",
-          value: DOCTOR_RQE,
-        },
-      ],
-    },
-    // The facility is one entity site-wide. Its canonical node lives on the
-    // clinic page; the site graph points at the same `@id` so the address is
-    // never described twice under two different identifiers.
-    {
-      "@type": "MedicalClinic",
-      "@id": clinicEntityId(PRACTICE_CLINIC),
-      name: PRACTICE_CLINIC.name,
-      url: clinicUrl(PRACTICE_CLINIC),
-      telephone: CONTACT_PHONE,
-      email: CONTACT_EMAIL,
-      medicalSpecialty: ["Neurosurgery"],
-      // Publishable since the client confirmed the consulting address; PR #1 had
-      // stripped it only because no address was verified at the time.
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: `${PRACTICE_CLINIC.streetAddress} - ${PRACTICE_CLINIC.neighborhood}`,
-        addressLocality: PRACTICE_CLINIC.city,
-        addressRegion: PRACTICE_CLINIC.state,
-        postalCode: PRACTICE_CLINIC.postalCode,
-        addressCountry: "BR",
-      },
-      hasMap: PRACTICE_CLINIC.mapUrl,
-      areaServed: SERVICE_LOCATIONS.map((location) => ({
-        "@type": "AdministrativeArea",
-        name: `${location.city} - ${location.state}`,
-      })),
-    },
-  ],
-};
-
-const safeJsonLd = JSON.stringify(PHYSICIAN_AND_CLINIC_JSON_LD).replace(
-  /</g,
-  "\\u003c",
-);
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -211,12 +104,8 @@ export default function RootLayout({
             strategy="beforeInteractive"
           />
         )}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: safeJsonLd,
-          }}
-        />
+        <JsonLd data={SITE_JSON_LD.practice} />
+        <JsonLd data={SITE_JSON_LD.facility} />
       </head>
       <body className="antialiased">
         {children}

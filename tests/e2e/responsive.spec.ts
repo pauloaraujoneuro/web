@@ -11,6 +11,8 @@ const publicRoutes = [
   "/locais-de-atendimento",
   "/locais-de-atendimento/campo-grande",
   "/clinica/protrauma",
+  "/contato",
+  "/privacidade",
 ];
 
 for (const route of publicRoutes) {

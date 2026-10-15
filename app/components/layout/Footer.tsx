@@ -11,6 +11,7 @@ import {
   INSTAGRAM_URL,
   LATTES_URL,
   LATTES_URL_LABEL,
+  FOOTER_LEGAL_ITEMS,
   FOOTER_NAV_ITEMS,
 } from "@/constants";
 import InstagramIcon from "@/app/components/icons/InstagramIcon";
@@ -121,9 +122,20 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-2 border-t border-bg/35 pt-6 text-sm text-bg/78 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            &copy; {year} {DOCTOR_NAME}. Todos os direitos reservados.
-          </p>
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-5">
+            <p>
+              &copy; {year} {DOCTOR_NAME}. Todos os direitos reservados.
+            </p>
+            <ul className="flex gap-5" aria-label="Institucional">
+              {FOOTER_LEGAL_ITEMS.map((item) => (
+                <li key={item.href}>
+                  <a href={item.href} className="interactive-link min-h-11 text-bg/84">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
           <p className="text-bg/72">Neurocirurgia | {DOCTOR_SUBTITLE}</p>
         </div>
       </div>
