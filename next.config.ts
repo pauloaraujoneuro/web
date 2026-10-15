@@ -4,6 +4,33 @@ const nextConfig: NextConfig = {
   images: {
     qualities: [68, 70, 72, 75],
   },
+  /**
+   * Pages are content-negotiated (HTML or Markdown, see `proxy.ts`), so page
+   * responses must tell caches they depend on `Accept`. Declared here as well
+   * as in the proxy because Next.js sets its own `Vary` on prerendered pages;
+   * the deployment applies config headers at the edge, after that happens.
+   */
+  async headers() {
+    return [
+      {
+        source: "/((?!_next/|.*\\.).*)",
+        headers: [{ key: "Vary", value: "Accept" }],
+      },
+    ];
+  },
+  /**
+   * The site is in Portuguese, so its trust pages live at Portuguese slugs.
+   * Agents and tools that vet a business look for the conventional English
+   * paths; these send them to the canonical page instead of a 404.
+   */
+  async redirects() {
+    return [
+      { source: "/about", destination: "/sobre", permanent: true },
+      { source: "/contact", destination: "/contato", permanent: true },
+      { source: "/privacy", destination: "/privacidade", permanent: true },
+      { source: "/privacy-policy", destination: "/privacidade", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
