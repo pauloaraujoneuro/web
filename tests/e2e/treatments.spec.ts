@@ -130,6 +130,25 @@ test("an illustration opens full size in a dialog that Escape, the backdrop and 
   await expect(dialog).toBeHidden();
 });
 
+test("hub cards show the page's first illustration and open from anywhere on the card", async ({ page }) => {
+  await page.goto("/tratamentos");
+
+  const card = page.locator("#peripheral-nerve .content-card").first();
+  await expect(card.locator(".card-media img")).toHaveAttribute("src", /atrofia-muscular-apos-denervacao/);
+  // Pages without an illustration keep the slot with a decorative plate, so
+  // rows still line up; it is hidden from assistive technology.
+  const placeholders = page.locator("#spine .card-media-placeholder");
+  await expect(placeholders).toHaveCount(5);
+  await expect(placeholders.first()).toHaveAttribute("aria-hidden", "true");
+
+  // A raw click on the title, which the link's stretched hit area covers.
+  await card.scrollIntoViewIfNeeded();
+  const title = await card.locator("h3").boundingBox();
+  if (!title) throw new Error("card title is not rendered");
+  await page.mouse.click(title.x + 8, title.y + title.height / 2);
+  await expect(page).toHaveURL(/\/tratamentos\/cirurgia-nervos-perifericos$/);
+});
+
 test("unknown treatment returns not found", async ({ page }) => {
   const response = await page.goto("/tratamentos/nao-existe");
 

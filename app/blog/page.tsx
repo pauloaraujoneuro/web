@@ -4,6 +4,7 @@ import { ArrowRight, CalendarDays } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import PageIntro from "@/app/components/content/PageIntro";
 import ContentCard from "@/app/components/content/ContentCard";
+import { postCoverFigure } from "@/app/lib/figures";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { buildPageMetadata } from "@/app/lib/metadata";
@@ -27,20 +28,23 @@ export function generateMetadata(): Metadata {
   });
 }
 
-/** The chip names the area an article belongs to, via its related treatments. */
-const groupLabelByTreatment = new Map(
-  getVisibleTreatments().map((treatment) => [
-    treatment.slug,
-    TREATMENT_GROUPS.find((group) => group.id === treatment.group)?.label ?? "",
-  ]),
+/** An article belongs to the area of its first related treatment. */
+const groupByTreatment = new Map(
+  getVisibleTreatments().map((treatment) => [treatment.slug, treatment.group]),
 );
 
-function topicFor(post: BlogPost) {
+function areaFor(post: BlogPost) {
   for (const slug of post.relatedTreatmentSlugs) {
-    const label = groupLabelByTreatment.get(slug);
-    if (label) return label;
+    const group = groupByTreatment.get(slug);
+    if (group) return group;
   }
-  return "Conteúdo educativo";
+  return undefined;
+}
+
+/** The chip names the area an article belongs to. */
+function topicFor(post: BlogPost) {
+  const area = areaFor(post);
+  return TREATMENT_GROUPS.find((group) => group.id === area)?.label ?? "Conteúdo educativo";
 }
 
 function formatDate(date: string, month: "long" | "short" = "long") {
@@ -101,6 +105,8 @@ export default function BlogPage() {
                   description={post.dek}
                   href={`/blog/${post.slug}`}
                   actionLabel="Ler artigo"
+                  imageSrc={postCoverFigure(post)?.src}
+                  area={areaFor(post)}
                 />
               ))}
             </div>

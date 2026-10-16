@@ -12,3 +12,12 @@ export const treatmentFigureUrls = (treatment: Treatment) =>
   treatment.sections.flatMap((section) => (section.figure ? [figureUrl(section.figure)] : []));
 
 export const postFigureUrls = (post: BlogPost) => post.figures.map(figureUrl);
+
+/**
+ * The illustration a hub card shows: the first one the reader meets on the
+ * page. Pages without illustrations get a card without an image.
+ */
+export const treatmentCoverFigure = (treatment: Treatment) =>
+  treatment.sections.find((section) => section.figure)?.figure;
+
+export const postCoverFigure = (post: BlogPost) => post.figures[0];
