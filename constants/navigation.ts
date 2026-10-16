@@ -18,3 +18,13 @@ export const FOOTER_NAV_ITEMS: NavigationItem[] = [
   ...NAV_ITEMS,
   { href: "/clinica/protrauma", label: "INCC - Instituto de Nervos, Cérebro e Coluna" },
 ];
+
+/**
+ * The contact and privacy pages, in the footer's closing line where visitors
+ * expect them. Contact sits here as a page link, not as the phone and e-mail
+ * the contact column already lists.
+ */
+export const FOOTER_LEGAL_ITEMS: NavigationItem[] = [
+  { href: "/contato", label: "Contato" },
+  { href: "/privacidade", label: "Privacidade" },
+];

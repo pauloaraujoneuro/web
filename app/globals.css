@@ -1544,6 +1544,38 @@ a.active-location-note:focus-visible {
   text-underline-offset: 3px;
 }
 
+/* Contact and privacy: plain text sections in the article rhythm. Lists carry
+   labelled facts (phone, address, tools), so they read as a list, and links
+   look like links the way they do inside articles. */
+.trust-body {
+  max-width: 48rem;
+}
+
+.trust-body section > ol {
+  margin-top: 0.85rem;
+  padding-left: 1.25rem;
+  list-style: decimal;
+  color: #475569;
+  line-height: 1.75;
+}
+
+.trust-body li + li {
+  margin-top: 0.35rem;
+}
+
+.trust-body strong {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.trust-body a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
 .clinic-note {
   margin-top: 1.5rem;
   color: #64748b;

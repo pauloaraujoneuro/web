@@ -2,6 +2,7 @@
 
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { sendGTMEvent } from "@next/third-parties/google";
+import { sanitizeWhatsAppUrl } from "@/app/lib/analytics";
 
 interface TrackedWhatsAppLinkProps
   extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -9,15 +10,6 @@ interface TrackedWhatsAppLinkProps
   eventLocation: string;
   eventLabel: string;
   children: ReactNode;
-}
-
-function getSanitizedWhatsAppUrl(href: string) {
-  try {
-    const url = new URL(href);
-    return `${url.origin}${url.pathname}`;
-  } catch {
-    return href.split("?")[0] || href;
-  }
 }
 
 export default function TrackedWhatsAppLink({
@@ -36,7 +28,7 @@ export default function TrackedWhatsAppLink({
           event: "whatsapp_click",
           whatsapp_location: eventLocation,
           whatsapp_label: eventLabel,
-          whatsapp_url: getSanitizedWhatsAppUrl(href),
+          whatsapp_url: sanitizeWhatsAppUrl(href),
         });
 
         onClick?.(event);

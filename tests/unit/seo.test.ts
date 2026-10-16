@@ -14,6 +14,7 @@ test("SEO inventory contains every and only published canonical route once", () 
     "/blog",
     "/perguntas-frequentes",
     "/locais-de-atendimento",
+    "/contato",
     "/tratamentos/cirurgia-nervos-perifericos",
     "/tratamentos/cirurgia-coluna",
     "/tratamentos/reabilitacao-neurocirurgica",
@@ -55,7 +56,7 @@ test("SEO inventory contains every and only published canonical route once", () 
 
 test("sitemap maps canonical URLs and content dates deterministically", () => {
   const sitemap = getSitemapEntries();
-  assert.equal(sitemap.length, 41);
+  assert.equal(sitemap.length, 42);
   assert.equal(sitemap[0].url, SITE_URL);
   assert.equal(sitemap.at(-1)?.url, `${SITE_URL}/clinica/protrauma`);
   assert.ok(

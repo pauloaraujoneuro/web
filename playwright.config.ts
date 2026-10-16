@@ -13,9 +13,13 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
   webServer: {
+    // No `--hostname`: Next.js resolves the proxy's same-origin rewrites
+    // against the bound hostname but normalises 127.0.0.1 to localhost, so
+    // binding 127.0.0.1 turns the Markdown rewrite into a failing external
+    // proxy. Listening on all interfaces keeps both spellings same-origin.
     command: useProductionServer
-      ? "npm run start -- --hostname 127.0.0.1 --port 3100"
-      : "npm run dev -- --hostname 127.0.0.1 --port 3100",
+      ? "npm run start -- --port 3100"
+      : "npm run dev -- --port 3100",
     url: "http://127.0.0.1:3100",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
