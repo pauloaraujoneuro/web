@@ -106,6 +106,30 @@ test("treatment sections show their illustrations with alt text, caption and zoo
   expect(medicalPage.image).toHaveLength(3);
 });
 
+test("an illustration opens full size in a dialog that Escape, the backdrop and the close button dismiss", async ({ page }) => {
+  await page.goto("/tratamentos/pe-caido");
+
+  const zoom = page.locator(".article-body figure.content-figure").first().getByRole("link", {
+    name: /^Ampliar ilustração/,
+  });
+  const dialog = page.getByRole("dialog");
+
+  await zoom.click();
+  await expect(dialog).toBeVisible();
+  await expect(page).toHaveURL(/\/tratamentos\/pe-caido$/);
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(zoom).toBeFocused();
+
+  await zoom.click();
+  await page.mouse.click(4, 4);
+  await expect(dialog).toBeHidden();
+
+  await zoom.click();
+  await dialog.getByRole("button", { name: "Fechar ilustração ampliada" }).click();
+  await expect(dialog).toBeHidden();
+});
+
 test("unknown treatment returns not found", async ({ page }) => {
   const response = await page.goto("/tratamentos/nao-existe");
 
