@@ -11,6 +11,7 @@ import { getVisiblePosts } from "@/app/lib/blog";
 import { clinicPath, fullAddress, getVisibleClinics } from "@/app/lib/clinics";
 import { getFaqTopics } from "@/app/lib/faqs";
 import { getPublishedLocations } from "@/app/lib/locations";
+import { getPublicRouteInventory } from "@/app/lib/seo";
 import {
   getVisibleTreatments,
   TREATMENT_GROUPS,
@@ -440,6 +441,16 @@ export function normalizeMarkdownPath(path: string) {
 
 export function getMarkdownPaths() {
   return [...markdownRoutes().keys()];
+}
+
+/**
+ * Whether the page the Markdown represents is indexable. The Markdown answers
+ * at the page's own URL, so it must carry the same robots decision as the
+ * HTML: never `noindex` on canonical content, always on utility pages.
+ */
+export function isMarkdownPathIndexable(path: string) {
+  const normalized = normalizeMarkdownPath(path);
+  return getPublicRouteInventory().some((entry) => entry.path === normalized);
 }
 
 export function getMarkdownDocument(path: string) {

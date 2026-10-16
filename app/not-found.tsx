@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { NOT_FOUND_METADATA } from "@/app/lib/metadata";
+
+// Replaces the root layout's `index, follow` (and its googlebot copy), which a
+// 404 would otherwise inherit next to Next.js's own `noindex`.
+export const metadata: Metadata = NOT_FOUND_METADATA;
 
 function HomeIcon() {
   return (

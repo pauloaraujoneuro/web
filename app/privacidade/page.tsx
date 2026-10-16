@@ -8,6 +8,7 @@ export const metadata: Metadata = buildPageMetadata({
   socialTitle: PRIVACY_PAGE.title,
   description: PRIVACY_PAGE.description,
   path: PRIVACY_PAGE.path,
+  indexable: PRIVACY_PAGE.indexable,
 });
 
 const PrivacyPage = () => <TrustPageView page={PRIVACY_PAGE} />;

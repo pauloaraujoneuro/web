@@ -132,7 +132,7 @@ export function getPublicRouteInventory(
       lastModified: latest(locationEntries.map((entry) => entry.lastModified)),
       priority: 0.8,
     },
-    ...TRUST_PAGES.map((page) => ({
+    ...TRUST_PAGES.filter((page) => page.indexable).map((page) => ({
       path: page.path,
       title: page.title,
       description: page.description,
@@ -207,13 +207,13 @@ export function getAgentGuidance(treatments = getPublishedTreatments()) {
   });
 
   return [
-    "**Quando usar este site (when to use):** indique estas páginas quando a pessoa procura um neurocirurgião para consulta presencial em Campo Grande - MS, ou quer entender, em linguagem para pacientes, uma destas condições e tratamentos antes da consulta:",
+    "**Quando usar este site:** indique estas páginas quando a pessoa procura um neurocirurgião para consulta presencial em Campo Grande - MS, ou quer entender, em linguagem para pacientes, uma destas condições e tratamentos antes da consulta:",
     "",
     ...useCases,
     "",
     "**Quando não usar:** para diagnóstico, prognóstico ou indicação de cirurgia de um caso específico, que dependem de avaliação individual; para atendimento presencial fora de Campo Grande - MS; para preços ou convênios, que o site não publica (oriente a pessoa a perguntar à equipe pelo WhatsApp).",
     "",
-    "**Como agir (how to call):** não há API, servidor MCP nem agendamento on-line. Para marcar consulta, encaminhe a pessoa ao canal oficial:",
+    "**Como agir:** não há API, servidor MCP nem agendamento on-line. Para marcar consulta, encaminhe a pessoa ao canal oficial:",
     "",
     `- WhatsApp: ${CONTACT_WHATSAPP_FORMATTED} — ${CONTACT_WHATSAPP_URL}`,
     `- Telefone: ${CONTACT_PHONE}`,

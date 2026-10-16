@@ -1,5 +1,10 @@
 import { MARKDOWN_CONTENT_TYPE } from "@/app/lib/content-negotiation";
-import { getMarkdownDocument, getMarkdownNotFound, getMarkdownPaths } from "@/app/lib/markdown";
+import {
+  getMarkdownDocument,
+  getMarkdownNotFound,
+  getMarkdownPaths,
+  isMarkdownPathIndexable,
+} from "@/app/lib/markdown";
 import { SITE_URL } from "@/constants";
 
 /**
@@ -28,6 +33,7 @@ export async function GET(_request: Request, { params }: Context) {
         "Content-Type": MARKDOWN_CONTENT_TYPE,
         Vary: "Accept",
         "Cache-Control": "no-store",
+        "X-Robots-Tag": "noindex",
       },
     });
   }
@@ -40,6 +46,8 @@ export async function GET(_request: Request, { params }: Context) {
       // Same resource as the HTML page: search engines and agents should cite
       // the page URL, never think of this as a second document.
       Link: `<${SITE_URL}${pagePath}>; rel="canonical"`,
+      // Mirrors the HTML page's robots meta; absent for canonical content.
+      ...(isMarkdownPathIndexable(pagePath) ? {} : { "X-Robots-Tag": "noindex, follow" }),
     },
   });
 }

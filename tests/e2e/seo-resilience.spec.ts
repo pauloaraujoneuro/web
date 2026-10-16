@@ -9,7 +9,6 @@ const expectedRoutes = [
   "/perguntas-frequentes",
   "/locais-de-atendimento",
   "/contato",
-  "/privacidade",
   "/tratamentos/cirurgia-nervos-perifericos",
   "/tratamentos/cirurgia-coluna",
   "/tratamentos/reabilitacao-neurocirurgica",

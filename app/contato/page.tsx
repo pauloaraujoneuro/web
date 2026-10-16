@@ -8,6 +8,7 @@ export const metadata: Metadata = buildPageMetadata({
   socialTitle: CONTACT_PAGE.title,
   description: CONTACT_PAGE.description,
   path: CONTACT_PAGE.path,
+  indexable: CONTACT_PAGE.indexable,
 });
 
 const ContactPage = () => <TrustPageView page={CONTACT_PAGE} />;

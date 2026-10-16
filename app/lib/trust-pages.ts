@@ -46,6 +46,12 @@ export interface TrustPage {
   metaTitle: string;
   description: string;
   lastModified: string;
+  /**
+   * Contact is content people search for; the privacy notice is a utility
+   * page: reachable and linked from every page, but `noindex, follow` and
+   * kept out of the sitemap and llms.txt.
+   */
+  indexable: boolean;
   sections: TrustSection[];
 }
 
@@ -57,6 +63,7 @@ export const CONTACT_PAGE: TrustPage = {
   eyebrow: "Contato",
   title: "Contato e agendamento de consultas",
   metaTitle: "Contato e agendamento",
+  indexable: true,
   description: `Canais para agendar consulta com o Dr. ${DOCTOR_NAME}, neurocirurgião em Campo Grande - MS: WhatsApp, telefone, e-mail e endereço do consultório.`,
   lastModified: "2026-10-14",
   sections: [
@@ -134,6 +141,7 @@ export const PRIVACY_PAGE: TrustPage = {
   eyebrow: "Privacidade",
   title: "Privacidade e uso de dados neste site",
   metaTitle: "Privacidade",
+  indexable: false,
   description: `Como o site do Dr. ${DOCTOR_NAME} funciona em relação aos seus dados: o que é medido, o que não é coletado e como falar com o consultório sobre privacidade.`,
   lastModified: "2026-10-14",
   sections: [

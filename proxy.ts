@@ -6,6 +6,13 @@ import {
   negotiateRepresentation,
 } from "@/app/lib/content-negotiation";
 
+const isInternalMarkdownRoute = (pathname: string) =>
+  pathname === MARKDOWN_ROUTE_PREFIX || pathname.startsWith(`${MARKDOWN_ROUTE_PREFIX}/`);
+
+/** Generated social preview images live at extensionless paths. */
+const isPreviewImage = (pathname: string) =>
+  pathname === "/opengraph-image" || pathname.endsWith("/opengraph-image");
+
 /**
  * Content negotiation for pages: the same URL answers HTML to browsers and
  * Markdown to agents that send `Accept: text/markdown`. Markdown requests are
@@ -15,6 +22,17 @@ import {
  */
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const representation = negotiateRepresentation(request.headers.get("accept"));
+
+  // The internal Markdown route is never a public URL, whatever the method or
+  // headers: this check comes before every bypass below, so a spoofed `RSC`,
+  // prefetch or Server Action header cannot reach it directly. Markdown
+  // clients get the Markdown 404; everyone else the site's HTML 404.
+  if (isInternalMarkdownRoute(pathname)) {
+    const target =
+      representation === "markdown" ? `${MARKDOWN_ROUTE_PREFIX}/__unknown__` : "/__unknown__";
+    return NextResponse.rewrite(new URL(target, request.url), { headers: { Vary: "Accept" } });
+  }
 
   // Framework traffic is not a document request: client navigations (RSC),
   // prefetches and Server Actions must reach the app exactly as sent.
@@ -26,12 +44,7 @@ export function proxy(request: NextRequest) {
   ) {
     return NextResponse.next();
   }
-  // Generated preview images live at extensionless paths.
-  if (pathname.endsWith("/opengraph-image") || pathname === "/opengraph-image") {
-    return NextResponse.next();
-  }
-
-  const representation = negotiateRepresentation(request.headers.get("accept"));
+  if (isPreviewImage(pathname)) return NextResponse.next();
 
   if (representation === null) {
     return new NextResponse(
@@ -42,34 +55,24 @@ export function proxy(request: NextRequest) {
           "Content-Type": "text/plain; charset=utf-8",
           Vary: "Accept",
           "Cache-Control": "no-store",
+          "X-Robots-Tag": "noindex",
         },
       },
     );
   }
 
-  const isInternalRoute =
-    pathname === MARKDOWN_ROUTE_PREFIX || pathname.startsWith(`${MARKDOWN_ROUTE_PREFIX}/`);
-
   if (representation === "markdown") {
-    // A direct request for the internal route is answered as the unknown
-    // path it is, so the Markdown never gains a second public URL.
-    const target = isInternalRoute
-      ? `${MARKDOWN_ROUTE_PREFIX}/__unknown__`
-      : `${MARKDOWN_ROUTE_PREFIX}${pathname === "/" ? "" : pathname}`;
+    const target = `${MARKDOWN_ROUTE_PREFIX}${pathname === "/" ? "" : pathname}`;
     return NextResponse.rewrite(new URL(target, request.url), { headers: { Vary: "Accept" } });
-  }
-
-  if (isInternalRoute) {
-    return NextResponse.rewrite(new URL("/__unknown__", request.url), {
-      headers: { Vary: "Accept" },
-    });
   }
 
   return NextResponse.next({ headers: { Vary: "Accept" } });
 }
 
 export const config = {
-  // Pages only: static assets, framework chunks and files with an extension
-  // (robots.txt, sitemap.xml, llms.txt, images) keep their single type.
-  matcher: ["/((?!_next/|.*\\.).*)"],
+  // Pages only: framework chunks and files with an extension (robots.txt,
+  // sitemap.xml, llms.txt, images) keep their single type. The internal
+  // Markdown route is matched on its own as well, so a dotted path under it
+  // (`/markdown-variant/x.md`) is still rejected here.
+  matcher: ["/((?!_next/|.*\\.).*)", "/markdown-variant/:path*"],
 };

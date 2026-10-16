@@ -16,6 +16,17 @@ const nextConfig: NextConfig = {
         source: "/((?!_next/|.*\\.).*)",
         headers: [{ key: "Vary", value: "Accept" }],
       },
+      // Generated social previews are fetched by link unfurlers, which ignore
+      // this header; it only keeps the cards out of image search. Article
+      // illustrations (/images/conteudo) stay indexable.
+      {
+        source: "/opengraph-image",
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+      },
+      {
+        source: "/:path*/opengraph-image",
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+      },
     ];
   },
   /**
