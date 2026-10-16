@@ -56,3 +56,53 @@ re-checked against production with `curl` before changing anything.
 variant does not list `Accept`. The Markdown, 404 and 406 responses do. The
 `Vary: Accept` header in `next.config.ts` targets the Vercel deployment, where
 config headers are applied at the edge; confirm on the preview deployment.
+
+## Review pass (2026-10-16)
+
+### Indexing inventory
+
+| Resource | Sitemap / llms.txt | Robots |
+| --- | --- | --- |
+| Content pages (42, incl. `/contato`) | listed | indexable in HTML and Markdown; root googlebot policy inherited |
+| `/privacidade` (utility) | not listed; linked from the footer | `noindex, follow` meta (root googlebot rule replaced, not inherited); Markdown `X-Robots-Tag: noindex, follow` |
+| 404 pages | — | `noindex` only (they had inherited `index, follow` + googlebot `index`; fixed via `not-found.tsx` metadata) |
+| `/markdown-variant/*` helper | — | unreachable directly (404 + `X-Robots-Tag: noindex`), including with spoofed `RSC`, prefetch, `Next-Action`, `x-middleware-*` headers, POST and dotted paths |
+| Markdown 404 / 406 | — | `X-Robots-Tag: noindex` |
+| `*/opengraph-image` | — | `X-Robots-Tag: noindex`; still 200 `image/png` for GET and HEAD |
+| `/images/conteudo/*`, `/_next/image` | images in the image sitemap | indexable, untouched |
+| `/about`, `/contact`, `/privacy`, `/privacy-policy` | — | 308 to the Portuguese page (no duplicate English pages) |
+| Design-system pages | — | none exist |
+
+llms.txt is now Portuguese only (the English "when to use" labels were removed).
+
+### Framework traffic
+
+Next.js strips flight headers (`RSC`, router prefetch) and `_rsc` from the
+request the proxy sees, so those checks cannot fire under `next start`; real
+client navigations send `Accept: */*` and are served RSC as before (asserted in
+the browser). The helper rejection runs before every bypass.
+
+### Analytics
+
+- Vercel Analytics and Speed Insights: one script load per page load, none on
+  client navigation (intercepted requests).
+- GTM (run against a build with the placeholder `GTM-TEST000`, every Google
+  request intercepted): `gtm.js` loads once, one `gtm.js` dataLayer event
+  across client navigation; `whatsapp_click` events carry location, label and
+  `https://wa.me/<number>` only, never the prefilled message.
+- Contact-page WhatsApp links now emit the same event as every other CTA.
+- Not in code: consent banner, Consent Mode defaults or revocation. GTM loads
+  on every page view. The container's tags, consent settings and GA4 page-view
+  handling live in the GTM account, which was not accessible.
+
+### Verification
+
+`npm run check`: 68 unit, lint, TypeScript, build, 232 Playwright passed
+(11 skips: GTM-only checks on the no-ID build and project-specific tests).
+Analytics spec on the placeholder-ID build: 6 passed.
+
+### Blocker
+
+The PR preview is behind Vercel Authentication and the connected Vercel
+account has no access to the `pauloaraujoneuros-projects` team, so the
+deployed headers (notably `Vary: Accept` on HTML) are unverified.

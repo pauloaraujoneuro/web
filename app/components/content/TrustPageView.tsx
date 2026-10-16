@@ -1,4 +1,5 @@
 import Link from "next/link";
+import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import PageIntro from "@/app/components/content/PageIntro";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
@@ -8,9 +9,23 @@ import { CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT } from "@/constants";
 
 const isExternal = (href: string) => /^(https?:|mailto:)/.test(href);
 
-const ItemText = ({ item }: { item: TrustItem }) => {
+const ItemText = ({ item, eventLocation }: { item: TrustItem; eventLocation: string }) => {
   if (!item.href) return <>{item.text}</>;
   if (!isExternal(item.href)) return <Link href={item.href}>{item.text}</Link>;
+  // Same click event as every other WhatsApp button on the site.
+  if (item.href.startsWith("https://wa.me/")) {
+    return (
+      <TrackedWhatsAppLink
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        eventLocation={eventLocation}
+        eventLabel={item.label ?? item.text}
+      >
+        {item.text}
+      </TrackedWhatsAppLink>
+    );
+  }
   const opensNewTab = item.href.startsWith("http");
   return (
     <a
@@ -42,7 +57,10 @@ const TrustPageView = ({ page }: { page: TrustPage }) => (
                   {section.items.map((item) => (
                     <li key={`${item.label ?? ""}${item.text}`}>
                       {item.label ? <strong>{item.label}: </strong> : null}
-                      <ItemText item={item} />
+                      <ItemText
+                        item={item}
+                        eventLocation={`trust_${page.path.slice(1)}_${section.id}`}
+                      />
                     </li>
                   ))}
                 </List>

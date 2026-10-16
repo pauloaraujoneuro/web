@@ -4,7 +4,9 @@ import {
   getMarkdownDocument,
   getMarkdownNotFound,
   getMarkdownPaths,
+  isMarkdownPathIndexable,
 } from "../../app/lib/markdown";
+import { sanitizeWhatsAppUrl } from "../../app/lib/analytics";
 import { getLlmsTxt, getPublicRouteInventory } from "../../app/lib/seo";
 import { getSiteJsonLd } from "../../app/lib/site-schema";
 import { CONTACT_PAGE, PRIVACY_PAGE, TRUST_PAGES } from "../../app/lib/trust-pages";
@@ -75,9 +77,11 @@ test("llms.txt tells agents when to use the site and how to act on it", () => {
   const llms = getLlmsTxt();
   const preamble = llms.slice(0, llms.indexOf("\n## "));
 
-  assert.ok(preamble.includes("Quando usar este site (when to use)"));
-  assert.ok(preamble.includes("Quando não usar"));
-  assert.ok(preamble.includes("Como agir (how to call)"));
+  assert.ok(preamble.includes("**Quando usar este site:**"));
+  assert.ok(preamble.includes("**Quando não usar:**"));
+  assert.ok(preamble.includes("**Como agir:**"));
+  // The site is Brazilian Portuguese end to end; no English labels.
+  assert.ok(!/when to use|how to call/i.test(llms));
   assert.ok(preamble.includes("lesão do plexo braquial"));
   assert.ok(preamble.includes("hérnia de disco"));
   assert.ok(preamble.includes(CONTACT_WHATSAPP_FORMATTED));
@@ -101,4 +105,29 @@ test("the site identity is a top-level Organization with contact point and addre
   assert.equal(practice.address.postalCode, "79020-300");
   assert.equal(facility["@type"], "MedicalClinic");
   assert.deepEqual(practice.worksFor, { "@id": facility["@id"] });
+});
+
+test("the privacy notice is a utility page: rendered, but outside discovery", () => {
+  const inventory = getPublicRouteInventory().map((entry) => entry.path);
+  assert.ok(inventory.includes(CONTACT_PAGE.path));
+  assert.ok(!inventory.includes(PRIVACY_PAGE.path));
+  assert.ok(!getLlmsTxt().includes(`${SITE_URL}${PRIVACY_PAGE.path}`));
+  assert.ok(getMarkdownPaths().includes(PRIVACY_PAGE.path));
+  assert.equal(isMarkdownPathIndexable(PRIVACY_PAGE.path), false);
+});
+
+test("Markdown never withholds a page the sitemap publishes", () => {
+  for (const entry of getPublicRouteInventory()) {
+    assert.equal(isMarkdownPathIndexable(entry.path), true, entry.path || "/");
+  }
+  assert.equal(isMarkdownPathIndexable("/"), true);
+});
+
+test("analytics events never carry the prefilled WhatsApp message", () => {
+  assert.equal(
+    sanitizeWhatsAppUrl("https://wa.me/556740420561?text=Ol%C3%A1%2C%20tenho%20h%C3%A9rnia"),
+    "https://wa.me/556740420561",
+  );
+  assert.equal(sanitizeWhatsAppUrl("#contact?text=x"), "#contact");
+  assert.equal(sanitizeWhatsAppUrl("wa.me/1?text=x#frag"), "wa.me/1");
 });
