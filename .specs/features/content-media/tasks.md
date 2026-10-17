@@ -101,7 +101,7 @@ the current selected PNG conversions. Full report: `validation.md`.
 
 ## T5 — Image accessibility before merge
 
-**Status**: Implemented and verified; independent review pending (AC5).
+**Status**: Complete; independent review PASS (AC5).
 
 - Reviewed all 22 listing banners: intentionally decorative `alt=""` beside
   title/summary, omitted from the accessibility image tree. This follows W3C
@@ -142,3 +142,7 @@ the current selected PNG conversions. Full report: `validation.md`.
   screenshots and original PNGs remain local in `tmp/` or `/tmp`.
 - This is scoped image-accessibility evidence, not a whole-site WCAG
   certification or a claim that VoiceOver/NVDA were manually exercised.
+- Independent review: all 33 hub links checked at 390/1440px, plus both
+  representative lightboxes. Two isolated DOM faults (missing featured link
+  label and missing scroller focusability) were both detected. Report:
+  `accessibility-validation.md`. No remaining technical blockers found.
