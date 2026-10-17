@@ -3,25 +3,15 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import type { CongressGalleryItem } from "@/app/components/sections/CongressGallery";
+import CongressGallerySkeleton from "@/app/components/sections/CongressGallerySkeleton";
 
 const CongressGallery = dynamic(
   () => import("@/app/components/sections/CongressGallery"),
-  { ssr: false },
+  { ssr: false, loading: () => <CongressGallerySkeleton /> },
 );
 
 interface DeferredCongressGalleryProps {
   items: CongressGalleryItem[];
-}
-
-function GalleryPlaceholder() {
-  return (
-    <article className="card-surface mt-9 overflow-hidden p-4 sm:p-5">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary/70">
-        Galeria
-      </p>
-      <div className="mt-4 min-h-70 rounded-xl border border-primary/14 bg-primary/6 sm:min-h-82" />
-    </article>
-  );
 }
 
 export default function DeferredCongressGallery({
@@ -60,7 +50,11 @@ export default function DeferredCongressGallery({
 
   return (
     <div ref={containerRef}>
-      {isVisible ? <CongressGallery items={items} /> : <GalleryPlaceholder />}
+      {isVisible ? (
+        <CongressGallery items={items} />
+      ) : (
+        <CongressGallerySkeleton />
+      )}
     </div>
   );
 }
