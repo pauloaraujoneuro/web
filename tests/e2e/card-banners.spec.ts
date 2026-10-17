@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { POST_BANNER_SLUGS, TREATMENT_BANNER_SLUGS } from "../fixtures/card-banners";
 
 for (const [route, slugs] of [["tratamentos", TREATMENT_BANNER_SLUGS], ["blog", POST_BANNER_SLUGS]] as const) {
-  test(`${route} shows each selected banner on the matching card`, async ({ page }) => {
+  test(`${route} shows each selected banner on the matching card`, async ({ page, request }) => {
     await page.goto(`/${route}`);
     for (const slug of slugs) {
       const card = page.locator(".content-card, .featured-post").filter({ has: page.locator(`a[href="/${route}/${slug}"]`) });
@@ -18,6 +18,13 @@ for (const [route, slugs] of [["tratamentos", TREATMENT_BANNER_SLUGS], ["blog", 
       await expect(image).toHaveAttribute("width", "1200");
       await expect(image).toHaveAttribute("height", "800");
       await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0)).toBe(true);
+      const optimizedSrc = await image.getAttribute("src");
+      for (const src of [`/images/cards/${slug}.webp`, optimizedSrc!]) {
+        const response = await request.get(src);
+        expect(response.status(), src).toBe(200);
+        expect(response.headers()["content-type"], src).toMatch(/^image\//);
+        expect(response.headers()["x-robots-tag"], src).toBeUndefined();
+      }
     }
   });
 }
