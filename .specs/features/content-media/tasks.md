@@ -27,7 +27,7 @@ blog and responsive specs pass on the production build (90 passed, 6 skipped).
 
 ## T3 — Dedicated generated banners (PR preview)
 
-**Status**: Implemented; independent verification pending. Scope: `spec.md`.
+**Status**: Complete; independent verification PASS. Scope: `spec.md`.
 
 - Add 22 current selected images as optimized WebP in `public/images/cards/`:
   11 treatment entries and 11 blog frontmatter entries, matched by exact slug.
@@ -94,4 +94,7 @@ Re-ran the unchanged full gate after this correction: 72 unit passes, lint and
 build pass, 247 browser passes / 11 existing conditional skips (29.0s), exit 0.
 Log: `/tmp/paulo-card-banners-clean-check-v2.log`. Refreshed the visual captures.
 The grounded responsive-media lesson was recorded as project-local candidate
-L-001. Independent re-verification remains pending.
+L-001. Independent re-verification passed all four ACs for `75b686f..505748b`;
+three behavior-level faults were injected in scratch state and all three were
+killed by assertions. The verifier independently confirmed all 22 assets match
+the current selected PNG conversions. Full report: `validation.md`.
