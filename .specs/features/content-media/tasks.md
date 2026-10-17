@@ -74,11 +74,24 @@ merge/deployment or clinical approval is implied.
 | AC2 priority/fallback | Same file lines 49–54: exact banner, exact first figure, then `undefined` | Existing component's abstract-art branch remains reachable |
 | AC2 validation/optional | Same file lines 62–66: `assert.throws(... /cardImage: unregistered image/)`, then `assert.doesNotThrow(...)` without fields | Invalid paths fail both catalogs; omitted banner is valid |
 | AC3 visible association/decode | `tests/e2e/card-banners.spec.ts:11` exact encoded slug source; lines 12–15 decorative alt, dimensions and decoded image | All 22 banners appear on their matching cards, including featured post |
-| AC3 responsiveness/keyboard | Same file lines 25, 29, 34–36: no overflow, 16:9 ratio, focus, Enter → exact post URL | Layout and navigation remain usable |
-| AC4 body isolation | Same file line 37: zero card images in Markdown; unchanged existing figure/schema/indexing suites pass | Banners do not become clinical body figures or schema illustrations |
+| AC3 responsiveness/keyboard | Same file lines 25, 31, 36–38: no overflow, 16:9 ratio for all ordinary and featured banners, focus, Enter → exact post URL | Layout and navigation remain usable |
+| AC4 body isolation | Same file line 39: zero card images in Markdown; unchanged existing figure/schema/indexing suites pass | Banners do not become clinical body figures or schema illustrations |
 
 Every new test maps to AC1–AC4; no speculative or dependency-behavior tests.
 The old spine-placeholder count changed from five to zero because those five
 cards now have the requested banners; the existing peripheral figure/navigation
 assertions remain. The treatment navigation selector now names the full card
 link, matching PR #8's accessible-name behavior.
+
+### T4 — Featured banner crop correction
+
+Independent review found that `max-height: 20rem` made the featured image wider
+than 16:9 on desktop, a case the first version of the crop test omitted.
+Removed the cap and added a two-column desktop featured layout. The crop test
+now checks every ordinary and featured banner at 320, 390 and 1440px.
+
+Re-ran the unchanged full gate after this correction: 72 unit passes, lint and
+build pass, 247 browser passes / 11 existing conditional skips (29.0s), exit 0.
+Log: `/tmp/paulo-card-banners-clean-check-v2.log`. Refreshed the visual captures.
+The grounded responsive-media lesson was recorded as project-local candidate
+L-001. Independent re-verification remains pending.

@@ -79,7 +79,7 @@ export default function BlogPage() {
         />
 
         {featured ? (
-          <section className="featured-post">
+          <section className={`featured-post${featuredImage && featuredImageSize ? " featured-post-with-image" : ""}`}>
             {featuredImage && featuredImageSize ? (
               <Image
                 className="featured-post-image"

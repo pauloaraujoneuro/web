@@ -23,10 +23,12 @@ test("banners preserve keyboard navigation, 16:9 cards and narrow layouts", asyn
     for (const route of ["tratamentos", "blog"]) {
       await page.goto(`/${route}`);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-      const media = page.locator(".content-card .card-media").first();
-      const box = await media.boundingBox();
-      expect(box).not.toBeNull();
-      expect(box!.width / box!.height).toBeCloseTo(16 / 9, 1);
+      const media = page.locator(".content-card .card-media, .featured-post-image");
+      for (const banner of await media.all()) {
+        const box = await banner.boundingBox();
+        expect(box).not.toBeNull();
+        expect(box!.width / box!.height).toBeCloseTo(16 / 9, 1);
+      }
     }
   }
   const link = page.getByRole("link", { name: "Ler artigo: Fisioterapia após cirurgia de nervo: quando começar?" });
