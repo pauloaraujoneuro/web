@@ -70,7 +70,12 @@ const FigureLightbox = ({ src, alt, caption, width, height }: FigureLightboxProp
           <X aria-hidden size={20} strokeWidth={1.5} />
         </button>
         <div className="figure-lightbox-body">
-          <div className="figure-lightbox-scroller">
+          <div
+            className="figure-lightbox-scroller"
+            role="region"
+            aria-label="Ilustração ampliada"
+            tabIndex={0}
+          >
             <Image src={src} alt={alt} width={width} height={height} quality={90} sizes="100vw" />
           </div>
           {caption ? <p>{caption}</p> : null}

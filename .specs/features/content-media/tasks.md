@@ -98,3 +98,47 @@ L-001. Independent re-verification passed all four ACs for `75b686f..505748b`;
 three behavior-level faults were injected in scratch state and all three were
 killed by assertions. The verifier independently confirmed all 22 assets match
 the current selected PNG conversions. Full report: `validation.md`.
+
+## T5 — Image accessibility before merge
+
+**Status**: Implemented and verified; independent review pending (AC5).
+
+- Reviewed all 22 listing banners: intentionally decorative `alt=""` beside
+  title/summary, omitted from the accessibility image tree. This follows W3C
+  WAI's decorative-image guidance, rather than repeating titles as alt text:
+  https://www.w3.org/WAI/tutorials/images/decorative/.
+- Teaching figures keep their descriptive alt text in both inline and expanded
+  forms. The featured blog link now includes its title in the accessible name.
+- The initial axe scan found mobile lightbox scrollers without keyboard access
+  and caption contrast dependent on a transparent top-layer backdrop. Added a
+  named, focusable region with a white focus outline and an explicit opaque
+  dark dialog background. Tab reaches the scroller; Arrow Right pans on mobile.
+- Regression coverage: all 22 banners are absent from `getByRole("img")` while
+  every associated link has the full expected name; both hubs retain tab order,
+  visible card focus and targets >=44px. The lightbox test asserts descriptive
+  expanded-image naming, actual Tab focus, outline and mobile arrow scrolling.
+- A red check against the old build failed for the featured link's missing
+  title (`/tmp/paulo-card-banners-a11y-red.log`). Actual keyboard input is used
+  for `:focus-visible`; pointer-initiated programmatic focus is not equivalent.
+
+### T5 evidence
+
+- Unchanged `npm run check` in the same clean PR copy: exit 0, 72 unit passes,
+  lint/build pass, **250 browser passes**, 11 existing conditional skips.
+  Log: `/tmp/paulo-card-banners-a11y-final-check.log`.
+- axe-core 4.11.1 WCAG 2/2.1 A/AA scans: **12 states, 0 violations**: hubs
+  `/tratamentos`, `/blog`, plus `/tratamentos/pe-caido` and
+  `/blog/tetraplegia-dobrar-cotovelo-abrir-mao`, including their open lightboxes,
+  at 390px and 1440px. JSON: `tmp/card-banners-qa/accessibility-audit.json`.
+- axe flags contrast as incomplete where pseudoelements, gradients, images or
+  overlap prevent automatic inference. Supplemented the image-control checks
+  with computed foreground/background contrast: zoom text >=9.41:1 even with
+  black/white image content beneath its translucent plate; captions 12.60:1 on
+  the explicit dark dialog surface, at both widths. Source data:
+  `tmp/card-banners-qa/image-controls-contrast.json`.
+- Inspected focus/lightbox screenshots at both widths:
+  `tmp/card-banners-qa/lightbox-{treatment,blog}-{390,1440}.png`.
+- `npx tsc --noEmit` and diff whitespace checks pass. Audit scripts, scan data,
+  screenshots and original PNGs remain local in `tmp/` or `/tmp`.
+- This is scoped image-accessibility evidence, not a whole-site WCAG
+  certification or a claim that VoiceOver/NVDA were manually exercised.

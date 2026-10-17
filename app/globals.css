@@ -2337,7 +2337,7 @@ a.active-location-note:focus-visible {
   max-height: none;
   margin: 0;
   border: 0;
-  background: transparent;
+  background: #0a141b;
   padding: 0;
   color: white;
 }
@@ -2369,6 +2369,11 @@ html:has(.figure-lightbox[open]) {
   background: white;
   object-fit: contain;
   cursor: auto;
+}
+
+.figure-lightbox-scroller:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
 }
 
 .figure-lightbox-body p {

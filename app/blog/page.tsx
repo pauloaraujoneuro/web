@@ -81,6 +81,8 @@ export default function BlogPage() {
         {featured ? (
           <section className={`featured-post${featuredImage && featuredImageSize ? " featured-post-with-image" : ""}`}>
             {featuredImage && featuredImageSize ? (
+              // The adjacent title and summary convey the content; keep the
+              // listing banner out of the screen reader's image list.
               <Image
                 className="featured-post-image"
                 src={featuredImage}
@@ -97,7 +99,11 @@ export default function BlogPage() {
               <p>{featured.dek}</p>
               <div className="post-meta"><CalendarDays aria-hidden size={16} />{formatDate(featured.publishDate)}</div>
             </div>
-            <Link className="btn-light" href={`/blog/${featured.slug}`}>
+            <Link
+              className="btn-light"
+              href={`/blog/${featured.slug}`}
+              aria-label={`Ler artigo: ${featured.title}`}
+            >
               Ler artigo
               <ArrowRight aria-hidden size={18} strokeWidth={1.5} />
             </Link>

@@ -20,6 +20,12 @@ cortical re-education, nerve-surgery timing, C6/C7 and hand transfers.
   flags, copy and structured-data/image-sitemap figures remain unchanged.
   Record that generated artwork still awaits clinician review on the PR preview;
   this task does not merge or deploy to production.
+- AC5: listing banners are omitted from the accessibility image tree via empty
+  alt; every associated card link, including featured, names its article or
+  treatment. Tab moves between cards in DOM order with a visible focus outline
+  and a link target at least 44px high. Teaching figures and expanded figures
+  retain descriptive names. Audit both hubs and representative illustrated
+  treatment/article pages (including open lightboxes) for WCAG A/AA violations.
 
 ## Execution
 

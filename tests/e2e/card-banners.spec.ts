@@ -10,12 +10,31 @@ for (const [route, slugs] of [["tratamentos", TREATMENT_BANNER_SLUGS], ["blog", 
       await image.scrollIntoViewIfNeeded();
       await expect(image).toHaveAttribute("src", new RegExp(encodeURIComponent(`/images/cards/${slug}.webp`)));
       await expect(image).toHaveAttribute("alt", "");
+      await expect(card.getByRole("img")).toHaveCount(0);
+      const title = await card.locator("h2, h3").innerText();
+      await expect(card.getByRole("link")).toHaveAccessibleName(
+        `${route === "blog" ? "Ler artigo" : "Saiba mais"}: ${title}`,
+      );
       await expect(image).toHaveAttribute("width", "1200");
       await expect(image).toHaveAttribute("height", "800");
       await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0)).toBe(true);
     }
   });
 }
+
+test("image cards keep a visible keyboard focus and logical tab order", async ({ page }) => {
+  for (const route of ["tratamentos", "blog"]) {
+    await page.goto(`/${route}`);
+    const links = page.locator(".content-card .card-link, .featured-post > a");
+    await links.first().focus();
+    await page.keyboard.press("Tab");
+    const second = links.nth(1);
+    await expect(second).toBeFocused();
+    await expect(second.locator("..")).toHaveCSS("outline-style", "solid");
+    const bounds = await second.boundingBox();
+    expect(bounds!.height).toBeGreaterThanOrEqual(44);
+  }
+});
 
 test("banners preserve keyboard navigation, 16:9 cards and narrow layouts", async ({ page }) => {
   for (const width of [320, 390, 1440]) {

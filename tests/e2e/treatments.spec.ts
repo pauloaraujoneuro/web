@@ -116,6 +116,18 @@ test("an illustration opens full size in a dialog that Escape, the backdrop and 
 
   await zoom.click();
   await expect(dialog).toBeVisible();
+  const figureAlt = await page.locator(".article-body figure.content-figure img").first().getAttribute("alt");
+  expect(figureAlt).toBeTruthy();
+  await expect(dialog.getByRole("img")).toHaveAccessibleName(figureAlt!);
+  const scroller = dialog.getByRole("region", { name: "Ilustração ampliada", exact: true });
+  await dialog.getByRole("button", { name: "Fechar ilustração ampliada" }).focus();
+  await page.keyboard.press("Tab");
+  await expect(scroller).toBeFocused();
+  await expect(scroller).toHaveCSS("outline-style", "solid");
+  if (page.viewportSize()!.width <= 640) {
+    await page.keyboard.press("ArrowRight");
+    await expect.poll(() => scroller.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+  }
   await expect(page).toHaveURL(/\/tratamentos\/pe-caido$/);
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
