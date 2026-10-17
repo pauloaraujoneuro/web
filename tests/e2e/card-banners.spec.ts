@@ -40,8 +40,41 @@ test("image cards keep a visible keyboard focus and logical tab order", async ({
     await expect(second.locator("..")).toHaveCSS("outline-style", "solid");
     const bounds = await second.boundingBox();
     expect(bounds!.height).toBeGreaterThanOrEqual(44);
+    await page.keyboard.press("Shift+Tab");
+    await expect(links.first()).toBeFocused();
+    await expect(links.first().locator("..")).toHaveCSS("outline-style", "solid");
   }
 });
+
+for (const [route, selector, label] of [
+  ["tratamentos", ".content-card", "treatment"],
+  ["blog", ".content-card", "blog"],
+  ["blog", ".featured-post", "featured blog"],
+] as const) {
+  test(`${label} card banners, titles and footers show a pointer and open the page`, async ({ page }) => {
+    for (const part of ["img", "h2, h3", "a"]) {
+      await page.goto(`/${route}`);
+      const card = page.locator(selector).first();
+      await expect(card.getByRole("link")).toHaveCount(1);
+      const href = await card.getByRole("link").getAttribute("href");
+      const target = card.locator(part).first();
+      await target.scrollIntoViewIfNeeded();
+      const bounds = await target.boundingBox();
+      expect(bounds).not.toBeNull();
+      const point = { x: bounds!.x + bounds!.width / 2, y: bounds!.y + bounds!.height / 2 };
+      await page.mouse.move(point.x, point.y);
+      await expect.poll(() => page.evaluate(({ x, y }) => {
+        const element = document.elementFromPoint(x, y);
+        return {
+          cursor: element ? getComputedStyle(element).cursor : null,
+          href: element?.closest("a")?.getAttribute("href"),
+        };
+      }, point)).toEqual({ cursor: "pointer", href });
+      await page.mouse.click(point.x, point.y);
+      await expect(page).toHaveURL(new RegExp(`${href}$`));
+    }
+  });
+}
 
 test("banners preserve keyboard navigation, 16:9 cards and narrow layouts", async ({ page }) => {
   for (const width of [320, 390, 1440]) {
