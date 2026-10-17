@@ -7,6 +7,10 @@ import {
   type KeyboardEventHandler,
   type TouchEventHandler,
 } from "react";
+import {
+  GALLERY_FRAME_ASPECT_CLASS,
+  GallerySlideSkeleton,
+} from "@/app/components/sections/CongressGallerySkeleton";
 
 export interface CongressGalleryItem {
   id: string;
@@ -27,6 +31,9 @@ function getSlideLabel(index: number, total: number) {
 
 export default function CongressGallery({ items }: CongressGalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [settledIds, setSettledIds] = useState<ReadonlySet<string>>(
+    () => new Set(),
+  );
   const touchStartX = useRef<number | null>(null);
 
   const totalSlides = items.length;
@@ -35,6 +42,15 @@ export default function CongressGallery({ items }: CongressGalleryProps) {
     if (totalSlides === 0) return;
     const normalized = (targetIndex + totalSlides) % totalSlides;
     setCurrentIndex(normalized);
+  };
+
+  const markSettled = (id: string) => {
+    setSettledIds((previous) => {
+      if (previous.has(id)) return previous;
+      const next = new Set(previous);
+      next.add(id);
+      return next;
+    });
   };
 
   const goPrev = () => goToIndex(currentIndex - 1);
@@ -100,26 +116,38 @@ export default function CongressGallery({ items }: CongressGalleryProps) {
             className="flex motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-reduce:transition-none"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {items.map((item, index) => (
-              <figure key={item.id} className="min-w-full">
-                <div className="relative aspect-4/5 w-full bg-bg/70 sm:aspect-16/10">
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    className="h-full w-full object-contain"
-                    sizes="(max-width: 640px) 94vw, (max-width: 1024px) 84vw, 980px"
-                    quality={68}
-                    loading="lazy"
-                  />
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-primary/70 via-primary/25 to-transparent px-4 py-3 text-bg sm:px-5">
-                    <p className="text-xs text-bg/84">
-                      {getSlideLabel(index, totalSlides)}
-                    </p>
+            {items.map((item, index) => {
+              const isSettled = settledIds.has(item.id);
+
+              return (
+                <figure key={item.id} className="min-w-full">
+                  <div
+                    className={`relative w-full bg-bg/70 ${GALLERY_FRAME_ASPECT_CLASS}`}
+                    aria-busy={!isSettled}
+                  >
+                    {!isSettled && <GallerySlideSkeleton />}
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      className={`h-full w-full object-contain motion-safe:transition-opacity motion-safe:duration-500 motion-safe:ease-out ${
+                        isSettled ? "opacity-100" : "opacity-0"
+                      }`}
+                      sizes="(max-width: 640px) 94vw, (max-width: 1024px) 84vw, 980px"
+                      quality={68}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      onLoad={() => markSettled(item.id)}
+                      onError={() => markSettled(item.id)}
+                    />
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-primary/70 via-primary/25 to-transparent px-4 py-3 text-bg sm:px-5">
+                      <p className="text-xs text-bg/84">
+                        {getSlideLabel(index, totalSlides)}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </figure>
-            ))}
+                </figure>
+              );
+            })}
           </div>
 
           <div className="pointer-events-none absolute inset-y-0 left-0 right-0 hidden items-center justify-between px-2 sm:flex sm:px-3">
