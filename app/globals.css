@@ -355,23 +355,27 @@ body::after {
 }
 
 /* The whole card is the link's hit area; the footer is what it shows. */
-.card-link::after {
+.card-link::after,
+.featured-post > a::after {
   position: absolute;
   inset: 0;
   z-index: 1;
   content: "";
 }
 
-.content-card:has(.card-link) {
+.content-card:has(.card-link),
+.featured-post {
   cursor: pointer;
 }
 
-.content-card:has(.card-link:focus-visible) {
+.content-card:has(.card-link:focus-visible),
+.featured-post:has(> a:focus-visible) {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
 }
 
-.card-link:focus-visible {
+.card-link:focus-visible,
+.featured-post > a:focus-visible {
   outline: none;
 }
 
@@ -2053,6 +2057,7 @@ a.active-location-note:focus-visible {
 }
 
 .featured-post {
+  position: relative;
   display: grid;
   gap: 1.5rem;
   overflow: hidden;
@@ -2099,6 +2104,11 @@ a.active-location-note:focus-visible {
 .featured-post > a {
   align-self: end;
   min-height: 3rem;
+}
+
+/* A transformed button would contain the stretched link inside itself. */
+.featured-post > a:hover {
+  transform: none;
 }
 
 .post-meta {
