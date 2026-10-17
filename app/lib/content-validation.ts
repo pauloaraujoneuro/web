@@ -6,6 +6,7 @@ import type {
   Treatment,
 } from "@/content/types";
 import { FIGURE_SIZES } from "@/content/figures";
+import { CARD_IMAGE_SIZES } from "@/content/card-images";
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -47,6 +48,13 @@ function assertUnique<T>(
  * illustration teaches in a sentence or two — not a caption, not a keyword list.
  */
 const MAX_ALT_LENGTH = 250;
+
+const assertCardImage = (source: string, src: string | undefined) => {
+  if (src === undefined) return;
+  if (typeof src !== "string" || !Object.hasOwn(CARD_IMAGE_SIZES, src)) {
+    fail(source, "cardImage", `unregistered image ${src}`);
+  }
+};
 
 function assertFigure(source: string, field: string, figure: ContentFigure) {
   if (!FIGURE_SIZES[figure.src]) fail(source, field, `unregistered image ${figure.src}`);
@@ -125,6 +133,7 @@ export function validateTreatments(entries: Treatment[]) {
 
   for (const entry of entries) {
     const source = `treatments.${entry.slug}`;
+    assertCardImage(source, entry.cardImage);
     if (!SLUG.test(entry.slug)) fail(source, "slug", "must be lowercase and hyphenated");
     if (!TREATMENT_KINDS.has(entry.kind)) fail(source, "kind", `unknown kind ${entry.kind}`);
     assertCalendarDate(source, "lastModified", entry.lastModified);
@@ -201,6 +210,7 @@ export function validatePosts(posts: BlogPost[], treatments: Treatment[]) {
   const articles = postTargets(posts);
   for (const post of posts) {
     const source = `posts.${post.slug}`;
+    assertCardImage(source, post.cardImage);
     if (!SLUG.test(post.slug)) fail(source, "slug", "must be lowercase and hyphenated");
     for (const field of ["title", "metaDescription", "dek", "primaryKeyword", "searchIntent"] as const) {
       if (!post[field]?.trim()) fail(source, field, "is required");

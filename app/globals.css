@@ -2070,6 +2070,16 @@ a.active-location-note:focus-visible {
   text-transform: uppercase;
 }
 
+.featured-post-image {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: auto;
+  max-height: 20rem;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
 .featured-post h2 {
   max-width: 42rem;
   margin-top: 0.75rem;

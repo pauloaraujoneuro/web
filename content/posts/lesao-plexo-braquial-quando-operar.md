@@ -1,5 +1,6 @@
 ---
 slug: lesao-plexo-braquial-quando-operar
+cardImage: /images/cards/lesao-plexo-braquial-quando-operar.webp
 state: published
 indexable: true
 title: "Lesão de plexo braquial no adulto: como é feito o diagnóstico"

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Treatment } from "@/content/types";
 import { FIGURE_SIZES } from "@/content/figures";
+import { CARD_IMAGE_SIZES } from "@/content/card-images";
 import CardArtwork from "@/app/components/content/CardArtwork";
 
 export type ContentCardChip = "overview" | "condition" | "procedure" | "topic";
@@ -16,7 +17,7 @@ interface ContentCardProps {
   description: string;
   href: string;
   actionLabel: string;
-  /** An illustration from the page itself, under `public/images/conteudo/`. */
+  /** Dedicated banner or the page's first teaching figure. */
   imageSrc?: string;
   /** Picks the placeholder artwork when there is no illustration. */
   area?: Treatment["group"];
@@ -33,7 +34,7 @@ export default function ContentCard({
   imageSrc,
   area,
 }: ContentCardProps) {
-  const imageSize = imageSrc ? FIGURE_SIZES[imageSrc] : undefined;
+  const imageSize = imageSrc ? CARD_IMAGE_SIZES[imageSrc] ?? FIGURE_SIZES[imageSrc] : undefined;
 
   return (
     <article className="content-card group">

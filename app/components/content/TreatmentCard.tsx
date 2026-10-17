@@ -1,7 +1,7 @@
 import type { Treatment } from "@/content/types";
 import { TREATMENT_KIND_LABELS } from "@/app/lib/treatments";
 import ContentCard from "@/app/components/content/ContentCard";
-import { treatmentCoverFigure } from "@/app/lib/figures";
+import { treatmentCardImage } from "@/app/lib/figures";
 
 export default function TreatmentCard({ treatment }: { treatment: Treatment }) {
   return (
@@ -12,7 +12,7 @@ export default function TreatmentCard({ treatment }: { treatment: Treatment }) {
       description={treatment.shortDescription}
       href={`/tratamentos/${treatment.slug}`}
       actionLabel="Saiba mais"
-      imageSrc={treatmentCoverFigure(treatment)?.src}
+      imageSrc={treatmentCardImage(treatment)}
       area={treatment.group}
     />
   );

@@ -38,7 +38,7 @@ test("published treatment renders the complete educational template", async ({ p
 
 test("every catalog treatment is reachable, canonical and open to search", async ({ page, request }) => {
   await page.goto("/tratamentos");
-  await page.getByRole("link", { name: "Saiba mais" }).nth(1).click();
+  await page.getByRole("link", { name: "Saiba mais: Lesão do plexo braquial", exact: true }).click();
 
   await expect(page).toHaveURL(/\/tratamentos\/lesao-plexo-braquial$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Lesão do plexo braquial");
@@ -135,11 +135,11 @@ test("hub cards show the page's first illustration and open from anywhere on the
 
   const card = page.locator("#peripheral-nerve .content-card").first();
   await expect(card.locator(".card-media img")).toHaveAttribute("src", /atrofia-muscular-apos-denervacao/);
-  // Pages without an illustration keep the slot with a decorative plate, so
-  // rows still line up; it is hidden from assistive technology.
+  // Dedicated banners now fill every spine card; the existing peripheral
+  // nerve teaching figure above remains the fallback for pages without one.
   const placeholders = page.locator("#spine .card-media-placeholder");
-  await expect(placeholders).toHaveCount(5);
-  await expect(placeholders.first()).toHaveAttribute("aria-hidden", "true");
+  await expect(placeholders).toHaveCount(0);
+  await expect(page.locator("#spine .card-media img")).toHaveCount(5);
 
   // A raw click on the title, which the link's stretched hit area covers.
   await card.scrollIntoViewIfNeeded();

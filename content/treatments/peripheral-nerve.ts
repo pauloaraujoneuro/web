@@ -495,6 +495,7 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
   },
   {
     slug: "sindrome-tunel-carpo",
+    cardImage: "/images/cards/sindrome-tunel-carpo.webp",
     state: "published",
     indexable: true,
     group: "peripheral-nerve",
@@ -627,6 +628,7 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
   },
   {
     slug: "sindrome-cubital",
+    cardImage: "/images/cards/sindrome-cubital.webp",
     state: "published",
     indexable: true,
     group: "peripheral-nerve",
@@ -751,6 +753,7 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
   },
   {
     slug: "sindrome-tunel-tarso",
+    cardImage: "/images/cards/sindrome-tunel-tarso.webp",
     state: "published",
     indexable: true,
     group: "peripheral-nerve",

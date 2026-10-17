@@ -1,5 +1,6 @@
 ---
 slug: como-se-preparar-para-consulta-neurocirurgica
+cardImage: /images/cards/como-se-preparar-para-consulta-neurocirurgica.webp
 state: published
 indexable: true
 title: Como se preparar para uma consulta neurocirúrgica

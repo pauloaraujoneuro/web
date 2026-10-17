@@ -14,10 +14,10 @@ export const treatmentFigureUrls = (treatment: Treatment) =>
 export const postFigureUrls = (post: BlogPost) => post.figures.map(figureUrl);
 
 /**
- * The illustration a hub card shows: the first one the reader meets on the
- * page. Pages without illustrations get a card without an image.
+ * Dedicated banners take priority on hub cards; existing teaching figures and
+ * abstract artwork remain the fallbacks. Banners never enter body figure URLs.
  */
-export const treatmentCoverFigure = (treatment: Treatment) =>
-  treatment.sections.find((section) => section.figure)?.figure;
+export const treatmentCardImage = (treatment: Treatment) =>
+  treatment.cardImage ?? treatment.sections.find((section) => section.figure)?.figure?.src;
 
-export const postCoverFigure = (post: BlogPost) => post.figures[0];
+export const postCardImage = (post: BlogPost) => post.cardImage ?? post.figures[0]?.src;

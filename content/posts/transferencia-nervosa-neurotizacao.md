@@ -1,5 +1,6 @@
 ---
 slug: transferencia-nervosa-neurotizacao
+cardImage: /images/cards/transferencia-nervosa-neurotizacao.webp
 state: published
 indexable: true
 title: Como funciona a cirurgia de transferência nervosa (neurotização)?

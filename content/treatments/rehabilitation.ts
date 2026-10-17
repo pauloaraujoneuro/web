@@ -4,6 +4,7 @@ import type { Treatment } from "@/content/types";
 export const REHABILITATION_TREATMENTS: Treatment[] = [
   {
     slug: "reabilitacao-neurocirurgica",
+    cardImage: "/images/cards/reabilitacao-neurocirurgica.webp",
     state: "published",
     indexable: true,
     group: "rehabilitation",
@@ -149,6 +150,7 @@ export const REHABILITATION_TREATMENTS: Treatment[] = [
   },
   {
     slug: "reeducacao-cortical-biofeedback",
+    cardImage: "/images/cards/reeducacao-cortical-biofeedback.webp",
     state: "published",
     indexable: true,
     group: "rehabilitation",
@@ -283,6 +285,7 @@ export const REHABILITATION_TREATMENTS: Treatment[] = [
   },
   {
     slug: "orteses-dinamicas",
+    cardImage: "/images/cards/orteses-dinamicas.webp",
     state: "published",
     indexable: true,
     group: "rehabilitation",

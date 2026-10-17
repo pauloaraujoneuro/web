@@ -4,6 +4,7 @@ import type { Treatment } from "@/content/types";
 export const SPINE_TREATMENTS: Treatment[] = [
   {
     slug: "cirurgia-coluna",
+    cardImage: "/images/cards/cirurgia-coluna.webp",
     state: "published",
     indexable: true,
     group: "spine",
@@ -182,6 +183,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
   },
   {
     slug: "hernia-disco",
+    cardImage: "/images/cards/hernia-disco.webp",
     state: "published",
     indexable: true,
     group: "spine",
@@ -323,6 +325,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
   },
   {
     slug: "estenose-canal-vertebral",
+    cardImage: "/images/cards/estenose-canal-vertebral.webp",
     state: "published",
     indexable: true,
     group: "spine",
@@ -447,6 +450,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
   },
   {
     slug: "mielopatia-cervical",
+    cardImage: "/images/cards/mielopatia-cervical.webp",
     state: "published",
     indexable: true,
     group: "spine",
@@ -589,6 +593,7 @@ export const SPINE_TREATMENTS: Treatment[] = [
   },
   {
     slug: "fraturas-coluna",
+    cardImage: "/images/cards/fraturas-coluna.webp",
     state: "published",
     indexable: true,
     group: "spine",

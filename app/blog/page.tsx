@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import PageIntro from "@/app/components/content/PageIntro";
 import ContentCard from "@/app/components/content/ContentCard";
-import { postCoverFigure } from "@/app/lib/figures";
+import { postCardImage } from "@/app/lib/figures";
+import { CARD_IMAGE_SIZES } from "@/content/card-images";
+import { FIGURE_SIZES } from "@/content/figures";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { buildPageMetadata } from "@/app/lib/metadata";
@@ -60,6 +63,10 @@ export default function BlogPage() {
   const posts = getVisiblePosts();
   const featured = posts.find((post) => post.featured);
   const remaining = posts.filter((post) => post.slug !== featured?.slug);
+  const featuredImage = featured ? postCardImage(featured) : undefined;
+  const featuredImageSize = featuredImage
+    ? CARD_IMAGE_SIZES[featuredImage] ?? FIGURE_SIZES[featuredImage]
+    : undefined;
 
   return (
     <SiteShell>
@@ -73,6 +80,17 @@ export default function BlogPage() {
 
         {featured ? (
           <section className="featured-post">
+            {featuredImage && featuredImageSize ? (
+              <Image
+                className="featured-post-image"
+                src={featuredImage}
+                alt=""
+                width={featuredImageSize.width}
+                height={featuredImageSize.height}
+                quality={70}
+                sizes="(min-width: 1024px) 1100px, 100vw"
+              />
+            ) : null}
             <div>
               <span>Leitura em destaque</span>
               <h2>{featured.title}</h2>
@@ -105,7 +123,7 @@ export default function BlogPage() {
                   description={post.dek}
                   href={`/blog/${post.slug}`}
                   actionLabel="Ler artigo"
-                  imageSrc={postCoverFigure(post)?.src}
+                  imageSrc={postCardImage(post)}
                   area={areaFor(post)}
                 />
               ))}

@@ -25,7 +25,60 @@ size…" on mobile, tablet and desktop; manual screenshots at 390px and 1440px.
 placeholder count and `aria-hidden`, click on the title navigates); treatments,
 blog and responsive specs pass on the production build (90 passed, 6 skipped).
 
-## Follow-up
+## T3 — Dedicated generated banners (PR preview)
 
-- Illustrations for the pages still on `CardArtwork` (generation prompt handed
-  to the client; each image needs the clinician's approval before it ships).
+**Status**: Implemented; independent verification pending. Scope: `spec.md`.
+
+- Add 22 current selected images as optimized WebP in `public/images/cards/`:
+  11 treatment entries and 11 blog frontmatter entries, matched by exact slug.
+- Use the latest simple replacements for rehabilitation, cortical re-education,
+  timing after an accident, C6/C7 and hand transfers. Keep all other latest
+  selected images, including the refined non-graphic neuropathic pain image.
+- Optional `cardImage` is registered and validated. Selection: dedicated banner,
+  then first body figure, then existing abstract artwork. Include featured blog.
+- Body illustrations, clinical copy and indexing flags stay as authored. Images
+  are decorative in listing banners, not new teaching figures or schema images.
+- Verify unit mapping/fallback/validation/asset budgets; Playwright all 22 visible
+  banners, image decoding, keyboard navigation, crops and 320px overflow; full
+  `npm run check`; inspect 390px and 1440px screenshots.
+- Commit only app/catalog/test/spec files and optimized assets, excluding `tmp/`.
+
+Clinician review remains pending for the generated artwork on the PR preview.
+User authorized adding all current images to the app for iteration; no production
+merge/deployment or clinical approval is implied.
+
+### Verification evidence
+
+- `npm run check` in `/tmp/paulo-card-banners-clean`: exit 0; 72 unit tests,
+  lint, production build (136 static outputs), 247 Playwright tests passed,
+  11 existing conditional skips. Added 4 unit cases and 9 browser executions.
+- The initial workspace run passed unit tests but lint traversed generated
+  `.next` files in the ignored `.claude/worktrees/` checkout. A clean copy of
+  tracked/selected files with cloned dependencies passed the unchanged gate.
+  Workspace lint also passes with only nested worktrees and `tmp/` excluded.
+- `npx tsc --noEmit` and `git diff --check`: exit 0.
+- Visible Playwright captures inspected at 390px/1440px: treatment spine cards
+  and featured blog block; no overflow or page errors. Local captures:
+  `tmp/card-banners-qa/{tratamentos,blog}-{390,1440}.png` (not committed).
+- Asset conversion: selected `tmp/card-images/<slug>.png` → 1200×800 WebP,
+  quality 80, effort 6; 22 files total 1,222,846 bytes (about 1.2 MiB).
+  Each file remains below 150 KiB. Re-running conversion for a regenerated
+  slug updates its banner without changing the catalog path.
+
+### Coverage / necessity mapping (ACs from spec.md)
+
+| Acceptance criterion | Assertion evidence | Spec-defined outcome / necessity |
+| --- | --- | --- |
+| AC1 exact mapping/counts | `tests/unit/card-images.test.ts:18` `assert.equal(entry.cardImage, /images/cards/<slug>.webp)`; lines 21–23 exact 22/11/11 counts | All required pages have their own banner; no extra assigned banners |
+| AC1 size/budget | Same file lines 29–41: disk count 22, dimensions 1200×800, registry equality, bytes below 150 KiB | Every selected optimized asset exists and reserves the correct space |
+| AC2 priority/fallback | Same file lines 49–54: exact banner, exact first figure, then `undefined` | Existing component's abstract-art branch remains reachable |
+| AC2 validation/optional | Same file lines 62–66: `assert.throws(... /cardImage: unregistered image/)`, then `assert.doesNotThrow(...)` without fields | Invalid paths fail both catalogs; omitted banner is valid |
+| AC3 visible association/decode | `tests/e2e/card-banners.spec.ts:11` exact encoded slug source; lines 12–15 decorative alt, dimensions and decoded image | All 22 banners appear on their matching cards, including featured post |
+| AC3 responsiveness/keyboard | Same file lines 25, 29, 34–36: no overflow, 16:9 ratio, focus, Enter → exact post URL | Layout and navigation remain usable |
+| AC4 body isolation | Same file line 37: zero card images in Markdown; unchanged existing figure/schema/indexing suites pass | Banners do not become clinical body figures or schema illustrations |
+
+Every new test maps to AC1–AC4; no speculative or dependency-behavior tests.
+The old spine-placeholder count changed from five to zero because those five
+cards now have the requested banners; the existing peripheral figure/navigation
+assertions remain. The treatment navigation selector now names the full card
+link, matching PR #8's accessible-name behavior.
