@@ -65,8 +65,9 @@ already broad.
 - Verify visually at 390px and 1440px. Screenshots catch what assertions miss —
   a duplicated heading, a footer gap, a card that reads badly.
 - Keep local design exports (`tmp/`) out of the commit.
-- Record substantive work in `.specs/features/<feature>/tasks.md` with the
-  verification evidence, not just the claim.
+- Record scope, rationale and verification evidence in commit messages and the
+  PR description. Keep planning specs, task logs and lesson files local; do not
+  add or update `.specs/` files in commits.
 
 ## Commit and PR style
 

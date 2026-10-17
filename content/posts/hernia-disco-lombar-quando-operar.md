@@ -1,5 +1,6 @@
 ---
 slug: hernia-disco-lombar-quando-operar
+cardImage: /images/cards/hernia-disco-lombar-quando-operar.webp
 state: published
 indexable: true
 title: "Hérnia de disco lombar: quando a cirurgia entra em discussão"

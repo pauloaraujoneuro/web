@@ -1,5 +1,6 @@
 ---
 slug: transferencia-nervosa-tetraplegia-maos
+cardImage: /images/cards/transferencia-nervosa-tetraplegia-maos.webp
 state: published
 indexable: true
 title: "Transferência nervosa na tetraplegia: como a cirurgia é planejada"

@@ -293,6 +293,88 @@ body::after {
   content: "";
 }
 
+/* A page's own illustration, bled to the card's edges. The drawings are wide
+   plates, so a fixed ratio keeps a mixed grid of cards aligned. */
+.card-media {
+  margin: -1.25rem -1.25rem 1.1rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+  background: white;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+@media (hover: hover) {
+  .content-card:hover .card-media img {
+    transform: scale(1.03);
+  }
+}
+
+/* No illustration yet: abstract line work in the brand's colours keeps the
+   slot, so rows line up. Deliberately not a picture — nothing here pretends to
+   depict the condition. */
+.card-media-placeholder {
+  background: linear-gradient(160deg, #f7fafb 0%, var(--accent-sky-soft) 100%);
+}
+
+.card-artwork {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 400ms ease;
+}
+
+.card-artwork-line {
+  stroke: var(--primary);
+  stroke-width: 1;
+  stroke-opacity: 0.22;
+  vector-effect: non-scaling-stroke;
+}
+
+.card-artwork-accent {
+  stroke: var(--secondary);
+  stroke-width: 1.75;
+  stroke-opacity: 0.7;
+}
+
+.card-artwork-dotted {
+  stroke-dasharray: 1 7;
+  stroke-width: 2.25;
+}
+
+@media (hover: hover) {
+  .content-card:hover .card-artwork {
+    transform: scale(1.03);
+  }
+}
+
+/* The whole card is the link's hit area; the footer is what it shows. */
+.card-link::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+}
+
+.content-card:has(.card-link) {
+  cursor: pointer;
+}
+
+.content-card:has(.card-link:focus-visible) {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.card-link:focus-visible {
+  outline: none;
+}
+
 .card-link {
   display: flex;
   min-height: 3rem;
@@ -343,6 +425,8 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .card-link,
   .card-link-arrow,
+  .card-media img,
+  .card-artwork,
   .content-card::before {
     transition: none !important;
   }
@@ -1986,6 +2070,15 @@ a.active-location-note:focus-visible {
   text-transform: uppercase;
 }
 
+.featured-post-image {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
 .featured-post h2 {
   max-width: 42rem;
   margin-top: 0.75rem;
@@ -2171,12 +2264,17 @@ a.active-location-note:focus-visible {
 
 /* Illustrations in articles and treatment sections. The drawings are
    white-ground plates, so a hairline border keeps them from bleeding into the
-   page; the caption row holds the zoom link at a full touch target. */
+   page. The zoom control sits on the plate's corner and its hit area stretches
+   over the whole drawing, so tapping the illustration itself opens it. */
 .content-figure {
   margin-block: 1.75rem;
 }
 
-.content-figure img {
+.content-figure-frame {
+  position: relative;
+}
+
+.content-figure-frame > img {
   width: 100%;
   height: auto;
   border: 1px solid var(--border-subtle);
@@ -2185,34 +2283,155 @@ a.active-location-note:focus-visible {
 }
 
 .content-figure figcaption {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.25rem 1rem;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   color: #64748b;
   font-size: 0.875rem;
   line-height: 1.5;
 }
 
-.content-figure figcaption > span {
-  flex: 1 1 16rem;
+/* The link covers the whole plate; the pill in its corner is what it shows. */
+.content-figure .content-figure-zoom {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  cursor: zoom-in;
 }
 
-.content-figure .content-figure-zoom {
+.content-figure-zoom-pill {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
   display: inline-flex;
   min-height: 2.75rem;
   align-items: center;
   gap: 0.4rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  padding-inline: 0.85rem;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
   color: var(--primary);
+  font-size: 0.8125rem;
   font-weight: 600;
-  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease;
 }
 
-.content-figure .content-figure-zoom:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+@media (hover: hover) {
+  .content-figure-zoom:hover .content-figure-zoom-pill {
+    border-color: rgba(35, 62, 76, 0.28);
+    background: white;
+  }
+}
+
+.content-figure .content-figure-zoom:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+/* Full-size view. A modal <dialog> gives Escape and focus handling for free;
+   the dialog fills the viewport so a click anywhere off the drawing closes it. */
+.figure-lightbox {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  background: #0a141b;
+  padding: 0;
+  color: white;
+}
+
+.figure-lightbox::backdrop {
+  background: rgba(10, 20, 27, 0.93);
+}
+
+.figure-lightbox[open] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+}
+
+html:has(.figure-lightbox[open]) {
+  overflow: hidden;
+}
+
+.figure-lightbox-body {
+  width: min(100%, 72rem);
+  padding: 4rem 1rem 1.5rem;
+}
+
+.figure-lightbox-scroller img {
+  width: 100%;
+  height: auto;
+  max-height: calc(100dvh - 9rem);
+  border-radius: 0.75rem;
+  background: white;
+  object-fit: contain;
+  cursor: auto;
+}
+
+.figure-lightbox-scroller:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
+
+.figure-lightbox-body p {
+  max-width: 48rem;
+  margin: 0.85rem auto 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+/* On a phone held upright the drawing's labels are still small at full width,
+   so the plate keeps a readable size and pans sideways instead. */
+@media (max-width: 640px) and (orientation: portrait) {
+  .figure-lightbox-scroller {
+    overflow-x: auto;
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+    overscroll-behavior-x: contain;
+  }
+
+  .figure-lightbox-scroller img {
+    width: 170vw;
+    max-width: none;
+    max-height: none;
+  }
+}
+
+.figure-lightbox-close {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  transition: background-color 180ms ease;
+}
+
+.figure-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.figure-lightbox-close:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content-figure-zoom-pill,
+  .figure-lightbox-close {
+    transition: none !important;
+  }
 }
 
 .article-toc {
@@ -2255,6 +2474,27 @@ a.active-location-note:focus-visible {
 
   .featured-post > a { width: auto; min-width: 12rem; }
 
+}
+
+@media (min-width: 1024px) {
+  .featured-post-with-image {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .featured-post-with-image > .featured-post-image {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .featured-post-with-image > div,
+  .featured-post-with-image > a {
+    grid-column: 2;
+  }
+
+  .featured-post-with-image > a {
+    justify-self: start;
+  }
 }
 
 a:focus-visible,

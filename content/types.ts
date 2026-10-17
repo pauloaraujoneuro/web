@@ -55,6 +55,8 @@ export type TreatmentKind = "overview" | "condition" | "procedure";
 
 export interface Treatment {
   slug: string;
+  /** Decorative hub banner, registered in content/card-images.ts. */
+  cardImage?: string;
   state: PublicationState;
   indexable: boolean;
   group: "peripheral-nerve" | "spine" | "rehabilitation";
@@ -138,6 +140,8 @@ export interface Location {
 
 export interface BlogFrontmatter {
   slug: string;
+  /** Decorative hub banner, independent of the article's teaching figures. */
+  cardImage?: string;
   state: PublicationState;
   /** Same gate as treatments: a page can exist without entering search. */
   indexable: boolean;

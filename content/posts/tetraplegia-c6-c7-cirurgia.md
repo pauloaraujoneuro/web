@@ -1,5 +1,6 @@
 ---
 slug: tetraplegia-c6-c7-cirurgia
+cardImage: /images/cards/tetraplegia-c6-c7-cirurgia.webp
 state: published
 indexable: true
 title: "Tetraplegia em C6 ou C7: candidatos a cirurgias de ganho de autonomia"

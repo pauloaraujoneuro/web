@@ -12,3 +12,12 @@ export const treatmentFigureUrls = (treatment: Treatment) =>
   treatment.sections.flatMap((section) => (section.figure ? [figureUrl(section.figure)] : []));
 
 export const postFigureUrls = (post: BlogPost) => post.figures.map(figureUrl);
+
+/**
+ * Dedicated banners take priority on hub cards; existing teaching figures and
+ * abstract artwork remain the fallbacks. Banners never enter body figure URLs.
+ */
+export const treatmentCardImage = (treatment: Treatment) =>
+  treatment.cardImage ?? treatment.sections.find((section) => section.figure)?.figure?.src;
+
+export const postCardImage = (post: BlogPost) => post.cardImage ?? post.figures[0]?.src;

@@ -1,5 +1,6 @@
 ---
 slug: dor-neuropatica-lesao-medular
+cardImage: /images/cards/dor-neuropatica-lesao-medular.webp
 state: published
 indexable: true
 title: "Dor neuropática central após lesão medular: tratamento da queimação abaixo da lesão"

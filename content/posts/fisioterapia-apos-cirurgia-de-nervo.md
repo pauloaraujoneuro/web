@@ -1,5 +1,6 @@
 ---
 slug: fisioterapia-apos-cirurgia-de-nervo
+cardImage: /images/cards/fisioterapia-apos-cirurgia-de-nervo.webp
 state: published
 indexable: true
 title: "Fisioterapia após cirurgia de nervo: quando começar?"

@@ -90,12 +90,12 @@ numbers, hours, memberships, outcome statistics and clinical timings are only
 published once the client confirms them. Optional fields omit cleanly rather
 than rendering an empty container.
 
-## Specification
+## Change verification
 
-Feature work follows `.specs/features/content-subpages/` — specification,
-design, task breakdown with verification evidence, and the implementation
-context that records which design decisions were accepted and which generated
-details were rejected.
+Record a change's scope, rationale and verification evidence in its commit
+messages and PR description. Planning specs, task logs and lesson files stay
+local; new `.specs/` files are ignored rather than shipped with application
+changes.
 
 ## Deployment
 

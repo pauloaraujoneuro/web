@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import Breadcrumb from "@/app/components/content/Breadcrumb";
 import PageIntro from "@/app/components/content/PageIntro";
 import ContentCard from "@/app/components/content/ContentCard";
+import { postCardImage } from "@/app/lib/figures";
+import { CARD_IMAGE_SIZES } from "@/content/card-images";
+import { FIGURE_SIZES } from "@/content/figures";
 import AppointmentCta from "@/app/components/conversion/AppointmentCta";
 import SiteShell from "@/app/components/layout/SiteShell";
 import { buildPageMetadata } from "@/app/lib/metadata";
@@ -27,20 +31,23 @@ export function generateMetadata(): Metadata {
   });
 }
 
-/** The chip names the area an article belongs to, via its related treatments. */
-const groupLabelByTreatment = new Map(
-  getVisibleTreatments().map((treatment) => [
-    treatment.slug,
-    TREATMENT_GROUPS.find((group) => group.id === treatment.group)?.label ?? "",
-  ]),
+/** An article belongs to the area of its first related treatment. */
+const groupByTreatment = new Map(
+  getVisibleTreatments().map((treatment) => [treatment.slug, treatment.group]),
 );
 
-function topicFor(post: BlogPost) {
+function areaFor(post: BlogPost) {
   for (const slug of post.relatedTreatmentSlugs) {
-    const label = groupLabelByTreatment.get(slug);
-    if (label) return label;
+    const group = groupByTreatment.get(slug);
+    if (group) return group;
   }
-  return "Conteúdo educativo";
+  return undefined;
+}
+
+/** The chip names the area an article belongs to. */
+function topicFor(post: BlogPost) {
+  const area = areaFor(post);
+  return TREATMENT_GROUPS.find((group) => group.id === area)?.label ?? "Conteúdo educativo";
 }
 
 function formatDate(date: string, month: "long" | "short" = "long") {
@@ -56,6 +63,10 @@ export default function BlogPage() {
   const posts = getVisiblePosts();
   const featured = posts.find((post) => post.featured);
   const remaining = posts.filter((post) => post.slug !== featured?.slug);
+  const featuredImage = featured ? postCardImage(featured) : undefined;
+  const featuredImageSize = featuredImage
+    ? CARD_IMAGE_SIZES[featuredImage] ?? FIGURE_SIZES[featuredImage]
+    : undefined;
 
   return (
     <SiteShell>
@@ -68,14 +79,31 @@ export default function BlogPage() {
         />
 
         {featured ? (
-          <section className="featured-post">
+          <section className={`featured-post${featuredImage && featuredImageSize ? " featured-post-with-image" : ""}`}>
+            {featuredImage && featuredImageSize ? (
+              // The adjacent title and summary convey the content; keep the
+              // listing banner out of the screen reader's image list.
+              <Image
+                className="featured-post-image"
+                src={featuredImage}
+                alt=""
+                width={featuredImageSize.width}
+                height={featuredImageSize.height}
+                quality={70}
+                sizes="(min-width: 1024px) 1100px, 100vw"
+              />
+            ) : null}
             <div>
               <span>Leitura em destaque</span>
               <h2>{featured.title}</h2>
               <p>{featured.dek}</p>
               <div className="post-meta"><CalendarDays aria-hidden size={16} />{formatDate(featured.publishDate)}</div>
             </div>
-            <Link className="btn-light" href={`/blog/${featured.slug}`}>
+            <Link
+              className="btn-light"
+              href={`/blog/${featured.slug}`}
+              aria-label={`Ler artigo: ${featured.title}`}
+            >
               Ler artigo
               <ArrowRight aria-hidden size={18} strokeWidth={1.5} />
             </Link>
@@ -101,6 +129,8 @@ export default function BlogPage() {
                   description={post.dek}
                   href={`/blog/${post.slug}`}
                   actionLabel="Ler artigo"
+                  imageSrc={postCardImage(post)}
+                  area={areaFor(post)}
                 />
               ))}
             </div>

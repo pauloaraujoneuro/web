@@ -1,5 +1,6 @@
 ---
 slug: resultados-cirurgia-plexo-braquial
+cardImage: /images/cards/resultados-cirurgia-plexo-braquial.webp
 state: published
 indexable: true
 title: "Cirurgia de lesão do plexo braquial: ajuste de expectativas"

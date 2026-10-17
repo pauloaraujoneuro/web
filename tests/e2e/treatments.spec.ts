@@ -38,7 +38,7 @@ test("published treatment renders the complete educational template", async ({ p
 
 test("every catalog treatment is reachable, canonical and open to search", async ({ page, request }) => {
   await page.goto("/tratamentos");
-  await page.getByRole("link", { name: "Saiba mais" }).nth(1).click();
+  await page.getByRole("link", { name: "Saiba mais: Lesão do plexo braquial", exact: true }).click();
 
   await expect(page).toHaveURL(/\/tratamentos\/lesao-plexo-braquial$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Lesão do plexo braquial");
@@ -104,6 +104,61 @@ test("treatment sections show their illustrations with alt text, caption and zoo
   )["@graph"];
   const medicalPage = graph.find((node: { "@type": string }) => node["@type"] === "MedicalWebPage");
   expect(medicalPage.image).toHaveLength(3);
+});
+
+test("an illustration opens full size in a dialog that Escape, the backdrop and the close button dismiss", async ({ page }) => {
+  await page.goto("/tratamentos/pe-caido");
+
+  const zoom = page.locator(".article-body figure.content-figure").first().getByRole("link", {
+    name: /^Ampliar ilustração/,
+  });
+  const dialog = page.getByRole("dialog");
+
+  await zoom.click();
+  await expect(dialog).toBeVisible();
+  const figureAlt = await page.locator(".article-body figure.content-figure img").first().getAttribute("alt");
+  expect(figureAlt).toBeTruthy();
+  await expect(dialog.getByRole("img")).toHaveAccessibleName(figureAlt!);
+  const scroller = dialog.getByRole("region", { name: "Ilustração ampliada", exact: true });
+  await dialog.getByRole("button", { name: "Fechar ilustração ampliada" }).focus();
+  await page.keyboard.press("Tab");
+  await expect(scroller).toBeFocused();
+  await expect(scroller).toHaveCSS("outline-style", "solid");
+  if (page.viewportSize()!.width <= 640) {
+    await page.keyboard.press("ArrowRight");
+    await expect.poll(() => scroller.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+  }
+  await expect(page).toHaveURL(/\/tratamentos\/pe-caido$/);
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(zoom).toBeFocused();
+
+  await zoom.click();
+  await page.mouse.click(4, 4);
+  await expect(dialog).toBeHidden();
+
+  await zoom.click();
+  await dialog.getByRole("button", { name: "Fechar ilustração ampliada" }).click();
+  await expect(dialog).toBeHidden();
+});
+
+test("hub cards show the page's first illustration and open from anywhere on the card", async ({ page }) => {
+  await page.goto("/tratamentos");
+
+  const card = page.locator("#peripheral-nerve .content-card").first();
+  await expect(card.locator(".card-media img")).toHaveAttribute("src", /atrofia-muscular-apos-denervacao/);
+  // Dedicated banners now fill every spine card; the existing peripheral
+  // nerve teaching figure above remains the fallback for pages without one.
+  const placeholders = page.locator("#spine .card-media-placeholder");
+  await expect(placeholders).toHaveCount(0);
+  await expect(page.locator("#spine .card-media img")).toHaveCount(5);
+
+  // A raw click on the title, which the link's stretched hit area covers.
+  await card.scrollIntoViewIfNeeded();
+  const title = await card.locator("h3").boundingBox();
+  if (!title) throw new Error("card title is not rendered");
+  await page.mouse.click(title.x + 8, title.y + title.height / 2);
+  await expect(page).toHaveURL(/\/tratamentos\/cirurgia-nervos-perifericos$/);
 });
 
 test("unknown treatment returns not found", async ({ page }) => {

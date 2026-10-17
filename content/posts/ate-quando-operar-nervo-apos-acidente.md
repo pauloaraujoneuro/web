@@ -1,5 +1,6 @@
 ---
 slug: ate-quando-operar-nervo-apos-acidente
+cardImage: /images/cards/ate-quando-operar-nervo-apos-acidente.webp
 state: published
 indexable: true
 title: Até quanto tempo depois do acidente posso fazer cirurgia de nervo?

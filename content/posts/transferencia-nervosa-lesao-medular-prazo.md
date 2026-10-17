@@ -1,5 +1,6 @@
 ---
 slug: transferencia-nervosa-lesao-medular-prazo
+cardImage: /images/cards/transferencia-nervosa-lesao-medular-prazo.webp
 state: published
 indexable: true
 title: "Transferência nervosa na lesão medular: até quanto tempo depois do trauma?"
