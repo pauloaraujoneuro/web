@@ -639,11 +639,14 @@ body::after {
   position: relative;
   aspect-ratio: 3 / 4;
   max-width: 26rem;
-  width: 100%;
+  /* Leave room for the 14px offset block inside the page gutter. */
+  width: calc(100% - 14px);
   overflow: hidden;
   border-radius: 1.25rem;
   background: #dbe4e8;
-  box-shadow: 0 20px 45px rgba(35, 62, 76, 0.12);
+  /* Offset sky block behind the portrait so /sobre does not open with the
+     same floating photo card as the home hero. */
+  box-shadow: 14px 14px 0 var(--accent-sky), 0 20px 45px rgba(35, 62, 76, 0.12);
 }
 
 .profile-intro h1 {
@@ -732,9 +735,25 @@ a.active-location-note:focus-visible {
 .focus-lead-photo {
   position: relative;
   aspect-ratio: 4 / 3;
+  margin: 0;
   overflow: hidden;
   border-radius: 1rem;
   background: #dbe4e8;
+}
+
+.focus-lead-photo figcaption {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  border-radius: 999px;
+  background: rgba(29, 50, 62, 0.82);
+  padding: 0.35rem 0.75rem;
+  color: var(--surface-white);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
 }
 
 .focus-lead p {
