@@ -12,6 +12,8 @@ export const DOCTOR_PROFILE_IMAGE_FRONT =
   "/pics/doutor-paulo-araujo-frente.webp";
 export const DOCTOR_PROFILE_IMAGE_FRONT_WIDE =
   "/pics/doutor-paulo-araujo-frente-wide.webp";
+export const DOCTOR_SURGERY_IMAGE =
+  "/pics/doutor-paulo-araujo-centro-cirurgico.webp";
 
 // Doctor Information
 export const DOCTOR_NAME = "Paulo Araújo";

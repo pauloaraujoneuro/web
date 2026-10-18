@@ -16,9 +16,10 @@ import {
   DOCTOR_HOSPITAL_AFFILIATION,
   DOCTOR_NAME,
   DOCTOR_PROFILE_IMAGE,
-  DOCTOR_PROFILE_IMAGE_FRONT_WIDE,
+  DOCTOR_PROFILE_IMAGE_FRONT,
   DOCTOR_RQE,
   DOCTOR_SHORT_BIO,
+  DOCTOR_SURGERY_IMAGE,
   DOCTOR_TITLE,
   EXPERTISE_AREAS,
   PROFESSIONAL_ROLES,
@@ -86,8 +87,8 @@ export default function AboutPage() {
         <header className="profile-hero">
           <div className="profile-portrait">
             <Image
-              src={DOCTOR_PROFILE_IMAGE}
-              alt={`Dr. ${DOCTOR_NAME}, neurocirurgião`}
+              src={DOCTOR_PROFILE_IMAGE_FRONT}
+              alt={`Dr. ${DOCTOR_NAME}, neurocirurgião, de jaleco`}
               fill
               priority
               sizes="(min-width: 900px) 26rem, 100vw"
@@ -125,15 +126,16 @@ export default function AboutPage() {
                 na avaliação presencial, a partir do exame clínico e dos exames disponíveis.
               </p>
             </div>
-            <div className="focus-lead-photo">
+            <figure className="focus-lead-photo">
               <Image
-                src={DOCTOR_PROFILE_IMAGE_FRONT_WIDE}
-                alt={`Dr. ${DOCTOR_NAME} em atendimento`}
+                src={DOCTOR_SURGERY_IMAGE}
+                alt={`Dr. ${DOCTOR_NAME} no centro cirúrgico, com a monitorização intraoperatória em primeiro plano`}
                 fill
                 sizes="(min-width: 900px) 28rem, 100vw"
-                className="object-cover object-top"
+                className="object-cover"
               />
-            </div>
+              <figcaption>No centro cirúrgico</figcaption>
+            </figure>
           </div>
           <div className="focus-grid">
             {EXPERTISE_AREAS.map((area) => (
