@@ -22,6 +22,12 @@ export const DOCTOR_CRM = "CRM-MS 16562";
 export const DOCTOR_RQE = "RQE 9823";
 export const DOCTOR_TITLE = "Neurocirurgião";
 export const DOCTOR_SUBTITLE = "Cirurgia de Coluna, Nervo e Reabilitação";
+/**
+ * Specialty and city as the home hero states them. Mirrors the home page's
+ * Markdown variant (app/lib/markdown.ts) and title, so a visitor sees what the
+ * search result promised.
+ */
+export const DOCTOR_HERO_POSITIONING = `${DOCTOR_TITLE} em Campo Grande - MS`;
 export const DOCTOR_HEADLINE = `${DOCTOR_NAME} | ${DOCTOR_TITLE} | ${DOCTOR_SUBTITLE}`;
 export const DOCTOR_SHORT_BIO =
   "Preceptor do serviço de neurocirurgia da Santa Casa de Campo Grande, foi chefe do serviço de nervo periférico e preceptor do serviço de coluna do Hospital Universitário Cajuru de 2023 a 2026, com fellowship em nervo periférico pela Rede SARAH e mestrado em medicina cirúrgica pela UFPR. Atua com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica, com atenção especial a pacientes tetraplégicos e com lesões de plexo braquial.";
