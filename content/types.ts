@@ -138,6 +138,16 @@ export interface Location {
   clinicSlug?: string;
 }
 
+/** A reference the article actually relies on, shown in its "Referências" list. */
+export interface ArticleSource {
+  title: string;
+  /** Journal, society or publisher, e.g. "Journal of Neurosurgery". */
+  publisher?: string;
+  year?: number;
+  /** Absolute https URL (DOI link preferred). */
+  url?: string;
+}
+
 export interface BlogFrontmatter {
   slug: string;
   /** Decorative hub banner, independent of the article's teaching figures. */
@@ -158,6 +168,13 @@ export interface BlogFrontmatter {
   order: number;
   author: "paulo-araujo";
   relatedTreatmentSlugs: string[];
+  /**
+   * Date the clinician last reviewed the article (ISO). Set only from the
+   * clinician's own sign-off — never inferred from lastModified.
+   */
+  lastReviewed?: string;
+  /** Structured references; rendered visibly and only then emitted as citation. */
+  sources?: ArticleSource[];
 }
 
 export interface BlogPost extends BlogFrontmatter {
