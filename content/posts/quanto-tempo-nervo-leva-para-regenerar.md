@@ -78,7 +78,7 @@ Formigamento ou choque ao tocar o trajeto do nervo, sozinhos, não confirmam que
 
 ## Quando procurar avaliação
 
-Procure avaliação com um especialista em nervo periférico quando houver:
+Procure avaliação com um neurocirurgião especialista em nervos periféricos quando houver:
 
 - ferimento com corte no trajeto de um nervo, seguido de perda de força ou de sensibilidade;
 - fraqueza que aparece ou piora;
