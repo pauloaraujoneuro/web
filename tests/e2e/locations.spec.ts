@@ -18,7 +18,7 @@ test("location hub exposes only the active Campo Grande location", async ({ page
 test("Campo Grande page renders the fields the client confirmed", async ({ page }) => {
   await page.goto("/locais-de-atendimento/campo-grande");
 
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Neurocirurgião em Campo Grande - MS");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Atendimento em Campo Grande - MS");
   await expect(
     page.getByRole("heading", { level: 2, name: "INCC - Instituto de Nervos, Cérebro e Coluna", exact: true }),
   ).toBeVisible();
@@ -43,4 +43,16 @@ test("related links carry a label and never point at the current page", async ({
 test("unknown location returns not found", async ({ page }) => {
   const response = await page.goto("/locais-de-atendimento/nao-existe");
   expect(response?.status()).toBe(404);
+});
+
+test("only the home page targets the city query in its title", async ({ page }) => {
+  await page.goto("/");
+  await expect(page).toHaveTitle(/^Neurocirurgião em Campo Grande/);
+
+  for (const path of ["/locais-de-atendimento", "/locais-de-atendimento/campo-grande", "/sobre"]) {
+    await page.goto(path);
+    expect(await page.title(), path).not.toMatch(/Neurocirurgião em Campo Grande/);
+  }
+  await page.goto("/locais-de-atendimento/campo-grande");
+  await expect(page).toHaveTitle("Endereço e agendamento em Campo Grande - MS | Paulo Araújo");
 });

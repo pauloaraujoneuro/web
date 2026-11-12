@@ -305,7 +305,7 @@ function locationsHubDocument(locations: Location[], clinics: ClinicProfile[]) {
         bullets(
           locations.map(
             (location) =>
-              `${link(`Neurocirurgião em ${location.city} - ${location.state}`, `/locais-de-atendimento/${location.slug}`)}: ${location.clinicName}${location.streetAddress ? `, ${location.streetAddress}` : ""}`,
+              `${link(`Atendimento em ${location.city} - ${location.state}`, `/locais-de-atendimento/${location.slug}`)}: ${location.clinicName}${location.streetAddress ? `, ${location.streetAddress}` : ""}`,
           ),
         ),
       ),
@@ -319,7 +319,7 @@ function locationDocument(location: Location, treatments: Treatment[]) {
   const related = treatments.filter((entry) => location.relatedTreatmentSlugs.includes(entry.slug));
   return renderDocument(
     `/locais-de-atendimento/${location.slug}`,
-    `Neurocirurgião em ${location.city} - ${location.state}`,
+    `Atendimento em ${location.city} - ${location.state}`,
     location.introduction,
     [
       ...section(

@@ -20,7 +20,7 @@ export default async function Image({
   return renderOgImage({
     eyebrow: "Atendimento presencial",
     title: location
-      ? `Neurocirurgião em ${location.city} - ${location.state}`
+      ? `Atendimento em ${location.city} - ${location.state}`
       : "Locais de atendimento",
     description: location?.clinicName,
   });

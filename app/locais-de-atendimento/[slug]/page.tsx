@@ -88,7 +88,7 @@ export default async function LocationDetailPage({ params }: Props) {
         <header className="location-hero">
           <div>
             <span className="eyebrow">Atendimento presencial ativo</span>
-            <h1>Neurocirurgião em {location.city} - {location.state}</h1>
+            <h1>Atendimento em {location.city} - {location.state}</h1>
             <p>{location.introduction}</p>
           </div>
           <aside className="clinic-summary">
