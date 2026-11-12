@@ -1,4 +1,4 @@
-import { OG_CONTENT_TYPE, OG_SIZE, renderOgImage } from "@/app/lib/og";
+import { OG_CONTENT_TYPE, OG_SIZE, renderFigureOgImage, renderOgImage } from "@/app/lib/og";
 import { getPublishedPost, getPublishedPosts } from "@/app/lib/blog";
 
 export const alt = "Artigo";
@@ -16,6 +16,9 @@ export default async function Image({
 }) {
   const { slug } = await params;
   const post = getPublishedPost(slug);
+  // The first teaching figure the article shows; the doctor's photo when it has none.
+  const figure = post?.figures[0]?.src;
+  if (figure) return renderFigureOgImage(figure);
 
   return renderOgImage({
     eyebrow: "Conteúdo educativo",

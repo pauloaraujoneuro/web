@@ -197,6 +197,25 @@ export function validateLocations(entries: Location[], treatments: Treatment[]) 
   }
 }
 
+function assertSources(source: string, sources: BlogPost["sources"]) {
+  if (sources === undefined) return;
+  if (!Array.isArray(sources)) fail(source, "sources", "must be an array");
+  sources.forEach((entry, index) => {
+    const field = `sources[${index}]`;
+    if (!entry?.title?.trim()) fail(source, field, "needs a title");
+    if (entry.year !== undefined && !Number.isInteger(entry.year)) fail(source, field, "year must be an integer");
+    if (entry.url !== undefined) {
+      let url: URL;
+      try {
+        url = new URL(entry.url);
+      } catch {
+        fail(source, field, `invalid url ${entry.url}`);
+      }
+      if (url.protocol !== "https:") fail(source, field, "url must use https");
+    }
+  });
+}
+
 export function validatePosts(posts: BlogPost[], treatments: Treatment[]) {
   assertUnique(posts, "posts", (entry) => entry.slug, "slug", (entry) => entry.slug);
   assertUnique(
@@ -226,6 +245,11 @@ export function validatePosts(posts: BlogPost[], treatments: Treatment[]) {
     if (typeof post.featured !== "boolean") fail(source, "featured", "must be a boolean");
     if (!Number.isInteger(post.order)) fail(source, "order", "must be an integer");
     if (typeof post.indexable !== "boolean") fail(source, "indexable", "must be a boolean");
+    if (post.lastReviewed !== undefined) {
+      assertCalendarDate(source, "lastReviewed", post.lastReviewed);
+      if (post.lastReviewed < post.publishDate) fail(source, "lastReviewed", "predates publishDate");
+    }
+    assertSources(source, post.sources);
     if (post.state === "published") {
       if (!post.body.trim()) fail(source, "body", "is required");
       if (post.headings.length < 2) fail(source, "headings", "requires at least two sections");

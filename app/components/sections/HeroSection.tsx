@@ -1,16 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 import TrackedWhatsAppLink from "@/app/components/analytics/TrackedWhatsAppLink";
 import {
   CONTACT_WHATSAPP_URL,
   CTA_PRIMARY,
   DOCTOR_CREDENTIALS,
   DOCTOR_CRM,
+  DOCTOR_HERO_POSITIONING,
   DOCTOR_NAME,
   DOCTOR_PROFILE_IMAGE,
   DOCTOR_RQE,
   DOCTOR_SHORTER_BIO,
   DOCTOR_SUBTITLE,
-  DOCTOR_TITLE,
 } from "@/constants";
 
 interface HeroImageCardProps {
@@ -50,10 +51,11 @@ export default function HeroSection() {
     >
       <div className="container-shell grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start xl:items-center">
         <div>
-          <span className="badge hero-badge">{DOCTOR_TITLE}</span>
-
-          <h1 className="mt-4 max-w-3xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-primary sm:text-5xl">
-            {DOCTOR_NAME}
+          <h1 className="max-w-3xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-primary sm:text-5xl">
+            {DOCTOR_NAME}{" "}
+            <span className="mt-3 block text-2xl font-medium leading-snug tracking-normal text-primary/86 sm:text-3xl">
+              {DOCTOR_HERO_POSITIONING}
+            </span>
           </h1>
 
           <p className="mt-3 text-balance text-base font-normal text-primary/78 sm:text-lg uppercase">
@@ -83,17 +85,38 @@ export default function HeroSection() {
             ))}
           </div>
 
-          <div className="mt-6 lg:hidden">
-            <TrackedWhatsAppLink
-              href={CONTACT_WHATSAPP_URL}
-              target={hasExternalWhatsApp ? "_blank" : undefined}
-              rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
-              className="btn-primary w-full sm:w-auto"
-              eventLocation="hero_mobile"
-              eventLabel={CTA_PRIMARY}
-            >
-              {CTA_PRIMARY}
-            </TrackedWhatsAppLink>
+          {/* Mobile and desktop CTAs stay separate so analytics keeps the
+              existing `hero_mobile` series; desktop had no hero CTA before. */}
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            {/* Visibility lives on wrappers: `.btn-primary` sets display
+                outside Tailwind's layers and would win over `hidden`. */}
+            <div className="lg:hidden">
+              <TrackedWhatsAppLink
+                href={CONTACT_WHATSAPP_URL}
+                target={hasExternalWhatsApp ? "_blank" : undefined}
+                rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
+                className="btn-primary min-h-12 w-full sm:w-auto"
+                eventLocation="hero_mobile"
+                eventLabel={CTA_PRIMARY}
+              >
+                {CTA_PRIMARY}
+              </TrackedWhatsAppLink>
+            </div>
+            <div className="hidden lg:block">
+              <TrackedWhatsAppLink
+                href={CONTACT_WHATSAPP_URL}
+                target={hasExternalWhatsApp ? "_blank" : undefined}
+                rel={hasExternalWhatsApp ? "noopener noreferrer" : undefined}
+                className="btn-primary min-h-12"
+                eventLocation="hero_desktop"
+                eventLabel={CTA_PRIMARY}
+              >
+                {CTA_PRIMARY}
+              </TrackedWhatsAppLink>
+            </div>
+            <Link href="/tratamentos" className="btn-secondary min-h-12 w-full sm:w-auto">
+              Ver tratamentos
+            </Link>
           </div>
         </div>
 
