@@ -4,6 +4,7 @@ import {
   CONTACT_PHONE,
   CONTACT_WHATSAPP_FORMATTED,
   DOCTOR_CRM,
+  DOCTOR_DISPLAY_NAME,
   DOCTOR_FULL_NAME,
   DOCTOR_HOSPITAL_AFFILIATION,
   DOCTOR_NAME,
@@ -41,8 +42,8 @@ export function getSiteJsonLd(description: string) {
     // do not walk the type hierarchy recognise the practice as one.
     "@type": ["Physician", "Organization"],
     "@id": `${SITE_URL}#physician`,
-    name: DOCTOR_NAME,
-    alternateName: [`Dr. ${DOCTOR_NAME}`, DOCTOR_FULL_NAME],
+    name: DOCTOR_DISPLAY_NAME,
+    alternateName: [DOCTOR_NAME, DOCTOR_FULL_NAME],
     jobTitle: DOCTOR_TITLE,
     url: SITE_URL,
     image: `${SITE_URL}${DOCTOR_PROFILE_IMAGE}`,
