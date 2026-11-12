@@ -8,8 +8,8 @@ import { TREATMENTS } from "../../app/lib/treatments";
 test("published posts are deterministic and expose parsed headings", () => {
   const posts = getPublishedPosts();
 
-  assert.equal(posts.length, 19);
-  assert.equal(posts[0].slug, "quanto-tempo-nervo-leva-para-regenerar");
+  assert.equal(posts.length, 18);
+  assert.equal(posts[0].slug, "recuperacao-apos-cirurgia-de-nervo");
 
   // The heading contract, not the current headings: anchors must be unique,
   // URL-safe and derived from real headings, so the in-page table of contents
@@ -51,18 +51,19 @@ test("treatment-to-article references use the live article catalog", () => {
 });
 
 /**
- * The catalog ships fully published: nothing depends on someone remembering to
- * flip a flag later. This test is the tripwire — if an article is ever withheld
- * again, it must be a deliberate decision that shows up here.
+ * Visible articles are published to search, except one awaiting clinical
+ * review. Adding another withheld article has to be a deliberate decision
+ * that shows up here. Flip the slug to indexable only after the clinician
+ * signs off, and remove it from this list in the same change.
  */
+const AWAITING_CLINICAL_REVIEW = ["quanto-tempo-nervo-leva-para-regenerar"];
+
 test("every visible article is published to search", () => {
   const visible = getVisiblePosts();
+  const withheld = visible.filter((post) => !post.indexable).map((post) => post.slug);
 
-  assert.equal(visible.length, getPublishedPosts().length);
-  assert.deepEqual(
-    visible.filter((post) => !post.indexable).map((post) => post.slug),
-    [],
-  );
+  assert.deepEqual(withheld, AWAITING_CLINICAL_REVIEW);
+  assert.equal(visible.length, getPublishedPosts().length + AWAITING_CLINICAL_REVIEW.length);
 });
 
 test("the discovery gate still withholds an article marked non-indexable", () => {

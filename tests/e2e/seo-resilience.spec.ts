@@ -24,7 +24,6 @@ const expectedRoutes = [
   "/tratamentos/fraturas-coluna",
   "/tratamentos/reeducacao-cortical-biofeedback",
   "/tratamentos/orteses-dinamicas",
-  "/blog/quanto-tempo-nervo-leva-para-regenerar",
   "/blog/recuperacao-apos-cirurgia-de-nervo",
   "/blog/fisioterapia-apos-cirurgia-de-nervo",
   "/blog/nervo-pode-voltar-a-funcionar-anos-depois",
