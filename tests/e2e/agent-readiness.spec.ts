@@ -212,6 +212,16 @@ test("conventional trust paths lead to the Portuguese pages", async ({ request }
   }
 });
 
+test("a misspelled post URL seen in search results leads to the real post", async ({ request }) => {
+  const from = "/blog/nervo-pode-vido-anos-depois-lesao";
+  const response = await request.get(from, { maxRedirects: 0 });
+  expect(response.status()).toBe(308);
+  expect(response.headers()["location"]).toBe("/blog/nervo-pode-voltar-a-funcionar-anos-depois");
+
+  const target = await request.get("/blog/nervo-pode-voltar-a-funcionar-anos-depois");
+  expect(target.status()).toBe(200);
+});
+
 test("contact and privacy pages render real content and are linked from the footer", async ({ page }) => {
   for (const [path, heading] of [
     ["/contato", "Contato e agendamento de consultas"],
