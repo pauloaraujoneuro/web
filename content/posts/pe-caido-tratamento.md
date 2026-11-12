@@ -3,10 +3,10 @@ slug: pe-caido-tratamento
 state: published
 indexable: true
 title: "Pé caído tem tratamento: as opções para a lesão do nervo fibular"
-metaDescription: Pé caído é a perda de força para levantar a ponta do pé, quase sempre por lesão do nervo fibular. Conheça as opções cirúrgicas — neurólise, enxerto e transferência de tendão.
+metaDescription: "Pé caído tem cura? Depende da causa e do tempo de lesão do nervo fibular. Veja quando ele melhora e as opções: neurólise, enxerto e transferência de tendão."
 dek: A escolha da cirurgia depende do tipo de lesão do nervo e do tempo desde o trauma — e mesmo lesões antigas merecem avaliação.
 publishDate: 2026-10-05
-lastModified: 2026-10-05
+lastModified: 2026-11-12
 primaryKeyword: pé caído tratamento
 secondaryKeywords:
   - lesão do nervo fibular
@@ -31,6 +31,12 @@ Pé caído é quando a pessoa perde a força para levantar a ponta do pé. Isso 
 Isso costuma acontecer porque o **nervo fibular** foi lesionado. Esse nervo passa bem perto da parte externa do joelho, logo abaixo da pele, o que o torna vulnerável a compressão, estiramento ou lesão direta durante traumas, luxações de joelho e até durante cirurgias ortopédicas na região.
 
 ![Ilustração comparando uma perna normal, em que o nervo fibular comum ativa o músculo tibial anterior para levantar o pé, com uma perna com dano no nervo fibular junto à fíbula, músculos inativos e o pé caído.](/images/conteudo/pe-caido-nervo-fibular.webp "O nervo fibular passa junto à parte externa do joelho; quando lesionado, o pé deixa de ser levantado ao caminhar.")
+
+## Pé caído tem cura?
+
+Depende da causa e de quanto o nervo foi lesionado. Quando o nervo foi só comprimido e continua inteiro, em geral ele volta a funcionar. Depois de uma luxação do joelho, a maioria das pessoas com paralisia **parcial** recuperou a força por completo, mas menos de 40% das que tinham paralisia **completa** voltaram a levantar o pé contra a gravidade.
+
+Quando o nervo não se recupera, ainda há cirurgias que podem devolver o movimento de levantar o pé, como a transferência de tendão. Por isso, além de perguntar se tem cura, vale saber a causa e há quanto tempo o pé caído começou. Os detalhes de cada caminho estão abaixo.
 
 ## Nem sempre a causa é um trauma
 
