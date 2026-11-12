@@ -6,8 +6,8 @@ indexable: true
 title: "Dor neuropática central após lesão medular: tratamento da queimação abaixo da lesão"
 metaDescription: Queimação, choque ou formigamento abaixo do nível da lesão medular? Entenda a dor neuropática central e como o tratamento é feito em etapas.
 dek: Essa dor nasce de um "curto-circuito" no próprio sistema nervoso lesionado — e o manejo correto pode reduzir sua intensidade de forma significativa.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-09-21
+lastModified: 2026-09-21
 primaryKeyword: dor neuropática central na lesão medular
 secondaryKeywords:
   - queimação abaixo do nível da lesão

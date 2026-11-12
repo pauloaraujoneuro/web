@@ -5,8 +5,8 @@ indexable: true
 title: "Tendão e nervo não são a mesma coisa: entenda a diferença após um corte ou acidente"
 metaDescription: O dedo não dobra ou o braço perdeu força depois de um corte ou acidente? Entenda a diferença entre lesão de tendão e lesão de nervo e por que a avaliação precoce importa.
 dek: Às vezes o problema é no tendão, às vezes no nervo — e, muitas vezes, nos dois. O tratamento e a urgência mudam bastante entre um e outro.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-11-06
+lastModified: 2026-11-06
 primaryKeyword: diferença entre lesão de tendão e de nervo
 secondaryKeywords:
   - corte no braço com perda de força

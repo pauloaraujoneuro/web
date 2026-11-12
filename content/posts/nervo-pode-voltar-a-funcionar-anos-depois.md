@@ -5,8 +5,8 @@ indexable: true
 title: O nervo pode voltar a funcionar anos depois da lesão?
 metaDescription: Entenda por que existe uma janela de tempo para tratar a lesão de nervo, o que acontece com o músculo e o nervo enquanto isso e quais opções restam em lesões antigas.
 dek: Existe uma janela de tempo, e quanto mais cedo o nervo é tratado, maior a chance de recuperação. Mas lesões antigas também merecem avaliação.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-10-19
+lastModified: 2026-10-19
 primaryKeyword: lesão de nervo antiga
 secondaryKeywords:
   - nervo volta a funcionar

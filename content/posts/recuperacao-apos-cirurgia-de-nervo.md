@@ -5,8 +5,8 @@ indexable: true
 title: "Recuperação após cirurgia de nervo: paciência e persistência"
 metaDescription: Entenda por que a recuperação após a cirurgia de nervo é lenta, o que esperar em cada fase e quais fatores influenciam o resultado.
 dek: O nervo cresce cerca de 1 milímetro por dia. Entender esse ritmo ajuda a manter expectativas realistas e a não desanimar durante o tratamento.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-09-28
+lastModified: 2026-09-28
 primaryKeyword: recuperação após cirurgia de nervo
 secondaryKeywords:
   - quanto tempo o nervo demora para regenerar

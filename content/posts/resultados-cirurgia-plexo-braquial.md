@@ -6,8 +6,8 @@ indexable: true
 title: "Cirurgia de lesão do plexo braquial: ajuste de expectativas"
 metaDescription: O que significa sucesso na cirurgia do plexo braquial, o que os estudos mostram sobre recuperação de força e por que o tempo até a cirurgia pesa tanto no resultado.
 dek: Sucesso não é sinônimo de "voltar 100% ao normal". Entender como o resultado é medido ajuda a ter expectativas realistas.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-10-12
+lastModified: 2026-10-12
 primaryKeyword: resultado da cirurgia de plexo braquial
 secondaryKeywords:
   - cirurgia de plexo braquial funciona

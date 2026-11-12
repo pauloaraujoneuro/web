@@ -6,8 +6,8 @@ indexable: true
 title: "Transferência nervosa na tetraplegia: como a cirurgia é planejada"
 metaDescription: Entenda como a transferência nervosa é avaliada e planejada para buscar ganhos de movimento no membro superior após lesão medular cervical.
 dek: A cirurgia aproveita nervos preservados acima da lesão para trabalhar movimentos escolhidos junto com o paciente.
-publishDate: 2026-09-03
-lastModified: 2026-10-05
+publishDate: 2026-09-17
+lastModified: 2026-09-17
 primaryKeyword: transferência nervosa em tetraplegia
 secondaryKeywords:
   - cirurgia para tetraplegia

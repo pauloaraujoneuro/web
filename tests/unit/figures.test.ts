@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
-import { getPublishedPost, getPublishedPosts } from "../../app/lib/blog";
+import { getPublishedPost, getPublishedPosts, getVisiblePosts } from "../../app/lib/blog";
 import { validatePosts, validateTreatments } from "../../app/lib/content-validation";
 import { TREATMENTS } from "../../app/lib/treatments";
 import { FIGURE_SIZES } from "../../content/figures";
@@ -36,7 +36,7 @@ function webpSize(file: string) {
 
 function usedFigureSources() {
   return new Set([
-    ...getPublishedPosts().flatMap((post) => post.figures.map((figure) => figure.src)),
+    ...getVisiblePosts().flatMap((post) => post.figures.map((figure) => figure.src)),
     ...TREATMENTS.flatMap((treatment) =>
       treatment.sections.flatMap((section) => (section.figure ? [section.figure.src] : [])),
     ),

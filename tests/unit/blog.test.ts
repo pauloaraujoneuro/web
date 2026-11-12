@@ -9,7 +9,7 @@ test("published posts are deterministic and expose parsed headings", () => {
   const posts = getPublishedPosts();
 
   assert.equal(posts.length, 18);
-  assert.equal(posts[0].slug, "recuperacao-apos-cirurgia-de-nervo");
+  assert.equal(posts[0].slug, "lesao-tendao-ou-nervo");
 
   // The heading contract, not the current headings: anchors must be unique,
   // URL-safe and derived from real headings, so the in-page table of contents

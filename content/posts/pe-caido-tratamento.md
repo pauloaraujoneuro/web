@@ -5,8 +5,8 @@ indexable: true
 title: "Pé caído tem tratamento: as opções para a lesão do nervo fibular"
 metaDescription: Pé caído é a perda de força para levantar a ponta do pé, quase sempre por lesão do nervo fibular. Conheça as opções cirúrgicas — neurólise, enxerto e transferência de tendão.
 dek: A escolha da cirurgia depende do tipo de lesão do nervo e do tempo desde o trauma — e mesmo lesões antigas merecem avaliação.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-11-03
+lastModified: 2026-11-03
 primaryKeyword: pé caído tratamento
 secondaryKeywords:
   - lesão do nervo fibular
