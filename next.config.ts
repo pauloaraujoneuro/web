@@ -40,6 +40,16 @@ const nextConfig: NextConfig = {
       { source: "/contact", destination: "/contato", permanent: true },
       { source: "/privacy", destination: "/privacidade", permanent: true },
       { source: "/privacy-policy", destination: "/privacidade", permanent: true },
+      /**
+       * Misspelled copy of a post URL that Google found somewhere outside the
+       * site (it never existed in this repository) and showed in results while
+       * it returned 404. Sending it to the real post keeps that traffic.
+       */
+      {
+        source: "/blog/nervo-pode-vido-anos-depois-lesao",
+        destination: "/blog/nervo-pode-voltar-a-funcionar-anos-depois",
+        permanent: true,
+      },
     ];
   },
 };
