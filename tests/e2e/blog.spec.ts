@@ -11,7 +11,7 @@ test("blog hub features a published article once", async ({ page }) => {
     "href",
     "/blog/como-se-preparar-para-consulta-neurocirurgica",
   );
-  await expect(page.locator(".post-grid .content-card")).toHaveCount(17);
+  await expect(page.locator(".post-grid .content-card")).toHaveCount(18);
   await expect(page.locator(".post-grid .card-eyebrow-topic").first()).toHaveText("Nervo periférico");
 });
 
