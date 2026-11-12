@@ -5,8 +5,8 @@ indexable: true
 title: Como voltar a dobrar o cotovelo ou abrir a mão sendo tetraplégico?
 metaDescription: Conheça as transferências de nervo usadas na tetraplegia para dobrar e estender o cotovelo, abrir a mão e fazer pinça, o que os estudos mostram e quanto tempo leva.
 dek: Os nervos acima do nível da lesão continuam funcionando — e é justamente isso que a neurocirurgia de nervos periféricos aproveita.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-10-01
+lastModified: 2026-10-01
 primaryKeyword: tetraplegia abrir a mão
 secondaryKeywords:
   - transferência nervosa para extensão do cotovelo

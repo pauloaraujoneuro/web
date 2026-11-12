@@ -6,8 +6,8 @@ indexable: true
 title: "Lesão de plexo braquial no adulto: como é feito o diagnóstico"
 metaDescription: Entenda como a lesão de plexo braquial é investigada no adulto e quais achados orientam a decisão entre acompanhar e operar.
 dek: A investigação combina a história do trauma, o exame neurológico e os exames já realizados para definir o caminho do tratamento.
-publishDate: 2026-09-05
-lastModified: 2026-10-05
+publishDate: 2026-09-14
+lastModified: 2026-09-14
 primaryKeyword: lesão de plexo braquial
 secondaryKeywords:
   - diagnóstico de plexo braquial

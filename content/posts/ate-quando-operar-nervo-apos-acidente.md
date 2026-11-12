@@ -6,8 +6,8 @@ indexable: true
 title: Até quanto tempo depois do acidente posso fazer cirurgia de nervo?
 metaDescription: Lesão de nervo no braço ou na perna após acidente? Entenda a janela ideal para a cirurgia conforme o tipo de lesão e por que não esperar para ver se melhora sozinho.
 dek: Na maioria dos casos ainda dá tempo de recuperar — mas a velocidade com que se procura um especialista faz toda a diferença no resultado.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-10-22
+lastModified: 2026-10-22
 primaryKeyword: cirurgia de nervo após acidente
 secondaryKeywords:
   - lesão de nervo do braço em acidente

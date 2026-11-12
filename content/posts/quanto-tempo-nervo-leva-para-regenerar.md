@@ -6,7 +6,7 @@ title: O nervo se regenera sozinho? Quanto tempo leva e como saber se está melh
 metaDescription: Entenda quando um nervo lesionado se recupera sozinho, por que a regeneração leva meses, o que muda conforme o tipo de lesão e quando procurar avaliação.
 dek: Alguns nervos se recuperam sozinhos, outros precisam de cirurgia. O tipo de lesão e o tempo decorrido mudam a resposta.
 publishDate: 2026-11-11
-lastModified: 2026-11-11
+lastModified: 2026-11-12
 primaryKeyword: nervo se regenera
 secondaryKeywords:
   - quanto tempo o nervo leva para se regenerar
@@ -50,7 +50,7 @@ Nem sempre é possível saber, logo depois da lesão, em qual dessas situações
 
 A regeneração é lenta. Quando as fibras precisam crescer de novo, elas avançam por volta de **1 milímetro por dia**, a partir do ponto da lesão em direção ao músculo ou à pele. Por isso a recuperação se mede em **meses**, e o resultado final pode só ficar claro depois de **dois anos ou mais**.
 
-![Ilustração de um nervo reparado cirurgicamente, mostrando o ponto de sutura e novas fibras nervosas (axônios) crescendo a partir dele dentro das camadas do nervo.](/images/conteudo/regeneracao-nervo-apos-reparo.webp "As novas fibras crescem a partir do ponto da lesão ou do reparo em direção ao músculo e à pele, devagar.")
+![Nervo contínuo com um trecho comprimido, a bainha externa preservada e fibras novas crescendo por dentro, em direção ao músculo.](/images/conteudo/ritmo-regeneracao-nervo.webp "Quando a bainha continua inteira, as fibras crescem devagar a partir da lesão, cerca de 1 mm por dia. O desenho explica o ritmo e não marca uma data de recuperação.")
 
 Esse número ajuda a entender o processo, mas **não serve para calcular uma data de recuperação**. O tempo real depende de vários fatores:
 

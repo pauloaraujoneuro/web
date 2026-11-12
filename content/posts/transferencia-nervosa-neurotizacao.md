@@ -6,8 +6,8 @@ indexable: true
 title: Como funciona a cirurgia de transferência nervosa (neurotização)?
 metaDescription: Entenda a transferência nervosa, ou neurotização — a técnica que usa um nervo saudável vizinho para reativar um músculo paralisado —, quando é indicada e o que esperar.
 dek: Em vez de consertar o nervo desde a raiz, o neurocirurgião "pega emprestado" um nervo saudável que está perto do músculo paralisado.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-10-26
+lastModified: 2026-10-26
 primaryKeyword: transferência nervosa
 secondaryKeywords:
   - neurotização

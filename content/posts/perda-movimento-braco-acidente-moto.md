@@ -5,8 +5,8 @@ indexable: true
 title: "Perda de movimento do ombro e do braço após acidente de moto: o que pode ser?"
 metaDescription: A perda de movimento do braço após acidente de moto costuma envolver o plexo braquial. Entenda o mecanismo da lesão, os padrões de fraqueza e por que avaliar cedo.
 dek: Na maioria das vezes, a explicação está no plexo braquial — e o tempo entre o acidente e a avaliação pesa no resultado.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-10-15
+lastModified: 2026-10-15
 primaryKeyword: perda de movimento do braço após acidente de moto
 secondaryKeywords:
   - lesão do plexo braquial em acidente de moto

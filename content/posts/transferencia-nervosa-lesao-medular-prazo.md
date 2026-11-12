@@ -6,8 +6,8 @@ indexable: true
 title: "Transferência nervosa na lesão medular: até quanto tempo depois do trauma?"
 metaDescription: Entenda por que existe um "relógio" na transferência nervosa após lesão medular, quando procurar avaliação e quando a cirurgia passa a ser uma urgência relativa.
 dek: A resposta costuma ser mais otimista do que as pessoas imaginam — mas o tempo importa, e entender por quê ajuda a tomar a melhor decisão.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-09-24
+lastModified: 2026-09-24
 primaryKeyword: prazo para transferência nervosa na lesão medular
 secondaryKeywords:
   - tetraplegia quanto tempo para operar
