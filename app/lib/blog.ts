@@ -59,6 +59,14 @@ function parsePost(filename: string): BlogPost {
       data.lastModified instanceof Date
         ? data.lastModified.toISOString().slice(0, 10)
         : String(data.lastModified),
+    ...(data.lastReviewed !== undefined
+      ? {
+          lastReviewed:
+            data.lastReviewed instanceof Date
+              ? data.lastReviewed.toISOString().slice(0, 10)
+              : String(data.lastReviewed),
+        }
+      : {}),
     body: content.trim(),
     headings: extractHeadings(content),
     figures: extractFigures(content),

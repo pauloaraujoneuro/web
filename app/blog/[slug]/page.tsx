@@ -6,6 +6,8 @@ import remarkGfm from "remark-gfm";
 import SectionToc from "@/app/components/content/SectionToc";
 import RelatedLinks from "@/app/components/content/RelatedLinks";
 import AuthorCard from "@/app/components/content/AuthorCard";
+import ArticleSources from "@/app/components/content/ArticleSources";
+import { buildArticleReviewSchema } from "@/app/lib/article-review";
 import ContentFigure from "@/app/components/content/ContentFigure";
 import Breadcrumb, { type BreadcrumbItem } from "@/app/components/content/Breadcrumb";
 import JsonLd from "@/app/components/content/JsonLd";
@@ -144,6 +146,11 @@ export default async function BlogArticlePage({ params }: Props) {
               name: `Dr. ${DOCTOR_NAME}`,
               url: SITE_URL,
             },
+            ...buildArticleReviewSchema(post, {
+              name: `Dr. ${DOCTOR_NAME}`,
+              url: `${SITE_URL}/sobre`,
+              identifier: [DOCTOR_CRM, DOCTOR_RQE],
+            }),
           }] : []),
         ],
       }} />
@@ -164,6 +171,11 @@ export default async function BlogArticlePage({ params }: Props) {
                   Atualizado em {formatDate(post.lastModified)}
                 </time>
               ) : null}
+              {post.lastReviewed ? (
+                <time dateTime={post.lastReviewed}>
+                  Revisado pelo Dr. {DOCTOR_NAME} em {formatDate(post.lastReviewed)}
+                </time>
+              ) : null}
             </p>
           </div>
         </header>
@@ -173,6 +185,8 @@ export default async function BlogArticlePage({ params }: Props) {
             <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
               {post.body}
             </ReactMarkdown>
+
+            <ArticleSources sources={post.sources} />
 
             <aside className="medical-disclaimer">
               <strong>Aviso de responsabilidade médica</strong>
