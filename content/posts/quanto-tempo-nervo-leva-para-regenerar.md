@@ -20,6 +20,18 @@ author: paulo-araujo
 relatedTreatmentSlugs:
   - cirurgia-nervos-perifericos
   - reabilitacao-neurocirurgica
+sources:
+  - title: "Nerve injury — patient information"
+    publisher: "British Society for Surgery of the Hand (BSSH)"
+    url: "https://www.bssh.ac.uk/patients/conditions/35/nerve_injury"
+  - title: "Evidence-Based Approach to Timing of Nerve Surgery: A Review"
+    publisher: "Annals of Plastic Surgery"
+    year: 2021
+    url: "https://pubmed.ncbi.nlm.nih.gov/33833177/"
+  - title: "Structured Motor Rehabilitation After Selective Nerve Transfers"
+    publisher: "Journal of Visualized Experiments"
+    year: 2019
+    url: "https://doi.org/10.3791/59840"
 ---
 
 Depois de um acidente, de um corte ou de uma compressão, uma das primeiras perguntas é se o nervo vai voltar a funcionar sozinho. A resposta depende principalmente de **que tipo de lesão aconteceu** e de **quanto tempo já passou**. Alguns nervos se recuperam por completo sem cirurgia. Outros só se recuperam se forem reparados, e mesmo assim de forma parcial.
@@ -78,9 +90,3 @@ Quando um ferimento sugere lesão do nervo, costuma ser necessário operar para 
 A reabilitação acompanha todas essas etapas, antes e depois de uma eventual cirurgia. Veja também [o que esperar da recuperação após a cirurgia de nervo](/blog/recuperacao-apos-cirurgia-de-nervo).
 
 > Este texto é educativo. Não substitui a avaliação presencial, e não há promessa de resultado: a recuperação de cada nervo depende da lesão e de cada pessoa.
-
-## Referências
-
-1. British Society for Surgery of the Hand (BSSH). [Nerve injury — patient information](https://www.bssh.ac.uk/patients/conditions/35/nerve_injury). Acesso em 11 nov. 2026.
-2. MacKay BJ, et al. Evidence-Based Approach to Timing of Nerve Surgery: A Review. *Annals of Plastic Surgery*, 2021. PMID: 33833177.
-3. Sturma A, et al. [Structured Motor Rehabilitation After Selective Nerve Transfers](https://doi.org/10.3791/59840). *Journal of Visualized Experiments*, 2019.
