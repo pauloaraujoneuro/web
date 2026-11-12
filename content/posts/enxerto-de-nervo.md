@@ -5,8 +5,8 @@ indexable: true
 title: "Enxerto de nervo: o que é e por que pode ser necessário?"
 metaDescription: Entenda quando a sutura direta do nervo não é possível, de onde vem o nervo usado no enxerto, como ele funciona dentro do corpo e o que se perde na área doadora.
 dek: Quando falta um pedaço do nervo, um segmento de nervo sensitivo serve de ponte para as novas fibras atravessarem até o outro lado.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-10-29
+lastModified: 2026-10-29
 primaryKeyword: enxerto de nervo
 secondaryKeywords:
   - enxerto de nervo sural

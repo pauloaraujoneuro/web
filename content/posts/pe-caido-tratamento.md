@@ -5,7 +5,7 @@ indexable: true
 title: "Pé caído tem tratamento: as opções para a lesão do nervo fibular"
 metaDescription: "Pé caído tem cura? Depende da causa e do tempo de lesão do nervo fibular. Veja quando ele melhora e as opções: neurólise, enxerto e transferência de tendão."
 dek: A escolha da cirurgia depende do tipo de lesão do nervo e do tempo desde o trauma — e mesmo lesões antigas merecem avaliação.
-publishDate: 2026-10-05
+publishDate: 2026-11-03
 lastModified: 2026-11-12
 primaryKeyword: pé caído tratamento
 secondaryKeywords:

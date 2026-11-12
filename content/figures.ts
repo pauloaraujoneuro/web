@@ -20,6 +20,7 @@ export const FIGURE_SIZES: Record<string, { width: number; height: number }> = {
   "/images/conteudo/regeneracao-nervo-apos-reparo.webp": { width: 1024, height: 559 },
   "/images/conteudo/regeneracao-nervosa-atraves-do-enxerto.webp": { width: 1024, height: 559 },
   "/images/conteudo/reparo-enxerto-nervo-fibular.webp": { width: 1024, height: 559 },
+  "/images/conteudo/ritmo-regeneracao-nervo.webp": { width: 1024, height: 576 },
   "/images/conteudo/transferencia-nervo-acessorio-lesao-cervical-alta.webp": { width: 1024, height: 559 },
   "/images/conteudo/transferencia-nervosa-extensao-cotovelo-triceps.webp": { width: 1024, height: 559 },
   "/images/conteudo/transferencia-nervosa-flexao-cotovelo-tetraplegia.webp": { width: 1024, height: 559 },

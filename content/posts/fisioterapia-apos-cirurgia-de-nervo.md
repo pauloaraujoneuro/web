@@ -6,8 +6,8 @@ indexable: true
 title: "Fisioterapia após cirurgia de nervo: quando começar?"
 metaDescription: Conheça as fases da fisioterapia depois da cirurgia de nervo periférico — proteção, movimentação, reeducação e fortalecimento — e por que não há um dia certo.
 dek: Não existe um número fixo de dias. A reabilitação segue fases, e cada uma começa quando o nervo e a cicatrização permitem.
-publishDate: 2026-10-05
-lastModified: 2026-10-05
+publishDate: 2026-10-08
+lastModified: 2026-10-08
 primaryKeyword: fisioterapia após cirurgia de nervo
 secondaryKeywords:
   - quando começar fisioterapia após cirurgia de nervo
