@@ -50,7 +50,7 @@ test("each analytics SDK initialises once and survives client navigation", async
   // they reload the page and initialise once per load by design.
   await page.getByRole("navigation", { name: "Navegação estrutural" }).getByRole("link", { name: "Início" }).click();
   await expect(page).toHaveURL(/\/$/);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Paulo Araújo");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Paulo Araújo Neurocirurgião em Campo Grande - MS");
   expect(counts.insights).toBe(1);
   expect(counts.speedInsights).toBe(1);
 

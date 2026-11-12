@@ -141,7 +141,7 @@ test("client navigations still receive RSC payloads, not Markdown", async ({ pag
   await page.goto("/contato");
   await page.getByRole("navigation", { name: "Navegação estrutural" }).getByRole("link", { name: "Início" }).click();
   await expect(page).toHaveURL(/\/$/);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Paulo Araújo");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Paulo Araújo Neurocirurgião em Campo Grande - MS");
   expect(flight.length).toBeGreaterThan(0);
   for (const type of flight) expect(type).toContain("text/x-component");
 });
