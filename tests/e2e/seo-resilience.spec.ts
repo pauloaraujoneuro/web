@@ -24,6 +24,7 @@ const expectedRoutes = [
   "/tratamentos/fraturas-coluna",
   "/tratamentos/reeducacao-cortical-biofeedback",
   "/tratamentos/orteses-dinamicas",
+  "/blog/quanto-tempo-nervo-leva-para-regenerar",
   "/blog/lesao-tendao-ou-nervo",
   "/blog/pe-caido-tratamento",
   "/blog/enxerto-de-nervo",
@@ -124,10 +125,20 @@ test("robots names assistant crawlers explicitly", async ({ request }) => {
   await expect(robots).toBeOK();
   const body = await robots.text();
 
-  for (const agent of ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended"]) {
+  for (const agent of [
+    "GPTBot",
+    "ClaudeBot",
+    "Claude-SearchBot",
+    "PerplexityBot",
+    "Perplexity-User",
+    "Google-Extended",
+  ]) {
     expect(body).toContain(agent);
   }
   expect(body).toContain("Sitemap: https://www.pauloaraujoneuro.com.br/sitemap.xml");
+  expect(body).not.toMatch(/^Disallow:/m);
+  // Google ignores `Host:`; the canonical host is set by the redirect and the canonical tags.
+  expect(body).not.toMatch(/^Host:/m);
 });
 
 test("each route advertises its own generated preview image", async ({ page, request }) => {

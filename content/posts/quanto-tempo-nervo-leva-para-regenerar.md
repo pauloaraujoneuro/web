@@ -1,7 +1,7 @@
 ---
 slug: quanto-tempo-nervo-leva-para-regenerar
 state: published
-indexable: false
+indexable: true
 title: O nervo se regenera sozinho? Quanto tempo leva e como saber se está melhorando
 metaDescription: Entenda quando um nervo lesionado se recupera sozinho, por que a regeneração leva meses, o que muda conforme o tipo de lesão e quando procurar avaliação.
 dek: Alguns nervos se recuperam sozinhos, outros precisam de cirurgia. O tipo de lesão e o tempo decorrido mudam a resposta.
