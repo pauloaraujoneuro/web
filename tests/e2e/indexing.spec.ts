@@ -99,14 +99,56 @@ test("social previews stay fetchable and out of image search", async ({ page, re
   expect(ogImage).toContain("/opengraph-image");
   expect(twitterImage).toBeTruthy();
 
-  for (const url of [ogImage!, "/opengraph-image"]) {
-    const path = url.replace(SITE, "");
+  const previews = [
+    ogImage!.replace(SITE, ""),
+    "/opengraph-image",
+    "/contato/opengraph-image?6c29ee3f2fca371d",
+    "/tratamentos/pe-caido/opengraph-image?9ca10052306c633d",
+    "/blog/fisioterapia-apos-cirurgia-de-nervo/opengraph-image",
+    "/blog/fisioterapia-apos-cirurgia-de-nervo/opengraph-image?beb2177dd740a6f0",
+  ];
+  for (const path of previews) {
     for (const method of ["get", "head"] as const) {
       const response = await request[method](path);
       expect(response.status(), `${method} ${path}`).toBe(200);
       expect(response.headers()["content-type"], `${method} ${path}`).toContain("image/png");
       expect(response.headers()["x-robots-tag"], `${method} ${path}`).toBe("noindex");
     }
+  }
+});
+
+test("assets pages load stay fetchable and out of search", async ({ request }) => {
+  const html = await (await request.get("/")).text();
+  const favicon = html.match(/\/favicon\.ico\?[^"]+/)?.[0];
+  const font = html.match(/\/_next\/static\/[^"]+\.woff2/)?.[0];
+  const stylesheet = html.match(/\/_next\/static\/[^"]+\.css/)?.[0];
+  const script = html.match(/\/_next\/static\/[^"]+\.js/)?.[0];
+  expect(favicon).toBeTruthy();
+  expect(font).toBeTruthy();
+  expect(stylesheet).toBeTruthy();
+  expect(script).toBeTruthy();
+
+  const assets = [
+    favicon!,
+    "/favicon.ico",
+    "/icons/favicon-32.png",
+    "/manifest.webmanifest",
+    font!,
+    stylesheet!,
+    script!,
+  ];
+  for (const path of assets) {
+    const response = await request.get(path);
+    expect(response.status(), path).toBe(200);
+    expect(response.headers()["x-robots-tag"], path).toBe("noindex");
+  }
+});
+
+test("pages and discovery files carry no robots header", async ({ request }) => {
+  for (const path of ["/", "/blog/pe-caido-tratamento", "/sitemap.xml", "/robots.txt", "/llms.txt"]) {
+    const response = await request.get(path);
+    expect(response.status(), path).toBe(200);
+    expect(response.headers()["x-robots-tag"], path).toBeUndefined();
   }
 });
 
