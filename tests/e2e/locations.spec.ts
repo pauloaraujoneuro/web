@@ -54,5 +54,27 @@ test("only the home page targets the city query in its title", async ({ page }) 
     expect(await page.title(), path).not.toMatch(/Neurocirurgião em Campo Grande/);
   }
   await page.goto("/locais-de-atendimento/campo-grande");
-  await expect(page).toHaveTitle("Endereço e agendamento em Campo Grande - MS | Paulo Araújo");
+  await expect(page).toHaveTitle("Endereço e agendamento em Campo Grande - MS | Dr. Paulo Araújo");
+});
+
+test("titles carry the name the way patients search it", async ({ page }) => {
+  await page.goto("/");
+  await expect(page).toHaveTitle("Neurocirurgião em Campo Grande MS | Dr. Paulo Araújo");
+
+  await page.goto("/tratamentos");
+  await expect(page).toHaveTitle(/ \| Dr\. Paulo Araújo$/);
+
+  await page.goto("/sobre");
+  await expect(page).toHaveTitle("Formação e trajetória | Dr. Paulo Araújo");
+});
+
+test("the physician entity has one name on every page that describes it", async ({ page }) => {
+  for (const path of ["/", "/sobre"]) {
+    await page.goto(path);
+    const documents = await page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((nodes) => nodes.map((node) => JSON.parse(node.textContent ?? "{}")));
+    const physician = documents.find((doc) => String(doc["@id"]).endsWith("#physician"));
+    expect(physician?.name, path).toBe("Dr. Paulo Araújo");
+  }
 });

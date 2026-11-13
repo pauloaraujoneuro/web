@@ -13,6 +13,7 @@ import {
   CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT,
   DOCTOR_CREDENTIALS,
   DOCTOR_CRM,
+  DOCTOR_DISPLAY_NAME,
   DOCTOR_HOSPITAL_AFFILIATION,
   DOCTOR_NAME,
   DOCTOR_PROFILE_IMAGE,
@@ -32,7 +33,9 @@ const description =
   "Conheça a formação, trajetória e áreas de atuação do Dr. Paulo Araújo, neurocirurgião com atendimento presencial em Campo Grande - MS.";
 
 export const metadata: Metadata = buildPageMetadata({
-  title,
+  // The root template already ends in the doctor's name.
+  title: "Formação e trajetória",
+  socialTitle: title,
   description,
   path: "/sobre",
   openGraph: { type: "profile" },
@@ -52,7 +55,7 @@ export default function AboutPage() {
         "@context": "https://schema.org",
         "@type": "Physician",
         "@id": `${SITE_URL}#physician`,
-        name: `Dr. ${DOCTOR_NAME}`,
+        name: DOCTOR_DISPLAY_NAME,
         url: SITE_URL,
         mainEntityOfPage: `${SITE_URL}/sobre`,
         image: `${SITE_URL}${DOCTOR_PROFILE_IMAGE}`,

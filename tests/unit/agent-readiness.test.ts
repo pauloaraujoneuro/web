@@ -107,6 +107,15 @@ test("the site identity is a top-level Organization with contact point and addre
   assert.deepEqual(practice.worksFor, { "@id": facility["@id"] });
 });
 
+test("the physician is named as patients search for him, with the other forms as aliases", () => {
+  const { practice } = getSiteJsonLd("descrição");
+
+  assert.equal(practice.name, "Dr. Paulo Araújo");
+  assert.ok(practice.alternateName.includes("Paulo Araújo"));
+  assert.ok(practice.alternateName.includes("Paulo Victor de Souza Araújo"));
+  assert.ok(!practice.alternateName.includes(practice.name));
+});
+
 test("the privacy notice is a utility page: rendered, but outside discovery", () => {
   const inventory = getPublicRouteInventory().map((entry) => entry.path);
   assert.ok(inventory.includes(CONTACT_PAGE.path));

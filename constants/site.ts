@@ -17,6 +17,12 @@ export const DOCTOR_SURGERY_IMAGE =
 
 // Doctor Information
 export const DOCTOR_NAME = "Paulo Araújo";
+/**
+ * The name as patients search for it and as Google shows it in titles. The
+ * site-wide brand and the Physician entity use it everywhere, so one `@id`
+ * never carries two names.
+ */
+export const DOCTOR_DISPLAY_NAME = `Dr. ${DOCTOR_NAME}`;
 export const DOCTOR_FULL_NAME = "Paulo Victor de Souza Araújo";
 export const DOCTOR_CRM = "CRM-MS 16562";
 export const DOCTOR_RQE = "RQE 9823";

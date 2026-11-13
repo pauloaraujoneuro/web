@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { DOCTOR_NAME } from "@/constants";
+import { DOCTOR_DISPLAY_NAME } from "@/constants";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: DOCTOR_NAME,
+    name: DOCTOR_DISPLAY_NAME,
     short_name: "Dr. Paulo",
     description:
       "Atendimento especializado em neurocirurgia com foco em nervo periférico, coluna e reabilitação neurocirúrgica.",

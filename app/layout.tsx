@@ -6,7 +6,7 @@ import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleTagManager } from "@next/third-parties/google";
-import { ANALYTICS_ENABLED, DOCTOR_NAME, GOOGLE_TAG_ID, SITE_URL } from "@/constants";
+import { ANALYTICS_ENABLED, DOCTOR_DISPLAY_NAME, GOOGLE_TAG_ID, SITE_URL } from "@/constants";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -16,7 +16,7 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const SITE_TITLE = `Neurocirurgião em Campo Grande MS | ${DOCTOR_NAME}`;
+const SITE_TITLE = `Neurocirurgião em Campo Grande MS | ${DOCTOR_DISPLAY_NAME}`;
 
 const SITE_DESCRIPTION =
   "Neurocirurgião em Campo Grande (MS), com foco em cirurgia de nervo periférico, cirurgia de coluna e reabilitação neurocirúrgica.";
@@ -39,16 +39,16 @@ const SITE_KEYWORDS = [
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  applicationName: DOCTOR_NAME,
+  applicationName: DOCTOR_DISPLAY_NAME,
   title: {
     default: SITE_TITLE,
-    template: `%s | ${DOCTOR_NAME}`,
+    template: `%s | ${DOCTOR_DISPLAY_NAME}`,
   },
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
-  authors: [{ name: DOCTOR_NAME, url: SITE_URL }],
-  creator: DOCTOR_NAME,
-  publisher: DOCTOR_NAME,
+  authors: [{ name: DOCTOR_DISPLAY_NAME, url: SITE_URL }],
+  creator: DOCTOR_DISPLAY_NAME,
+  publisher: DOCTOR_DISPLAY_NAME,
   alternates: {
     canonical: "/",
   },
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    siteName: DOCTOR_NAME,
+    siteName: DOCTOR_DISPLAY_NAME,
     url: SITE_URL,
     locale: "pt_BR",
     type: "website",
