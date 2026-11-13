@@ -19,7 +19,7 @@ export default async function Image({
   if (!clinic) throw new Error(`clinics.${slug}: no published profile`);
   return renderOgImage({
     eyebrow: "Local de atendimento",
-    title: `${clinic.name} em ${clinic.city} - ${clinic.state}`,
+    title: clinic.pageTitle,
     description: `${clinic.streetAddress} - ${clinic.neighborhood}`,
   });
 }

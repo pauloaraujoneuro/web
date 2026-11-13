@@ -4,8 +4,11 @@ test("the clinic page carries the facility facts and structured data", async ({ 
   await page.goto("/clinica/protrauma");
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "INCC - Instituto de Nervos, Cérebro e Coluna em Campo Grande - MS",
+    "INCC / Protrauma em Campo Grande - MS",
   );
+  await expect(
+    page.getByText("3º andar do prédio da Clínica Protrauma, na R. 15 de Novembro, 2808").first(),
+  ).toBeVisible();
   await expect(page.getByText("R. 15 de Novembro, 2808", { exact: false }).first()).toBeVisible();
   await expect(page.getByText("79020-300", { exact: false }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: /Falar com a recepção/ })).toHaveAttribute(
@@ -26,6 +29,7 @@ test("the clinic page carries the facility facts and structured data", async ({ 
     .find((value) => value["@type"] === "MedicalClinic" && value.containedInPlace);
   expect(clinic.address.postalCode).toBe("79020-300");
   expect(clinic.name).toBe("INCC - Instituto de Nervos, Cérebro e Coluna");
+  expect(clinic.alternateName).toEqual(["INCC", "INCC / Protrauma"]);
   expect(clinic.address.streetAddress).toContain("3º andar");
   expect(clinic.sameAs).toBeUndefined();
   expect(clinic.containedInPlace.sameAs).toContain(
@@ -59,10 +63,10 @@ test("the map is embedded lazily and without the reviews panel", async ({ page }
 test("the clinic page is reachable from the hub, the footer and the site schema carries the address", async ({ page }) => {
   await page.goto("/locais-de-atendimento");
   await expect(
-    page.locator("footer").getByRole("link", { name: "INCC - Instituto de Nervos, Cérebro e Coluna" }),
+    page.locator("footer").getByRole("link", { name: "INCC / Protrauma" }),
   ).toHaveAttribute("href", "/clinica/protrauma");
   await expect(
-    page.locator(".location-highlight").getByRole("link", { name: /Sobre o INCC - Instituto de Nervos, Cérebro e Coluna/ }),
+    page.locator(".location-highlight").getByRole("link", { name: /Sobre o INCC \/ Protrauma/ }),
   ).toHaveAttribute("href", "/clinica/protrauma");
 
   const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
@@ -76,9 +80,31 @@ test("the clinic page is reachable from the hub, the footer and the site schema 
 test("the location page links to the clinic page and shows its map", async ({ page }) => {
   await page.goto("/locais-de-atendimento/campo-grande");
 
-  await expect(page.getByRole("link", { name: /Ver contato e detalhes da clínica/ })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: /Ver contato e detalhes do INCC \/ Protrauma/ })).toHaveAttribute(
     "href",
     "/clinica/protrauma",
   );
   await expect(page.locator(".clinic-map iframe")).toHaveCount(1);
+});
+
+test("the clinic page links back to the Campo Grande location page", async ({ page }) => {
+  await page.goto("/clinica/protrauma");
+  await expect(
+    page.locator(".clinic-crosslink").getByRole("link", { name: /atendimento em Campo Grande - MS/ }),
+  ).toHaveAttribute("href", "/locais-de-atendimento/campo-grande");
+});
+
+test("only the clinic page targets Protrauma searches in its title", async ({ page }) => {
+  await page.goto("/clinica/protrauma");
+  await expect(page).toHaveTitle(/^INCC \/ Protrauma em Campo Grande - MS \| /);
+  expect((await page.title()).length).toBeLessThanOrEqual(60);
+  const description = await page.locator('meta[name="description"]').getAttribute("content");
+  for (const fragment of ["Protrauma", "15 de Novembro, 2808", "Jardim dos Estados"]) {
+    expect(description).toContain(fragment);
+  }
+
+  for (const path of ["/", "/sobre", "/contato", "/locais-de-atendimento", "/locais-de-atendimento/campo-grande"]) {
+    await page.goto(path);
+    expect(await page.title(), path).not.toMatch(/Protrauma/);
+  }
 });

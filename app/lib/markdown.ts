@@ -351,7 +351,7 @@ function locationDocument(location: Location, treatments: Treatment[]) {
 
 function clinicDocument(clinic: ClinicProfile, treatments: Treatment[]) {
   const overviews = treatments.filter((entry) => entry.kind === "overview");
-  return renderDocument(clinicPath(clinic), `${clinic.name} em ${clinic.city} - ${clinic.state}`, clinic.description, [
+  return renderDocument(clinicPath(clinic), clinic.pageTitle, clinic.description, [
     ...section(
       "Endereço",
       fullAddress(clinic),
@@ -375,7 +375,7 @@ function clinicDocument(clinic: ClinicProfile, treatments: Treatment[]) {
       bullets([...clinic.socialLinks.map((item) => link(item.label, item.href)), link("protrauma.net", clinic.websiteUrl)]),
     ),
     ...section(
-      `O que o Dr. ${DOCTOR_NAME} atende na ${clinic.name}`,
+      `O que o Dr. ${DOCTOR_NAME} atende no ${clinic.shortName}`,
       "As consultas cobrem condições da coluna vertebral, dos nervos periféricos e necessidades de reabilitação neurocirúrgica. A conduta é definida na avaliação presencial.",
       bullets(overviews.map((entry) => link(entry.title, `/tratamentos/${entry.slug}`))),
     ),

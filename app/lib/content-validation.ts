@@ -281,6 +281,9 @@ export function validateClinics(entries: ClinicProfile[]) {
     if (entry.publicationState !== "published") continue;
     for (const field of [
       "name",
+      "shortName",
+      "pageTitle",
+      "metaDescription",
       "tagline",
       "description",
       "streetAddress",
@@ -296,6 +299,9 @@ export function validateClinics(entries: ClinicProfile[]) {
     }
     if (!/^\d{5}-\d{3}$/.test(entry.postalCode)) {
       fail(source, "postalCode", "must be a Brazilian CEP (00000-000)");
+    }
+    if (entry.metaDescription.length > 160) {
+      fail(source, "metaDescription", "must be at most 160 characters");
     }
     if (!entry.openingHours.length) fail(source, "openingHours", "is required");
     for (const window of entry.openingHoursSpecification) {

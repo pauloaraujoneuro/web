@@ -101,7 +101,7 @@ export const CONTACT_PAGE: TrustPage = {
         },
         {
           label: "Detalhes da clínica",
-          text: "Fotos, mapa e como chegar",
+          text: `${practiceClinic.shortName}: fotos, mapa e como chegar`,
           href: clinicPath(practiceClinic),
         },
       ],

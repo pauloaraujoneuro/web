@@ -81,8 +81,8 @@ export function getPublicRouteInventory(
 
   const clinicEntries = getPublishedClinics().map((clinic) => ({
     path: clinicPath(clinic),
-    title: `${clinic.name} em ${clinic.city} - ${clinic.state}`,
-    description: clinic.tagline,
+    title: clinic.pageTitle,
+    description: clinic.metaDescription,
     lastModified: clinic.lastModified,
     priority: 0.7,
   }));

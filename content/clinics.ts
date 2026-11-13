@@ -10,9 +10,14 @@ export const CLINICS: ClinicProfile[] = [
     publicationState: "published",
     indexable: true,
     name: "INCC - Instituto de Nervos, Cérebro e Coluna",
+    shortName: "INCC / Protrauma",
+    alternateNames: ["INCC", "INCC / Protrauma"],
+    pageTitle: "INCC / Protrauma em Campo Grande - MS",
+    metaDescription:
+      "Neurocirurgia com o Dr. Paulo Araújo no INCC, 3º andar do prédio da Clínica Protrauma: R. 15 de Novembro, 2808, Jardim dos Estados, Campo Grande - MS.",
     tagline: "No 3º andar do prédio da Clínica Protrauma, em Campo Grande - MS",
     description:
-      "O INCC - Instituto de Nervos, Cérebro e Coluna fica no 3º andar do prédio da Clínica Protrauma, em Campo Grande. É onde o Dr. Paulo Araújo realiza as consultas de neurocirurgia, com estrutura para avaliação clínica e acompanhamento.",
+      "O INCC - Instituto de Nervos, Cérebro e Coluna fica no 3º andar do prédio da Clínica Protrauma, na R. 15 de Novembro, 2808, Jardim dos Estados, em Campo Grande. É onde o Dr. Paulo Araújo realiza as consultas de neurocirurgia, com estrutura para avaliação clínica e acompanhamento.",
     streetAddress: "R. 15 de Novembro, 2808 - 3º andar",
     neighborhood: "Jardim dos Estados",
     city: "Campo Grande",
@@ -44,7 +49,7 @@ export const CLINICS: ClinicProfile[] = [
     ],
     imageSrc: "/pics/clinica-protrauma.webp",
     imageAlt: "Fachada da Clínica Protrauma, em Campo Grande - MS",
-    lastModified: "2026-09-10",
+    lastModified: "2026-11-12",
   },
 ];
 

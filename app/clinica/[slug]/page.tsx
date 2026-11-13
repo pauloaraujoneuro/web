@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import type { ClinicProfile } from "@/content/types";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -64,22 +63,14 @@ export function generateStaticParams() {
   return getVisibleClinics().map((clinic) => ({ slug: clinic.slug }));
 }
 
-function describe(clinic: ClinicProfile) {
-  return {
-    socialTitle: `${clinic.name} — onde o Dr. ${DOCTOR_NAME} atende em ${clinic.city}`,
-    description: `Endereço, contato e localização do ${clinic.name}, em ${clinic.city} - ${clinic.state}, onde o Dr. ${DOCTOR_NAME} realiza as consultas de neurocirurgia.`,
-  };
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const clinic = getVisibleClinic(slug);
   if (!clinic) return NOT_FOUND_METADATA;
-  const { socialTitle, description } = describe(clinic);
   return buildPageMetadata({
-    title: `${clinic.name} em ${clinic.city} - ${clinic.state}`,
-    socialTitle,
-    description,
+    title: clinic.pageTitle,
+    socialTitle: `${clinic.shortName} — onde o Dr. ${DOCTOR_NAME} atende em ${clinic.city}`,
+    description: clinic.metaDescription,
     path: clinicPath(clinic),
     indexable: clinic.indexable,
   });
@@ -108,6 +99,7 @@ export default async function ClinicPage({ params }: Props) {
           "@type": "MedicalClinic",
           "@id": clinicEntityId(clinic),
           name: clinic.name,
+          alternateName: clinic.alternateNames,
           description: clinic.description,
           url: pageUrl,
           // The website and social profiles belong to the Protrauma building the
@@ -146,10 +138,10 @@ export default async function ClinicPage({ params }: Props) {
         }}
       />
       <div className="subpage-shell">
-        <Breadcrumb items={[{ name: "Início", href: "/" }, { name: clinic.name }]} />
+        <Breadcrumb items={[{ name: "Início", href: "/" }, { name: clinic.shortName }]} />
         <PageIntro
           eyebrow="Local de atendimento"
-          title={`${clinic.name} em ${clinic.city} - ${clinic.state}`}
+          title={clinic.pageTitle}
           description={clinic.description}
         />
 
@@ -257,7 +249,7 @@ export default async function ClinicPage({ params }: Props) {
         <section className="location-section">
           <div className="location-section-heading">
             <span>Atendimento de neurocirurgia</span>
-            <h2>O que o Dr. {DOCTOR_NAME} atende na {clinic.name}</h2>
+            <h2>O que o Dr. {DOCTOR_NAME} atende no {clinic.shortName}</h2>
             <p>
               As consultas cobrem condições da coluna vertebral, dos nervos periféricos
               e necessidades de reabilitação neurocirúrgica. A conduta é definida na
@@ -293,7 +285,7 @@ export default async function ClinicPage({ params }: Props) {
 
         <div className="mt-12 sm:mt-16">
           <AppointmentCta
-            heading={`Agende sua avaliação na ${clinic.name}`}
+            heading={`Agende sua avaliação no ${clinic.shortName}`}
             body={`Converse com a equipe para confirmar disponibilidade de agenda em ${clinic.city} - ${clinic.state}.`}
             message={location?.ctaMessage ?? CONTACT_WHATSAPP_CAMPO_GRANDE_TEXT}
             eventLocation={`clinic_${clinic.slug}_final`}
@@ -302,7 +294,7 @@ export default async function ClinicPage({ params }: Props) {
         </div>
 
         <p className="clinic-note">
-          {clinic.name} é a clínica onde o Dr. {DOCTOR_NAME} realiza os atendimentos de
+          O {clinic.name} é onde o Dr. {DOCTOR_NAME} realiza os atendimentos de
           neurocirurgia. Os dados de contato acima são da clínica; o endereço completo é{" "}
           {fullAddress(clinic)}.
         </p>

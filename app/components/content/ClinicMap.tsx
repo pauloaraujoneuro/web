@@ -11,7 +11,7 @@ export default function ClinicMap({ clinic }: { clinic: ClinicProfile }) {
     <div className="clinic-map">
       <iframe
         src={clinic.mapEmbedUrl}
-        title={`Mapa de localização da ${clinic.name}`}
+        title={`Mapa de localização do ${clinic.shortName}`}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         allowFullScreen={false}

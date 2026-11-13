@@ -87,6 +87,13 @@ export interface ClinicProfile {
   publicationState: PublicationState;
   indexable: boolean;
   name: string;
+  /** How patients and directories name the place; the label for links to it. */
+  shortName: string;
+  /** Other public names for the same place, published as schema.org `alternateName`. */
+  alternateNames: string[];
+  /** Search title and H1, before the site-wide name suffix. */
+  pageTitle: string;
+  metaDescription: string;
   tagline: string;
   description: string;
   streetAddress: string;
