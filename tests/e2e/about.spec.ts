@@ -12,6 +12,19 @@ test("profile separates current attendance from education and prior work", async
   await expect(page.getByText("Curitiba, PR").first()).toBeVisible();
 });
 
+test("the profile page declares the physician as its main entity", async ({ page }) => {
+  await page.goto("/sobre");
+
+  const documents = await page
+    .locator('script[type="application/ld+json"]')
+    .evaluateAll((nodes) => nodes.map((node) => JSON.parse(node.textContent ?? "{}")));
+  const profile = documents.find((doc) => doc["@type"] === "ProfilePage");
+  expect(profile?.url).toBe("https://www.pauloaraujoneuro.com.br/sobre");
+  expect(profile?.mainEntity).toEqual({ "@id": "https://www.pauloaraujoneuro.com.br#physician" });
+  // The entity it points at is described on the same page.
+  expect(documents.some((doc) => doc["@id"] === profile?.mainEntity["@id"])).toBe(true);
+});
+
 test("profile exposes canonical credentials and tracked appointment path", async ({ page }) => {
   await page.goto("/sobre");
 

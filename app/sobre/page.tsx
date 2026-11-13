@@ -48,6 +48,17 @@ export default function AboutPage() {
 
   return (
     <SiteShell>
+      {/* Marks this URL as the canonical page about the physician, so search
+          engines attach the name, credentials and photo below to one entity. */}
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "@id": `${SITE_URL}/sobre#profilepage`,
+        url: `${SITE_URL}/sobre`,
+        name: title,
+        inLanguage: "pt-BR",
+        mainEntity: { "@id": `${SITE_URL}#physician` },
+      }} />
       <JsonLd data={{
         "@context": "https://schema.org",
         "@type": "Physician",
