@@ -90,7 +90,7 @@ export default function LocationHighlightCard({
           </Link>
           {clinic ? (
             <Link className="location-highlight-link" href={clinicPath(clinic)}>
-              Sobre o {clinic.name}
+              Sobre o {clinic.shortName}
               <ArrowRight aria-hidden size={17} strokeWidth={2} />
             </Link>
           ) : null}

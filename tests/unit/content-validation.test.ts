@@ -158,4 +158,16 @@ test("clinic validation rejects malformed facility facts", () => {
       ]),
     /clinics\.protrauma\.openingHoursSpecification: closes before it opens/,
   );
+
+  assert.throws(
+    () => validateClinics([{ ...CLINICS[0], metaDescription: "x".repeat(161) }]),
+    /clinics\.protrauma\.metaDescription: must be at most 160 characters/,
+  );
+});
+
+test("the clinic's search title fits 60 characters with the site-wide name", () => {
+  for (const clinic of CLINICS) {
+    const title = `${clinic.pageTitle} | Dr. Paulo Araújo`;
+    assert.ok(title.length <= 60, `${clinic.slug}: "${title}" has ${title.length} characters`);
+  }
 });

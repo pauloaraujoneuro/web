@@ -142,10 +142,11 @@ export default async function LocationDetailPage({ params }: Props) {
           <section className="location-section">
             <div className="location-section-heading">
               <span>Como chegar</span>
-              <h2>Onde fica a {clinic.name}</h2>
+              <h2>Onde fica o {clinic.shortName}</h2>
               <p>
-                O atendimento acontece na {clinic.name}, em {clinic.neighborhood}.{" "}
-                <Link href={clinicPath(clinic)}>Ver contato e detalhes da clínica</Link>.
+                O atendimento acontece no {clinic.name}, {clinic.tagline.charAt(0).toLowerCase()}
+                {clinic.tagline.slice(1)}.{" "}
+                <Link href={clinicPath(clinic)}>Ver contato e detalhes do {clinic.shortName}</Link>.
               </p>
             </div>
             <ClinicMap clinic={clinic} />
