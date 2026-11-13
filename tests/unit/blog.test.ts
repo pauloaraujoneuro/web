@@ -8,8 +8,8 @@ import { TREATMENTS } from "../../app/lib/treatments";
 test("published posts are deterministic and expose parsed headings", () => {
   const posts = getPublishedPosts();
 
-  assert.equal(posts.length, 18);
-  assert.equal(posts[0].slug, "lesao-tendao-ou-nervo");
+  assert.equal(posts.length, 19);
+  assert.equal(posts[0].slug, "quanto-tempo-nervo-leva-para-regenerar");
 
   // The heading contract, not the current headings: anchors must be unique,
   // URL-safe and derived from real headings, so the in-page table of contents
@@ -51,12 +51,12 @@ test("treatment-to-article references use the live article catalog", () => {
 });
 
 /**
- * Visible articles are published to search, except one awaiting clinical
- * review. Adding another withheld article has to be a deliberate decision
- * that shows up here. Flip the slug to indexable only after the clinician
- * signs off, and remove it from this list in the same change.
+ * Visible articles are published to search, except those awaiting clinical
+ * review. Adding a withheld article has to be a deliberate decision that shows
+ * up here. Flip the slug to indexable only after the clinician signs off, and
+ * remove it from this list in the same change.
  */
-const AWAITING_CLINICAL_REVIEW = ["quanto-tempo-nervo-leva-para-regenerar"];
+const AWAITING_CLINICAL_REVIEW: string[] = [];
 
 test("every visible article is published to search", () => {
   const visible = getVisiblePosts();
