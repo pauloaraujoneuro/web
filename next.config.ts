@@ -1,5 +1,22 @@
 import type { NextConfig } from "next";
 
+/**
+ * Resources that pages load but that are not pages themselves. Search engines
+ * still fetch them (rendering needs the fonts and scripts, link unfurlers need
+ * the previews), so they stay crawlable in robots.txt; this header only keeps
+ * them out of the index. Matching ignores the query string, so cache-busted
+ * URLs such as `/opengraph-image?<hash>` are covered too. Article
+ * illustrations (/images/conteudo, /_next/image) stay indexable.
+ */
+const NON_PAGE_RESOURCES = [
+  "/opengraph-image",
+  "/:path*/opengraph-image",
+  "/favicon.ico",
+  "/icons/:path*",
+  "/manifest.webmanifest",
+  "/_next/static/:path*",
+];
+
 const nextConfig: NextConfig = {
   images: {
     qualities: [68, 70, 72, 75],
@@ -16,17 +33,10 @@ const nextConfig: NextConfig = {
         source: "/((?!_next/|.*\\.).*)",
         headers: [{ key: "Vary", value: "Accept" }],
       },
-      // Generated social previews are fetched by link unfurlers, which ignore
-      // this header; it only keeps the cards out of image search. Article
-      // illustrations (/images/conteudo) stay indexable.
-      {
-        source: "/opengraph-image",
+      ...NON_PAGE_RESOURCES.map((source) => ({
+        source,
         headers: [{ key: "X-Robots-Tag", value: "noindex" }],
-      },
-      {
-        source: "/:path*/opengraph-image",
-        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
-      },
+      })),
     ];
   },
   /**
