@@ -7,7 +7,7 @@ title: "Lesão de plexo braquial no adulto: como é feito o diagnóstico"
 metaDescription: Entenda como a lesão de plexo braquial é investigada no adulto e quais achados orientam a decisão entre acompanhar e operar.
 dek: A investigação combina a história do trauma, o exame neurológico e os exames já realizados para definir o caminho do tratamento.
 publishDate: 2026-09-14
-lastModified: 2026-09-14
+lastModified: 2026-11-26
 primaryKeyword: lesão de plexo braquial
 secondaryKeywords:
   - diagnóstico de plexo braquial
@@ -54,7 +54,7 @@ O exame é repetido ao longo do acompanhamento, e essa repetição não é forma
 
 Estudos eletrofisiológicos e exames de imagem ajudam a distinguir uma lesão com potencial de recuperação espontânea de uma interrupção que não se recompõe sozinha. O momento de realizá-los é definido caso a caso, porque um exame feito cedo demais pode não mostrar o que se procura.
 
-A eletroneuromiografia documenta a perda e os primeiros sinais de reinervação, e costuma ser repetida. A ressonância estuda as raízes e o plexo, e em situações selecionadas a mielotomografia ainda tem papel na avaliação de arrancamento de raiz. Nenhum desses exames fecha o diagnóstico isoladamente.
+A eletroneuromiografia documenta a perda e os primeiros sinais de reinervação, e costuma ser repetida. A ressonância estuda as raízes e o plexo, e em situações selecionadas a mielotomografia ainda tem papel na avaliação de arrancamento de raiz. Nenhum desses exames fecha o diagnóstico isoladamente. Veja [quando fazer cada exame e o que significa avulsão no laudo](/blog/exames-lesao-plexo-braquial).
 
 ## Sinais que mudam a urgência
 
