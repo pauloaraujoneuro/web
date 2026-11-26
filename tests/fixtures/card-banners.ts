@@ -25,4 +25,11 @@ export const POST_BANNER_SLUGS = [
   "lesao-plexo-braquial-quando-operar",
   "hernia-disco-lombar-quando-operar",
   "transferencia-nervosa-tetraplegia-maos",
+  "lesao-plexo-braquial-tem-cura",
+  "plexo-braquial-so-fisioterapia",
+  "exames-lesao-plexo-braquial",
+  "paralisia-braquial-obstetrica",
+  "tunel-do-carpo-quando-operar",
+  "mao-dormente-tunel-do-carpo-ou-coluna-cervical",
+  "cirurgia-tunel-do-carpo-recuperacao",
 ] as const;

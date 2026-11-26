@@ -1,5 +1,6 @@
 ---
 slug: cirurgia-tunel-do-carpo-recuperacao
+cardImage: /images/cards/cirurgia-tunel-do-carpo-recuperacao.webp
 state: published
 indexable: true
 title: "Cirurgia de túnel do carpo: como é, recuperação e volta ao trabalho"

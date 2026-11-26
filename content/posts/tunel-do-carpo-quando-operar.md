@@ -1,5 +1,6 @@
 ---
 slug: tunel-do-carpo-quando-operar
+cardImage: /images/cards/tunel-do-carpo-quando-operar.webp
 state: published
 indexable: true
 title: "Formigamento nas mãos que acorda você de madrugada? Quando o tratamento sem cirurgia deixa de funcionar"

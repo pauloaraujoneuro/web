@@ -1,5 +1,6 @@
 ---
 slug: mao-dormente-tunel-do-carpo-ou-coluna-cervical
+cardImage: /images/cards/mao-dormente-tunel-do-carpo-ou-coluna-cervical.webp
 state: published
 indexable: true
 title: "Mão dormente à noite: quando é túnel do carpo e quando é coluna cervical"

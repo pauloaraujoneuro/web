@@ -1,5 +1,6 @@
 ---
 slug: plexo-braquial-so-fisioterapia
+cardImage: /images/cards/plexo-braquial-so-fisioterapia.webp
 state: published
 indexable: true
 title: "Só fisioterapia resolve lesão do plexo braquial? Quando esperar vira perder tempo"

@@ -1,5 +1,6 @@
 ---
 slug: paralisia-braquial-obstetrica
+cardImage: /images/cards/paralisia-braquial-obstetrica.webp
 state: published
 indexable: true
 title: "Paralisia braquial obstétrica: quando o bebê precisa de avaliação e cirurgia"

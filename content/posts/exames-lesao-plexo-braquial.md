@@ -1,5 +1,6 @@
 ---
 slug: exames-lesao-plexo-braquial
+cardImage: /images/cards/exames-lesao-plexo-braquial.webp
 state: published
 indexable: true
 title: "Eletroneuromiografia e ressonância no plexo braquial: quais exames fazer e quando"

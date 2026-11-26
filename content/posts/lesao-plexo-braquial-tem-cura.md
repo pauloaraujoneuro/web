@@ -1,5 +1,6 @@
 ---
 slug: lesao-plexo-braquial-tem-cura
+cardImage: /images/cards/lesao-plexo-braquial-tem-cura.webp
 state: published
 indexable: true
 title: "Lesão do plexo braquial tem cura? O que dá para recuperar com cirurgia"
