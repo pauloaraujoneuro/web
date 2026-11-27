@@ -338,6 +338,30 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
         answer:
           "Leve todos os exames e laudos relacionados ao trauma, incluindo imagens em mídia digital, relatórios de atendimento de urgência e estudos eletrofisiológicos, mesmo que antigos.",
       },
+      {
+        id: "plexo-so-fisioterapia",
+        question: "Posso fazer só fisioterapia?",
+        answer:
+          "Em lesões em que o nervo está íntegro e se recupera, o acompanhamento com fisioterapia e reavaliações periódicas pode ser suficiente. Quem decide isso é o especialista, com base em exame clínico e eletroneuromiografia.",
+      },
+      {
+        id: "plexo-fisioterapia-atrapalha",
+        question: "Fisioterapia atrapalha a cirurgia?",
+        answer:
+          "Não. Ela ajuda a manter o braço em boas condições para o procedimento e é fundamental na reabilitação.",
+      },
+      {
+        id: "plexo-depois-de-6-meses",
+        question: "Passei de 6 meses. Ainda adianta consultar?",
+        answer:
+          "Sim. Há opções de reconstrução mesmo em fases mais tardias, embora o potencial de ganho possa ser menor. Quanto antes a avaliação, mais alternativas existem.",
+      },
+      {
+        id: "plexo-acompanhar-melhora",
+        question: "Como saber se meu braço está melhorando?",
+        answer:
+          "Registre datas e movimentos (por exemplo, com vídeos), pois pequenos sinais iniciais podem passar despercebidos e ajudam o especialista.",
+      },
     ],
     relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "reabilitacao-neurocirurgica"],
     relatedPostSlugs: [
@@ -622,6 +646,36 @@ export const PERIPHERAL_NERVE_TREATMENTS: Treatment[] = [
         question: "A dormência some logo depois da cirurgia?",
         answer:
           "Nem sempre. O formigamento noturno costuma melhorar primeiro; uma dormência antiga pode levar mais tempo e, em casos de compressão prolongada, pode não se recuperar por completo.",
+      },
+      {
+        id: "carpo-mao-dormente-noite",
+        question: "Mão dormente à noite sempre é túnel do carpo?",
+        answer:
+          "Não. É a causa mais comum, mas coluna cervical, outros pontos de compressão do nervo, diabetes, alterações da tireoide e neuropatias também podem causar o sintoma.",
+      },
+      {
+        id: "carpo-dor-pescoco",
+        question: "Dor no pescoço junto com a mão dormente significa hérnia de disco?",
+        answer:
+          "Pode significar, mas nem sempre. A combinação merece avaliação, porque as duas condições podem coexistir.",
+      },
+      {
+        id: "carpo-tala",
+        question: "A tala resolve?",
+        answer:
+          "Em casos leves de túnel do carpo, pode aliviar bem. Se não houver melhora em cerca de 6 semanas, ou se surgirem sinais de alerta, é preciso reavaliar.",
+      },
+      {
+        id: "carpo-cirurgia-resolve",
+        question: "A cirurgia resolve de vez?",
+        answer:
+          "Na maioria dos pacientes bem selecionados, os sintomas melhoram. Quanto mais avançada a compressão, mais lenta pode ser a recuperação, e nem sempre ela é completa. Por isso a avaliação precoce importa.",
+      },
+      {
+        id: "carpo-esperar",
+        question: "Posso piorar se esperar?",
+        answer:
+          "Se o nervo permanece comprimido por muito tempo, pode haver perda de força e de sensibilidade que nem sempre volta totalmente. Nesse caso, a consulta deve ser feita o quanto antes, para evitar sequela neurológica.",
       },
     ],
     relatedTreatmentSlugs: ["cirurgia-nervos-perifericos", "sindrome-cubital"],
