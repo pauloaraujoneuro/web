@@ -90,6 +90,11 @@ numbers, hours, memberships, outcome statistics and clinical timings are only
 published once the client confirms them. Optional fields omit cleanly rather
 than rendering an empty container.
 
+### Blog covers
+
+For art direction, image generation, and card checks, see the
+[editorial blog-cover metaprompt](docs/metaprompt-capas-editoriais.md).
+
 ## Change verification
 
 Record a change's scope, rationale and verification evidence in its commit
