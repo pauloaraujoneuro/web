@@ -9,6 +9,13 @@ test.beforeEach(async ({ page }) => {
   await page.route("https://wa.me/**", (route) => route.abort());
 });
 
+test("the hero frames the CTA with the client's time-matters message", async ({ page }) => {
+  await page.goto("/");
+  const callout = page.locator("#sobre .hero-urgency");
+  await expect(callout).toContainText("O tempo importa, avalie cedo.");
+  await expect(callout.getByRole("link", { name: "Agendar consulta" })).toBeVisible();
+});
+
 test("the home opening states specialty and city in the H1", async ({ page }) => {
   await page.goto("/");
   const heading = page.getByRole("heading", { level: 1 });
@@ -35,7 +42,7 @@ for (const [name, viewport, location] of [
     await expect(treatments).toHaveAttribute("href", "/tratamentos");
 
     // Both CTAs sit in the first screen on desktop; on phones they follow the
-    // portrait and credentials, as the mobile CTA did before.
+    // portrait and bio, inside the "O tempo importa" callout.
     if (name === "desktop") {
       const box = await visible.boundingBox();
       expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height + 200);

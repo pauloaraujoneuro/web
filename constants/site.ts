@@ -170,6 +170,9 @@ export const PROFESSIONAL_ROLES: ProfessionalRole[] = [
 
 // CTA Labels
 export const CTA_PRIMARY = "Agendar consulta";
+
+// Client-supplied line for the hero callout (Nov 2026).
+export const HERO_URGENCY_MESSAGE = "O tempo importa, avalie cedo.";
 export const CTA_SECONDARY = "Ver local de atendimento";
 
 export const FAQ_ITEMS: FaqSeed[] = [
