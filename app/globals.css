@@ -3177,3 +3177,38 @@ button:focus-visible {
     padding: 0.38rem 0.66rem;
   }
 }
+
+/* Hero: the client's "time matters" message frames the primary CTA. */
+.hero-urgency {
+  border: 1px solid var(--accent-sky);
+  border-left: 4px solid var(--primary);
+  border-radius: 0.6rem;
+  background: var(--accent-sky-soft);
+  padding: 1.1rem 1.1rem 1.15rem;
+  box-shadow: 0 18px 36px -28px rgba(35, 62, 76, 0.55);
+}
+
+.hero-urgency-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--primary);
+  font-size: clamp(1.15rem, 3.4vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.hero-urgency-icon {
+  flex: none;
+  box-sizing: content-box;
+  border-radius: 999px;
+  background: var(--accent-sky);
+  padding: 0.45rem;
+}
+
+.btn-hero {
+  padding: 0.9rem 1.6rem;
+  font-size: 1rem;
+  box-shadow: 0 14px 26px -14px rgba(35, 62, 76, 0.7);
+}
