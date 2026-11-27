@@ -53,7 +53,12 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: [{ url: "/icons/favicon-32.png", type: "image/png", sizes: "32x32" }],
+    // Google's search-result favicon needs a square icon whose side is a
+    // multiple of 48px; the 32px PNG and the 256px .ico are not.
+    icon: [
+      { url: "/icons/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icons/icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
     shortcut: [{ url: "/icons/favicon-32.png", type: "image/png" }],
     apple: [
       {

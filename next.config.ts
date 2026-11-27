@@ -7,12 +7,14 @@ import type { NextConfig } from "next";
  * them out of the index. Matching ignores the query string, so cache-busted
  * URLs such as `/opengraph-image?<hash>` are covered too. Article
  * illustrations (/images/conteudo, /_next/image) stay indexable.
+ *
+ * Icons (/favicon.ico, /icons/*) must never be listed here: Google only shows
+ * a favicon in search results when it can crawl and index the file, so a
+ * `noindex` on them drops the site's icon from the results page.
  */
 const NON_PAGE_RESOURCES = [
   "/opengraph-image",
   "/:path*/opengraph-image",
-  "/favicon.ico",
-  "/icons/:path*",
   "/manifest.webmanifest",
   "/_next/static/:path*",
 ];
