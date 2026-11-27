@@ -119,28 +119,37 @@ test("social previews stay fetchable and out of image search", async ({ page, re
 
 test("assets pages load stay fetchable and out of search", async ({ request }) => {
   const html = await (await request.get("/")).text();
-  const favicon = html.match(/\/favicon\.ico\?[^"]+/)?.[0];
   const font = html.match(/\/_next\/static\/[^"]+\.woff2/)?.[0];
   const stylesheet = html.match(/\/_next\/static\/[^"]+\.css/)?.[0];
   const script = html.match(/\/_next\/static\/[^"]+\.js/)?.[0];
-  expect(favicon).toBeTruthy();
   expect(font).toBeTruthy();
   expect(stylesheet).toBeTruthy();
   expect(script).toBeTruthy();
 
-  const assets = [
-    favicon!,
-    "/favicon.ico",
-    "/icons/favicon-32.png",
-    "/manifest.webmanifest",
-    font!,
-    stylesheet!,
-    script!,
-  ];
-  for (const path of assets) {
+  for (const path of ["/manifest.webmanifest", font!, stylesheet!, script!]) {
     const response = await request.get(path);
     expect(response.status(), path).toBe(200);
     expect(response.headers()["x-robots-tag"], path).toBe("noindex");
+  }
+});
+
+// Google drops a favicon from search results when the file carries `noindex`.
+test("favicons stay indexable and a 48px-multiple icon is linked", async ({ request }) => {
+  const html = await (await request.get("/")).text();
+  const favicon = html.match(/\/favicon\.ico\?[^"]+/)?.[0];
+  expect(favicon).toBeTruthy();
+  expect(html).toMatch(/<link rel="icon" href="\/icons\/icon-192\.png" type="image\/png" sizes="192x192"/);
+
+  for (const path of [
+    favicon!,
+    "/favicon.ico",
+    "/icons/favicon-32.png",
+    "/icons/icon-192.png",
+    "/icons/apple-touch-icon.png",
+  ]) {
+    const response = await request.get(path);
+    expect(response.status(), path).toBe(200);
+    expect(response.headers()["x-robots-tag"], path).toBeUndefined();
   }
 });
 
