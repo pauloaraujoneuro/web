@@ -22,4 +22,11 @@ export const CARD_IMAGE_SIZES: Record<string, { width: number; height: number }>
   "/images/cards/lesao-plexo-braquial-quando-operar.webp": { width: 1200, height: 800 },
   "/images/cards/hernia-disco-lombar-quando-operar.webp": { width: 1200, height: 800 },
   "/images/cards/transferencia-nervosa-tetraplegia-maos.webp": { width: 1200, height: 800 },
+  "/images/cards/lesao-plexo-braquial-tem-cura.webp": { width: 1200, height: 800 },
+  "/images/cards/plexo-braquial-so-fisioterapia.webp": { width: 1200, height: 800 },
+  "/images/cards/exames-lesao-plexo-braquial.webp": { width: 1200, height: 800 },
+  "/images/cards/paralisia-braquial-obstetrica.webp": { width: 1200, height: 800 },
+  "/images/cards/tunel-do-carpo-quando-operar.webp": { width: 1200, height: 800 },
+  "/images/cards/mao-dormente-tunel-do-carpo-ou-coluna-cervical.webp": { width: 1200, height: 800 },
+  "/images/cards/cirurgia-tunel-do-carpo-recuperacao.webp": { width: 1200, height: 800 },
 };

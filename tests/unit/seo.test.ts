@@ -30,6 +30,13 @@ test("SEO inventory contains every and only published canonical route once", () 
     "/tratamentos/fraturas-coluna",
     "/tratamentos/reeducacao-cortical-biofeedback",
     "/tratamentos/orteses-dinamicas",
+    "/blog/cirurgia-tunel-do-carpo-recuperacao",
+    "/blog/mao-dormente-tunel-do-carpo-ou-coluna-cervical",
+    "/blog/tunel-do-carpo-quando-operar",
+    "/blog/paralisia-braquial-obstetrica",
+    "/blog/exames-lesao-plexo-braquial",
+    "/blog/plexo-braquial-so-fisioterapia",
+    "/blog/lesao-plexo-braquial-tem-cura",
     "/blog/quanto-tempo-nervo-leva-para-regenerar",
     "/blog/lesao-tendao-ou-nervo",
     "/blog/pe-caido-tratamento",
@@ -57,7 +64,7 @@ test("SEO inventory contains every and only published canonical route once", () 
 
 test("sitemap maps canonical URLs and content dates deterministically", () => {
   const sitemap = getSitemapEntries();
-  assert.equal(sitemap.length, 43);
+  assert.equal(sitemap.length, 50);
   assert.equal(sitemap[0].url, SITE_URL);
   assert.equal(sitemap.at(-1)?.url, `${SITE_URL}/clinica/protrauma`);
   assert.ok(

@@ -8,8 +8,8 @@ import { TREATMENTS } from "../../app/lib/treatments";
 test("published posts are deterministic and expose parsed headings", () => {
   const posts = getPublishedPosts();
 
-  assert.equal(posts.length, 19);
-  assert.equal(posts[0].slug, "quanto-tempo-nervo-leva-para-regenerar");
+  assert.equal(posts.length, 26);
+  assert.equal(posts[0].slug, "cirurgia-tunel-do-carpo-recuperacao");
 
   // The heading contract, not the current headings: anchors must be unique,
   // URL-safe and derived from real headings, so the in-page table of contents

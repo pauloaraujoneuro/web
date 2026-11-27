@@ -9,7 +9,7 @@ import { TREATMENTS } from "../../app/lib/treatments";
 import { CARD_IMAGE_SIZES } from "../../content/card-images";
 import { POST_BANNER_SLUGS, TREATMENT_BANNER_SLUGS } from "../fixtures/card-banners";
 
-test("all 22 selected banners are assigned to their exact page slugs", () => {
+test("all 29 selected banners are assigned to their exact page slugs", () => {
   const posts = getVisiblePosts();
   for (const [slugs, entries] of [[TREATMENT_BANNER_SLUGS, TREATMENTS], [POST_BANNER_SLUGS, posts]] as const) {
     for (const slug of slugs) {
@@ -18,15 +18,15 @@ test("all 22 selected banners are assigned to their exact page slugs", () => {
       assert.equal(entry.cardImage, `/images/cards/${slug}.webp`);
     }
   }
-  assert.equal(Object.keys(CARD_IMAGE_SIZES).length, 22);
+  assert.equal(Object.keys(CARD_IMAGE_SIZES).length, 29);
   assert.equal(TREATMENTS.filter((entry) => entry.cardImage).length, 11);
-  assert.equal(posts.filter((post) => post.cardImage).length, 11);
+  assert.equal(posts.filter((post) => post.cardImage).length, 18);
 });
 
 test("registered banners exist, fit the size budget and have correct intrinsic sizes", () => {
   const used = new Set([...TREATMENTS, ...getVisiblePosts()].map((entry) => entry.cardImage).filter(Boolean));
   const disk = fs.readdirSync(path.join(process.cwd(), "public/images/cards"));
-  assert.equal(disk.length, 22);
+  assert.equal(disk.length, 29);
   for (const [src, size] of Object.entries(CARD_IMAGE_SIZES)) {
     assert.ok(used.has(src), `${src} is unused`);
     const buffer = fs.readFileSync(path.join(process.cwd(), "public", src));
