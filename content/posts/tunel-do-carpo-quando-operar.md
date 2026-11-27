@@ -86,7 +86,7 @@ Na maioria dos pacientes bem selecionados, os sintomas melhoram. Quanto mais ava
 
 Se há dormência constante, fraqueza ou atrofia no polegar, esperar não é recomendado. Nesses casos, agende a avaliação.
 
-## Seu nervo não deve esperar
+## O tempo importa, avalie cedo
 
 Se você já tentou tala, medicação ou infiltração e os sintomas continuam, ou se a dormência já não passa, é hora de uma avaliação especializada. **Agende sua consulta com o neurocirurgião** e descubra se o seu caso precisa de cirurgia, e quando.
 
